@@ -1,3 +1,3 @@
-MESIN NEGARA
-Maquina de estados em indonésio.
+MESIN NEGARA <br>
+Maquina de estados em indonésio. <br>
 Sugestão do Pedro
