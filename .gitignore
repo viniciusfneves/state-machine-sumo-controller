@@ -1,0 +1,7 @@
+# Proteus
+*.pdsbak
+*.workspace
+
+# Webots
+*.exe
+*build/
