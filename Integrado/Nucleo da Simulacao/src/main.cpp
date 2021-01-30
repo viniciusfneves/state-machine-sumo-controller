@@ -1,7 +1,7 @@
-#include <sml.hpp>
+#include <machine - (núcleo)/machine.hpp>
 #include <Arduino.h>
 
-namespace sml = boost::sml;
+
 
 void setup() {}
 
