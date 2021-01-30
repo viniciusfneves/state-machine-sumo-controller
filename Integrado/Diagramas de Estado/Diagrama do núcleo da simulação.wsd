@@ -1,0 +1,27 @@
+@startuml SimulationController
+
+title Núcleo da Simulação
+
+[*] --> Configuration
+Configuration --> StartClock : Start
+StartClock -r-> DisengageRobot : Terminate
+StartClock --> FightState : Timeout
+FightState -r-> DisengageRobot : Terminate
+DisengageRobot -u-> Configuration : Reset
+
+state FightState{
+    [*] --> InitialMove
+    InitialMove --> SearchStrategy : Timeout
+}
+
+/'
+' Descrições
+'/
+
+Configuration : Check for bluetooth communications\nand run configuration routine
+StartClock : Halt for T ms and start fight -> setTimeout(T)
+DisengageRobot : Stop all robot functions and halt
+InitialMove : Execute selected inital move strategy
+SearchStrategy : Execute selected search strategy
+
+@enduml
