@@ -4,10 +4,10 @@ title Núcleo da Simulação
 
 [*] --> Configuration
 Configuration --> StartClock : Start
-StartClock -r-> DisengageRobot : Terminate
 StartClock --> FightState : Timeout
+StartClock -r-> DisengageRobot : Terminate
 FightState -r-> DisengageRobot : Terminate
-DisengageRobot -u-> Configuration : Reset
+DisengageRobot -> Configuration : Reset
 
 state FightState{
     [*] --> InitialMove
