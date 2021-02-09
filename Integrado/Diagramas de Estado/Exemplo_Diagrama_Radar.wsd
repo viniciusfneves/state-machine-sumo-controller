@@ -3,13 +3,13 @@
 title Busca por Radar
 
 [*] --> Dojo
-Dojo -> OnEdge : Border Detected
-OnEdge -> Dojo : Border Lost
+Dojo -> OnEdge : BorderDetected
+OnEdge -> Dojo
 
 state Dojo{
     [*] --> Blind
-    Blind -> Chase : Opponent Detected
-    Chase -> Blind : Opponent Lost
+    Blind -> Chase : OpponentDetected
+    Chase -> Blind : OpponentLost
 }
 
 /'
