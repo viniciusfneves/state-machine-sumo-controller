@@ -26,7 +26,7 @@ public:
     {
         using namespace sml;
         return make_transition_table(
-            "initial"_s = "Configuration"_s,
+            *"initial"_s = "Configuration"_s,
 
             "Configuration"_s + event<Start> / []{Serial.println("Transiting to StartClock State");}= "StartClock"_s,
 
