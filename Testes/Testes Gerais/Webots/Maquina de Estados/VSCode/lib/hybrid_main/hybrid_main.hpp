@@ -8,24 +8,16 @@
 // PRÉ-DEFINIÇÕES DOS AMBIENTES
 // ------------------------------
 // Pré-definições Gerais
-#include "../include/event_handler/event_handler.hpp"
 // Pré-definições do Arduino
 #ifdef ARDUINO
 #include <Arduino.h>
 #endif
 // Pré-definições do Webots
 #ifdef WEBOTS
-#include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
-#include "C:/Program Files/Webots/include/controller/cpp/webots/Motor.hpp"
-#include "../motors/motors.hpp"
-
-using namespace webots;
-
-// Criação da instancia do robô
-Robot *robot = new Robot();
-// Criação das instancias dos motores
-Motor *leftMotor = initMotor(robot, (char *)"left wheel motor");
-Motor *rightMotor = initMotor(robot, (char *)"right wheel motor");
+    #include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
+    #include "C:/Program Files/Webots/include/controller/cpp/webots/Motor.hpp"
+    #include "../../../Simulacao/controllers/main/lib/motors/motors.hpp"
+    #include "../../include/event_handler/event_handler.hpp"
 #endif
 // Fim das Pré-definições dos Ambientes
 
