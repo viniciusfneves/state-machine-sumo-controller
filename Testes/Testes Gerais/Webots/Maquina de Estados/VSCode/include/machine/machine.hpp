@@ -1,9 +1,10 @@
 #ifndef MACHINE_HPP
 #define MACHINE_HPP
 
-#include <sml.hpp>
-#include <events/events.hpp>
-#include <actions/actions.hpp>
+#include "../../../Simulacao/libraries/boost/sml.hpp"
+//#include "../lib/boost/sml.hpp"
+#include "../events/events.hpp"
+#include "../actions/actions.hpp"
 
 namespace sml = boost::sml;
 

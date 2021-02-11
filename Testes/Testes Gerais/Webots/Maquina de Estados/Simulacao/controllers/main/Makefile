@@ -65,8 +65,11 @@
 ###
 ###-----------------------------------------------------------------------------
 CXX_SOURCES = main.cpp lib/motors/motors.cpp
-INCLUDE = -I"../../libraries" -I"../../../VSCode/lib/hybrid_main" -I"../../../VSCode/include/actions" -I"../../../VSCode/include/event_handler" -I"../../../VSCode/include/event_handler" -I"../../../VSCode/include/events" -I"../../../VSCode/include/machine" -I"../../../VSCode/include/sensors"
+#INCLUDE = -I"../../libraries" -I"../../../VSCode/lib/hybrid_main" -I"../../../VSCode/include/actions" -I"../../../VSCode/include/event_handler" -I"../../../VSCode/include/event_handler" -I"../../../VSCode/include/events" -I"../../../VSCode/include/machine" -I"../../../VSCode/include/sensors"
+#INCLUDE = -I"../../libraries" -I"../../../VSCode/lib" -I"../../../VSCode/include"
 
+INCLUDE = -I"../../libraries" 
+INCLUDE = -I"../../../VSCode/lib/hybrid_main"
 
 ### Do not modify: this includes Webots global Makefile.include
 null :=
