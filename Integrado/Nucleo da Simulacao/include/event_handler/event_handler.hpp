@@ -16,4 +16,8 @@ void handle_events()
     delay(500);
 };
 
+void setTimeoutEvent()
+{
+    Core.process_event(Timeout{});
+};
 #endif
