@@ -3,11 +3,16 @@
 
 #include <sml.hpp>
 #include <events/events.hpp>
-#include <actions/actions.hpp>
+#include <selectors/initial_move_selector/initial_move_selector.hpp>
+#include <selectors/search_selector/search_selector.hpp>
 #include <Arduino.h>
 
 namespace sml = boost::sml;
 
+//ACTIONS
+
+
+//MAIN MACHINE
 struct machine
 {
     struct FightState
@@ -16,8 +21,8 @@ struct machine
         {
             using namespace sml;
             return make_transition_table(
-                *"initial"_s = "initialMove"_s, 
-                "initialMove"_s        +         event<Timeout>                                      =          "SearchStrategy"_s);
+                *"entry"_s = state<InitialMoveSelector>, 
+                state<InitialMoveSelector>  +         event<Timeout>                                      =          state<SearchSelector>);
         }
     };
 
@@ -28,15 +33,15 @@ public:
         return make_transition_table(
             *"initial"_s = "Configuration"_s,
 
-            "Configuration"_s           +         event<Start>                                       =           "StartClock"_s,
+            "Configuration"_s               +         event<Start>                                       =           "StartClock"_s,
 
-            "StartClock"_s              +         event<Timeout>                                     =           state<FightState>,
-            "StartClock"_s              +         event<Terminate>                                   =           "DisengageRobot"_s,
+            "StartClock"_s                  +         event<Timeout>                                     =           state<FightState>,
+            "StartClock"_s                  +         event<Terminate>                                   =           "DisengageRobot"_s,
 
-            state<FightState>           +         on_entry<_>           /           run,
-            state<FightState>           +         event<Terminate>                                   =           "DisengageRobot"_s,
+            //state<FightState>             +         on_entry<_>          / (ACTIONS),
+            state<FightState>               +         event<Terminate>                                   =           "DisengageRobot"_s,
 
-            "DisengageRobot"_s          +         event<Reset>                                       =           "Configuration"_s);
+            "DisengageRobot"_s              +         event<Reset>                                       =           "Configuration"_s);
     };
 };
 
