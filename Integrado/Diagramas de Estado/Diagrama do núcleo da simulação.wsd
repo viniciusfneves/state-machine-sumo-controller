@@ -10,9 +10,17 @@ FightState -r-> DisengageRobot : Terminate
 DisengageRobot -> Configuration : Reset
 
 state FightState{
-    [*] --> InitialMove
-    InitialMove --> SearchStrategy : Timeout
+    state Strategies{
+        [*] --> InitialMove
+        InitialMove --> SearchStrategy : Timeout
+        SearchStrategy --> ChaseState : OpponentDetected
+        ChaseState --> SearchStrategy : None
+    }
+    [*] --> Strategies
+    Strategies -> AvoidEdge :  BorderDetected
 }
+
+
 
 /'
 ' Descrições
