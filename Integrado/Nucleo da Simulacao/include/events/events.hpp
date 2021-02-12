@@ -13,4 +13,6 @@ struct OpponentDetected {};
 
 struct Reset {};
 
+struct None{}
+
 #endif
