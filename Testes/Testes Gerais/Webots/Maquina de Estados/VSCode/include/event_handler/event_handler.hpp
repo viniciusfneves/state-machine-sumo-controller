@@ -3,17 +3,17 @@
 
 #include "../machine/machine.hpp"
 #include "../events/events.hpp"
+#include <iostream>
 
 void handle_events()
 {
-    Core.process_event(Start{});
-    delay(2000);
-    Core.process_event(Timeout{});
-    delay(2000);
-    Core.process_event(Terminate{});
-    delay(2000);
-    Core.process_event(Reset{});
-    delay(500);
+    using namespace std;
+    cout << robot->getTime() * 1000<< endl;
+    if ((long)(robot->getTime() * 1000) % 3200 == 0)
+    {
+        cout << "SHAZAM CARAIO" << endl;
+        Core.process_event(Time{});
+    }
 };
 
 #endif
