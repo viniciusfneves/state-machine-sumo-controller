@@ -14,7 +14,7 @@ struct SearchNone
     {
         using namespace sml;
         return make_transition_table(
-            "entry"_s = "switch_state"_s,
+            *"entry"_s = "switch_state"_s,
             "switch_state"_s / exit_state = X);
     }
 };
