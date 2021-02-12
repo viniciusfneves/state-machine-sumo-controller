@@ -3,24 +3,30 @@
 title Situações/Leituras e seus eventos correspondentes
 
 
-state Leituras{
-    Parar_o_Robo -[hidden]-> EncerrarEstadoAtual
-    EncerrarEstadoAtual -[hidden]-> Comecar_a_luta
-    Comecar_a_luta -[hidden]-> BordaDetectada
-    BordaDetectada -[hidden]-> OponenteDetectado
+state Ações_e_Leituras{
+    Parar_o_Robo -[hidden]-> Encerrar_estado_atual
+    Encerrar_estado_atual -[hidden]-> Comecar_a_luta
+    Comecar_a_luta -[hidden]-> Borda_detectada
+    Borda_detectada -[hidden]-> Oponente_detectado
+    Oponente_detectado -[hidden]-> Resetar_o_robo
+    Resetar_o_robo -[hidden]-> Nenhum_comando_recebido
 }
 state Eventos_Gerados{
     Terminate -[hidden]-> Timeout
     Timeout -[hidden]-> Start
     Start -[hidden]-> BorderDetected
     BorderDetected -[hidden]-> OpponentDetected
+    OpponentDetected -[hidden]-> Reset
+    Reset -[hidden]-> None
 }
 
 Parar_o_Robo -> Terminate
-EncerrarEstadoAtual -> Timeout
+Encerrar_estado_atual -> Timeout
 Comecar_a_luta -> Start
-BordaDetectada -> BorderDetected
-OponenteDetectado -> OpponentDetected
+Borda_detectada -> BorderDetected
+Oponente_detectado -> OpponentDetected
+Resetar_o_robo -> Reset
+Nenhum_comando_recebido -> None
 /'
 ' Descrições
 '/
