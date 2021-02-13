@@ -4,7 +4,6 @@
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Motor.hpp"
 #include "../../../Webots/controllers/main/lib/motors/motors.hpp"
-#include <windows.h>
 
 using namespace webots;
 using namespace std;
