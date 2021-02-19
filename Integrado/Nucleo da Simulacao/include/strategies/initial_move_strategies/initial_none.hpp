@@ -3,19 +3,19 @@
 
 #include <sml.hpp>
 #include <event_handler/event_handler.hpp>
+#include <utilities/timeout_implementation/timeout.hpp>
 
 namespace sml = boost::sml;
-
-auto exit_state = [] { setTimeoutEvent(); };
 
 struct InitialNone
 {
     auto operator()() const
     {
+        auto exit_state = [] { triggerTimeoutEvent(); };
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "switch_state"_s,
-            "switch_state"_s / exit_state = X);
+            "switch_state"_s + on_entry<_> / exit_state);
     }
 };
 
