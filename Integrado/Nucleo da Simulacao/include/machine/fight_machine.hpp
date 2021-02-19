@@ -4,6 +4,7 @@
 #include <sml.hpp>
 #include <selectors/initial_move_selector/initial_move_selector.hpp>
 #include <selectors/search_selector/search_selector.hpp>
+#include <selectors/combat_strategy_selector/combat_strategy_selector.hpp>
 
 namespace sml = boost::sml;
 
@@ -14,7 +15,9 @@ struct FightMachine
         using namespace sml;
         return make_transition_table(
             *"entry"_s                                                                   = state<InitialMoveSelector>,
-            state<InitialMoveSelector>              + event<Timeout>                     = state<SearchSelector>);
+            state<InitialMoveSelector>              + event<Timeout>                     = state<SearchSelector>,
+            state<SearchSelector>                   + event<OpponentDetected>            = state<CombatStrategySelector>,
+            state<CombatStrategySelector>           + event<None>                        = state<SearchSelector>);
     }
 };
 #endif
