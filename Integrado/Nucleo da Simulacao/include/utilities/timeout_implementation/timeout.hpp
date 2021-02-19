@@ -28,9 +28,9 @@ void cancelTimeout()
 };
 
 //Dispara o evento Timeout instantaneamente
-void setTimeoutEvent()
+void triggerTimeoutEvent()
 {
-    Core.process_event(Timeout{});
+    //Core.process_event(Timeout{});
 };
 
 #endif
