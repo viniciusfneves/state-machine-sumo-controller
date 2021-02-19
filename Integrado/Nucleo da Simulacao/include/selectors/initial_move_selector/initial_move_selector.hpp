@@ -4,6 +4,7 @@
 #include <sml.hpp>
 #include <configuration/configuration.hpp>
 #include <strategies/initial_move_strategies/initial_none.hpp>
+#include <utilities/timeout_implementation/timeout.hpp>
 
 namespace sml = boost::sml;
 
@@ -11,12 +12,12 @@ struct InitialMoveSelector
 {
     auto operator()() const
     {
-        auto none = [](Configuration &config) { return config.initialMove == InitialMove::none; };
+        //auto none = []() { return true; };
 
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "selector"_s,
-            "selector"_s[none] = state<InitialNone>);
+            "selector"_s = state<InitialNone>);
     }
 };
 

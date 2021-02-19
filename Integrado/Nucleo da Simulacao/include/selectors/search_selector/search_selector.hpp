@@ -11,12 +11,12 @@ struct SearchSelector
 {
     auto operator()() const
     {
-        auto none = [](Configuration &config){return config.initialMove == InitialMove::none;};
+        //auto none = [](Configuration& config){return config.initialMove == InitialMove::none;};
 
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "selector"_s,
-            "selector"_s [none] = state<SearchNone>);
+            "selector"_s = state<SearchNone>);
     }
 };
 
