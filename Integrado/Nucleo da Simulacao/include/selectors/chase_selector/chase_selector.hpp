@@ -8,16 +8,16 @@
 
 namespace sml = boost::sml;
 
-struct ChaseSelector
+class ChaseSelector
 {
     auto operator()() const
     {
-        //auto none = []() { return true; };
+        auto standard = [](Configuration &config) { return config.chase == Chase::standard; };
 
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "selector"_s,
-            "selector"_s = state<StandardChase>);
+            "selector"_s [standard]    = state<StandardChase>);
     }
 };
 

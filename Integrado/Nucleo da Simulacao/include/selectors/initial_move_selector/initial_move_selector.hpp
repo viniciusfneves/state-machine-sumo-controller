@@ -8,16 +8,16 @@
 
 namespace sml = boost::sml;
 
-struct InitialMoveSelector
+class InitialMoveSelector
 {
     auto operator()() const
     {
-        //auto none = []() { return true; };
+        auto none = [](Configuration &config) { return config.initialMove == InitialMove::none; };
 
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "selector"_s,
-            "selector"_s = state<InitialNone>);
+            "selector"_s [none]      = sml::state<InitialNone>);
     }
 };
 
