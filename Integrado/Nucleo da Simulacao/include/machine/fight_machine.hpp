@@ -8,16 +8,19 @@
 
 namespace sml = boost::sml;
 
+
+// MÁQUINA DE LUTA
+// Responsável pela transição de estados no momento da luta
 struct FightMachine
 {
     auto operator()() const
     {
         using namespace sml;
         return make_transition_table(
-            *"entry"_s                                                                   = state<InitialMoveSelector>,
-            state<InitialMoveSelector>              + event<Timeout>                     = state<SearchSelector>,
-            state<SearchSelector>                   + event<OpponentDetected>            = state<ChaseSelector>,
-            state<ChaseSelector>                    + event<None>                        = state<SearchSelector>);
+            *"entry"_s = state<InitialMoveSelector>,
+            state<InitialMoveSelector>       + event<Timeout>                     = state<SearchSelector>,
+            state<SearchSelector>            + event<OpponentDetected>            = state<ChaseSelector>,
+            state<ChaseSelector>             + event<None>                        = state<SearchSelector>);
     }
 };
 #endif

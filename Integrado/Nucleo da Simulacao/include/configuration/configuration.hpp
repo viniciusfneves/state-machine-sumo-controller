@@ -17,9 +17,10 @@ enum class Chase
 
 struct Configuration
 {
-    InitialMove initialMove{InitialMove::none};
-    Search search{Search::none};
-    Chase chase{Chase::standard};
+    // Definindo inicialização padrão para as estratégias
+    InitialMove   initialMove     {InitialMove::none};
+    Search        search          {Search::none};
+    Chase         chase           {Chase::standard};
 };
 
 #endif
