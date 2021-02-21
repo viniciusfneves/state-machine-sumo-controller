@@ -3,17 +3,23 @@
 
 enum class InitialMove
 {
-    none,
+    none
 };
 enum class Search
 {
-    none,
+    none
+};
+
+enum class Chase
+{
+    standard
 };
 
 struct Configuration
 {
     InitialMove initialMove{InitialMove::none};
     Search search{Search::none};
+    Chase chase{Chase::standard};
 };
 
 #endif

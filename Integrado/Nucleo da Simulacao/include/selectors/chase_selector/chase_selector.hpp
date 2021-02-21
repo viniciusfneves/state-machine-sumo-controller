@@ -1,5 +1,5 @@
-#ifndef COMBAT_STRATEGY_SELECTOR_HPP
-#define COMBAT_STRATEGY_SELECTOR_HPP
+#ifndef CHASE_SELECTOR_HPP
+#define CHASE_SELECTOR_HPP
 
 #include <sml.hpp>
 #include <strategies/chase_controllers/standard_chase_controller.hpp>
@@ -8,7 +8,7 @@
 
 namespace sml = boost::sml;
 
-struct CombatStrategySelector
+struct ChaseSelector
 {
     auto operator()() const
     {
