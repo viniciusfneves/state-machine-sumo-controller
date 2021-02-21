@@ -3,7 +3,7 @@
 
 #include <sml.hpp>
 #include <events/events.hpp>
-#include "fight_machine.hpp"
+#include <machine/fight_machine.hpp>
 
 namespace sml = boost::sml;
 
