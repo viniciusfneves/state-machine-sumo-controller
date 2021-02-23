@@ -11,8 +11,10 @@ struct InitialNone
 {
     auto operator()() const
     {
-        auto exit_state = [] { setTimeout(0); };
         using namespace sml;
+        // Funções
+        auto exit_state = [] { setTimeout(0); };
+        
         return make_transition_table(
             *"entry"_s = "switch_state"_s,
             "switch_state"_s + on_entry<_> / exit_state);

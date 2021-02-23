@@ -11,6 +11,7 @@ struct StandardChase
     auto operator()() const
     {
         auto chase_action = [] {};
+        
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "chase"_s,

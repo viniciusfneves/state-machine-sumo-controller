@@ -12,6 +12,7 @@ struct ChaseSelector
     auto operator()() const
     {
         using namespace sml;
+        
         return make_transition_table(
             *"entry"_s = "selector"_s,
             "selector"_s = state<StandardChase>);

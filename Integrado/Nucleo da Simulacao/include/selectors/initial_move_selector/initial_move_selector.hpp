@@ -13,7 +13,7 @@ struct InitialMoveSelector
     auto operator()() const
     {
         using namespace sml;
-
+        // Guards
         auto none         = [] { return config.initialMove == InitialMove::none; };
         auto full_frente  = [] { return config.initialMove == InitialMove::full_frente; };
 

@@ -13,7 +13,7 @@ struct SearchSelector
     auto operator()() const
     {
         using namespace sml;
-
+        // Guards
         auto none        = [] { return config.search == Search::none; };
         auto radar       = [] { return config.search == Search::radar; };
 

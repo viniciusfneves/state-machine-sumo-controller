@@ -11,6 +11,7 @@ struct SearchNone
     auto operator()() const
     {
         using namespace sml;
+        // Funções
         auto exit_state = [] { setTimeout(0); };
 
         return make_transition_table(

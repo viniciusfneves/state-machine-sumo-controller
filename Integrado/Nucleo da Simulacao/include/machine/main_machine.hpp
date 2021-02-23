@@ -17,9 +17,8 @@ struct machine
     auto operator()() const
     {
         using namespace sml;
-
+        // Funções
         auto set_startClock = []{setTimeout(4000);};
-
 
         return make_transition_table(
             *"initial"_s                                                      = "Configuration"_s,
