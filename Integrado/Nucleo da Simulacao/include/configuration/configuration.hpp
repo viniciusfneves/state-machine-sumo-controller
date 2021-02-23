@@ -19,7 +19,7 @@ enum class Chase
 struct Configuration
 {
     // Definindo inicialização padrão para as estratégias
-    InitialMove   initialMove     = InitialMove::full_frente;
+    InitialMove   initialMove     = InitialMove::none;
     Search        search          = Search::none;
     Chase         chase           = Chase::standard;
 };
