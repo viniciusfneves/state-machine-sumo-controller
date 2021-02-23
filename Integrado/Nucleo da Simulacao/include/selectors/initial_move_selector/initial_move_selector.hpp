@@ -13,9 +13,14 @@ struct InitialMoveSelector
     auto operator()() const
     {
         using namespace sml;
+
+        auto none         = [] { return config.initialMove == InitialMove::none; };
+        auto full_frente  = [] { return config.initialMove == InitialMove::full_frente; };
+
         return make_transition_table(
             *"entry"_s = "selector"_s,
-            "selector"_s = sml::state<FullFrente>);
+            "selector"_s  [none]         = state<InitialNone>,
+            "selector"_s  [full_frente]  = state<FullFrente>);
     }
 };
 
