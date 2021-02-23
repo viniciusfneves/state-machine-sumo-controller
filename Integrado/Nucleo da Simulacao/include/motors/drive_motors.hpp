@@ -15,6 +15,7 @@
 // Dependências gerais
 #include "../pins/pins.hpp"
 
+// Envia sinais PWM para as portas dos motores ESQ e DIR
 void drive(int PWM_esq, int PWM_dir)
 {
 #ifdef REAL_ROBOT
@@ -23,6 +24,7 @@ void drive(int PWM_esq, int PWM_dir)
 #endif
 };
 
+// Para toda a locomoção do robô
 void stop()
 {
 #ifdef REAL_ROBOT
