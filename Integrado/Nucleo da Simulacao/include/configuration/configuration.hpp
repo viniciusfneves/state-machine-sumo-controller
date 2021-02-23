@@ -3,7 +3,8 @@
 
 enum class InitialMove
 {
-    none
+    none,
+    full_frente
 };
 enum class Search
 {
