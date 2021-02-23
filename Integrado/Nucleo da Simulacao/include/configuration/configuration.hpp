@@ -24,4 +24,6 @@ struct Configuration
     Chase         chase           = Chase::standard;
 };
 
+// Objeto global de configurações do robô
+Configuration config;
 #endif
