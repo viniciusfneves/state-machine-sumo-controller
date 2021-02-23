@@ -17,17 +17,23 @@ struct machine
     auto operator()() const
     {
         using namespace sml;
+
+        auto set_startClock = []{setTimeout(4000);};
+
+
         return make_transition_table(
-            *"initial"_s = "Configuration"_s,
+            *"initial"_s                                                      = "Configuration"_s,
 
-            "Configuration"_s      +         event<Start>           =           "StartClock"_s,
+            "Configuration"_s    +  event<Start>                              =   "StartClock"_s,
 
-            "StartClock"_s         +         event<Timeout>         =           state<FightMachine>,
-            "StartClock"_s         +         event<Terminate>       =           "DisengageRobot"_s,
 
-            state<FightMachine>    +         event<Terminate>       =           "DisengageRobot"_s,
+            "StartClock"_s       +  on_entry<_>         /  set_startClock,
+            "StartClock"_s       +  event<Timeout>                            =   state<FightMachine>,
+            "StartClock"_s       +  event<Terminate>                          =   "DisengageRobot"_s,
 
-            "DisengageRobot"_s     +         event<Reset>           =           "Configuration"_s);
+            state<FightMachine>  +  event<Terminate>                          =   "DisengageRobot"_s,
+
+            "DisengageRobot"_s   +  event<Reset>                              =   "Configuration"_s);
     }
 };
 
