@@ -14,6 +14,7 @@ int main(int argc, char **argv) {
   // Lógica geral de inicialização
   //initCode();
   initMotors(robot);
+  initTime(robot, TIME_STEP);
   while (robot->step(TIME_STEP) != -1) {
     event_handler();
   }
