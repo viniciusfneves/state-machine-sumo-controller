@@ -8,7 +8,8 @@ enum class InitialMove
 };
 enum class Search
 {
-    none
+    none,
+    radar
 };
 
 enum class Chase
