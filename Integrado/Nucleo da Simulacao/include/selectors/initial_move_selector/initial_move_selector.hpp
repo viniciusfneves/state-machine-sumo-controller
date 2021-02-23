@@ -17,14 +17,9 @@ public:
     auto operator()() const
     {
         using namespace sml;
-
-        //auto none        = [](Configuration &config) { return config.initialMove == InitialMove::none; };
-        //auto full_frente = [](Configuration &config) { return config.initialMove == InitialMove::full_frente; };
         return make_transition_table(
             *"entry"_s = "selector"_s,
-            "selector"_s + on_entry<_> / [] { Serial.println("Entered InitialMove Selector"); },
-            //"selector"_s[none] = sml::state<InitialNone>,
-            "selector"_s / [] { Serial.println("SHAZAAAM"); } = sml::state<FullFrente>);
+            "selector"_s = sml::state<FullFrente>);
     }
 };
 

@@ -12,14 +12,13 @@ namespace sml = boost::sml;
 // Em uma struct os guards apresentam erro
 class SearchSelector
 {
+public:
     auto operator()() const
     {
-        auto none = [](Configuration &config) { return config.search == Search::none; };
-
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "selector"_s,
-            "selector"_s [none]     = state<SearchNone>);
+            "selector"_s = state<SearchNone>);
     }
 };
 

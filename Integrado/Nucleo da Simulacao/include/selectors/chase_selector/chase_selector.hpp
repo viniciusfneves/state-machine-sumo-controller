@@ -12,14 +12,13 @@ namespace sml = boost::sml;
 // Em uma struct os guards apresentam erro
 class ChaseSelector
 {
+public:
     auto operator()() const
     {
-        auto standard = [](Configuration &config) { return config.chase == Chase::standard; };
-
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "selector"_s,
-            "selector"_s [standard]    = state<StandardChase>);
+            "selector"_s = state<StandardChase>);
     }
 };
 
