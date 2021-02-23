@@ -1,10 +1,19 @@
 #ifndef DRIVE_MOTORS_HPP
 #define DRIVE_MOTORS_HPP
 
-#include "../pins/pins.hpp"
+// Adiciona a função analogWrite para compilação com ESP32
+#ifdef SUMO3KG
+#include <analogWrite.h>
+#endif
+
+// No caso de simulação, importa a biblioteca com as funções de
+// locomoção do WeBots
 #ifndef REAL_ROBOT
 #include "../webots/motors.hpp"
 #endif
+
+// Dependências gerais
+#include "../pins/pins.hpp"
 
 void drive(int PWM_esq, int PWM_dir)
 {
