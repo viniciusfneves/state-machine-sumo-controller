@@ -17,7 +17,7 @@ struct FightMachine
     {
         using namespace sml;
         return make_transition_table(
-            *"entry"_s = state<InitialMoveSelector>,
+            *"entry"_s                                                            = state<InitialMoveSelector>,
             state<InitialMoveSelector>       + event<Timeout>                     = state<SearchSelector>,
             state<SearchSelector>            + event<OpponentDetected>            = state<ChaseSelector>,
             state<ChaseSelector>             + event<None>                        = state<SearchSelector>);

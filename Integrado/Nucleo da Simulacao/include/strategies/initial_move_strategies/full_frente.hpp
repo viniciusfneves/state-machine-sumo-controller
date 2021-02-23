@@ -12,11 +12,12 @@ struct FullFrente
 {
     auto operator()() const
     {
-        auto run_forwards = [] {};
+        auto config_exit = [] { setTimeout(1000); };
+        auto run_forwards = [] { drive(255, 255); };
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "moving"_s,
-            "moving"_s + on_entry<_> / (run_forwards, [] { setTimeout(750); }));
+            "moving"_s + on_entry<_> / (config_exit, run_forwards));
     }
 };
 
