@@ -1,10 +1,10 @@
 #ifndef INITIAL_MOVE_SELECTOR_HPP
 #define INITIAL_MOVE_SELECTOR_HPP
 
-#include <sml.hpp>
-#include <configuration/configuration.hpp>
-#include <strategies/initial_move_strategies/initial_none.hpp>
-#include <utilities/timeout_implementation/timeout.hpp>
+#include "../../../lib/boost/sml.hpp"
+#include "../../configuration/configuration.hpp"
+#include "../../strategies/initial_move_strategies/initial_none.hpp"
+#include "../../strategies/initial_move_strategies/full_frente.hpp"
 
 namespace sml = boost::sml;
 

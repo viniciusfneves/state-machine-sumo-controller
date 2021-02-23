@@ -1,9 +1,9 @@
 #ifndef SEARCH_SELECTOR_HPP
 #define SEARCH_SELECTOR_HPP
 
-#include <sml.hpp>
-#include <configuration/configuration.hpp>
-#include <strategies/search_strategies/search_none.hpp>
+#include "../../../lib/boost/sml.hpp"
+#include "../../configuration/configuration.hpp"
+#include "../../strategies/search_strategies/search_none.hpp"
 
 namespace sml = boost::sml;
 

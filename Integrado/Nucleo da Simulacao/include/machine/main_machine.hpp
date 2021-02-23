@@ -1,9 +1,9 @@
 #ifndef MAIN_MACHINE_HPP
 #define MAIN_MACHINE_HPP
 
-#include <sml.hpp>
-#include <events/events.hpp>
-#include <machine/fight_machine.hpp>
+#include "../../lib/boost/sml.hpp"
+#include "../events/events.hpp"
+#include "../machine/fight_machine.hpp"
 
 namespace sml = boost::sml;
 
@@ -28,7 +28,7 @@ struct machine
             state<FightMachine>    +         event<Terminate>       =           "DisengageRobot"_s,
 
             "DisengageRobot"_s     +         event<Reset>           =           "Configuration"_s);
-    };
+    }
 };
 
 

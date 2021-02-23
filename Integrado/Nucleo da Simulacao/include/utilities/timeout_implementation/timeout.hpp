@@ -1,7 +1,9 @@
 #ifndef TIMEOUT_HPP
 #define TIMEOUT_HPP
 
+#ifdef REAL_ROBOT
 #include <Arduino.h>
+#endif
 
 // VARIAVEIS GLOBAIS
 //---    ---    ---    ---//

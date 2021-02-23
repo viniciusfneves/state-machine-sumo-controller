@@ -1,8 +1,8 @@
 #ifndef CHASE_CONTROLLER_HPP
 #define CHASE_CONTROLLER_HPP
 
-#include <sml.hpp>
-#include <events/events.hpp>
+#include "../../../lib/boost/sml.hpp"
+#include "../../events/events.hpp"
 
 namespace sml = boost::sml;
 
@@ -15,7 +15,7 @@ struct StandardChase
         return make_transition_table(
             *"entry"_s = "chase"_s,
             "chase"_s + event<OpponentDetected> / chase_action);
-    };
+    }
 };
 
 #endif

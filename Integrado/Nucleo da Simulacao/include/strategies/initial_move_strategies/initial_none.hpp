@@ -1,9 +1,9 @@
 #ifndef INITIAL_NONE_HPP
 #define INITIAL_NONE_HPP
 
-#include <sml.hpp>
-#include <event_handler/event_handler.hpp>
-#include <utilities/timeout_implementation/timeout.hpp>
+#include "../../../lib/boost/sml.hpp"
+#include "../../event_handler/event_handler.hpp"
+#include "../../utilities/timeout_implementation/timeout.hpp"
 
 namespace sml = boost::sml;
 

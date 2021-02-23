@@ -1,10 +1,10 @@
 #ifndef FIGHT_MACHINE_HPP
 #define FIGHT_MACHINE_HPP
 
-#include <sml.hpp>
-#include <selectors/initial_move_selector/initial_move_selector.hpp>
-#include <selectors/search_selector/search_selector.hpp>
-#include <selectors/chase_selector/chase_selector.hpp>
+#include "../../lib/boost/sml.hpp"
+#include "../selectors/initial_move_selector/initial_move_selector.hpp"
+#include "../selectors/search_selector/search_selector.hpp"
+#include "../selectors/chase_selector/chase_selector.hpp"
 
 namespace sml = boost::sml;
 
