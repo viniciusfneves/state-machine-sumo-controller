@@ -12,9 +12,12 @@ struct SearchSelector
     auto operator()() const
     {
         using namespace sml;
+
+        auto none        = [] { return config.search == Search::none; };
+
         return make_transition_table(
             *"entry"_s = "selector"_s,
-            "selector"_s = state<SearchNone>);
+            "selector"_s [none] = state<SearchNone>);
     }
 };
 
