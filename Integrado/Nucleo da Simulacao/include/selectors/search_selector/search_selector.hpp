@@ -3,6 +3,7 @@
 
 #include "../../../lib/boost/sml.hpp"
 #include "../../configuration/configuration.hpp"
+#include "../../utilities/messages/messages.hpp"
 #include "../../strategies/search_strategies/search_none.hpp"
 #include "../../strategies/search_strategies/radar.hpp"
 
@@ -18,9 +19,9 @@ struct SearchSelector
         auto radar       = [] { return config.search == Search::radar; };
 
         return make_transition_table(
-            *"entry"_s = "selector"_s,
+            *"entry"_s  / [] { display_message("Entered Search Selector"); } = "selector"_s,
             "selector"_s [none]  = state<SearchNone>,
-            "selector"_s [radar] = state<Radar>);
+            "selector"_s [radar] = state<SearchRadar>);
     }
 };
 
