@@ -16,11 +16,14 @@
 #include "../pins/pins.hpp"
 
 // Envia sinais PWM para as portas dos motores ESQ e DIR
-void drive(int PWM_esq, int PWM_dir)
+void drive(int PWM_left, int PWM_right)
 {
 #ifdef REAL_ROBOT
-    analogWrite(pins::leftMotor, PWM_esq);
-    analogWrite(pins::rightMotor, PWM_dir);
+    analogWrite(pins::leftMotor, PWM_left);
+    analogWrite(pins::rightMotor, PWM_right);
+#endif
+#ifndef REAL_ROBOT
+    move(PWM_left, PWM_right);
 #endif
 };
 
@@ -30,6 +33,9 @@ void stop()
 #ifdef REAL_ROBOT
     analogWrite(pins::leftMotor, 0);
     analogWrite(pins::rightMotor, 0);
+#endif
+#ifndef REAL_ROBOT
+    move(0, 0);
 #endif
 };
 

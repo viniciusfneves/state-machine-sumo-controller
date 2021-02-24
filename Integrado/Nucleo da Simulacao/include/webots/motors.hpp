@@ -6,7 +6,7 @@
 #include <iostream>
 #include "../pins/pins.hpp"
 #define MAX_SPEED 6.28 * 1.3
-#define MAX_PWM   255
+#define MAX_PWM   1
 
 using namespace webots;
 
