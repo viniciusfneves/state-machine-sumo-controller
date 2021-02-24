@@ -24,6 +24,7 @@ void setTimeout(unsigned long time)
 }
 
 //Cancela o disparo do evento Timeout, caso haja eventos programados
+//Essa função deve vir OBRIGATÓRIAMENTE antes da máquina processar o evento de timeout
 void cancelTimeout()
 {
     timeoutActive = false;

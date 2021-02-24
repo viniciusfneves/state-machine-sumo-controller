@@ -13,8 +13,8 @@ void handle_events()
     {
         if (millis() >= timeoutTime)
         {
-            Core.process_event(Timeout{});
             cancelTimeout();
+            Core.process_event(Timeout{});
         }
     }
     else
