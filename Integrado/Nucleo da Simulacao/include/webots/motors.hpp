@@ -6,6 +6,7 @@
 #include <iostream>
 #include "../pins/pins.hpp"
 #define MAX_SPEED 6.28 * 1.3
+#define MAX_PWM   255
 
 using namespace webots;
 
@@ -61,8 +62,8 @@ Motor *initMotor(Robot *robot, char *motorName)
 
 void initMotors(Robot *robot)
 {
-    leftMotor = initMotor(robot, (char *)"wheel1");
-    rightMotor = initMotor(robot, (char *)"wheel2");
+    leftMotor = initMotor(robot, (char *)"left wheel motor");
+    rightMotor = initMotor(robot, (char *)"right wheel motor");
 }
 
 void analogWrite(int pin, int pwm)

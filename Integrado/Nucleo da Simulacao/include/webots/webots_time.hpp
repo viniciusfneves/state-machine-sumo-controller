@@ -1,8 +1,10 @@
 #ifndef WEBOTS_TIME_HPP
 #define WEBOTS_TIME_HPP
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
-#include "../webots/sensors.hpp"
 #include <chrono>
+
+using namespace std::chrono;
+
 auto startTime = high_resolution_clock::now();
 int timeStepSimulation = 0;
 Robot *robotTime;
