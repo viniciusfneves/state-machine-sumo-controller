@@ -71,8 +71,8 @@ void initSensors(Robot *robot, int _timeStep)
     timeStep = _timeStep;
 
     // Criando instancia dos sensores
-    rightEdgeSensor = robot->getDistanceSensor("border right");
-    leftEdgeSensor = robot->getDistanceSensor("border left");
+    rightEdgeSensor = robot->getDistanceSensor("edge right");
+    leftEdgeSensor = robot->getDistanceSensor("edge left");
     rightDistanceSensor = robot->getDistanceSensor("opponent right");
     leftDistanceSensor = robot->getDistanceSensor("opponent left");
 

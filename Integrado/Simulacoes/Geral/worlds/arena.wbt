@@ -69,7 +69,7 @@ Robot {
   translation -0.8938890883560732 0.03249471159965897 0.7712450179554028
   rotation -0.0027296994818501535 -0.9999683539284748 0.007472608802506454 -2.443703907105059
   children [
-    DEF RIGHT_LINE DistanceSensor {
+    DEF EDGE_RIGHT DistanceSensor {
       translation -0.083748 -0.006999999999999999 0.146763
       rotation 0 0 1 -1.5707963071795863
       children [
@@ -90,7 +90,7 @@ Robot {
           ]
         }
       ]
-      name "right line"
+      name "edge right"
       lookupTable [
         0 1024 0
         0.02 1024 0.1
@@ -98,7 +98,7 @@ Robot {
       ]
       aperture 1
     }
-    DEF LEFT_LINE DistanceSensor {
+    DEF EDGE_LEFT DistanceSensor {
       translation 0.076252 -0.006999999999999999 0.146763
       rotation 0 0 1 -1.5707963071795863
       children [
@@ -119,7 +119,7 @@ Robot {
           ]
         }
       ]
-      name "left line"
+      name "edge left"
       lookupTable [
         0 1024 0
         0.02 1024 0.1
@@ -171,8 +171,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation 0.059999999061120475 -2.530091428475953e-06 -3.604984299715632e-06
-        rotation 0.9999993372392888 0.000985898826871854 -0.0005945792515073125 1.1776496339371412
+        translation 0.059999999061120475 -2.5300914284759533e-06 -3.604984299715633e-06
+        rotation 0.9999993372392888 0.0009858988268718538 -0.0005945792515073124 1.1776496339371412
         children [
           DEF WHEEL Transform {
             rotation 0 0 1 1.5708
@@ -214,7 +214,7 @@ Robot {
       ]
       endPoint Solid {
         translation -0.06000000073736451 -4.104891089116699e-07 3.052328719297434e-06
-        rotation 0.9999980469507626 0.0012133129596884253 0.0015601174066244925 4.480103183910347
+        rotation 0.9999980469507626 0.0012133129596884253 0.0015601174066244923 4.480103183910347
         children [
           USE WHEEL
         ]
