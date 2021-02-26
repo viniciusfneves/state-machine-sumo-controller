@@ -60,8 +60,8 @@ DEF ARENA Solid {
   }
 }
 Robot {
-  translation -0.893899 0.0438718 0.771255
-  rotation -0.0027311862962275074 -0.9999682604019298 0.007484571474303406 -2.443766568150956
+  translation -0.8938890883560732 0.03249471159965897 0.7712450179554028
+  rotation -0.0027296994818501535 -0.9999683539284748 0.007472608802506454 -2.443703907105059
   children [
     DEF LINE_1 DistanceSensor {
       translation -0.083748 -0.006999999999999999 0.146763
@@ -151,22 +151,22 @@ Robot {
         }
       ]
     }
-    DEF WHEEL1 HingeJoint {
+    DEF LEFT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position 3317.302824544768
+        position 3317.302824499596
         anchor 0.06 0 0
       }
       device [
         RotationalMotor {
-          name "wheel1"
+          name "left wheel motor"
           acceleration 10000
           maxVelocity 250
           maxTorque 100
         }
       ]
       endPoint Solid {
-        translation 0.059999999061120475 -2.5300912656320557e-06 -3.6049844140045954e-06
-        rotation 0.9999993372393335 0.0009858988069592635 -0.000594579209132026 1.1776496791089843
+        translation 0.059999999061120475 -2.5300914284759524e-06 -3.604984299715631e-06
+        rotation 0.9999993372392888 0.0009858988268718542 -0.0005945792515073127 1.1776496339371412
         children [
           DEF WHEEL Transform {
             rotation 0 0 1 1.5708
@@ -193,22 +193,22 @@ Robot {
         }
       }
     }
-    DEF WHEEL2 HingeJoint {
+    DEF RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position 2236.9492180480474
+        position 2236.949217902863
         anchor -0.06 0 0
       }
       device [
         RotationalMotor {
-          name "wheel2"
+          name "right wheel motor"
           acceleration 10000
           maxVelocity 250
           maxTorque 100
         }
       ]
       endPoint Solid {
-        translation -0.06000000073736451 -4.1048955206235675e-07 3.0523286597007617e-06
-        rotation 0.9999980469505383 0.0012133129161086284 0.0015601175842889063 4.480103329094522
+        translation -0.06000000073736451 -4.104891089116699e-07 3.052328719297434e-06
+        rotation 0.9999980469507626 0.0012133129596884253 0.0015601174066244927 4.480103183910347
         children [
           USE WHEEL
         ]
