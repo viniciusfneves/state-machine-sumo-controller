@@ -26,4 +26,4 @@ bool isOnEdge()
     }
 }
 
-#endif // BORDER_SENSOR_HPP
+#endif // EDGE_SENSOR_HPP

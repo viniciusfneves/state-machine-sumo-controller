@@ -10,7 +10,7 @@ struct Timeout {};
 
 struct Start {};
 
-struct BorderDetected {};
+struct EdgeDetected {};
 
 struct OpponentDetected {};
 

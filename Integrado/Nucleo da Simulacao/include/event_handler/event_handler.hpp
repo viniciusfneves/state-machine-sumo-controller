@@ -14,7 +14,7 @@ void handle_events()
     if (isOnEdge())
     {
         display_message("On Edge");
-        Core.process_event(BorderDetected{});
+        Core.process_event(EdgeDetected{});
     }
     if (timeoutActive)
     {

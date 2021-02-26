@@ -24,9 +24,12 @@ struct FightMachine
         return make_transition_table(
             *"entry"_s                                                                    = state<InitialMoveSelector>,
             state<InitialMoveSelector>       + event<Timeout>                             = state<SearchSelector>,
-            state<InitialMoveSelector>       + event<BorderDetected>     / avoidEdge      = "AvoidEdge"_s,
+            state<InitialMoveSelector>       + event<EdgeDetected>     / avoidEdge      = "AvoidEdge"_s,
+
             "AvoidEdge"_s                                                                 = state<SearchSelector>,
+
             state<SearchSelector>            + event<OpponentDetected>                    = state<ChaseSelector>,
+            
             state<ChaseSelector>             + event<None>                                = state<SearchSelector>);
     }
 };
