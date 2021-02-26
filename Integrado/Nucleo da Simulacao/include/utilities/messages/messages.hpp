@@ -6,6 +6,7 @@
 #endif
 #ifndef REAL_ROBOT
 #include <iostream>
+using namespace std;
 #endif
 
 void display_message(const char *message)
