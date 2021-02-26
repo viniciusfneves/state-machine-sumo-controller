@@ -5,7 +5,7 @@
 #include "../../../../Nucleo da Simulacao/include/webots/sensors.hpp"
 #include "../../../../Nucleo da Simulacao/include/event_handler/event_handler.hpp"
 
-#define TIME_STEP 64
+#define TIME_STEP 1
 
 using namespace webots;
 
