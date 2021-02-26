@@ -26,4 +26,9 @@ bool isOnEdge()
     }
 }
 
+void initEdgeSensors(){
+    pinMode(pins::edgeSensors::leftEdge, INPUT);
+    pinMode(pins::edgeSensors::rightEdge, INPUT);
+};
+
 #endif // EDGE_SENSOR_HPP
