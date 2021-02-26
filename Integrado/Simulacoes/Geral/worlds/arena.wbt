@@ -1,17 +1,300 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
+  gravity 200
+  ERP 0.8
+  basicTimeStep 1
   coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      coulombFriction [
+        8
+      ]
+      bounce 0
+      bounceVelocity 1
+      softERP 0.85
+      softCFM 1e-05
+    }
+  ]
 }
 Viewpoint {
-  orientation -0.23068991623490684 -0.9630113892894785 -0.13925238470590037 1.1621315960856455
-  position -0.6751064588263914 0.3251481790719065 0.2914557440461162
+  orientation 0.2372603754173549 -0.9548397032245555 -0.17885372627613594 4.874351651015044
+  position 2.3828810157105083 1.1920409130494782 0.9687837434589097
+}
+SolidBox {
+  translation -0.217671 0.07 -0.173217
+  rotation 0 1 0 1.0472
+  size 0.01 0.1 0.3
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
-RectangleArena {
+DEF ARENA Solid {
+  translation -0.504138 -0.015 0.34325
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 0
+        }
+        texture ImageTexture {
+          url [
+            "C:/Users/viny3/Desktop/WeBots Test/Simulacoes/Geral/textures/Arena_texture3.png"
+          ]
+        }
+        textureTransform TextureTransform {
+          center -0.45 -0.45
+          scale 0.9 0.9
+        }
+      }
+      geometry Cylinder {
+        height 0.05
+        radius 0.77
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject Cylinder {
+    height 0.05
+    radius 0.77
+  }
 }
-E-puck {
+Robot {
+  translation -0.893899 0.0438718 0.771255
+  rotation -0.0027311862962275074 -0.9999682604019298 0.007484571474303406 -2.443766568150956
+  children [
+    DEF LINE_1 DistanceSensor {
+      translation -0.083748 -0.006999999999999999 0.146763
+      rotation 0 0 1 -1.5707963071795863
+      children [
+        DEF SENSOR Transform {
+          rotation 0 0 1 1.57
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.6 0 0
+                roughness 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.004
+                radius 0.008
+              }
+            }
+          ]
+        }
+      ]
+      name "line0"
+      lookupTable [
+        0 1024 0
+        0.02 1024 0.1
+        0.08 0 0.3
+      ]
+      aperture 1
+    }
+    DEF LINE_2 DistanceSensor {
+      translation 0.076252 -0.006999999999999999 0.146763
+      rotation 0 0 1 -1.5707963071795863
+      children [
+        DEF SENSOR Transform {
+          rotation 0 0 1 1.57
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.6 0 0
+                roughness 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.002
+                radius 0.008
+              }
+            }
+          ]
+        }
+      ]
+      name "line1"
+      lookupTable [
+        0 1024 0
+        0.02 1024 0.1
+        0.08 0 0.3
+      ]
+      aperture 1
+    }
+    Transform {
+      translation 0 -0.006 0
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0.3 0.3 0.3
+                }
+              }
+              geometry Box {
+                size 0.2 0.1 0.2
+              }
+            }
+          ]
+        }
+        DEF BODY Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.09999999999999999 0.09999999999999999 0.09999999999999999
+              transparency 1
+            }
+          }
+          geometry Box {
+            size 0.2 0.03 0.2
+          }
+        }
+      ]
+    }
+    DEF WHEEL1 HingeJoint {
+      jointParameters HingeJointParameters {
+        position 3317.302824544768
+        anchor 0.06 0 0
+      }
+      device [
+        RotationalMotor {
+          name "wheel1"
+          acceleration 10000
+          maxVelocity 250
+          maxTorque 100
+        }
+      ]
+      endPoint Solid {
+        translation 0.059999999061120475 -2.5300912656320557e-06 -3.6049844140045954e-06
+        rotation 0.9999993372393335 0.0009858988069592635 -0.000594579209132026 1.1776496791089843
+        children [
+          DEF WHEEL Transform {
+            rotation 0 0 1 1.5708
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.305882 0.898039 0.25098
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.02
+                  radius 0.0225
+                  subdivision 24
+                }
+              }
+            ]
+          }
+        ]
+        boundingObject USE WHEEL
+        physics Physics {
+          density -1
+          mass 0.1
+        }
+      }
+    }
+    DEF WHEEL2 HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2236.9492180480474
+        anchor -0.06 0 0
+      }
+      device [
+        RotationalMotor {
+          name "wheel2"
+          acceleration 10000
+          maxVelocity 250
+          maxTorque 100
+        }
+      ]
+      endPoint Solid {
+        translation -0.06000000073736451 -4.1048955206235675e-07 3.0523286597007617e-06
+        rotation 0.9999980469505383 0.0012133129161086284 0.0015601175842889063 4.480103329094522
+        children [
+          USE WHEEL
+        ]
+        name "solid(1)"
+        boundingObject USE WHEEL
+        physics Physics {
+          density -1
+          mass 0.08
+        }
+      }
+    }
+    DistanceSensor {
+      translation -0.0807351 0.02 0.10242
+      rotation 0 1 0 3.14159
+      scale 0.1 0.1 0.1
+      children [
+        DEF sensor Shape {
+          appearance PBRAppearance {
+            baseColor 0 1 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.1 0.1 0.1
+          }
+        }
+      ]
+      name "ds0"
+      boundingObject USE sensor
+      physics Physics {
+      }
+      lookupTable [
+        0 1023 0
+        0.02 1023 0.05
+        4 0 0.4
+      ]
+    }
+    DistanceSensor {
+      translation 0.089265 0.02 0.10242
+      rotation 0 -1 0 3.67802e-06
+      scale 0.1 0.1 0.1
+      children [
+        DEF sensor Shape {
+          appearance PBRAppearance {
+            baseColor 0 1 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.1 0.1 0.1
+          }
+        }
+      ]
+      name "ds1"
+      boundingObject USE sensor
+      physics Physics {
+      }
+      lookupTable [
+        0 1023 0
+        0.02 1023 0.05
+        4 0 0.4
+      ]
+    }
+    SharpGP2D120 {
+      translation -0.03 0.02 0.11
+      rotation 0 1 0 -1.5707953071795862
+      name "dist0"
+    }
+    SharpGP2D120 {
+      translation 0.01 0.02 0.11
+      rotation 0 1 0 -1.5707953071795862
+      name "dist1"
+    }
+  ]
+  name "Atena"
+  boundingObject Transform {
+    translation 0 -0.006 0
+    children [
+      USE BODY
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 3
+    centerOfMass [
+      0 0 0
+    ]
+  }
+  rotationStep 0.261799
   controller "main"
 }
