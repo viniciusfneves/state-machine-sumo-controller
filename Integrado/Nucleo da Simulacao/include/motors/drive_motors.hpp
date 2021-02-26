@@ -1,10 +1,31 @@
 #ifndef DRIVE_MOTORS_HPP
 #define DRIVE_MOTORS_HPP
 
+#ifdef REAL_ROBOT
+
+// Dependências gerais
+#include "../pins/pins.hpp"
+
 // Adiciona a função analogWrite para compilação com ESP32
 #ifdef SUMO3KG
 #include <analogWrite.h>
 #endif
+
+// Envia sinais PWM para as portas dos motores ESQ e DIR
+void drive(int PWM_left, int PWM_right)
+{
+    analogWrite(pins::leftMotor, PWM_left);
+    analogWrite(pins::rightMotor, PWM_right);
+};
+
+// Para toda a locomoção do robô
+void stop()
+{
+    analogWrite(pins::leftMotor, 0);
+    analogWrite(pins::rightMotor, 0);
+};
+
+#endif //ifdef REAL_ROBOT
 
 // No caso de simulação, importa a biblioteca com as funções de
 // locomoção do WeBots
@@ -12,31 +33,4 @@
 #include "../webots/motors.hpp"
 #endif
 
-// Dependências gerais
-#include "../pins/pins.hpp"
-
-// Envia sinais PWM para as portas dos motores ESQ e DIR
-void drive(int PWM_left, int PWM_right)
-{
-#ifdef REAL_ROBOT
-    analogWrite(pins::leftMotor, PWM_left);
-    analogWrite(pins::rightMotor, PWM_right);
-#endif
-#ifndef REAL_ROBOT
-    move(PWM_left, PWM_right);
-#endif
-};
-
-// Para toda a locomoção do robô
-void stop()
-{
-#ifdef REAL_ROBOT
-    analogWrite(pins::leftMotor, 0);
-    analogWrite(pins::rightMotor, 0);
-#endif
-#ifndef REAL_ROBOT
-    move(0, 0);
-#endif
-};
-
-#endif
+#endif //DRIVE_MOTORS_HPP
