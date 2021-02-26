@@ -12,7 +12,7 @@ bool getRightEdgeSensor() { return digitalRead(pins::edgeSensors::rightEdge); };
 #include "../../webots/sensors.hpp"
 #endif
 
-bool isOnEdge()
+bool isEdgeDetected()
 {
     bool left_edge = getLeftEdgeSensor();
     bool right_edge = getRightEdgeSensor();
