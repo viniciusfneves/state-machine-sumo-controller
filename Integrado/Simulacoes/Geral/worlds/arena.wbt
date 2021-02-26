@@ -17,8 +17,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.2372603754173549 -0.9548397032245555 -0.17885372627613594 4.874351651015044
-  position 2.3828810157105083 1.1920409130494782 0.9687837434589097
+  orientation 0.5857587546408342 -0.7213904512132366 -0.36943537765078993 4.8109491890759175
+  position 0.6268705638088516 1.6226710886053128 0.5684166499899017
 }
 SolidBox {
   translation -0.217671 0.07 -0.173217
@@ -63,7 +63,7 @@ Robot {
   translation -0.8938890883560732 0.03249471159965897 0.7712450179554028
   rotation -0.0027296994818501535 -0.9999683539284748 0.007472608802506454 -2.443703907105059
   children [
-    DEF LINE_1 DistanceSensor {
+    DEF RIGHT_LINE DistanceSensor {
       translation -0.083748 -0.006999999999999999 0.146763
       rotation 0 0 1 -1.5707963071795863
       children [
@@ -84,7 +84,7 @@ Robot {
           ]
         }
       ]
-      name "line0"
+      name "right line"
       lookupTable [
         0 1024 0
         0.02 1024 0.1
@@ -92,7 +92,7 @@ Robot {
       ]
       aperture 1
     }
-    DEF LINE_2 DistanceSensor {
+    DEF LEFT_LINE DistanceSensor {
       translation 0.076252 -0.006999999999999999 0.146763
       rotation 0 0 1 -1.5707963071795863
       children [
@@ -113,7 +113,7 @@ Robot {
           ]
         }
       ]
-      name "line1"
+      name "left line"
       lookupTable [
         0 1024 0
         0.02 1024 0.1
@@ -165,8 +165,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation 0.059999999061120475 -2.5300914284759524e-06 -3.604984299715631e-06
-        rotation 0.9999993372392888 0.0009858988268718542 -0.0005945792515073127 1.1776496339371412
+        translation 0.059999999061120475 -2.530091428475953e-06 -3.604984299715632e-06
+        rotation 0.9999993372392888 0.000985898826871854 -0.0005945792515073125 1.1776496339371412
         children [
           DEF WHEEL Transform {
             rotation 0 0 1 1.5708
@@ -208,7 +208,7 @@ Robot {
       ]
       endPoint Solid {
         translation -0.06000000073736451 -4.104891089116699e-07 3.052328719297434e-06
-        rotation 0.9999980469507626 0.0012133129596884253 0.0015601174066244927 4.480103183910347
+        rotation 0.9999980469507626 0.0012133129596884253 0.0015601174066244925 4.480103183910347
         children [
           USE WHEEL
         ]
@@ -220,65 +220,15 @@ Robot {
         }
       }
     }
-    DistanceSensor {
-      translation -0.0807351 0.02 0.10242
-      rotation 0 1 0 3.14159
-      scale 0.1 0.1 0.1
-      children [
-        DEF sensor Shape {
-          appearance PBRAppearance {
-            baseColor 0 1 1
-            metalness 0
-          }
-          geometry Box {
-            size 0.1 0.1 0.1
-          }
-        }
-      ]
-      name "ds0"
-      boundingObject USE sensor
-      physics Physics {
-      }
-      lookupTable [
-        0 1023 0
-        0.02 1023 0.05
-        4 0 0.4
-      ]
-    }
-    DistanceSensor {
-      translation 0.089265 0.02 0.10242
-      rotation 0 -1 0 3.67802e-06
-      scale 0.1 0.1 0.1
-      children [
-        DEF sensor Shape {
-          appearance PBRAppearance {
-            baseColor 0 1 1
-            metalness 0
-          }
-          geometry Box {
-            size 0.1 0.1 0.1
-          }
-        }
-      ]
-      name "ds1"
-      boundingObject USE sensor
-      physics Physics {
-      }
-      lookupTable [
-        0 1023 0
-        0.02 1023 0.05
-        4 0 0.4
-      ]
-    }
-    SharpGP2D120 {
+    DEF OPPONENT_RIGHT SharpGP2D120 {
       translation -0.03 0.02 0.11
       rotation 0 1 0 -1.5707953071795862
-      name "dist0"
+      name "opponent right"
     }
-    SharpGP2D120 {
+    DEF OPPONENT_LEFT SharpGP2D120 {
       translation 0.01 0.02 0.11
       rotation 0 1 0 -1.5707953071795862
-      name "dist1"
+      name "opponent left"
     }
   ]
   name "Atena"
