@@ -19,6 +19,8 @@ void setup()
 
     pinMode(pins::leftMotor, OUTPUT);
     pinMode(pins::rightMotor, OUTPUT);
+    pinMode(pins::leftEdge, INPUT);
+    pinMode(pins::rightEdge, INPUT);
 }
 
 void loop()
