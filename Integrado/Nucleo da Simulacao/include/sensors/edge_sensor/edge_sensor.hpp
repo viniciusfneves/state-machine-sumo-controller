@@ -4,8 +4,8 @@
 #ifdef REAL_ROBOT
 #include "../../pins/pins.hpp"
 
-bool getLeftEdgeSensor() { return digitalRead(pins::leftEdge); };
-bool getRightEdgeSensor() { return digitalRead(pins::rightEdge); };
+bool getLeftEdgeSensor() { return digitalRead(pins::edgeSensors::leftEdge); };
+bool getRightEdgeSensor() { return digitalRead(pins::edgeSensors::rightEdge); };
 #endif
 
 #ifndef REAL_ROBOT
