@@ -1,20 +1,30 @@
 #ifndef OPPONENT_SENSOR_HPP
 #define OPPONENT_SENSOR_HPP
 
-#define NUMBER_OF_SENSORS 5
+// SIMULAÇÃO
+#ifndef REAL_ROBOT
+#include "../../webots/sensors.hpp"
+#endif
 
-bool opponentSensorDetectionArray[NUMBER_OF_SENSORS];
+// SUMO 3KG
+#ifdef SUMO3KG
+#define NUMBER_OF_OPPONENT_SENSORS 5
+int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-2, -1, 0, 1, 2};
+#endif
 
+// FUNÇÕES GLOBAIS - ARDUINO & ESP
 #ifdef REAL_ROBOT
 #include "../../pins/pins.hpp"
-#ifdef SUMO3KG
-int opponentSensorWeight[5] = {-2, -1, 0, 1, 2};
-#endif
+
+// VARIAVEIS GLOBAIS
+bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
+
+double error;
 
 int sumArray(bool vector[])
 {
     int sum = 0;
-    for (int index = 0; index < NUMBER_OF_SENSORS; index++)
+    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
     {
         sum += vector[index];
     }
@@ -23,31 +33,45 @@ int sumArray(bool vector[])
 
 int readOpponentSensors()
 {
-    for (int index = 0; index < NUMBER_OF_SENSORS; index++)
+    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
     {
         opponentSensorDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
     }
     return sumArray(opponentSensorDetectionArray);
 };
 
-bool isOpponentDetected()
+void initOpponentSensors()
 {
-    if (readOpponentSensors() >= 1)
+    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
     {
-        return true;
-    }
-    return false;
-};
-
-void initOpponentSensors(){
-    for (int index = 0; index < NUMBER_OF_SENSORS; index++){
         pinMode(pins::opponentsSensors::sensors[index], INPUT);
     }
 };
 #endif
 
-#ifndef REAL_ROBOT
-#include "../../webots/sensors.hpp"
-#endif
+// MAIS FUNÇÕES GLOBAIS
+double calculateError()
+{
+    double sum = 0.;
+    double readings = 0.;
+    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
+    {
+        if (opponentSensorDetectionArray[index] == 1)
+        {
+            sum += opponentSensorWeight[index];
+            readings += 1;
+        }
+    }
+    return sum / readings;
+}
+bool isOpponentDetected()
+{
+    if (readOpponentSensors() >= 1)
+    {
+        error = calculateError();
+        return true;
+    }
+    return false;
+};
 
 #endif // OPPONENT_SENSOR_HPP
