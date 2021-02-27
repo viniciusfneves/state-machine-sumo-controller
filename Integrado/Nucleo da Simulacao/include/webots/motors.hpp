@@ -3,7 +3,6 @@
 
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Motor.hpp"
-#include "../pins/pins.hpp"
 #define MAX_SPEED 250
 #define MAX_PWM   255
 
@@ -17,14 +16,14 @@ double map(int x, double in_min, double in_max, double out_min, double out_max)
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-// int constrain(int input, int minimumValue, int maximumValue)
-// {
-//     if (input >= maximumValue)
-//         return maximumValue;
-//     if (input <= minimumValue)
-//         return minimumValue;
-//     return input;
-// }
+int constrain(int input, int minimumValue, int maximumValue)
+{
+    if (input >= maximumValue)
+        return maximumValue;
+    if (input <= minimumValue)
+        return minimumValue;
+    return input;
+}
 
 double convertPWMinSpeed(int pwm)
 {
@@ -33,6 +32,8 @@ double convertPWMinSpeed(int pwm)
 
 void drive(int leftPWM, int rightPWM)
 {
+    leftPWM = constrain(leftPWM, -MAX_PWM, MAX_PWM);
+    rightPWM = constrain(rightPWM, -MAX_PWM, MAX_PWM);
     int leftSpeed = convertPWMinSpeed(leftPWM);
     int rightSpeed = convertPWMinSpeed(rightPWM);
     leftMotor->setVelocity(leftSpeed);
