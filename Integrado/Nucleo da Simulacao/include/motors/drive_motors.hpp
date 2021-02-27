@@ -14,6 +14,8 @@
 // Envia sinais PWM para as portas dos motores ESQ e DIR
 void drive(int PWM_left, int PWM_right)
 {
+    PWM_left = constrain(PWM_left, -255, 255);
+    PWM_right = constrain(PWM_right, -255, 255);
     analogWrite(pins::motors::leftMotor, PWM_left);
     analogWrite(pins::motors::rightMotor, PWM_right);
 };
