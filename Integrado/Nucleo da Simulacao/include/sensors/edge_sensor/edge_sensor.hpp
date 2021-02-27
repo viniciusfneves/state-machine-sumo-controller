@@ -6,6 +6,12 @@
 
 bool getLeftEdgeSensor() { return digitalRead(pins::edgeSensors::leftEdge); };
 bool getRightEdgeSensor() { return digitalRead(pins::edgeSensors::rightEdge); };
+
+void initEdgeSensors()
+{
+    pinMode(pins::edgeSensors::leftEdge, INPUT);
+    pinMode(pins::edgeSensors::rightEdge, INPUT);
+};
 #endif
 
 #ifndef REAL_ROBOT
@@ -25,10 +31,5 @@ bool isEdgeDetected()
         return false;
     }
 }
-
-void initEdgeSensors(){
-    pinMode(pins::edgeSensors::leftEdge, INPUT);
-    pinMode(pins::edgeSensors::rightEdge, INPUT);
-};
 
 #endif // EDGE_SENSOR_HPP
