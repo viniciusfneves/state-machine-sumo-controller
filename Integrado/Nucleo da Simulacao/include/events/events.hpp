@@ -4,17 +4,28 @@
 // Aqui são definidos todos os possíveis eventos que podem
 // ser emitidos para que a máquina os processe
 
-struct Terminate {};
+enum class Events
+{
+    Terminate,
+    Timeout,
+    Start,
+    EdgeDetected,
+    OpponentDetected,
+    Reset,
+    None
+};
 
-struct Timeout {};
+struct Terminate{};
 
-struct Start {};
+struct Timeout{};
 
-struct EdgeDetected {};
+struct Start{};
 
-struct OpponentDetected {};
+struct EdgeDetected{};
 
-struct Reset {};
+struct OpponentDetected{};
+
+struct Reset{};
 
 struct None{};
 
