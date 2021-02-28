@@ -8,10 +8,27 @@
 #include "../utilities/timeout_implementation/timeout.hpp"
 #include "../utilities/messages/messages.hpp"
 
+#ifdef SUMO3KG
+#include <communications/WiFi/WiFi.hpp>
+#endif
+
 // Responsável por processar informações e emitir
 // eventos dinamicamente para a máquina
 void handle_events()
 {
+    if (isComAvailable())
+    {
+        switch (getParametersFromCom())
+        {
+        case Events::Start:
+            Core.process_event(Start{});
+            break;
+        case Events::Terminate:
+            Core.process_event(Terminate{});
+        default:
+            break;
+        }
+    }
     if (timeoutActive)
     {
         if (millis() >= timeoutTime)
@@ -20,7 +37,8 @@ void handle_events()
             Core.process_event(Timeout{});
         }
     }
-    if (isOpponentDetected()){
+    if (isOpponentDetected())
+    {
         display_message("Opponent Detected");
         Core.process_event(OpponentDetected{});
     }

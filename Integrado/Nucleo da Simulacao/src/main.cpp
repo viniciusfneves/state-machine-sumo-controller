@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <event_handler/event_handler.hpp>
+#include <communications/WiFi/WiFi.hpp>
 
 void setup()
 {
@@ -12,6 +13,7 @@ void setup()
     Serial.begin(9600);
 #endif
 
+    initCommunications();
     initMotors();
     initOpponentSensors();
     initEdgeSensors();
@@ -19,5 +21,6 @@ void setup()
 
 void loop()
 {
+    handle_Communications();
     handle_events();
 }
