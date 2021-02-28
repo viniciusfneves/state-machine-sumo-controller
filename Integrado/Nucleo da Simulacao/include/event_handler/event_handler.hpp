@@ -29,9 +29,5 @@ void handle_events()
         display_message("On Edge");
         Core.process_event(EdgeDetected{});
     }
-    else
-    {
-        Core.process_event(Start{});
-    }
 }
 #endif
