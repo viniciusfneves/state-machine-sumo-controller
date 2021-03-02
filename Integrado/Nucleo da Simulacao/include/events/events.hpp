@@ -4,7 +4,7 @@
 // Aqui são definidos todos os possíveis eventos que podem
 // ser emitidos para que a máquina os processe
 
-enum class Events
+enum class Event
 {
     Terminate,
     Timeout,
