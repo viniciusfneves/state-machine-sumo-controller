@@ -18,16 +18,29 @@ void handle_events()
 {
     if (isComAvailable())
     {
-        switch (getParametersFromCom())
+    }
+    else if (eventOnQueue != Event::None)
+    {
+        switch (eventOnQueue)
         {
-        case Events::Start:
+        case Event::Start:
             Core.process_event(Start{});
             break;
-        case Events::Terminate:
+
+        case Event::Terminate:
             Core.process_event(Terminate{});
+            break;
+
+        case Event::Reset:
+            Core.process_event(Reset{});
+            break;
+
         default:
             break;
         }
+        Serial.print("Handled Event :");
+        Serial.println(static_cast<int>(eventOnQueue));
+        eventOnQueue = Event::None;
     }
     else if (isTimeoutActive())
     {
@@ -37,15 +50,18 @@ void handle_events()
             Core.process_event(Timeout{});
         }
     }
-    if (isOpponentDetected())
+    else if (isOpponentDetected())
     {
         display_message("Opponent Detected");
         Core.process_event(OpponentDetected{});
     }
-    if (isEdgeDetected())
+    else if (isEdgeDetected())
     {
         display_message("On Edge");
         Core.process_event(EdgeDetected{});
+    }
+    else{
+        Core.process_event(None{});
     }
 }
 #endif
