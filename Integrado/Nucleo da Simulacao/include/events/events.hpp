@@ -29,4 +29,12 @@ struct Reset{};
 
 struct None{};
 
+
+Event eventOnQueue = Event::None;
+
+void addEventToQueue(Event event)
+{
+    eventOnQueue = event;
+};
+
 #endif
