@@ -29,15 +29,15 @@ void stop()
 
 void initMotors()
 {
+#ifdef SUMO3KG
+    // Define a resolução de saída dos pinos de PWM do ESP32
+    analogWriteResolution(pins::motors::leftMotor, 12);
+    analogWriteResolution(pins::motors::rightMotor, 12);
+#endif
     pinMode(pins::motors::leftMotor, OUTPUT);
     pinMode(pins::motors::rightMotor, OUTPUT);
     analogWrite(pins::motors::leftMotor, 0);
     analogWrite(pins::motors::rightMotor, 0);
-#ifdef SUMO3KG
-    // Define a resolução de saída dos pinos de PWM do ESP32
-    analogWriteResolution(pins::motors::leftMotor, 8);
-    analogWriteResolution(pins::motors::rightMotor, 8);
-#endif
 }
 
 #endif //ifdef REAL_ROBOT
