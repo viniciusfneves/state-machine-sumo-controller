@@ -29,7 +29,7 @@ void handle_events()
             break;
         }
     }
-    if (timeoutActive)
+    else if (isTimeoutActive())
     {
         if (millis() >= timeoutTime)
         {

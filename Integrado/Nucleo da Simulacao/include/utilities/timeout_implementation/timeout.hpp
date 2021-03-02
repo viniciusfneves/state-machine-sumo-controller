@@ -10,9 +10,11 @@
 
 // VARIAVEIS GLOBAIS
 //---    ---    ---    ---//
-bool timeoutActive = false;  //Indica se Timeout está ativo
+bool timeoutActive = false; //Indica se Timeout está ativo
 
-unsigned long timeoutTime;   //Indica qual o tempo, em milissegundos, que o evento Timeout deve ser disparado
+bool isTimeoutActive() { return timeoutActive; };
+
+unsigned long timeoutTime; //Indica qual o tempo, em milissegundos, que o evento Timeout deve ser disparado
 //---    ---    ---    ---//
 
 //Ativa a função de Timeout
