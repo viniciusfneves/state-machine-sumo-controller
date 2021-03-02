@@ -7,6 +7,7 @@
 #include <WebServer.h>
 #include <events/events.hpp>
 #include <utilities/messages/messages.hpp>
+#include <configuration/configuration.hpp>
 
 const char *ssid = "ESP32";        // Enter SSID here
 const char *password = "12345678"; //Enter Password here
@@ -15,44 +16,40 @@ WiFiServer server(80);
 
 String page;
 
-String parameter;
-
 bool comAvailable = false;
 
 bool isComAvailable() { return comAvailable; };
 
-Events getParametersFromCom()
-{
-    if (parameter == "START")
-    {
-        return Events::Start;
-    }
-    if (parameter == "TERMINATE")
-    {
-        return Events::Terminate;
-    }
-    comAvailable = false;
-};
-
 void createHTMLPage()
 {
     page = "<!DOCTYPE html> <html>\n";
-    page += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n";
+    page += "<head><meta charset=\"utf-8\" name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><link rel=\"icon\" href=\"#\">\n";
     page += "<title>Robot WiFi Controller</title>\n";
-    page += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\n";
-    page += "body{margin-top: 50px;} h1 {color: #444444;margin: 50px auto 30px;} h3 {color: #444444;margin-bottom: 50px;}\n";
-    page += "button {display: block;background-color: #3498db;border: none;color: white;padding: 13px 30px;text-decoration: none;font-size: 25px;margin: 0px auto 35px;cursor: pointer;border-radius: 4px;}\n";
+    page += "<style>";
+    page += "html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\n";
+    page += "body { margin-top: 50px;} h1 {color: #444444;margin: 50px auto 30px;} h3 {color: #444444;margin-bottom: 50px;}\n";
+    page += "button { border: none;color: white;width: 165px;padding: 12px;margin: 12px;cursor: pointer;border-radius: 5px; }\n";
     page += "a {color: white;text-decoration: none;font-size: 22px;}\n";
-    page += ".button-start {background-color: #3498db;}\n";
-    page += ".button-terminate {background-color: #3498db;}\n";
     page += "p {font-size: 14px;color: #888;margin-bottom: 10px;}\n";
+    page += ".button-start {background-color: #00770c;}\n";
+    page += ".button-terminate {background-color: #a70000;}\n";
+    page += ".button-reset {background-color: #00770c;}\n";
+    page += ".button-initial-move {background-color: #0b5873;}\n";
+    page += ".button-search {background-color: #0b5873;}\n";
     page += "</style>\n";
     page += "</head>\n";
     page += "<body>\n";
-    page += "<h1>Configure Robot Strategies</h1>\n";
-    page += "<h4>Using Access Point(AP) Mode</h4>\n";
-    page += "<button class=\"button-start\"><a href=\"/Start\">Start</a></button>";
-    page += "<button class=\"button-terminate\"><a href=\"/Terminate\">Terminate</a></button>";
+    page += "<h1>Configurações do Robô - ESP32</h1>\n";
+    page += "<h4>Emita eventos para a state machine</h4>\n";
+    page += "<button class=\"button-start\"><a href=\"/start\">Start</a></button>";
+    page += "<button class=\"button-terminate\"><a href=\"/terminate\">Terminate</a></button>";
+    page += "<button class=\"button-reset\"><a href=\"/reset\">Reset</a></button>";
+    page += "<h4>Configure a estratégia de movimento inicial</h4>\n";
+    page += "<button class=\"button-initial-move\"><a href=\"/initial-move-none\">None</a></button>";
+    page += "<button class=\"button-initial-move\"><a href=\"/initial-move-full-frente\">Full Frente</a></button>";
+    page += "<h4>Configure a estratégia de busca</h4>\n";
+    page += "<button class=\"button-search\"><a href=\"/search-none\">None</a></button>";
+    page += "<button class=\"button-search\"><a href=\"/search-radar\">Radar</a></button>";
     page += "</body>\n";
     page += "</html>\n";
 };
@@ -72,15 +69,14 @@ void initCommunications()
 void handle_Communications()
 {
     WiFiClient client = server.available();
-    if (client)
-    {                            // if you get a client,
-        String currentLine = ""; // make a String to hold incoming data from the client
+    if (client)             // if you get a client,
+    {                            
+        String currentLine;
         while (client.connected())
-        { // loop while the client's connected
-            if (client.available())
-            {                           // if there's bytes to read from the client,
-                char c = client.read(); // read a byte, then
-                Serial.write(c);        // print it out the serial monitor
+        {
+            if (client.available())     // if there's bytes to read from the client,
+            {                           
+                char c = client.read(); // read a byte
                 if (c == '\n')
                 { // if the byte is a newline character
 
@@ -113,15 +109,37 @@ void handle_Communications()
                 }
 
                 // Check to see if the client request was "GET /H" or "GET /L":
-                if (currentLine.endsWith("GET /Start"))
+                if (currentLine.endsWith("GET /start"))
                 {
-                    comAvailable = true;
-                    parameter = "START";
+                    addEventToQueue(Event::Start);
                 }
-                if (currentLine.endsWith("GET /Terminate"))
+                if (currentLine.endsWith("GET /terminate"))
                 {
-                    comAvailable = true;
-                    parameter = "TERMINATE";
+                    addEventToQueue(Event::Terminate);
+                }
+                if (currentLine.endsWith("GET /reset"))
+                {
+                    addEventToQueue(Event::Reset);
+                }
+                if (currentLine.endsWith("GET /initial-move-none"))
+                {
+                    config.initialMove = InitialMove::none;
+                    display_message("INITIAL MOVE: NONE");
+                }
+                if (currentLine.endsWith("GET /initial-move-full-frente"))
+                {
+                    config.initialMove = InitialMove::full_frente;
+                    display_message("INITIAL MOVE: FULL FRENTE");
+                }
+                if (currentLine.endsWith("GET /search-none"))
+                {
+                    config.search = Search::none;
+                    display_message("SEARCH: NONE");
+                }
+                if (currentLine.endsWith("GET /search-radar"))
+                {
+                    config.search = Search::radar;
+                    display_message("SEARCH: RADAR");
                 }
             }
         }
