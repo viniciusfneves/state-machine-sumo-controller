@@ -1,0 +1,40 @@
+html {
+    font-family: Helvetica;
+    display: inline-block;
+    margin: 0px auto;
+    text-align: center;
+}
+
+body {
+    margin-top: 50px;
+}
+
+h1 {
+    color: #444444;
+    margin: 50px auto 30px;
+}
+
+button {
+    border: none;
+    width: 120px;
+    padding: 12px;
+    margin: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.button-green {
+    background-color: #00770c;
+}
+
+.button-red {
+    background-color: #a70000;
+}
+
+.button-blue {
+    background-color: #0b5873;
+}

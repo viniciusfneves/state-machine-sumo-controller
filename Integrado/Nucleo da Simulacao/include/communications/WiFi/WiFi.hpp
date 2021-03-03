@@ -16,6 +16,8 @@ void setRequestsResponse()
 {
     // Request da Home pelo cliente. Retorna index.html
     server.on("/", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/index.html"); });
+    server.on("/style.css", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/style.css"); });
+    server.on("/js/script.js", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/js/script.js"); });
 
     // Caso o usuário procure um endereço que não exista
     server.onNotFound([](AsyncWebServerRequest *request) { request->send(404, "text/plain", "Not found"); });
