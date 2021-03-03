@@ -11,13 +11,13 @@ void setup()
 
     SPIFFS.begin(); // Inicia o File System do ESP32
 
+    initCommunications(); // Configura o servidor HTTP e WebSocket
 #endif
 
 #ifdef SUMOMINI
     Serial.begin(9600);
 #endif
 
-    initCommunications();
     initMotors();
     initOpponentSensors();
     initEdgeSensors();
