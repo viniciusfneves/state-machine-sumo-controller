@@ -1,21 +1,32 @@
 /*Abre a conexão com serviço WebSocket do ESP*/
 var connection = new WebSocket("ws://" + location.hostname + ":81");
 
+// Conexão estabelecida
 connection.onopen = function() {
     document.getElementById("connection-status-circle").style.background = "#00770c";
     document.getElementById("connection-status-text").innerHTML = "Connected";
 }
+
+// Erro na conexão
 connection.onerror = function() {
     document.getElementById("connection-status-circle").style.background = "#bd0101";
     document.getElementById("connection-status-text").innerHTML = "ERROR! Uma conexão não pôde ser estabelecida";
-
 }
 
+// Conexão encerrada
+connection.onclose = function(event) {
+    if (event.wasClean) {
+        document.getElementById("connection-status-circle").style.background = "#e4c200";
+        document.getElementById("connection-status-text").innerHTML = "O robô encerrou a conxão";
+    }
+}
+
+// Enum com os tipos de estratégias aceitas pelo robô
 const strategy_type = {
     initial: "initial",
     search: "search",
     chase: "chase"
-};
+}
 
 // Enum com estratégias iniciais
 const initial_move_strategy = {
