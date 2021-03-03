@@ -19,7 +19,7 @@ struct InitialMoveSelector
         auto full_frente  = [] { return config.initialMove == InitialMove::full_frente; };
 
         return make_transition_table(
-            *"entry"_s / [] { display_message("Entered Initial Move Selector"); } = "selector"_s,
+            *"entry"_s / [] { displayMessage("Entered Initial Move Selector"); } = "selector"_s,
             "selector"_s  [none]         = state<InitialNone>,
             "selector"_s  [full_frente]  = state<FullFrente>);
     }

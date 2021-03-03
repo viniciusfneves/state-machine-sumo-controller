@@ -15,7 +15,7 @@ struct ChaseSelector
         using namespace sml;
         
         return make_transition_table(
-            *"entry"_s / [] { display_message("Entered Chase Selector"); }  = "selector"_s,
+            *"entry"_s / [] { displayMessage("Entered Chase Selector"); }  = "selector"_s,
             "selector"_s = state<StandardChase>);
     }
 };

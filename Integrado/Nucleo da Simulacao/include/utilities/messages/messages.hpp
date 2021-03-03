@@ -9,7 +9,7 @@
 using namespace std;
 #endif
 
-void display_message(const char *message)
+void displayMessage(const char *message)
 {
 #ifdef REAL_ROBOT
     Serial.println(message);

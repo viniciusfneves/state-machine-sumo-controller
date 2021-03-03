@@ -14,12 +14,9 @@
 
 // Responsável por processar informações e emitir
 // eventos dinamicamente para a máquina
-void handle_events()
+void processEvents()
 {
-    if (isComAvailable())
-    {
-    }
-    else if (eventOnQueue != Event::None)
+    if (eventOnQueue != Event::None)
     {
         switch (eventOnQueue)
         {
@@ -52,15 +49,16 @@ void handle_events()
     }
     else if (isOpponentDetected())
     {
-        display_message("Opponent Detected");
+        displayMessage("Opponent Detected");
         Core.process_event(OpponentDetected{});
     }
     else if (isEdgeDetected())
     {
-        display_message("On Edge");
+        displayMessage("On Edge");
         Core.process_event(EdgeDetected{});
     }
-    else{
+    else
+    {
         Core.process_event(None{});
     }
 }

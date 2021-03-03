@@ -20,7 +20,7 @@ struct machine
         using namespace sml;
         // Funções
         auto set_startClock = []{ setTimeout(4000); };
-        auto disengage = [] { stop(); display_message("Disengage"); };
+        auto disengage = [] { stop(); displayMessage("Disengage"); };
 
         return make_transition_table(
             *"initial"_s                                                      = "Configuration"_s,

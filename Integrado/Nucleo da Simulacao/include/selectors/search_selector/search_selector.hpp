@@ -19,7 +19,7 @@ struct SearchSelector
         auto radar       = [] { return config.search == Search::radar; };
 
         return make_transition_table(
-            *"entry"_s  / [] { display_message("Entered Search Selector"); } = "selector"_s,
+            *"entry"_s  / [] { displayMessage("Entered Search Selector"); } = "selector"_s,
             "selector"_s [none]  = state<SearchNone>,
             "selector"_s [radar] = state<SearchRadar>);
     }
