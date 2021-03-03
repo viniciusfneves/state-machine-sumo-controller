@@ -9,11 +9,10 @@
 #include "../utilities/messages/messages.hpp"
 
 #ifdef SUMO3KG
-#include <communications/WiFi/WiFi.hpp>
+#include <communications/WiFi/WirelessCom_handler.hpp>
 #endif
 
-// Responsável por processar informações e emitir
-// eventos dinamicamente para a máquina
+// Responsável por processar informações e emitir eventos dinamicamente para a máquina
 void processEvents()
 {
     if (eventOnQueue != Event::None)

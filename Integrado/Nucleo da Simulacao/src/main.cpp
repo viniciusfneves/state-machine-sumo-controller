@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <SPIFFS.h>
 #include <event_handler/event_handler.hpp>
-#include <communications/WiFi/WiFi.hpp>
+#include <communications/WiFi/WirelessCom_handler.hpp>
 
 void setup()
 {
@@ -11,7 +11,7 @@ void setup()
 
     SPIFFS.begin(); // Inicia o File System do ESP32
 
-    initCommunications(); // Configura o servidor HTTP e WebSocket
+    initCommunications();
 #endif
 
 #ifdef SUMOMINI

@@ -16,12 +16,12 @@ h1 {
 
 button {
     border: none;
-    width: 120px;
+    width: 115px;
     padding: 12px;
-    margin: 12px;
+    margin: 8px;
     cursor: pointer;
-    border-radius: 5px;
-
+    border-radius: 8px;
+    background-color: #868686;
     color: white;
     text-decoration: none;
     font-size: 18px;
@@ -32,9 +32,25 @@ button {
 }
 
 .button-red {
-    background-color: #a70000;
+    background-color: #bd0101;
 }
 
-.button-blue {
-    background-color: #0b5873;
+#connection-info {
+    display: inline;
+}
+
+#connection-status-text {
+    display: inline;
+    color: midnightblue;
+}
+
+#connection-status-circle {
+    display: inline-block;
+    background: #e4c200;
+    vertical-align: bottom;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
 }
