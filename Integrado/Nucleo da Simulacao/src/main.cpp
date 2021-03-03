@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <SPIFFS.h>
 #include <event_handler/event_handler.hpp>
 #include <communications/WiFi/WiFi.hpp>
 
@@ -7,6 +8,9 @@ void setup()
 // Configurações específicas para o ESP32
 #ifdef SUMO3KG
     Serial.begin(115200); // Porta Serial
+
+    SPIFFS.begin(); // Inicia o File System do ESP32
+
 #endif
 
 #ifdef SUMOMINI
