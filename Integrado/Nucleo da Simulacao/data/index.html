@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="icon" href="#">
+    <title>Robot WiFi Controller</title>
+    <script>
+        var none = "none";
+        var full_frente = "full_frente";
+        var radar = "radar";
+
+        var connection = new WebSocket("ws://" + location.hostname + ":81");
+
+        function set_initial_move_strategy(strategy) {
+            console.log("Configurando estratégia de movimento inicial para " + strategy);
+            connection.send("{initial_move = "+strategy+"}");
+        }
+
+        function set_search_strategy(strategy) {
+            console.log("Configurando estratégia de busca para " + strategy);
+            connection.send("{search = "+strategy+"}");
+        }
+    </script>
+    <style>
+        html {
+            font-family: Helvetica;
+            display: inline-block;
+            margin: 0px auto;
+            text-align: center;
+        }
+
+        body {
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #444444;
+            margin: 50px auto 30px;
+        }
+
+        button {
+            border: none;
+            width: 120px;
+            padding: 12px;
+            margin: 12px;
+            cursor: pointer;
+            border-radius: 5px;
+
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .button-green {
+            background-color: #00770c;
+        }
+
+        .button-red {
+            background-color: #a70000;
+        }
+
+        .button-blue {
+            background-color: #0b5873;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Configurações do Robô - ESP32</h1>
+
+    <h4>Emita eventos para a state machine</h4>
+
+    <button class="button-green">Start</button>
+    <button class="button-red">Terminate</button>
+    <button class="button-green">Reset</button>
+
+    <h4>Configure a estratégia de movimento inicial</h4>
+
+    <button class="button-blue" onclick="set_initial_move_strategy(none)">None</button>
+    <button class="button-blue" onclick="set_initial_move_strategy(full_frente)">Full Frente</button>
+
+    <h4>Configure a estratégia de busca</h4>
+
+    <button class="button-blue" onclick="set_search_strategy(none)">None</button>
+    <button class="button-blue" onclick="set_search_strategy(radar)">Radar</button>
+</body>
+
+</html>

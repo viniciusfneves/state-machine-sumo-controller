@@ -2,150 +2,73 @@
 #define WIFI_HPP
 
 #include <WiFi.h>
-#include <WiFiClient.h>
-#include <WiFiAP.h>
-#include <WebServer.h>
-#include <events/events.hpp>
-#include <utilities/messages/messages.hpp>
-#include <configuration/configuration.hpp>
+#include <ESPAsyncWebServer.h>
+#include <WebSocketsServer.h>
 
-const char *ssid = "ESP32";        // Enter SSID here
-const char *password = "12345678"; //Enter Password here
+const char *ssid = "ESP32";        // Nome da rede - SSID
+const char *password = "12345678"; // Senha da rede
 
-WiFiServer server(80);
+AsyncWebServer server(80);      // Configura o servidor HTTP para a porta 80
+WebSocketsServer webSocket(81); // Configura o serviço do WebSockets para a porta 81
 
-String page;
-
-bool comAvailable = false;
-
-bool isComAvailable() { return comAvailable; };
-
-void createHTMLPage()
+//Configura as instruções para lidar com os requests HTML
+void setRequestsResponse()
 {
-    page = "<!DOCTYPE html> <html>\n";
-    page += "<head><meta charset=\"utf-8\" name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"><link rel=\"icon\" href=\"#\">\n";
-    page += "<title>Robot WiFi Controller</title>\n";
-    page += "<style>";
-    page += "html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\n";
-    page += "body { margin-top: 50px;} h1 {color: #444444;margin: 50px auto 30px;} h3 {color: #444444;margin-bottom: 50px;}\n";
-    page += "button { border: none;color: white;width: 165px;padding: 12px;margin: 12px;cursor: pointer;border-radius: 5px; }\n";
-    page += "a {color: white;text-decoration: none;font-size: 22px;}\n";
-    page += "p {font-size: 14px;color: #888;margin-bottom: 10px;}\n";
-    page += ".button-start {background-color: #00770c;}\n";
-    page += ".button-terminate {background-color: #a70000;}\n";
-    page += ".button-reset {background-color: #00770c;}\n";
-    page += ".button-initial-move {background-color: #0b5873;}\n";
-    page += ".button-search {background-color: #0b5873;}\n";
-    page += "</style>\n";
-    page += "</head>\n";
-    page += "<body>\n";
-    page += "<h1>Configurações do Robô - ESP32</h1>\n";
-    page += "<h4>Emita eventos para a state machine</h4>\n";
-    page += "<button class=\"button-start\"><a href=\"/start\">Start</a></button>";
-    page += "<button class=\"button-terminate\"><a href=\"/terminate\">Terminate</a></button>";
-    page += "<button class=\"button-reset\"><a href=\"/reset\">Reset</a></button>";
-    page += "<h4>Configure a estratégia de movimento inicial</h4>\n";
-    page += "<button class=\"button-initial-move\"><a href=\"/initial-move-none\">None</a></button>";
-    page += "<button class=\"button-initial-move\"><a href=\"/initial-move-full-frente\">Full Frente</a></button>";
-    page += "<h4>Configure a estratégia de busca</h4>\n";
-    page += "<button class=\"button-search\"><a href=\"/search-none\">None</a></button>";
-    page += "<button class=\"button-search\"><a href=\"/search-radar\">Radar</a></button>";
-    page += "</body>\n";
-    page += "</html>\n";
-};
+    // Request da Home pelo cliente. Retorna index.html
+    server.on("/", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/index.html"); });
 
+    // Caso o usuário procure um endereço que não exista
+    server.onNotFound([](AsyncWebServerRequest *request) { request->send(404, "text/plain", "Not found"); });
+}
+
+// Lida com os dados recebidos do browser pelo WebSocket
+void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *data, size_t length)
+{
+    switch (type)
+    {
+    case WStype_DISCONNECTED:
+        Serial.printf("(%u) Disconnecting\n", client_id);
+        break;
+    case WStype_CONNECTED:
+        Serial.printf("Client Connected! Assigned ID: %u\n", client_id);
+        break;
+    case WStype_TEXT:
+        Serial.printf("(%u) Message recieved -> %s\n", client_id, data);
+        break;
+    case WStype_ERROR:
+        break;
+    }
+}
+
+// Lida com a troca de dados entre server e clients pelo protocolo WebSockets
+void handleWSData()
+{
+    webSocket.loop();
+}
+
+// Realiza as configurações necessárias para a parte de comunicação
+// do ESP32
 void initCommunications()
 {
+    // Cria a rede Wi-Fi própria do ESP com os parametros de
+    // nome da rede e senha
     WiFi.softAP(ssid, password);
     delay(100);
-    IPAddress myIP = WiFi.softAPIP();
-    Serial.println(myIP);
-    createHTMLPage();
+    // Printa o endereço IP do Server na Serial
+    Serial.println(WiFi.softAPIP());
 
+    // Inicia o servidor HHTP
     server.begin();
-    Serial.println("HTTP server started");
-};
+    Serial.println("HTTP Server Started");
 
-void handle_Communications()
-{
-    WiFiClient client = server.available();
-    if (client)             // if you get a client,
-    {                            
-        String currentLine;
-        while (client.connected())
-        {
-            if (client.available())     // if there's bytes to read from the client,
-            {                           
-                char c = client.read(); // read a byte
-                if (c == '\n')
-                { // if the byte is a newline character
+    setRequestsResponse();
 
-                    // if the current line is blank, you got two newline characters in a row.
-                    // that's the end of the client HTTP request, so send a response:
-                    if (currentLine.length() == 0)
-                    {
-                        // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
-                        // and a content-type so the client knows what's coming, then a blank line:
-                        client.println("HTTP/1.1 200 OK");
-                        client.println("Content-type:text/html");
-                        client.println();
+    // Inicia o serviço de WebSockets
+    webSocket.begin();
+    Serial.println("WebSockets Server Started");
 
-                        // the content of the HTTP response follows the header:
-                        client.print(page);
-
-                        // The HTTP response ends with another blank line:
-                        client.println();
-                        // break out of the while loop:
-                        break;
-                    }
-                    else
-                    { // if you got a newline, then clear currentLine:
-                        currentLine = "";
-                    }
-                }
-                else if (c != '\r')
-                {                     // if you got anything else but a carriage return character,
-                    currentLine += c; // add it to the end of the currentLine
-                }
-
-                // Check to see if the client request was "GET /H" or "GET /L":
-                if (currentLine.endsWith("GET /start"))
-                {
-                    addEventToQueue(Event::Start);
-                }
-                if (currentLine.endsWith("GET /terminate"))
-                {
-                    addEventToQueue(Event::Terminate);
-                }
-                if (currentLine.endsWith("GET /reset"))
-                {
-                    addEventToQueue(Event::Reset);
-                }
-                if (currentLine.endsWith("GET /initial-move-none"))
-                {
-                    config.initialMove = InitialMove::none;
-                    display_message("INITIAL MOVE: NONE");
-                }
-                if (currentLine.endsWith("GET /initial-move-full-frente"))
-                {
-                    config.initialMove = InitialMove::full_frente;
-                    display_message("INITIAL MOVE: FULL FRENTE");
-                }
-                if (currentLine.endsWith("GET /search-none"))
-                {
-                    config.search = Search::none;
-                    display_message("SEARCH: NONE");
-                }
-                if (currentLine.endsWith("GET /search-radar"))
-                {
-                    config.search = Search::radar;
-                    display_message("SEARCH: RADAR");
-                }
-            }
-        }
-        // close the connection:
-        //client.stop();
-    }
-};
+    // Configura qual ação tomar a cada evento recebido pelo WebSocket
+    webSocket.onEvent(handleWSIncomingData);
+}
 
 #endif

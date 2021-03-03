@@ -25,6 +25,6 @@ void setup()
 
 void loop()
 {
-    handle_Communications();
+    handleWSData();
     processEvents();
 }
