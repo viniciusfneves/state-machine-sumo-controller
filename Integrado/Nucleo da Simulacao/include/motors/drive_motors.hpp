@@ -27,6 +27,7 @@ void stop()
     analogWrite(pins::motors::rightMotor, 0);
 };
 
+// Realiza as configurações necessárias para a parte de locomoção do robô
 void initMotors()
 {
 #ifdef SUMO3KG

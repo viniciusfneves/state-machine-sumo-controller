@@ -7,6 +7,7 @@
 bool getLeftEdgeSensor() { return digitalRead(pins::edgeSensors::leftEdge); };
 bool getRightEdgeSensor() { return digitalRead(pins::edgeSensors::rightEdge); };
 
+// Realiza as configurações necessárias para o sensoriamento de borda do robô
 void initEdgeSensors()
 {
     pinMode(pins::edgeSensors::leftEdge, INPUT);
