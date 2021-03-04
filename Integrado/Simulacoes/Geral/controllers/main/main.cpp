@@ -4,6 +4,7 @@
 #include "../../../../Nucleo da Simulacao/include/webots/motors.hpp"
 #include "../../../../Nucleo da Simulacao/include/webots/sensors.hpp"
 #include "../../../../Nucleo da Simulacao/include/event_handler/event_handler.hpp"
+#include "../../../../Nucleo da Simulacao/include/events/events.hpp"
 
 #define TIME_STEP 1
 
@@ -16,8 +17,9 @@ int main(int argc, char **argv) {
   initMotors(robot);
   initSensors(robot, TIME_STEP);
   initTime(robot, TIME_STEP);
+  addEventToQueue(Event::Start);
   while (robot->step(TIME_STEP) != -1) {
-    handle_events();
+    processEvents();
   }
 
   delete robot;
