@@ -4,18 +4,37 @@
 // Aqui são definidos todos os possíveis eventos que podem
 // ser emitidos para que a máquina os processe
 
-struct Terminate {};
+enum class Event
+{
+    Terminate,
+    Timeout,
+    Start,
+    EdgeDetected,
+    OpponentDetected,
+    Reset,
+    None
+};
 
-struct Timeout {};
+struct Terminate{};
 
-struct Start {};
+struct Timeout{};
 
-struct EdgeDetected {};
+struct Start{};
 
-struct OpponentDetected {};
+struct EdgeDetected{};
 
-struct Reset {};
+struct OpponentDetected{};
+
+struct Reset{};
 
 struct None{};
+
+
+Event eventOnQueue = Event::None;
+
+void addEventToQueue(Event event)
+{
+    eventOnQueue = event;
+};
 
 #endif

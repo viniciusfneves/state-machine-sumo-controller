@@ -4,6 +4,7 @@
 #include "../../lib/boost/sml.hpp"
 #include "../events/events.hpp"
 #include "../machine/fight_machine.hpp"
+#include "../motors/drive_motors.hpp"
 
 namespace sml = boost::sml;
 
@@ -18,7 +19,8 @@ struct machine
     {
         using namespace sml;
         // Funções
-        auto set_startClock = []{setTimeout(4000);};
+        auto set_startClock = []{ setTimeout(4000); };
+        auto disengage = [] { stop(); displayMessage("Disengage"); };
 
         return make_transition_table(
             *"initial"_s                                                      = "Configuration"_s,
@@ -32,6 +34,7 @@ struct machine
 
             state<FightMachine>  +  event<Terminate>                          =   "DisengageRobot"_s,
 
+            "DisengageRobot"_s   +  on_entry<_>         / disengage,
             "DisengageRobot"_s   +  event<Reset>                              =   "Configuration"_s);
     }
 };

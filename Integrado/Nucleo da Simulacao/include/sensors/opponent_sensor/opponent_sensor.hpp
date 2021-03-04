@@ -40,6 +40,7 @@ int readOpponentSensors()
     return sumArray(opponentSensorDetectionArray);
 };
 
+// Realiza as configurações necessárias para a parte de sensoriamento de oponentes do robô
 void initOpponentSensors()
 {
     for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)

@@ -8,11 +8,31 @@
 #include "../utilities/timeout_implementation/timeout.hpp"
 #include "../utilities/messages/messages.hpp"
 
-// Responsável por processar informações e emitir
-// eventos dinamicamente para a máquina
-void handle_events()
+// Responsável por processar informações e emitir eventos dinamicamente para a máquina
+void processEvents()
 {
-    if (timeoutActive)
+    if (eventOnQueue != Event::None)
+    {
+        switch (eventOnQueue)
+        {
+        case Event::Start:
+            Core.process_event(Start{});
+            break;
+
+        case Event::Terminate:
+            Core.process_event(Terminate{});
+            break;
+
+        case Event::Reset:
+            Core.process_event(Reset{});
+            break;
+
+        default:
+            break;
+        }
+        eventOnQueue = Event::None;
+    }
+    else if (isTimeoutActive())
     {
         if (millis() >= timeoutTime)
         {
@@ -20,18 +40,19 @@ void handle_events()
             Core.process_event(Timeout{});
         }
     }
-    if (isOpponentDetected()){
-        display_message("Opponent Detected");
+    else if (isOpponentDetected())
+    {
+        displayMessage("Opponent Detected");
         Core.process_event(OpponentDetected{});
     }
-    if (isEdgeDetected())
+    else if (isEdgeDetected())
     {
-        display_message("On Edge");
+        displayMessage("On Edge");
         Core.process_event(EdgeDetected{});
     }
     else
     {
-        Core.process_event(Start{});
+        Core.process_event(None{});
     }
 }
 #endif

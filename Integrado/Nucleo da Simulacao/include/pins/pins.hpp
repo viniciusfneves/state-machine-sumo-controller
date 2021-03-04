@@ -8,8 +8,8 @@ namespace pins
 #ifdef SUMO3KG
     namespace motors
     {
-        int leftMotor = 18;
-        int rightMotor = 19;
+        int leftMotor = 25;
+        int rightMotor = 26;
     }
     namespace edgeSensors
     {
