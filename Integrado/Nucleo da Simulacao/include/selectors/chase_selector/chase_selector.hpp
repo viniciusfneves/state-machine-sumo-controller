@@ -18,7 +18,7 @@ struct ChaseSelector
 
         return make_transition_table(
             *"entry"_s / [] { displayMessage("Entered Chase Selector"); }  = "selector"_s,
-            "selector"_s = state<StandardChase>);
+            "selector"_s = [standard] state<StandardChase>);
     }
 };
 
