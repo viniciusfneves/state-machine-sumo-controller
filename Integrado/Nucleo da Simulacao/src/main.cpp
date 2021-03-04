@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <SPIFFS.h>
 #include <event_handler/event_handler.hpp>
-#include <communications/WiFi/depedencies/acess_point/wireless_acess_point.hpp>
+#include <communications/WiFi/depedencies/access_point/wireless_access_point.hpp>
 #include <communications/WiFi/depedencies/http_server/http_server.hpp>
 #include <communications/WiFi/depedencies/websockets_server/webSockets_server.hpp>
 
@@ -13,7 +13,7 @@ void setup()
 
     SPIFFS.begin(); // Inicia o File System do ESP32
 
-    initAcessPointRouter();
+    initAccessPointRouter();
     initHTTPServer();
     initWebSocketsServer();
 #endif
