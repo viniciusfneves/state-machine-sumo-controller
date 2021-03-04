@@ -116,13 +116,10 @@ connection.onclose = function(event) {
 }
 
 // Quando recebe-se dados do robô
-connection.onmessage = function(data) {
-    let json = JSON.parse(data);
+connection.onmessage = function(response) {
+    let json = JSON.parse(response.data);
 
     // Verificas as chaves contidas no JSON recebido
-
-    console.log(json);
-
     // Recebendo Array de estratégias
     if ("configurations" in json) {
         let initial_move_configured;
