@@ -13,9 +13,11 @@ struct ChaseSelector
     auto operator()() const
     {
         using namespace sml;
-        
+        // Guards
+        auto standard = [] { return config.chase == Chase::standard; };
+
         return make_transition_table(
-            *"entry"_s / [] { display_message("Entered Chase Selector"); }  = "selector"_s,
+            *"entry"_s / [] { display_message("Entered Chase Selector"); } = "selector"_s,
             "selector"_s = state<StandardChase>);
     }
 };
