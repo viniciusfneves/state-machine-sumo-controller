@@ -1,26 +1,6 @@
 /*Abre a conexão com serviço WebSocket do ESP*/
 var connection = new WebSocket("ws://" + location.hostname + ":81");
 
-// Conexão estabelecida
-connection.onopen = function() {
-    document.getElementById("connection-status-circle").style.background = "#00770c";
-    document.getElementById("connection-status-text").innerHTML = "Connected";
-}
-
-// Erro na conexão
-connection.onerror = function() {
-    document.getElementById("connection-status-circle").style.background = "#bd0101";
-    document.getElementById("connection-status-text").innerHTML = "ERROR! Uma conexão não pôde ser estabelecida";
-}
-
-// Conexão encerrada
-connection.onclose = function(event) {
-    if (event.wasClean) {
-        document.getElementById("connection-status-circle").style.background = "#e4c200";
-        document.getElementById("connection-status-text").innerHTML = "O robô encerrou a conxão";
-    }
-}
-
 // Enum com os tipos de estratégias aceitas pelo robô
 const strategy_type = {
     initial: "initial",
@@ -89,7 +69,14 @@ function setStrategy(strategyType, strategy) {
             clearButtons(chase_strategy);
             break;
     }
-    connection.send("{\"" + type + "\" = \"" + strategy + "\"}");
+    connection.send('{ "' + type + '" : "' + strategy + '" }');
+    console.log('{ "' + type + '" : "' + strategy + '" }');
+}
+
+//Envia um request para a máquina do robô emitir um evento específico
+function requestEvent(event) {
+    connection.send('{ "event_request" : "' + event + '" }');
+    console.log('{ "event_request" : "' + event + '" }');
 }
 
 // Atualiza visulmente na tela para quais estratégias o robô está atualmente configurado
@@ -106,4 +93,59 @@ function updateRobotConfigurations(type, strategy) {
             break;
     }
     document.getElementById(type + "_" + strategy).style.backgroundColor = selected_strategy_color;
+}
+
+// Conexão estabelecida
+connection.onopen = function() {
+    document.getElementById("connection-status-circle").style.background = "#00770c";
+    document.getElementById("connection-status-text").innerHTML = "Connected";
+}
+
+// Erro na conexão
+connection.onerror = function() {
+    document.getElementById("connection-status-circle").style.background = "#bd0101";
+    document.getElementById("connection-status-text").innerHTML = "ERROR! Uma conexão não pôde ser estabelecida";
+}
+
+// Conexão encerrada
+connection.onclose = function(event) {
+    if (event.wasClean) {
+        document.getElementById("connection-status-circle").style.background = "#e4c200";
+        document.getElementById("connection-status-text").innerHTML = "O robô encerrou a conxão";
+    }
+}
+
+// Quando recebe-se dados do robô
+connection.onmessage = function(data) {
+    let json = JSON.parse(data);
+
+    // Verificas as chaves contidas no JSON recebido
+
+    console.log(json);
+
+    // Recebendo Array de estratégias
+    if ("configurations" in json) {
+        let initial_move_configured;
+        switch (json["configurations"]["initial_move"]) {
+            case "none":
+                initial_move_configured = initial_move_strategy.none;
+                break;
+            case "full_frente":
+                initial_move_configured = initial_move_strategy.full_frente;
+                break;
+        }
+        updateRobotConfigurations(strategy_type.initial, initial_move_configured);
+
+        let search_configured;
+        switch (json["configurations"]["search"]) {
+            case "none":
+                search_configured = search_strategy.none;
+                break;
+            case "radar":
+                search_configured = search_strategy.radar;
+                break;
+        }
+        updateRobotConfigurations(strategy_type.search, search_configured);
+
+    }
 }

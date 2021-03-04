@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include <SPIFFS.h>
 #include <event_handler/event_handler.hpp>
-#include <communications/WiFi/WirelessCom_handler.hpp>
+#include <communications/WiFi/WirelessComm_handler.hpp>
+#include <communications/JSON/json_handler.hpp>
 
 void setup()
 {

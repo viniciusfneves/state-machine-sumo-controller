@@ -9,7 +9,7 @@
 #include "../utilities/messages/messages.hpp"
 
 #ifdef SUMO3KG
-#include <communications/WiFi/WirelessCom_handler.hpp>
+#include <communications/WiFi/WirelessComm_handler.hpp>
 #endif
 
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina
@@ -34,8 +34,6 @@ void processEvents()
         default:
             break;
         }
-        Serial.print("Handled Event :");
-        Serial.println(static_cast<int>(eventOnQueue));
         eventOnQueue = Event::None;
     }
     else if (isTimeoutActive())

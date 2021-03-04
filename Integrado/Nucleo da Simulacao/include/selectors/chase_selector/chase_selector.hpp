@@ -2,7 +2,7 @@
 #define CHASE_SELECTOR_HPP
 
 #include "../../../lib/boost/sml.hpp"
-#include "../../configuration/configuration.hpp"
+#include "../../configuration/configuration_object.hpp"
 #include "../../utilities/messages/messages.hpp"
 #include "../../strategies/chase_controllers/standard_chase_controller.hpp"
 

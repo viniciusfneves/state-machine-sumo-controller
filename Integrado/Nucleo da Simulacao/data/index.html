@@ -16,11 +16,12 @@
     <h4 id="connection-info">Connection Status: </h4>
     <div id="connection-status-circle"></div>
     <h4 id="connection-status-text">Trying upgrade to WebSocket</h4>
+
     <h4>Emita eventos para a state machine</h4>
 
-    <button class="button-green">Start</button>
-    <button class="button-red">Terminate</button>
-    <button class="button-green">Reset</button>
+    <button class="button-green" onclick="requestEvent('start')">Start</button>
+    <button class="button-red" onclick="requestEvent('terminate')">Terminate</button>
+    <button class="button-green" onclick="requestEvent('reset')">Reset</button>
 
     <h4>Configure a estratégia de movimento inicial</h4>
 

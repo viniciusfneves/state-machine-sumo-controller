@@ -2,7 +2,7 @@
 #define SEARCH_SELECTOR_HPP
 
 #include "../../../lib/boost/sml.hpp"
-#include "../../configuration/configuration.hpp"
+#include "../../configuration/configuration_object.hpp"
 #include "../../utilities/messages/messages.hpp"
 #include "../../strategies/search_strategies/search_none.hpp"
 #include "../../strategies/search_strategies/radar.hpp"
