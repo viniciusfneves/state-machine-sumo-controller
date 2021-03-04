@@ -8,10 +8,6 @@
 #include "../utilities/timeout_implementation/timeout.hpp"
 #include "../utilities/messages/messages.hpp"
 
-#ifdef SUMO3KG
-#include <communications/WiFi/WirelessComm_handler.hpp>
-#endif
-
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina
 void processEvents()
 {
