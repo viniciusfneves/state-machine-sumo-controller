@@ -13,7 +13,8 @@ void initAcessPointRouter()
     WiFi.softAP(ssid, password);
     delay(100);
     // Printa o endereço IP do Server na Serial
-    Serial.printf("Rede gerada! Conectado em: %s\n", WiFi.softAPIP());
+    Serial.print("Rede gerada! Conectado em: ");
+    Serial.println(WiFi.softAPIP());
 }
 
 #endif

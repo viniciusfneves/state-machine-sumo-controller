@@ -33,6 +33,8 @@ void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *data, size_
         deserializeJSON(String((char *)data));
         reConfigureRobotFromComm();
         break;
+    default:
+        break;
     }
 }
 #endif // JSON_HANDLER
