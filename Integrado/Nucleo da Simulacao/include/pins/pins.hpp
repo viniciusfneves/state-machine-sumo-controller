@@ -30,10 +30,23 @@ namespace pins
 
 // Definição de pinos para os robôs sumo mini
 #ifdef SUMOMINI
-    int leftMotor = 9;
-    int rightMotor = 10;
-    int leftEdge = 5;
-    int rightEdge = 6;
+    namespace motors
+    {
+        int leftMotor = 5;
+        int rightMotor = 6;
+    }
+    namespace edgeSensors
+    {
+        int leftEdge = 2;
+        int rightEdge = 4;
+    }
+    namespace opponentsSensors
+    {
+        int left = 12;
+        int right = 13;
+
+        int sensors[] = {left, right};
+    }
 #endif
 };
 

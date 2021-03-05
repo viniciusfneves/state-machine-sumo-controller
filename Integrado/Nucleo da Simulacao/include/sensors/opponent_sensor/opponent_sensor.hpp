@@ -12,6 +12,11 @@
 int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-2, -1, 0, 1, 2};
 #endif
 
+#ifdef SUMOMINI
+#define NUMBER_OF_OPPONENT_SENSORS 2
+int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
+#endif
+
 // FUNÇÕES GLOBAIS - ARDUINO & ESP
 #ifdef REAL_ROBOT
 #include "../../pins/pins.hpp"
