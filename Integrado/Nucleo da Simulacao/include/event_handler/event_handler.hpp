@@ -41,12 +41,10 @@ void processMachineEvents()
     }
     else if (isOpponentDetected())
     {
-        displayMessage("Opponent Detected");
         Core.process_event(OpponentDetected{});
     }
     else if (isEdgeDetected())
     {
-        displayMessage("On Edge");
         Core.process_event(EdgeDetected{});
     }
     else
