@@ -1,6 +1,6 @@
 #if !defined(CONFIG_ROBOT_HPP)
 #define CONFIG_ROBOT_HPP
-
+#ifdef SUMO3KG
 #include "configuration_object.hpp"
 
 #include <events/events.hpp>
@@ -50,6 +50,12 @@ void reConfigureRobotFromComm(){
             initial_configured = "full_frente";
             Serial.println("Initial -> FULL FRENTE");
         }
+        if (strcmp(strategy, "zig_zag") == 0)
+        {
+            config.initialMove = InitialMove::zig_zag;
+            initial_configured = "zig_zag";
+            Serial.println("Initial -> ZIGZAG");
+        }
     }
 
     // Processa as requisições de estratégia de busca
@@ -83,5 +89,5 @@ void reConfigureRobotFromComm(){
     }
 }
 
-
+#endif
 #endif // CONFIG_ROBOT_HPP

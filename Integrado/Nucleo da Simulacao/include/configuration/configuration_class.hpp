@@ -8,7 +8,8 @@
 enum class InitialMove
 {
     none,
-    full_frente
+    full_frente,
+    zig_zag
 };
 // Estratégias de busca
 enum class Search
