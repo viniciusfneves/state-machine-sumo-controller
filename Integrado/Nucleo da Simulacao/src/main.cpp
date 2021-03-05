@@ -1,8 +1,8 @@
 #ifdef SUMO3KG
 #include <SPIFFS.h>
-#include <communications/WiFi/depedencies/access_point/wireless_access_point.hpp>
-#include <communications/WiFi/depedencies/http_server/http_server.hpp>
-#include <communications/WiFi/depedencies/websockets_server/webSockets_server.hpp>
+#include <communications/WiFi/access_point/wireless_access_point.hpp>
+#include <communications/WiFi/http_server/http_server.hpp>
+#include <communications/WiFi/websockets_server/webSockets_server.hpp>
 #endif
 #include <Arduino.h>
 #include <event_handler/event_handler.hpp>
@@ -32,7 +32,7 @@ void setup()
 void loop()
 {
     #ifdef SUMO3KG
-    handleWSData();
+    processWebSocketEvents();
     #endif
-    processEvents();
+    processMachineEvents();
 }

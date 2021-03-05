@@ -2,7 +2,7 @@
 #define SEARCH_SELECTOR_HPP
 
 #include "../../../lib/boost/sml.hpp"
-#include "../../configuration/configuration_object.hpp"
+#include "../../configuration/configurations.hpp"
 #include "../../utilities/messages/messages.hpp"
 #include "../../strategies/search_strategies/search_none.hpp"
 #include "../../strategies/search_strategies/radar.hpp"
@@ -15,8 +15,8 @@ struct SearchSelector
     {
         using namespace sml;
         // Guards
-        auto none        = [] { return config.search == Search::none; };
-        auto radar       = [] { return config.search == Search::radar; };
+        auto none        = [] { return robotConfiguration.search == Search::none; };
+        auto radar       = [] { return robotConfiguration.search == Search::radar; };
 
         return make_transition_table(
             *"entry"_s  / [] { displayMessage("Entered Search Selector"); } = "selector"_s,

@@ -1,21 +1,20 @@
-#if !defined(CONFIG_ROBOT_HPP)
-#define CONFIG_ROBOT_HPP
-#ifdef SUMO3KG
-#include "configuration_object.hpp"
+#if !defined(DYNAMIC_DATA_HPP)
+#define DYNAMIC_DATA_HPP
 
+#include <ArduinoJson.h>
 #include <events/events.hpp>
+#include <configuration/configurations.hpp>
 
-void reConfigureRobotFromComm(){
-    String initial_configured;
-    String search_configured;
-    String chase_configured;
-
-    /*------ Processa os comandos emitidos ------*/
-
-    // Processa as requisições de emissão de eventos
-    if (doc.containsKey("event_request"))
+void processMessages(String message)
+{
+    StaticJsonDocument<512> jsonMessage;
+    DeserializationError JSONerror = deserializeJson(jsonMessage, message);
+    if (JSONerror){
+        Serial.println("JSON -> Ocorreu um erro ao deserializar a mensagem");
+    }
+    if (jsonMessage.containsKey("event_request"))
     {
-        const char *request = doc["event_request"];
+        const char *request = jsonMessage["event_request"];
 
         if (strcmp(request, "start") == 0)
         {
@@ -35,59 +34,52 @@ void reConfigureRobotFromComm(){
     }
 
     // Processa as requisições de estratégia inicial
-    if (doc.containsKey("initial"))
+    if (jsonMessage.containsKey("initial"))
     {
-        const char *strategy = doc["initial"];
+        const char *strategy = jsonMessage["initial"];
         if (strcmp(strategy, "none") == 0)
         {
-            config.initialMove = InitialMove::none;
-            initial_configured = "none";
+            setInitialStrategy(InitialMove::none);
             Serial.println("Initial -> NONE");
         }
         if (strcmp(strategy, "full_frente") == 0)
         {
-            config.initialMove = InitialMove::full_frente;
-            initial_configured = "full_frente";
+            setInitialStrategy(InitialMove::full_frente);
             Serial.println("Initial -> FULL FRENTE");
         }
         if (strcmp(strategy, "zig_zag") == 0)
         {
-            config.initialMove = InitialMove::zig_zag;
-            initial_configured = "zig_zag";
+            setInitialStrategy(InitialMove::zig_zag);
             Serial.println("Initial -> ZIGZAG");
         }
     }
 
     // Processa as requisições de estratégia de busca
-    if (doc.containsKey("search"))
+    if (jsonMessage.containsKey("search"))
     {
-        const char *strategy = doc["search"];
+        const char *strategy = jsonMessage["search"];
         if (strcmp(strategy, "none") == 0)
         {
-            config.search = Search::none;
-            search_configured = "none";
+            setSearchStrategy(Search::none);
             Serial.println("Search -> NONE");
         }
         if (strcmp(strategy, "radar") == 0)
         {
-            config.search = Search::radar;
-            search_configured = "radar";
+            setSearchStrategy(Search::radar);
             Serial.println("Search -> RADAR");
         }
     }
 
     // Processa as requisições de estratégia de perseguição
-    if (doc.containsKey("chase"))
+    if (jsonMessage.containsKey("chase"))
     {
-        const char *strategy = doc["chase"];
+        const char *strategy = jsonMessage["chase"];
         if (strcmp(strategy, "standard") == 0)
         {
-            config.chase = Chase::standard;
-            chase_configured = "chase";
+            setChaseStrategy(Chase::standard);
             Serial.println("Chase -> STANDARD");
         }
     }
-}
+};
 
-#endif
-#endif // CONFIG_ROBOT_HPP
+#endif // DYNAMIC_DATA_HPP

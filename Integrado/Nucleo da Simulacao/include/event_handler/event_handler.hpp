@@ -6,10 +6,9 @@
 #include "../sensors/edge_sensor/edge_sensor.hpp"
 #include "../sensors/opponent_sensor/opponent_sensor.hpp"
 #include "../utilities/timeout_implementation/timeout.hpp"
-#include "../utilities/messages/messages.hpp"
 
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina
-void processEvents()
+void processMachineEvents()
 {
     if (eventOnQueue != Event::None)
     {

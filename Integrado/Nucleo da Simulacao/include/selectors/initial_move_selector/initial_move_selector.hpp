@@ -2,7 +2,7 @@
 #define INITIAL_MOVE_SELECTOR_HPP
 
 #include "../../../lib/boost/sml.hpp"
-#include "../../configuration/configuration_object.hpp"
+#include "../../configuration/configurations.hpp"
 #include "../../utilities/messages/messages.hpp"
 #include "../../strategies/initial_move_strategies/initial_none.hpp"
 #include "../../strategies/initial_move_strategies/full_frente.hpp"
@@ -16,9 +16,9 @@ struct InitialMoveSelector
     {
         using namespace sml;
         // Guards
-        auto none         = [] { return config.initialMove == InitialMove::none; };
-        auto full_frente  = [] { return config.initialMove == InitialMove::full_frente; };
-        auto zig_zag      = [] { return config.initialMove == InitialMove::zig_zag; };
+        auto none         = [] { return robotConfiguration.initialMove == InitialMove::none; };
+        auto full_frente  = [] { return robotConfiguration.initialMove == InitialMove::full_frente; };
+        auto zig_zag      = [] { return robotConfiguration.initialMove == InitialMove::zig_zag; };
 
         return make_transition_table(
             *"entry"_s / [] { displayMessage("Entered Initial Move Selector"); } = "selector"_s,
