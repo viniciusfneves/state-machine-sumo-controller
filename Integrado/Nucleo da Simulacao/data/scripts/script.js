@@ -11,7 +11,8 @@ const strategy_type = {
 // Enum com estratégias iniciais
 const initial_move_strategy = {
     none: "none",
-    full_frente: "full_frente"
+    full_frente: "full_frente",
+    zig_zag: "zig_zag"
 }
 
 // Enum com estratégias de busca
@@ -118,8 +119,13 @@ connection.onclose = function(event) {
 // Quando recebe-se dados do robô
 connection.onmessage = function(response) {
     let json = JSON.parse(response.data);
+    console.log(response.data);
 
-    // Verificas as chaves contidas no JSON recebido
+    // Verifica as chaves contidas no JSON recebido
+    if ("robot_name" in json) {
+        document.getElementById("connection-status-text").innerHTML = "Connected to " + json["robot_name"];
+    }
+
     // Recebendo Array de estratégias
     if ("configurations" in json) {
         let initial_move_configured;
@@ -143,6 +149,5 @@ connection.onmessage = function(response) {
                 break;
         }
         updateRobotConfigurations(strategy_type.search, search_configured);
-
     }
 }
