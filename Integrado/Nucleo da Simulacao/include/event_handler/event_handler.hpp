@@ -5,6 +5,7 @@
 #include "../events/events.hpp"
 #include "../sensors/edge_sensor/edge_sensor.hpp"
 #include "../sensors/opponent_sensor/opponent_sensor.hpp"
+#include <communications/dynamic_data/send_data.hpp>
 #include "../utilities/timeout_implementation/timeout.hpp"
 
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina
@@ -25,6 +26,9 @@ void processMachineEvents()
         case Event::Reset:
             Core.process_event(Reset{});
             break;
+        
+        case Event::SendData:
+            broadcastConfigurations();
 
         default:
             break;

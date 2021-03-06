@@ -8,6 +8,7 @@ enum class Event
 {
     Terminate,
     Timeout,
+    SendData,
     Start,
     EdgeDetected,
     OpponentDetected,
@@ -18,6 +19,8 @@ enum class Event
 struct Terminate{};
 
 struct Timeout{};
+
+struct SendData{};
 
 struct Start{};
 
