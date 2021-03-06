@@ -99,13 +99,15 @@ function updateRobotConfigurations(type, strategy) {
 // Conexão estabelecida
 connection.onopen = function() {
     document.getElementById("connection-status-circle").style.background = "#00770c";
+    document.getElementById("connection-status-circle").style.color = "#00770c";
     document.getElementById("connection-status-text").innerHTML = "Connected";
 }
 
 // Erro na conexão
 connection.onerror = function() {
     document.getElementById("connection-status-circle").style.background = "#bd0101";
-    document.getElementById("connection-status-text").innerHTML = "ERROR! Uma conexão não pôde ser estabelecida";
+    document.getElementById("connection-status-text").style.color = "#bd0101";
+    document.getElementById("connection-status-text").innerHTML = "ERRO!";
 }
 
 // Conexão encerrada
@@ -123,7 +125,7 @@ connection.onmessage = function(response) {
 
     // Verifica as chaves contidas no JSON recebido
     if ("robot_name" in json) {
-        document.getElementById("connection-status-text").innerHTML = "Connected to " + json["robot_name"];
+        document.getElementById("config-title").innerHTML = "Configurações do Robô -> " + json["robot_name"];
     }
 
     // Recebendo Array de estratégias

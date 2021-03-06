@@ -11,8 +11,16 @@ void setRequestsResponse()
 {
     // Request da Home pelo cliente. Retorna index.html
     server.on("/", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/index.html"); });
-    server.on("/style.css", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/style.css"); });
-    server.on("/scripts/script.js", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/scripts/script.js"); });
+
+    // Request da página de configurações do robô
+    server.on("/config", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/pages/config/config.html"); });
+    server.on("/config.css", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/pages/config/config.css"); });
+    server.on("/scripts/config.js", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/scripts/config.js"); });
+
+    // Request da página de telemetria do robô
+    server.on("/telemetry", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/pages/telemetry/telemetry.html"); });
+    server.on("/telemetry.css", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/pages/telemetry/telemetry.css"); });
+    server.on("/scripts/telemetry.js", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/scripts/telemetry.js"); });
 
     // Caso o usuário procure um endereço que não exista
     server.onNotFound([](AsyncWebServerRequest *request) { request->send(404, "text/plain", "Not found"); });

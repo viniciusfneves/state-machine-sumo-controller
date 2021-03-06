@@ -36,18 +36,20 @@ button {
 }
 
 #connection-info {
-    display: inline;
+    display: inline-block;
+    margin: 0px;
 }
 
 #connection-status-text {
-    display: inline;
+    display: inline-block;
+    margin: 0px;
     color: midnightblue;
 }
 
 #connection-status-circle {
     display: inline-block;
     background: #e4c200;
-    vertical-align: bottom;
+    vertical-align: baseline;
     width: 18px;
     height: 18px;
     border-radius: 50%;
