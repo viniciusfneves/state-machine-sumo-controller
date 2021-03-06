@@ -11,9 +11,9 @@
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina
 void processMachineEvents()
 {
-    if (eventOnQueue != Event::None)
+    if (anyEventOnQueue())
     {
-        switch (eventOnQueue)
+        switch (eventToProcess())
         {
         case Event::Start:
             Core.process_event(Start{});
@@ -33,7 +33,6 @@ void processMachineEvents()
         default:
             break;
         }
-        eventOnQueue = Event::None;
     }
     else if (isTimeoutActive())
     {

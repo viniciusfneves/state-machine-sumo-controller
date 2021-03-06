@@ -1,9 +1,10 @@
 #ifndef EVENTS_HPP
 #define EVENTS_HPP
 
+#include <CircularBuffer.h>
+
 // Aqui são definidos todos os possíveis eventos que podem
 // ser emitidos para que a máquina os processe
-
 enum class Event
 {
     Terminate,
@@ -33,11 +34,23 @@ struct Reset{};
 struct None{};
 
 
-Event eventOnQueue = Event::None;
+// Buffer circular
+// Utilizado nesse código com lógica FIFO - First In -> First Out
+// Mais informações da biblioteca utilizada em: https://github.com/rlogiacco/CircularBuffer?utm_source=platformio&utm_medium=piohome
+CircularBuffer<Event, 10> eventQueue;
 
-void addEventToQueue(Event event)
-{
-    eventOnQueue = event;
+// Retorna se há eventos para a máquina processar na fila
+bool anyEventOnQueue(){
+    return !eventQueue.isEmpty();
+}
+
+// Retorna o evento que precisa ser processado
+Event eventToProcess(){
+    return eventQueue.shift();
 };
 
+// Adiciona um evento na fila para ser processado
+void addEventToQueue(Event event){
+    eventQueue.push(event);
+};
 #endif
