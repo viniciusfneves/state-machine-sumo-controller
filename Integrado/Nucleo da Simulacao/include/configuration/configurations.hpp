@@ -1,10 +1,12 @@
 #if !defined(CONFIGURATIONS_HPP)
 #define CONFIGURATIONS_HPP
 
+#include <string.h>
 #include "../strategies/strategies.hpp"
 
 struct Configuration
 {
+    String robot_name        = "Atena"; 
     // Definindo inicialização padrão para as estratégias
     InitialMove initialMove = InitialMove::none;
     Search      search      = Search::none;
