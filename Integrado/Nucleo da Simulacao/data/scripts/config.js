@@ -138,6 +138,9 @@ connection.onmessage = function(response) {
             case "full_frente":
                 initial_move_configured = initial_move_strategy.full_frente;
                 break;
+            case "zig_zag":
+                initial_move_configured = initial_move_strategy.zig_zag;
+                break;
         }
         updateRobotConfigurations(strategy_type.initial, initial_move_configured);
 
