@@ -151,5 +151,13 @@ connection.onmessage = function(response) {
                 break;
         }
         updateRobotConfigurations(strategy_type.search, search_configured);
+
+        let chase_configured;
+        switch (json["configurations"]["chase"]) {
+            case "standard":
+                chase_configured = chase_strategy.standard;
+                break;
+        }
+        updateRobotConfigurations(strategy_type.chase, chase_configured);
     }
 }
