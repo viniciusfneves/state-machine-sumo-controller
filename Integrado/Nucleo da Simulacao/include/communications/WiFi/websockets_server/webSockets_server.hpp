@@ -2,7 +2,7 @@
 #define WEBSOCKETS_SERVER_HPP
 
 #include <WebSocketsServer.h>
-#include "../../dynamic_data/dynamic_data.hpp"
+#include "../../dynamic_data/handle_incoming_data.hpp"
 
 WebSocketsServer webSocket(81); // Configura o serviço do WebSockets para a porta 81
 
