@@ -9,7 +9,7 @@ enum class Event
 {
     Terminate,
     Timeout,
-    SendData,
+    SendRobotConfig,
     Start,
     EdgeDetected,
     OpponentDetected,
@@ -21,7 +21,7 @@ struct Terminate{};
 
 struct Timeout{};
 
-struct SendData{};
+struct SendRobotConfig{};
 
 struct Start{};
 

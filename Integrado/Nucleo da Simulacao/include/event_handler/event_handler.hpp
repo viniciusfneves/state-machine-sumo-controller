@@ -27,7 +27,7 @@ void processMachineEvents()
             Core.process_event(Reset{});
             break;
         
-        case Event::SendData:
+        case Event::SendRobotConfig:
             broadcastConfigurations();
 
         default:
