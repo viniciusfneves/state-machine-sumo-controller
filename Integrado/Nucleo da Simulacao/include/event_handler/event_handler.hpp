@@ -5,8 +5,9 @@
 #include "../events/events.hpp"
 #include "../sensors/edge_sensor/edge_sensor.hpp"
 #include "../sensors/opponent_sensor/opponent_sensor.hpp"
+#ifdef SUMO3KG
 #include <communications/dynamic_data/send_data.hpp>
-#include "../utilities/timeout_implementation/timeout.hpp"
+#endif
 
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina
 void processMachineEvents()
@@ -26,10 +27,10 @@ void processMachineEvents()
         case Event::Reset:
             Core.process_event(Reset{});
             break;
-        
+#ifdef SUMO3KG
         case Event::SendRobotConfig:
             broadcastConfigurations();
-
+#endif
         default:
             break;
         }

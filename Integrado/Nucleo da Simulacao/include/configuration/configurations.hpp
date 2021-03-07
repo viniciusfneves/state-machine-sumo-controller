@@ -6,7 +6,9 @@
 
 struct Configuration
 {
+    #ifdef SUMO3KG
     String robot_name        = "Atena"; 
+    #endif
     // Definindo inicialização padrão para as estratégias
     InitialMove initialMove = InitialMove::none;
     Search      search      = Search::none;
