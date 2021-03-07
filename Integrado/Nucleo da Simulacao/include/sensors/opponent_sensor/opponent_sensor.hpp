@@ -10,6 +10,7 @@
 #ifdef SUMO3KG
 #define NUMBER_OF_OPPONENT_SENSORS 5
 int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-2, -1, 0, 1, 2};
+#include <communications/dynamic_data/send_data.hpp>
 #endif
 
 #ifdef SUMOMINI
@@ -42,6 +43,7 @@ int readOpponentSensors()
     {
         opponentSensorDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
     }
+    broadcastReadings(opponentSensorDetectionArray);
     return sumArray(opponentSensorDetectionArray);
 };
 
