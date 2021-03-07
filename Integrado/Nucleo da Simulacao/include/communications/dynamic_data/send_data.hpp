@@ -45,7 +45,7 @@ void broadcastConfigurations()
     webSocket.broadcastTXT(JSONBuffer);
 }
 
-void broadcastReadings(bool opSensorArray[]){
+void broadcastOPReadings(bool opSensorArray[]){
     StaticJsonDocument<128> readings;
     String JSONBuffer;
 
@@ -54,6 +54,17 @@ void broadcastReadings(bool opSensorArray[]){
     readings["readings"]["opponent"][2] = opSensorArray[2];
     readings["readings"]["opponent"][3] = opSensorArray[3];
     readings["readings"]["opponent"][4] = opSensorArray[4];
+
+    serializeJson(readings, JSONBuffer);
+    webSocket.broadcastTXT(JSONBuffer);
+};
+
+void broadcastEdgeReadings(bool edgeSensorArray[]){
+    StaticJsonDocument<128> readings;
+    String JSONBuffer;
+
+    readings["readings"]["edge"][0] = edgeSensorArray[0];
+    readings["readings"]["edge"][1] = edgeSensorArray[1];
 
     serializeJson(readings, JSONBuffer);
     webSocket.broadcastTXT(JSONBuffer);

@@ -1,16 +1,25 @@
 /*Abre a conexão com serviço WebSocket do ESP*/
 var connection = new WebSocket("ws://" + location.hostname + ":81");
 
-function setOpponentSensor(index, reading) {
+function setOpponentSensor(id, reading) {
     if (reading == true) {
-        document.getElementById(index + "-op").style.background = "red";
+        document.getElementById(id + "-op").style.background = "red";
     } else {
-        document.getElementById(index + "-op").style.background = "black";
+        document.getElementById(id + "-op").style.background = "black";
+    }
+}
+
+function setEdgeSensor(id, reading) {
+    if (reading == true) {
+        document.getElementById(id + "-edge").style.background = "yellow";
+    } else {
+        document.getElementById(id + "-edge").style.background = "black";
     }
 }
 
 connection.onmessage = function(response) {
     let json = JSON.parse(response.data);
+    console.log(response.data);
 
     if ("readings" in json) {
         if ("opponent" in json["readings"]) {
@@ -20,9 +29,12 @@ connection.onmessage = function(response) {
             setOpponentSensor("right", json["readings"]["opponent"][3]);
             setOpponentSensor("far-right", json["readings"]["opponent"][4]);
         }
+
         if ("edge" in json["readings"]) {
-            console.log(json["readings"]["edge"][0]);
-            console.log(json["readings"]["edge"][1]);
+            setEdgeSensor("left", json["readings"]["edge"][0]);
+            setEdgeSensor("right", json["readings"]["edge"][1]);
         }
+
+        if ("motor" in json["readings"]) {}
     }
 }
