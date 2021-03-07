@@ -15,68 +15,128 @@ h1 {
 }
 
 #robot-body {
+    position: relative;
     margin: 15em auto;
-    background: rgb(75, 75, 75);
+    background: rgb(125, 125, 125);
     border-radius: 12px;
     width: 15em;
     height: 15em;
+    box-shadow: inset 6px 1px 12px rgb(128, 128, 128), 6px 2px 1em rgb(112, 112, 112);
 }
 
-#far-left-op-sensor {
-    display: inline-block;
-    position: relative;
-    top: 25px;
-    left: -30px;
+.op-sensor {
+    position: absolute;
+    border-radius: 4px;
+    width: 2em;
+    height: 16px;
+}
+
+#left-90-op {
+    display: none;
+    top: 5em;
+    left: 0;
+    transform: rotate(90deg);
+    background: black;
+}
+
+#far-left-op {
+    top: 2.5em;
+    left: 0.8em;
     transform: rotate(-25deg);
     background: black;
-    border-radius: 15px;
-    width: 30px;
-    height: 12px;
 }
 
-#left-op-sensor {
-    display: inline-block;
-    position: relative;
-    top: 13px;
-    left: -15px;
+#left-op {
+    top: 1.5em;
+    left: 3.5em;
     transform: rotate(-15deg);
     background: black;
-    border-radius: 15px;
-    width: 30px;
-    height: 12px;
 }
 
-#center-op-sensor {
-    display: inline-block;
-    position: relative;
-    top: 5px;
-    left: 0;
+#center-op {
+    top: 1em;
+    left: 6.45em;
     background: black;
-    border-radius: 15px;
-    width: 30px;
-    height: 12px;
 }
 
-#right-op-sensor {
-    display: inline-block;
-    position: relative;
-    top: 13px;
-    left: 15px;
+#right-op {
+    top: 1.5em;
+    right: 3.5em;
     transform: rotate(15deg);
     background: black;
-    border-radius: 15px;
-    width: 30px;
-    height: 12px;
 }
 
-#far-right-op-sensor {
-    display: inline-block;
-    position: relative;
-    top: 25px;
-    left: 30px;
+#far-right-op {
+    top: 2.5em;
+    right: 0.8em;
     transform: rotate(25deg);
     background: black;
+}
+
+#right-90-op {
+    display: none;
+    top: 5em;
+    right: 0;
+    transform: rotate(90deg);
+    background: black;
+}
+
+.edge-sensor {
+    position: absolute;
     border-radius: 15px;
-    width: 30px;
-    height: 12px;
+    width: 1.2em;
+    height: 1.2em;
+}
+
+#left-edge {
+    background: white;
+    top: 10px;
+    left: 10px;
+}
+
+#right-edge {
+    background: white;
+    top: 10px;
+    right: 10px;
+}
+
+.motor {
+    position: absolute;
+    background: rgb(0, 50, 100);
+    border-radius: 5px;
+    width: 2.2em;
+    height: 3.6em;
+    box-shadow: inset 0 0 4px rgb(27, 27, 27);
+}
+
+#right-motor {
+    top: 8em;
+    right: 0.5em;
+}
+
+#left-motor {
+    top: 8em;
+    left: 0.5em;
+}
+
+meter {
+    position: absolute;
+    margin-top: 62.5%;
+    height: 32px;
+    width: 12em;
+}
+
+meter::-webkit-meter-optimum-value {
+    box-shadow: 0 5px 5px -5px rgb(255, 254, 254) inset;
+    background: -webkit-gradient(linear, left top, right top, from(rgb(32, 158, 0)), to(rgb(32, 158, 0)));
+    background-size: 100% 100%;
+}
+
+#left-motor-meter {
+    left: -14em;
+    background-image: yellow;
+}
+
+#right-motor-meter {
+    right: -14em;
 }

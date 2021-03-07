@@ -14,11 +14,19 @@
     <h1>Telemetria</h1>
     <div id="robot">
         <div id="robot-body">
-            <div id="far-left-op-sensor"></div>
-            <div id="left-op-sensor"></div>
-            <div id="center-op-sensor"></div>
-            <div id="right-op-sensor"></div>
-            <div id="far-right-op-sensor"></div>
+            <meter id="left-motor-meter" min="0" max="255" value="127"></meter>
+            <div id="left-90-op" class="op-sensor"></div>
+            <div id="far-left-op" class="op-sensor"></div>
+            <div id="left-op" class="op-sensor"></div>
+            <div id="center-op" class="op-sensor"></div>
+            <div id="right-op" class="op-sensor"></div>
+            <div id="far-right-op" class="op-sensor"></div>
+            <div id="right-90-op" class="op-sensor"></div>
+            <div id="left-edge" class="edge-sensor"></div>
+            <div id="right-edge" class="edge-sensor"></div>
+            <div id="left-motor" class="motor"></div>
+            <div id="right-motor" class="motor"></div>
+            <meter id="right-motor-meter" min="0" max="255" value="90"></meter>
         </div>
     </div>
 </body>
