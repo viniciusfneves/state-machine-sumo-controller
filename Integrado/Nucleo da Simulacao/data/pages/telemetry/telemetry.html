@@ -12,9 +12,18 @@
 
 <body>
     <h1>Telemetria</h1>
+
+    <div id="connection-container">
+        <h4 id="connection-info">Connection Status: </h4>
+        <div id="connection-status-circle"></div>
+        <h4 id="connection-status-text">Trying upgrade to WebSocket</h4>
+    </div>
+
+    <button id="start-request" onclick="requestEvent('start')">Start</button>
+    <button id="terminate-request" onclick="requestEvent('terminate')">Terminate</button>
+
     <div id="robot">
         <div id="robot-body">
-            <meter id="left-motor-meter" min="0" max="255" value="127"></meter>
             <div id="left-90-op" class="op-sensor"></div>
             <div id="far-left-op" class="op-sensor"></div>
             <div id="left-op" class="op-sensor"></div>
@@ -26,7 +35,6 @@
             <div id="right-edge" class="edge-sensor"></div>
             <div id="left-motor" class="motor"></div>
             <div id="right-motor" class="motor"></div>
-            <meter id="right-motor-meter" min="0" max="255" value="90"></meter>
         </div>
     </div>
 </body>

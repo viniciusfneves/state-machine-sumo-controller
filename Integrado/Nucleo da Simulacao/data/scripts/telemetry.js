@@ -1,6 +1,33 @@
 /*Abre a conexão com serviço WebSocket do ESP*/
 var connection = new WebSocket("ws://" + location.hostname + ":81");
 
+// Conexão estabelecida
+connection.onopen = function() {
+    document.getElementById("connection-status-circle").style.background = "#00770c";
+    document.getElementById("connection-status-circle").style.color = "#00770c";
+    document.getElementById("connection-status-text").innerHTML = "Connected";
+}
+
+// Erro na conexão
+connection.onerror = function() {
+    document.getElementById("connection-status-circle").style.background = "#bd0101";
+    document.getElementById("connection-status-text").style.color = "#bd0101";
+    document.getElementById("connection-status-text").innerHTML = "ERRO!";
+}
+
+// Conexão encerrada
+connection.onclose = function(event) {
+    if (event.wasClean) {
+        document.getElementById("connection-status-circle").style.background = "#e4c200";
+        document.getElementById("connection-status-text").innerHTML = "O robô encerrou a conxão";
+    }
+}
+
+function requestEvent(event) {
+    connection.send('{ "event_request" : "' + event + '" }');
+    console.log('{ "event_request" : "' + event + '" }');
+}
+
 function setOpponentSensor(id, reading) {
     if (reading == true) {
         document.getElementById(id + "-op").style.background = "red";

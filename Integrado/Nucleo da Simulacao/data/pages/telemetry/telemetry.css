@@ -14,6 +14,56 @@ h1 {
     margin: 50px auto 30px;
 }
 
+#connection-container {
+    margin-bottom: 35px;
+}
+
+button {
+    display: block;
+    border: none;
+    width: 115px;
+    padding: 12px;
+    margin: 8px auto;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #868686;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#start-request {
+    width: 115px;
+    padding: 12px;
+    background-color: #00770c;
+}
+
+#terminate-request {
+    width: 80%;
+    height: 100px;
+    background-color: #bd0101;
+}
+
+#connection-info {
+    display: inline-block;
+    margin: 0px;
+}
+
+#connection-status-text {
+    display: inline-block;
+    margin: 0px;
+    color: midnightblue;
+}
+
+#connection-status-circle {
+    display: inline-block;
+    background: #e4c200;
+    vertical-align: baseline;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
 #robot-body {
     position: relative;
     margin: 15em auto;
@@ -117,26 +167,4 @@ h1 {
 #left-motor {
     top: 8em;
     left: 0.5em;
-}
-
-meter {
-    position: absolute;
-    margin-top: 62.5%;
-    height: 32px;
-    width: 12em;
-}
-
-meter::-webkit-meter-optimum-value {
-    box-shadow: 0 5px 5px -5px rgb(255, 254, 254) inset;
-    background: -webkit-gradient(linear, left top, right top, from(rgb(32, 158, 0)), to(rgb(32, 158, 0)));
-    background-size: 100% 100%;
-}
-
-#left-motor-meter {
-    left: -14em;
-    background-image: yellow;
-}
-
-#right-motor-meter {
-    right: -14em;
 }
