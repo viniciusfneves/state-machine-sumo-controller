@@ -102,7 +102,7 @@ struct sm_impl : aux::conditional_t<aux::is_empty<typename TSM::sm>::value, aux:
     auto region = 0;
 #if defined(__cpp_fold_expressions)  // __pph__
     ((current_state_[region++] = aux::get_id<state_t, TStates>((states_ids_t *)0)), ...);
-#else  // __pph__
+#else   // __pph__
     (void)aux::swallow{0, (current_state_[region++] = aux::get_id<state_t, TStates>((states_ids_t *)0), 0)...};
 #endif  // __pph__
   }
@@ -128,7 +128,7 @@ struct sm_impl : aux::conditional_t<aux::is_empty<typename TSM::sm>::value, aux:
     return process_event_impl<get_event_mapping_t<get_generic_t<TEvent>, mappings>>(event, deps, subs, states_t{},
                                                                                     aux::make_index_sequence<regions>{});
 #else   // __pph__
-    return process_event_noexcept<get_event_mapping_t<get_generic_t<TEvent>, mappings>>(event, deps, subs, has_exceptions{});
+    return process_event_except_imp<get_event_mapping_t<get_generic_t<TEvent>, mappings>>(event, deps, subs, has_exceptions{});
 #endif  // __pph__
   }
 
@@ -140,7 +140,7 @@ struct sm_impl : aux::conditional_t<aux::is_empty<typename TSM::sm>::value, aux:
     return process_event_impl<get_event_mapping_t<get_mapped_t<TEvent>, mappings>>(event, deps, subs, states_t{},
                                                                                    aux::make_index_sequence<regions>{});
 #else   // __pph__
-    return process_event_noexcept<get_event_mapping_t<get_mapped_t<TEvent>, mappings>>(event, deps, subs, has_exceptions{});
+    return process_event_except_imp<get_event_mapping_t<get_mapped_t<TEvent>, mappings>>(event, deps, subs, has_exceptions{});
 #endif  // __pph__
   }
 
@@ -165,8 +165,8 @@ struct sm_impl : aux::conditional_t<aux::is_empty<typename TSM::sm>::value, aux:
     return process_event_impl<get_event_mapping_t<get_generic_t<TEvent>, mappings>>(event, deps, subs, states_t{},
                                                                                     current_state);
 #else   // __pph__
-    return process_event_noexcept<get_event_mapping_t<get_generic_t<TEvent>, mappings>>(event, deps, subs, current_state,
-                                                                                        has_exceptions{});
+    return process_event_except_imp<get_event_mapping_t<get_generic_t<TEvent>, mappings>>(event, deps, subs, current_state,
+                                                                                          has_exceptions{});
 #endif  // __pph__
   }
 
@@ -184,8 +184,8 @@ struct sm_impl : aux::conditional_t<aux::is_empty<typename TSM::sm>::value, aux:
 #if BOOST_SML_DISABLE_EXCEPTIONS  // __pph__
     return process_event_impl<get_event_mapping_t<get_mapped_t<TEvent>, mappings>>(event, deps, subs, states_t{}, current_state)
 #else   // __pph__
-    return process_event_noexcept<get_event_mapping_t<get_mapped_t<TEvent>, mappings>>(event, deps, subs, current_state,
-                                                                                       has_exceptions{})
+    return process_event_except_imp<get_event_mapping_t<get_mapped_t<TEvent>, mappings>>(event, deps, subs, current_state,
+                                                                                         has_exceptions{})
 #endif  // __pph__
            || process_internal_generic_event(event, deps, subs, current_state);
   }
@@ -225,17 +225,18 @@ struct sm_impl : aux::conditional_t<aux::is_empty<typename TSM::sm>::value, aux:
 
 #if !BOOST_SML_DISABLE_EXCEPTIONS  // __pph__
   template <class TMappings, class TEvent, class TDeps, class TSubs>
-  bool process_event_noexcept(const TEvent &event, TDeps &deps, TSubs &subs, aux::false_type) noexcept {
+  bool process_event_except_imp(const TEvent &event, TDeps &deps, TSubs &subs, aux::false_type) {
     return process_event_impl<TMappings>(event, deps, subs, states_t{}, aux::make_index_sequence<regions>{});
   }
 
   template <class TMappings, class TEvent, class TDeps, class TSubs>
-  bool process_event_noexcept(const TEvent &event, TDeps &deps, TSubs &subs, state_t &current_state, aux::false_type) noexcept {
+  bool process_event_except_imp(const TEvent &event, TDeps &deps, TSubs &subs, state_t &current_state, aux::false_type) {
     return process_event_impl<TMappings>(event, deps, subs, states_t{}, current_state);
   }
 
   template <class TMappings, class TEvent, class TDeps, class TSubs>
-  bool process_event_noexcept(const TEvent &event, TDeps &deps, TSubs &subs, state_t &current_state, aux::true_type) noexcept {
+  bool process_event_except_imp(const TEvent &event, TDeps &deps, TSubs &subs, state_t &current_state,
+                                aux::true_type) noexcept {
     try {
       return process_event_impl<TMappings>(event, deps, subs, states_t{}, current_state);
     } catch (...) {
@@ -244,7 +245,7 @@ struct sm_impl : aux::conditional_t<aux::is_empty<typename TSM::sm>::value, aux:
   }
 
   template <class TMappings, class TEvent, class TDeps, class TSubs>
-  bool process_event_noexcept(const TEvent &event, TDeps &deps, TSubs &subs, aux::true_type) {
+  bool process_event_except_imp(const TEvent &event, TDeps &deps, TSubs &subs, aux::true_type) {
     try {
       return process_event_impl<TMappings>(event, deps, subs, states_t{}, aux::make_index_sequence<regions>{});
     } catch (...) {
@@ -323,8 +324,8 @@ struct sm_impl : aux::conditional_t<aux::is_empty<typename TSM::sm>::value, aux:
 #if BOOST_SML_DISABLE_EXCEPTIONS  // __pph__
     return process_event_impl<get_event_mapping_t<TEvent, mappings>>(event, deps, subs, states_t{},
                                                                      aux::make_index_sequence<regions>{});
-#else  // __pph__
-    return process_event_noexcept<get_event_mapping_t<TEvent, mappings>>(event, deps, subs, has_exceptions{});
+#else   // __pph__
+    return process_event_except_imp<get_event_mapping_t<TEvent, mappings>>(event, deps, subs, has_exceptions{});
 #endif  // __pph__
   }
 
@@ -433,13 +434,10 @@ class sm {
   }
 
   sm(aux::init, deps_t &deps) : deps_{deps}, sub_sms_{deps} { aux::get<sm_impl<TSM>>(sub_sms_).start(deps_, sub_sms_); }
-
   sm(const sm &) = default;
-
   sm(sm &&) = default;
 
   sm &operator=(const sm &) = default;
-
   sm &operator=(sm &&) = default;
 
   template <class TEvent, __BOOST_SML_REQUIRES(aux::is_base_of<TEvent, events_ids>::value)>

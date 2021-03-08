@@ -138,18 +138,33 @@ T &get_by_id(tuple_type<N, T> *object) {
 }
 
 struct init {};
+
 struct pool_type_base {
   __BOOST_SML_ZERO_SIZE_ARRAY(byte);
 };
 
-template <class T>
-struct pool_type : pool_type_base {
-  explicit pool_type(T object) : value{object} {}
-
+template <class T, class = void>
+struct pool_type_impl : pool_type_base {
+  explicit pool_type_impl(T object) : value{object} {}
   template <class TObject>
-  pool_type(init i, TObject object) : value{i, object} {}
-
+  pool_type_impl(init i, TObject object) : value{i, object} {}
   T value;
+};
+
+template <class T>
+struct pool_type_impl<T &, aux::enable_if_t<aux::is_constructible<T>::value>> : pool_type_base {
+  explicit pool_type_impl(T &value) : value{value} {}
+  template <class TObject>
+  explicit pool_type_impl(TObject value) : value_{value}, value{value_} {}
+  template <class TObject>
+  pool_type_impl(const init &i, const TObject &object) : value(i, object) {}
+  T value_{};
+  T &value;
+};
+
+template <class T>
+struct pool_type : pool_type_impl<T> {
+  using pool_type_impl<T>::pool_type_impl;
 };
 
 template <class T>
@@ -257,17 +272,19 @@ struct size<T<Ts...>> {
 };
 
 #if defined(_MSC_VER) && !defined(__clang__)  // __pph__
-constexpr int max_impl() { return 0; }
-constexpr int max_impl(int r) { return r; }
-constexpr int max_impl(int r, int i) { return r > i ? r : i; }
-constexpr int max_impl(int r, int i, int ints...) { return i > r ? max_impl(i, ints) : max_impl(r, ints); }
+constexpr int max_element_impl() { return 0; }
+constexpr int max_element_impl(int r) { return r; }
+constexpr int max_element_impl(int r, int i) { return r > i ? r : i; }
+constexpr int max_element_impl(int r, int i, int ints...) {
+  return i > r ? max_element_impl(i, ints) : max_element_impl(r, ints);
+}
 template <int... Ts>
-constexpr int max() {
-  return max_impl(Ts...);
+constexpr int max_element() {
+  return max_element_impl(Ts...);
 }
 #else   // __pph__
 template <int... Ts>
-constexpr int max() {
+constexpr int max_element() {
   int max = 0;
   (void)swallow{0, (Ts > max ? max = Ts : max)...};
   return max;
@@ -281,8 +298,8 @@ struct zero_wrapper : TExpr {
   const TExpr &get() const { return *this; }
 };
 
-template <class R, class TBase, class... TArgs>
-struct zero_wrapper<R (TBase::*)(TArgs...)> {
+template <class R, class TBase, class... TArgs, class T>
+struct zero_wrapper<R (TBase::*)(TArgs...), T> {
   explicit zero_wrapper(R (TBase::*ptr)(TArgs...)) : ptr{ptr} {}
   auto operator()(TBase &self, TArgs... args) { return (self.*ptr)(args...); }
 
@@ -290,14 +307,52 @@ struct zero_wrapper<R (TBase::*)(TArgs...)> {
   R (TBase::*ptr)(TArgs...){};
 };
 
-template <class R, class TBase, class... TArgs>
-struct zero_wrapper<R (TBase::*)(TArgs...) const> {
+template <class R, class TBase, class... TArgs, class T>
+struct zero_wrapper<R (TBase::*)(TArgs...) const, T> {
   explicit zero_wrapper(R (TBase::*ptr)(TArgs...) const) : ptr{ptr} {}
   auto operator()(TBase &self, TArgs... args) { return (self.*ptr)(args...); }
 
  private:
   R (TBase::*ptr)(TArgs...) const {};
 };
+
+template <class R, class... TArgs, class T>
+struct zero_wrapper<R (*)(TArgs...), T> {
+  explicit zero_wrapper(R (*ptr)(TArgs...)) : ptr{ptr} {}
+  auto operator()(TArgs... args) { return (*ptr)(args...); }
+
+ private:
+  R (*ptr)(TArgs...){};
+};
+
+#if defined(__cpp_noexcept_function_type)  // __pph__
+template <class R, class TBase, class... TArgs, class T>
+struct zero_wrapper<R (TBase::*)(TArgs...) noexcept, T> {
+  explicit zero_wrapper(R (TBase::*ptr)(TArgs...) noexcept) : ptr{ptr} {}
+  auto operator()(TBase &self, TArgs... args) { return (self.*ptr)(args...); }
+
+ private:
+  R (TBase::*ptr)(TArgs...) noexcept {};
+};
+
+template <class R, class TBase, class... TArgs, class T>
+struct zero_wrapper<R (TBase::*)(TArgs...) const noexcept, T> {
+  explicit zero_wrapper(R (TBase::*ptr)(TArgs...) const noexcept) : ptr{ptr} {}
+  auto operator()(TBase &self, TArgs... args) { return (self.*ptr)(args...); }
+
+ private:
+  R (TBase::*ptr)(TArgs...) const noexcept {};
+};
+
+template <class R, class... TArgs, class T>
+struct zero_wrapper<R (*)(TArgs...) noexcept, T> {
+  explicit zero_wrapper(R (*ptr)(TArgs...) noexcept) : ptr{ptr} {}
+  auto operator()(TArgs... args) { return (*ptr)(args...); }
+
+ private:
+  R (*ptr)(TArgs...) noexcept {};
+};
+#endif  // __pph__
 
 template <class, class>
 struct zero_wrapper_impl;
@@ -377,4 +432,8 @@ struct string<T> {
 
 }  // namespace aux
 
+template <class T>
+constexpr auto wrap(T callback) {
+  return aux::zero_wrapper<T, T>{callback};
+}
 #endif
