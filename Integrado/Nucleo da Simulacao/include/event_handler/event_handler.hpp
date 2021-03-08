@@ -3,14 +3,18 @@
 
 #include "../machine/main_machine.hpp"
 #include "../events/events.hpp"
-#include "../sensors/edge_sensor/edge_sensor.hpp"
-#include "../sensors/opponent_sensor/opponent_sensor.hpp"
-#include <communications/dynamic_data/send_data.hpp>
+#include "../sensors/sensors.hpp"
 #include "../utilities/timeout_implementation/timeout.hpp"
+#include "../utilities/messages/messages.hpp"
+#ifdef SUMO3KG
+#include <communications/dynamic_data/send_data.hpp>
+#endif
 
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina
 void processMachineEvents()
 {
+    readSensors();
+
     if (anyEventOnQueue())
     {
         switch (eventToProcess())
@@ -26,10 +30,10 @@ void processMachineEvents()
         case Event::Reset:
             Core.process_event(Reset{});
             break;
-        
-        case Event::SendData:
+#ifdef SUMO3KG
+        case Event::SendRobotConfig:
             broadcastConfigurations();
-
+#endif
         default:
             break;
         }

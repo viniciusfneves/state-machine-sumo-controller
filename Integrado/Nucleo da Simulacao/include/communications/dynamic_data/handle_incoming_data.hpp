@@ -73,7 +73,7 @@ void processMessages(String message)
             setChaseStrategy(Chase::standard);
         }
     }
-    addEventToQueue(Event::SendData);
+    addEventToQueue(Event::SendRobotConfig);
 };
 
 #endif // DYNAMIC_DATA_HPP

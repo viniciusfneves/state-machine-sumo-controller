@@ -121,7 +121,6 @@ connection.onclose = function(event) {
 // Quando recebe-se dados do robô
 connection.onmessage = function(response) {
     let json = JSON.parse(response.data);
-    console.log(response.data);
 
     // Verifica as chaves contidas no JSON recebido
     if ("robot_name" in json) {

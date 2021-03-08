@@ -11,7 +11,7 @@ struct StandardChase
 {
     auto operator()() const
     {
-        auto chase_action = [] {drive(100 + error*5, 100-error*5);};
+        auto chase_action = [] {drive(100 + detectionError*25, 100-detectionError*25);};
         
         using namespace sml;
         return make_transition_table(

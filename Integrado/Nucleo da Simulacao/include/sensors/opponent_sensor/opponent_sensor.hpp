@@ -21,42 +21,15 @@ int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
 #ifdef REAL_ROBOT
 #include "../../pins/pins.hpp"
 
-// VARIAVEIS GLOBAIS
 bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
 
-double error;
+bool opDetected = false;
 
-int sumArray(bool vector[])
-{
-    int sum = 0;
-    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
-    {
-        sum += vector[index];
-    }
-    return sum;
-};
+double detectionError;
 
-int readOpponentSensors()
-{
-    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
-    {
-        opponentSensorDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
-    }
-    return sumArray(opponentSensorDetectionArray);
-};
+bool isOpponentDetected() { return opDetected; }
 
-// Realiza as configurações necessárias para a parte de sensoriamento de oponentes do robô
-void initOpponentSensors()
-{
-    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
-    {
-        pinMode(pins::opponentsSensors::sensors[index], INPUT);
-    }
-};
-#endif
-
-// MAIS FUNÇÕES GLOBAIS
-double calculateError()
+void calculateError()
 {
     double sum = 0.;
     double readings = 0.;
@@ -68,16 +41,45 @@ double calculateError()
             readings += 1;
         }
     }
-    return sum / readings;
+    detectionError = sum / readings;
 }
-bool isOpponentDetected()
+
+int sumArray(bool vector[])
 {
-    if (readOpponentSensors() >= 1)
+    int sum = 0;
+    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
     {
-        error = calculateError();
-        return true;
+        sum += vector[index];
     }
-    return false;
-};
+    return sum;
+}
+
+void readOpponentSensors()
+{
+    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
+    {
+        opponentSensorDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
+    }
+    int buffer = sumArray(opponentSensorDetectionArray);
+    if (buffer >= 1)
+    {
+        opDetected = true;
+    }
+    else
+    {
+        opDetected = false;
+    }
+    calculateError();
+}
+
+// Realiza as configurações necessárias para a parte de sensoriamento de oponentes do robô
+void initOpponentSensors()
+{
+    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
+    {
+        pinMode(pins::opponentsSensors::sensors[index], INPUT);
+    }
+}
+#endif
 
 #endif // OPPONENT_SENSOR_HPP

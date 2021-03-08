@@ -1,11 +1,8 @@
-#ifndef SENSORS_HPP
-#define SENSORS_HPP
+#ifndef WEBOTS_SENSORS_HPP
+#define WEBOTS_SENSORS_HPP
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
 #include "C:/Program Files/Webots/include/controller/cpp/webots/DistanceSensor.hpp"
 #include "../utilities/messages/messages.hpp"
-
-// DEFINES
-#define NUMBER_OF_OPPONENT_SENSORS 2
 
 using namespace webots;
 
@@ -47,6 +44,36 @@ void initSensors(Robot *robot, int _timeStep)
     enableSensors();
 }
 
+// SENSORES DE BORDA
+
+bool edgeDetected = false;
+
+bool isEdgeDetected() { return edgeDetected; }
+
+void readEdgeSensors()
+{
+    // 0=borda | 1024=semBorda
+    bool left_edge = leftEdgeSensor->getValue() < 300;
+    bool right_edge = rightEdgeSensor->getValue() < 300;
+    if (left_edge || right_edge)
+    {
+        edgeDetected = true;
+    }
+    else
+    {
+        edgeDetected = false;
+    }
+}
+
+// SENSORES DE OPONENTE
+#define NUMBER_OF_OPPONENT_SENSORS 2
+int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
+bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
+double detectionError;
+bool opDetected = false;
+
+bool isOpponentDetected() { return opDetected; }
+
 int sumArray(bool vector[])
 {
     int sum = 0;
@@ -55,41 +82,21 @@ int sumArray(bool vector[])
         sum += vector[index];
     }
     return sum;
-};
-
-// SENSORES DE BORDA
-
-// 0=borda | 1024=semBorda
-bool getLeftEdgeSensor()
-{
-    double reading = leftEdgeSensor->getValue();
-    return reading < 300;
-}
-bool getRightEdgeSensor()
-{
-    double reading = rightEdgeSensor->getValue();
-    return reading < 300;
 }
 
-// SENSORES DE OPONENTE
-
-bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
-int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
-double error;
-
-// 0=semObjeto | 0(longe)->1060(perto)=objeto
-bool getLeftOpponentSensor()
+void readOpponentSensors()
 {
-    return leftDistanceSensor->getValue() > 0.35;
+    // 0=semObjeto | 0(longe)->1060(perto)=objeto
+    opponentSensorDetectionArray[0] = leftDistanceSensor->getValue() > 0.35;
+    opponentSensorDetectionArray[1] = rightDistanceSensor->getValue() > 0.35;
+    int buffer = sumArray(opponentSensorDetectionArray);
+    if (buffer >= 1)
+    {
+        opDetected = true;
+    }
+    else
+    {
+        opDetected = false;
+    }
 }
-bool getRightOpponentSensor()
-{
-    return rightDistanceSensor->getValue() > 0.35;
-}
-int readOpponentSensors()
-{
-    opponentSensorDetectionArray[0] = getLeftOpponentSensor();
-    opponentSensorDetectionArray[1] = getRightOpponentSensor();
-    return sumArray(opponentSensorDetectionArray);
-};
 #endif

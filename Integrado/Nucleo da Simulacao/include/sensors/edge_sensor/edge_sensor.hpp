@@ -3,9 +3,28 @@
 
 #ifdef REAL_ROBOT
 #include "../../pins/pins.hpp"
+#include <Arduino.h>
+#define NUMBER_OF_EDGE_SENSORS 2
 
-bool getLeftEdgeSensor() { return digitalRead(pins::edgeSensors::leftEdge); };
-bool getRightEdgeSensor() { return digitalRead(pins::edgeSensors::rightEdge); };
+bool edgeSensorDetectionArray[NUMBER_OF_EDGE_SENSORS];
+
+bool edgeDetected = false;
+
+bool isEdgeDetected() { return edgeDetected; }
+
+void readEdgeSensors()
+{
+    edgeSensorDetectionArray[0] = digitalRead(pins::edgeSensors::leftEdge);
+    edgeSensorDetectionArray[1] = digitalRead(pins::edgeSensors::rightEdge);
+    if (edgeSensorDetectionArray[0] || edgeSensorDetectionArray[1])
+    {
+        edgeDetected = true;
+    }
+    else
+    {
+        edgeDetected = false;
+    }
+};
 
 // Realiza as configurações necessárias para o sensoriamento de borda do robô
 void initEdgeSensors()
@@ -18,19 +37,5 @@ void initEdgeSensors()
 #ifndef REAL_ROBOT
 #include "../../webots/sensors.hpp"
 #endif
-
-bool isEdgeDetected()
-{
-    bool left_edge = getLeftEdgeSensor();
-    bool right_edge = getRightEdgeSensor();
-    if (left_edge || right_edge)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
 
 #endif // EDGE_SENSOR_HPP

@@ -1,7 +1,7 @@
 #ifndef EVENTS_HPP
 #define EVENTS_HPP
 
-#include <CircularBuffer.h>
+#include "../../lib/CircularBuffer/CircularBuffer.h"
 
 // Aqui são definidos todos os possíveis eventos que podem
 // ser emitidos para que a máquina os processe
@@ -9,7 +9,7 @@ enum class Event
 {
     Terminate,
     Timeout,
-    SendData,
+    SendRobotConfig,
     Start,
     EdgeDetected,
     OpponentDetected,
@@ -21,7 +21,7 @@ struct Terminate{};
 
 struct Timeout{};
 
-struct SendData{};
+struct SendRobotConfig{};
 
 struct Start{};
 
