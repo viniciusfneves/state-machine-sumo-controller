@@ -19,7 +19,7 @@ int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
 
 // FUNÇÕES GLOBAIS - ARDUINO & ESP
 #ifdef REAL_ROBOT
-#include "../../pins/pins.hpp"
+#include <pins/pins.hpp>
 
 bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
 

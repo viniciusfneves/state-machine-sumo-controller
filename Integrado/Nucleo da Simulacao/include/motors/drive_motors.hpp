@@ -4,7 +4,7 @@
 #ifdef REAL_ROBOT
 
 // Dependências gerais
-#include "../pins/pins.hpp"
+#include <pins/pins.hpp>
 
 // Adiciona a função analogWrite para compilação com ESP32
 #ifdef SUMO3KG
@@ -43,8 +43,7 @@ void initMotors()
 
 #endif //ifdef REAL_ROBOT
 
-// No caso de simulação, importa a biblioteca com as funções de
-// locomoção do WeBots
+// No caso de simulação, importa a biblioteca com as funções de locomoção do WeBots
 #ifndef REAL_ROBOT
 #include "../webots/motors.hpp"
 #endif
