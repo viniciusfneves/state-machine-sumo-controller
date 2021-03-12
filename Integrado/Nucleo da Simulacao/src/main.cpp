@@ -6,6 +6,7 @@
 #endif
 #include <Arduino.h>
 #include <event_handler/event_handler.hpp>
+#include <motors/drive_motors.hpp>
 
 void setup()
 {

@@ -2,8 +2,7 @@
 #define EDGE_SENSOR_HPP
 
 #ifdef REAL_ROBOT
-#include "../../pins/pins.hpp"
-#include <Arduino.h>
+#include <pins/pins.hpp>
 #define NUMBER_OF_EDGE_SENSORS 2
 
 bool edgeSensorDetectionArray[NUMBER_OF_EDGE_SENSORS];
