@@ -6,6 +6,8 @@
 #endif
 #include <Arduino.h>
 #include <event_handler/event_handler.hpp>
+#include <motors/drive_motors.hpp>
+#include <sensors/sensors.hpp>
 
 void setup()
 {
@@ -31,8 +33,8 @@ void setup()
 
 void loop()
 {
-    #ifdef SUMO3KG
+#ifdef SUMO3KG
     processWebSocketEvents();
-    #endif
+#endif
     processMachineEvents();
 }

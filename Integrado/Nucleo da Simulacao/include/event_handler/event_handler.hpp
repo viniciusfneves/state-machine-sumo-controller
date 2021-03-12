@@ -5,7 +5,6 @@
 #include "../events/events.hpp"
 #include "../sensors/sensors.hpp"
 #include "../utilities/timeout_implementation/timeout.hpp"
-#include "../utilities/messages/messages.hpp"
 #ifdef SUMO3KG
 #include <communications/dynamic_data/send_data.hpp>
 #endif
@@ -34,8 +33,6 @@ void processMachineEvents()
         case Event::SendRobotConfig:
             broadcastConfigurations();
 #endif
-        default:
-            break;
         }
     }
     else if (isTimeoutActive())

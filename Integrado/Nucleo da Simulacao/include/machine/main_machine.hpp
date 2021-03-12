@@ -13,6 +13,7 @@ namespace sml = boost::sml;
 // Nela exitem os estados de configuração inicial do robô, máquina de luta
 // e todas as transições entre elas, incluindo o desligamento do robô após
 // o evento de <Terminate>
+
 struct machine
 {
     auto operator()() const
