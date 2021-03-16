@@ -4,6 +4,7 @@
 #include <communications/WiFi/http_server/http_server.hpp>
 #include <communications/WiFi/websockets_server/webSockets_server.hpp>
 #endif
+#include <sml.hpp>
 #include <Arduino.h>
 #include <event_handler/event_handler.hpp>
 #include <motors/drive_motors.hpp>
