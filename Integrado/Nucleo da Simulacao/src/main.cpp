@@ -1,10 +1,13 @@
+// A biblioteca SML precisa ser a primeira incluída no programa
+#include <sml.hpp>
+
 #ifdef SUMO3KG
 #include <SPIFFS.h>
 #include <communications/WiFi/access_point/wireless_access_point.hpp>
 #include <communications/WiFi/http_server/http_server.hpp>
 #include <communications/WiFi/websockets_server/webSockets_server.hpp>
 #endif
-#include <sml.hpp>
+
 #include <Arduino.h>
 #include <event_handler/event_handler.hpp>
 #include <motors/drive_motors.hpp>
