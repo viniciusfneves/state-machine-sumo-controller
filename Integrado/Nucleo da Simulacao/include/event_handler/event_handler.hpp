@@ -33,6 +33,8 @@ void processMachineEvents()
         case Event::SendRobotConfig:
             broadcastConfigurations();
 #endif
+        default:
+            break;
         }
     }
     else if (isTimeoutActive())

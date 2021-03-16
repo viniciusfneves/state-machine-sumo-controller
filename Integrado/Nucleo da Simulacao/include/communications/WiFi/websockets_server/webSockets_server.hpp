@@ -31,6 +31,8 @@ void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *payload, si
         Serial.printf("JSON recieved from Id: %u\n", client_id);
         processMessages(String((char *)payload));
         break;
+    default:
+        break;
     }
 }
 
