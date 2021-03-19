@@ -32,6 +32,7 @@ void processMachineEvents()
 #ifdef SUMO3KG
         case Event::SendRobotConfig:
             broadcastConfigurations();
+            broadcastMotorsPower(0, 0);
 #endif
         default:
             break;

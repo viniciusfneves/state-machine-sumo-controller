@@ -44,6 +44,16 @@ function setEdgeSensor(id, reading) {
     }
 }
 
+function setMotorPower(id, reading) {
+    if (reading < 0) {
+        document.getElementById(id + "-motor-power").style.color = "red";
+        document.getElementById(id + "-motor-power").innerHTML = (reading * -1);
+    } else {
+        document.getElementById(id + "-motor-power").style.color = "green";
+        document.getElementById(id + "-motor-power").innerHTML = reading;
+    }
+}
+
 connection.onmessage = function(response) {
     let json = JSON.parse(response.data);
     console.log(response.data);
@@ -62,6 +72,9 @@ connection.onmessage = function(response) {
             setEdgeSensor("right", json["readings"]["edge"][1]);
         }
 
-        if ("motor" in json["readings"]) {}
+        if ("motor" in json["readings"]) {
+            setMotorPower("left", json["readings"]["motor"][0]);
+            setMotorPower("right", json["readings"]["motor"][1]);
+        }
     }
 }

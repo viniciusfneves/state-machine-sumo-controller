@@ -81,7 +81,7 @@ button {
     height: 16px;
 }
 
-#left-90-op {
+#left-side-op {
     display: none;
     top: 5em;
     left: 0;
@@ -123,7 +123,7 @@ button {
     background: black;
 }
 
-#right-90-op {
+#right-side-op {
     display: none;
     top: 5em;
     right: 0;
@@ -167,4 +167,18 @@ button {
 #left-motor {
     top: 8em;
     left: 0.5em;
+}
+
+#right-motor-power {
+    position: absolute;
+    font-size: 32px;
+    top: 3.1em;
+    right: -3em;
+}
+
+#left-motor-power {
+    position: absolute;
+    font-size: 32px;
+    top: 3.1em;
+    left: -3em;
 }

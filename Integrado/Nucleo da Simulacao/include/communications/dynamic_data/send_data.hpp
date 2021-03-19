@@ -11,7 +11,7 @@ void broadcastConfigurations()
     String JSONBuffer;
 
     configs["robot_name"] = robotConfiguration.robot_name;
-    
+
     switch (robotConfiguration.initialMove)
     {
     case InitialMove::none:
@@ -45,9 +45,19 @@ void broadcastConfigurations()
     webSocket.broadcastTXT(JSONBuffer);
 }
 
-void broadcastOPReadings(bool opSensorArray[]){
-    StaticJsonDocument<128> readings;
+// Serializa qualquer objeto JSON e envia para todos os clientes conectados no WebSocket
+void serializeAndBroadcast(StaticJsonDocument<128> readings)
+{
     String JSONBuffer;
+
+    serializeJson(readings, JSONBuffer);
+    webSocket.broadcastTXT(JSONBuffer);
+};
+
+// Envia as leituras dos sensores de oponentes para todos os clientes do WebSockets -> TELEMETRIA
+void broadcastOPReadings(bool opSensorArray[])
+{
+    StaticJsonDocument<128> readings;
 
     readings["readings"]["opponent"][0] = opSensorArray[0];
     readings["readings"]["opponent"][1] = opSensorArray[1];
@@ -55,19 +65,29 @@ void broadcastOPReadings(bool opSensorArray[]){
     readings["readings"]["opponent"][3] = opSensorArray[3];
     readings["readings"]["opponent"][4] = opSensorArray[4];
 
-    serializeJson(readings, JSONBuffer);
-    webSocket.broadcastTXT(JSONBuffer);
+    serializeAndBroadcast(readings);
 };
 
-void broadcastEdgeReadings(bool edgeSensorArray[]){
+// Envia as leituras dos sensores de borda para todos os clientes do WebSockets -> TELEMETRIA
+void broadcastEdgeReadings(bool edgeSensorArray[])
+{
     StaticJsonDocument<128> readings;
-    String JSONBuffer;
 
     readings["readings"]["edge"][0] = edgeSensorArray[0];
     readings["readings"]["edge"][1] = edgeSensorArray[1];
 
-    serializeJson(readings, JSONBuffer);
-    webSocket.broadcastTXT(JSONBuffer);
+    serializeAndBroadcast(readings);
+};
+
+// Envia as leituras das potências dos motores para todos os clientes do WebSockets -> TELEMETRIA
+void broadcastMotorsPower(int left_motor_PWM, int right_motor_PWM)
+{
+    StaticJsonDocument<128> readings;
+
+    readings["readings"]["motor"][0] = left_motor_PWM;
+    readings["readings"]["motor"][1] = right_motor_PWM;
+
+    serializeAndBroadcast(readings);
 };
 
 #endif // SEND_DATA_HPP

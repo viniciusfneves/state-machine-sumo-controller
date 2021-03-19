@@ -9,6 +9,7 @@
 // Adiciona a função analogWrite para compilação com ESP32
 #ifdef SUMO3KG
 #include <analogWrite.h>
+#include <communications/dynamic_data/send_data.hpp>
 #endif
 
 // Envia sinais PWM para as portas dos motores ESQ e DIR
@@ -18,6 +19,10 @@ void drive(int PWM_left, int PWM_right)
     PWM_right = constrain(PWM_right, -255, 255);
     analogWrite(pins::motors::leftMotor, PWM_left);
     analogWrite(pins::motors::rightMotor, PWM_right);
+    
+#ifdef SUMO3KG
+    broadcastMotorsPower(PWM_left, PWM_right);
+#endif
 };
 
 // Para toda a locomoção do robô
@@ -25,6 +30,10 @@ void stop()
 {
     analogWrite(pins::motors::leftMotor, 0);
     analogWrite(pins::motors::rightMotor, 0);
+
+#ifdef SUMO3KG
+    broadcastMotorsPower(0, 0);
+#endif
 };
 
 // Realiza as configurações necessárias para a parte de locomoção do robô
