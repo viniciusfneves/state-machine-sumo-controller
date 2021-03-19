@@ -21,7 +21,8 @@ h1 {
 button {
     display: block;
     border: none;
-    width: 115px;
+    width: 150px;
+    height: 50px;
     padding: 12px;
     margin: 8px auto;
     cursor: pointer;
@@ -33,13 +34,21 @@ button {
 }
 
 #start-request {
-    width: 115px;
+    display: inline-block;
     padding: 12px;
+    margin-right: 30px;
     background-color: #00770c;
 }
 
+#configs {
+    display: inline-block;
+    padding: 12px;
+    margin-left: 30px;
+    background-color: #b1a117;
+}
+
 #terminate-request {
-    width: 80%;
+    width: 75%;
     height: 100px;
     background-color: #bd0101;
 }
