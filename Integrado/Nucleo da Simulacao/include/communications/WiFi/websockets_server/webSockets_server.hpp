@@ -2,7 +2,7 @@
 #define WEBSOCKETS_SERVER_HPP
 
 #include <WebSocketsServer.h>
-#include <events/events.hpp>
+#include <event_handler/circular_buffer.hpp>
 #include "../../dynamic_data/handle_incoming_data.hpp"
 
 WebSocketsServer webSocket(81); // Configura o serviço do WebSockets para a porta 81
@@ -32,6 +32,7 @@ void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *payload, si
         processMessages(String((char *)payload));
         break;
     default:
+        Serial.println("Tipo de mensagem WebSocket não programada recebida. Lide com ela em \"communications/WiFi/websocket_server -> Função (handleWSIncomingData)\"");
         break;
     }
 }
