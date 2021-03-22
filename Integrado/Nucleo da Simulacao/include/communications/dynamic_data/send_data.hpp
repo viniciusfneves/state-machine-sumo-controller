@@ -10,7 +10,7 @@ void broadcastConfigurations()
     StaticJsonDocument<128> configs;
     String JSONBuffer;
 
-    configs["robot_name"] = robotConfiguration.robotName;
+    configs["robot_name"] = robotSpecifications.robotName;
 
     switch (robotConfiguration.initialMove)
     {

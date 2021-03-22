@@ -40,7 +40,7 @@ void driveMotors(int leftPWM, int rightPWM)
     rightMotor->setVelocity(rightSpeed);
 }
 
-void stop()
+void stopMotors()
 {
     leftMotor->setVelocity(0);
     rightMotor->setVelocity(0);

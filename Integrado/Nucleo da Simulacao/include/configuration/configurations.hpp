@@ -4,17 +4,10 @@
 #include <string.h>
 #include "../strategies/strategies.hpp"
 
-struct Configuration
+struct Configurations
 {
-    // Define o nome do robõ
-    String robotName = "Atena";
-
     // Define a velocidade máxima global do robô -> [0, 255]
     int maxSpeed = 255;
-
-    // Especificações mecânicas do robô necessárias para alguns algoritmos do código
-    const int wheelBase       = 132;    // Distância entre as rodas em milímetros
-    const double wheelRadius  = 72.5/2; // Raio das rodas em milímetros
 
     // Define a inicialização padrão das estratégias
     InitialMove initialMove = InitialMove::none;
@@ -22,8 +15,21 @@ struct Configuration
     Chase chase = Chase::standard;
 };
 
+struct Specifications
+{
+    // Define o nome do robõ
+    String robotName = "Atena";
+
+    // Especificações mecânicas do robô necessárias para alguns algoritmos do código
+    const int wheelBase = 132;           // Distância entre as rodas em milímetros
+    const double wheelRadius = 72.5 / 2; // Raio das rodas em milímetros
+    const double maxLinearSpeed = wheelRadius;
+    const double maxAngularSpeed = 2 * wheelRadius / wheelBase;
+};
+
 // Objeto global de configurações do robô
-Configuration robotConfiguration;
+Configurations robotConfiguration;
+Specifications robotSpecifications;
 
 // Muda a configuração de estratégia de movimento inicial
 // (enum) InitialMove -> void
