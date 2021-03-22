@@ -14,7 +14,7 @@ struct SearchNone
         using namespace sml;
         // Funções
         auto exit_state = [] { setTimeout(0); };
-        auto stop_motors = [] { stop(); };
+        auto stop_motors = [] { stopMotors(); };
 
         return make_transition_table(
             *"entry"_s = "exit"_s,

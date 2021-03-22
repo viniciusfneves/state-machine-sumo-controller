@@ -15,9 +15,9 @@ struct ZigZag
         using namespace sml;
 
         auto exit_state = [] { setTimeout(0); };
-        auto run_forwards1 = [] { drive(100, 100) ; delay(250); };
-        auto spin_left = [] { drive(-70,70); delay(120); };
-        auto run_forwards2 = [] { drive(120, 120) ; delay(250); };
+        auto run_forwards1 = [] { driveMotors(100, 100) ; delay(250); };
+        auto spin_left = [] { driveMotors(-70,70); delay(120); };
+        auto run_forwards2 = [] { driveMotors(120, 120) ; delay(250); };
 
         //Zigzag curto pela direita
         return make_transition_table(

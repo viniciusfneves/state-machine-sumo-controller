@@ -30,7 +30,7 @@ double convertPWMinSpeed(int pwm)
     return map(pwm, -MAX_PWM, MAX_PWM, -MAX_SPEED, MAX_SPEED);
 }
 
-void drive(int leftPWM, int rightPWM)
+void driveMotors(int leftPWM, int rightPWM)
 {
     leftPWM = constrain(leftPWM, -MAX_PWM, MAX_PWM);
     rightPWM = constrain(rightPWM, -MAX_PWM, MAX_PWM);

@@ -19,7 +19,7 @@ struct FightMachine
         using namespace sml;
 
         // Funções
-        auto avoidEdge = [] {stop();drive(-120,-120);delay(200);};
+        auto avoidEdge = [] { stopMotors(); driveMotors(-120,-120);delay(200); };
 
         return make_transition_table(
             *"entry"_s                                                                    = state<InitialMoveSelector>,

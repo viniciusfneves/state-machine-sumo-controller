@@ -15,7 +15,7 @@ struct FullFrente
         using namespace sml;
         // Funções
         auto config_exit = [] { setTimeout(300); };
-        auto run_forwards = [] { drive(140, 140); };
+        auto run_forwards = [] { driveMotors(140, 140); };
         
         return make_transition_table(
             *"entry"_s = "moving"_s,

@@ -1,10 +1,6 @@
 #if !defined(CIRCULAR_BUFFER_HPP)
 #define CIRCULAR_BUFFER_HPP
 
-
-
-
-
 #include "../events/events.hpp"
 #include "../../lib/CircularBuffer/CircularBuffer.h"
 // Buffer circular
@@ -26,4 +22,5 @@ Event eventToProcess(){
 void addEventToQueue(Event event){
     eventQueue.push(event);
 };
+
 #endif // CIRCULAR_BUFFER_HPP
