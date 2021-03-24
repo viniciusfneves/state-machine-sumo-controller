@@ -6,7 +6,7 @@
 // Dependências gerais
 #include <pins/pins.hpp>
 #include <utilities/code_parameters/code_parameters.hpp>
-#include <configuration/configurations.hpp>
+#include <configuration/specifications.hpp>
 
 // Adiciona a função analogWrite para compilação com ESP32
 #ifdef SUMO3KG
