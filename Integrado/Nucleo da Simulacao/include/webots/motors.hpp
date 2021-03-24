@@ -46,6 +46,39 @@ void stopMotors()
     rightMotor->setVelocity(0);
 }
 
+// Movimenta o robô baseado nos parâmetros de entrada de velocidade linear e velocidade angular desejada
+// double linearSpeed -> Velocidade linear do robô -> Range [-1,1]
+// double angularSpeed -> Velocidade angular do robô -> Range [-1,1]
+void driveRobot(int linearSpeed, int angularSpeed)
+{
+    // Limita os parâmetros de entrada aos permitidos pela função
+    // Só funciona se os parametros forem de -1 à 1, caso contrário utilize um MAP para definir as velocidas linear e angular
+    linearSpeed = constrain(linearSpeed, -1, 1) * robotSpecifications.maxLinearSpeed;
+    angularSpeed = constrain(angularSpeed, -1, 1) * robotSpecifications.maxAngularSpeed;
+
+    // Transforma os parâmetros de velocidade linear e angular em potência para os motores
+    int PWM_left = (2 * linearSpeed - angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius)) * 255;
+    int PWM_right = (2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius)) * 255;
+
+    //Assegura que a velocidade angular vai ser exercida como pedido, podendo alterar a velocidade linear para isso
+    double maxSpeed = (PWM_left > PWM_right) ? PWM_left : PWM_right;
+    double minSpeed = (PWM_left < PWM_right) ? PWM_left : PWM_right;
+
+    if (maxSpeed > robotConfiguration.maxSpeed)
+    {
+        PWM_left -= maxSpeed - robotConfiguration.maxSpeed;
+        PWM_right -= maxSpeed - robotConfiguration.maxSpeed;
+    }
+    else if (minSpeed < -robotConfiguration.maxSpeed)
+    {
+        PWM_left -= minSpeed + robotConfiguration.maxSpeed;
+        PWM_right -= minSpeed + robotConfiguration.maxSpeed;
+    }
+
+    // Comanda os motores à rodar com as potências calculadas
+    driveMotors(PWM_left, PWM_right);
+};
+
 Motor *initMotor(Robot *robot, char *motorName)
 {
     Motor *motor = robot->getMotor(motorName);
