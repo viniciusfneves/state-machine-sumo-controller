@@ -1,9 +1,11 @@
 #if !defined(PID_CONTROLLER_HPP)
 #define PID_CONTROLLER_HPP
 
-#define Kp 60
-#define Ki 1
-#define Kd 0.4
+#include "../configuration/configurations.hpp"
+
+double& Kp = robotConfiguration.Kp;
+double& Ki = robotConfiguration.Ki;
+double& Kd = robotConfiguration.Kd;
 
 double pid(double error)
 {
