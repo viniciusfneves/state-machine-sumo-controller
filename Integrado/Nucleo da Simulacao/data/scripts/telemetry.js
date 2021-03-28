@@ -56,7 +56,10 @@ function setMotorPower(id, reading) {
 
 connection.onmessage = function(response) {
     let json = JSON.parse(response.data);
-    console.log(response.data);
+
+    if ("robot_name" in json) {
+        document.getElementById("connection-status-text").innerHTML = "Connected to " + json["robot_name"];
+    }
 
     if ("readings" in json) {
         if ("opponent" in json["readings"]) {

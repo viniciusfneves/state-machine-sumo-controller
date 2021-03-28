@@ -124,7 +124,7 @@ connection.onmessage = function(response) {
 
     // Verifica as chaves contidas no JSON recebido
     if ("robot_name" in json) {
-        document.getElementById("config-title").innerHTML = "Configurações do Robô -> " + json["robot_name"];
+        document.getElementById("connection-status-text").innerHTML = "Connected to " + json["robot_name"];
     }
 
     // Recebendo Array de estratégias
