@@ -5,6 +5,10 @@ html {
     text-align: center;
 }
 
+.inline-text {
+    display: inline;
+}
+
 body {
     margin-top: 50px;
 }
@@ -53,4 +57,34 @@ button {
     width: 18px;
     height: 18px;
     border-radius: 50%;
+}
+
+.PID-regulator-setter {
+    display: inline;
+}
+
+.setter-value-field {
+    font-family: Helvetica;
+    font-size: 20px;
+    text-align: center;
+    width: 12%;
+    height: 35px;
+    margin: 8px;
+    min-width: 75px;
+    max-width: 115px;
+    border-style: solid;
+    border-radius: 8px;
+}
+
+#set-pid-button {
+    display: block;
+    margin: 20px auto;
+    width: 115px;
+    background-color: rgb(100, 0, 100);
+    color: white;
+}
+
+#start-time {
+    min-width: 100px;
+    max-width: 140px;
 }
