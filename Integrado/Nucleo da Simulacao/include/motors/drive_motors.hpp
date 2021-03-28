@@ -7,9 +7,10 @@
 #include <pins/pins.hpp>
 #include <utilities/code_parameters/code_parameters.hpp>
 #include <configuration/specifications.hpp>
+#include <configuration/configurations.hpp>
 
 // Adiciona a função analogWrite para compilação com ESP32
-#ifdef SUMO3KG
+#ifdef ESP32_ENV
 #include <analogWrite.h>
 #include <communications/dynamic_data/send_data.hpp>
 #endif
@@ -24,7 +25,7 @@ void driveMotors(int PWM_left, int PWM_right)
     analogWrite(pins::motors::leftMotor, PWM_left);
     analogWrite(pins::motors::rightMotor, PWM_right);
 
-#ifdef SUMO3KG
+#ifdef ESP32_ENV
     broadcastMotorsPower(PWM_left, PWM_right);
 #endif
 };
@@ -35,7 +36,7 @@ void stopMotors()
     analogWrite(pins::motors::leftMotor, 0);
     analogWrite(pins::motors::rightMotor, 0);
 
-#ifdef SUMO3KG
+#ifdef ESP32_ENV
     broadcastMotorsPower(0, 0);
 #endif
 };
@@ -99,7 +100,7 @@ void rotateRobot(int degrees, Direction direction)
 // Realiza as configurações necessárias para a parte de locomoção do robô
 void initMotors()
 {
-#ifdef SUMO3KG
+#ifdef ESP32_ENV
     // Define a resolução de saída dos pinos de PWM do ESP32
     analogWriteResolution(pins::motors::leftMotor, 12);
     analogWriteResolution(pins::motors::rightMotor, 12);

@@ -5,7 +5,7 @@
 #include "../event_handler/circular_buffer.hpp"
 #include "../sensors/sensors.hpp"
 #include "../utilities/timeout_implementation/timeout.hpp"
-#ifdef SUMO3KG
+#ifdef ESP32_ENV
 #include <communications/dynamic_data/send_data.hpp>
 #endif
 
@@ -29,7 +29,7 @@ void processMachineEvents()
         case Event::Reset:
             Core.process_event(Reset{});
             break;
-#ifdef SUMO3KG
+#ifdef ESP32_ENV
         case Event::SendRobotConfig:
             broadcastConfigurations();
             broadcastMotorsPower(0, 0);

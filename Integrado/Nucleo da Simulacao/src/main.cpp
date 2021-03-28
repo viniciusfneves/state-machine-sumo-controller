@@ -1,7 +1,7 @@
 // A biblioteca SML precisa ser a primeira incluída no programa
 #include <sml.hpp>
 
-#ifdef SUMO3KG
+#ifdef ESP32_ENV
 #include <SPIFFS.h>
 #include <communications/WiFi/access_point/wireless_access_point.hpp>
 #include <communications/WiFi/http_server/http_server.hpp>
@@ -16,7 +16,7 @@
 void setup()
 {
 // Configurações específicas para o ESP32
-#ifdef SUMO3KG
+#ifdef ESP32_ENV
     Serial.begin(115200); // Porta Serial
 
     SPIFFS.begin(); // Inicia o File System do ESP32
@@ -26,7 +26,7 @@ void setup()
     initWebSocketsServer();
 #endif
 
-#ifdef SUMOMINI
+#ifdef ARDUINO_ENV
     Serial.begin(9600);
 #endif
 
@@ -37,7 +37,7 @@ void setup()
 
 void loop()
 {
-#ifdef SUMO3KG
+#ifdef ESP32_ENV
     processWebSocketEvents();
 #endif
     processMachineEvents();

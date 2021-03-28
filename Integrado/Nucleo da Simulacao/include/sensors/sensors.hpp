@@ -3,7 +3,7 @@
 
 #include "edge_sensor/edge_sensor.hpp"
 #include "opponent_sensor/opponent_sensor.hpp"
-#ifdef SUMO3KG
+#ifdef ESP32_ENV
 #include <communications/dynamic_data/send_data.hpp>
 #endif
 
@@ -11,7 +11,7 @@ void readSensors()
 {
     readOpponentSensors();
     readEdgeSensors();
-    #ifdef SUMO3KG
+    #ifdef ESP32_ENV
     broadcastOPReadings(opponentSensorDetectionArray);
     broadcastEdgeReadings(edgeSensorDetectionArray);
     #endif
