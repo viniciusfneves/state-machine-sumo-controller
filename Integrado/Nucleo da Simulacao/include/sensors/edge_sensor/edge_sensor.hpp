@@ -7,9 +7,9 @@
 
 bool edgeSensorDetectionArray[NUMBER_OF_EDGE_SENSORS];
 
-bool edgeDetected = false;
+bool _edgeDetected = false;
 
-bool isEdgeDetected() { return edgeDetected; }
+bool isEdgeDetected() { return _edgeDetected; }
 
 void readEdgeSensors()
 {
@@ -17,11 +17,11 @@ void readEdgeSensors()
     edgeSensorDetectionArray[1] = digitalRead(pins::edgeSensors::rightEdge);
     if (edgeSensorDetectionArray[0] || edgeSensorDetectionArray[1])
     {
-        edgeDetected = true;
+        _edgeDetected = true;
     }
     else
     {
-        edgeDetected = false;
+        _edgeDetected = false;
     }
 };
 
