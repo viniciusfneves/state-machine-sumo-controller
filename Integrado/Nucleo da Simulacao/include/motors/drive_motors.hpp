@@ -1,13 +1,20 @@
 #ifndef DRIVE_MOTORS_HPP
 #define DRIVE_MOTORS_HPP
 
-#ifdef REAL_ROBOT
-
 // Dependências gerais
-#include <pins/pins.hpp>
-#include <utilities/code_parameters/code_parameters.hpp>
 #include <configuration/specifications.hpp>
 #include <configuration/configurations.hpp>
+#include <utilities/code_parameters/code_parameters.hpp>
+
+// No caso de simulação, importa a biblioteca com as funções de locomoção do WeBots
+#ifndef REAL_ROBOT
+#include "../webots/motors.hpp"
+#endif
+
+#ifdef REAL_ROBOT
+
+// Dependências gerais dos microcontroladores
+#include <pins/pins.hpp>
 
 // Adiciona a função analogWrite para compilação com ESP32
 #ifdef ESP32_ENV
@@ -41,19 +48,35 @@ void stopMotors()
 #endif
 };
 
+// Realiza as configurações necessárias para a parte de locomoção do robô
+void initMotors()
+{
+#ifdef ESP32_ENV
+    // Define a resolução de saída dos pinos de PWM do ESP32
+    analogWriteResolution(pins::motors::leftMotor, 12);
+    analogWriteResolution(pins::motors::rightMotor, 12);
+#endif
+    pinMode(pins::motors::leftMotor, OUTPUT);
+    pinMode(pins::motors::rightMotor, OUTPUT);
+    analogWrite(pins::motors::leftMotor, 0);
+    analogWrite(pins::motors::rightMotor, 0);
+}
+
+#endif //ifdef REAL_ROBOT
+
 // Movimenta o robô baseado nos parâmetros de entrada de velocidade linear e velocidade angular desejada
 // double linearSpeed -> Velocidade linear do robô -> Range [-1,1]
 // double angularSpeed -> Velocidade angular do robô -> Range [-1,1]
-void driveRobot(int linearSpeed, int angularSpeed)
+void driveRobot(double linearSpeed, double angularSpeed)
 {
     // Limita os parâmetros de entrada aos permitidos pela função
     // Só funciona se os parametros forem de -1 à 1, caso contrário utilize um MAP para definir as velocidas linear e angular
     linearSpeed = constrain(linearSpeed, -1, 1) * robotSpecifications.maxLinearSpeed;
     angularSpeed = constrain(angularSpeed, -1, 1) * robotSpecifications.maxAngularSpeed;
 
-    // Transforma os parâmetros de velocidade linear e angular em potência para os motores
-    int PWM_left = (2 * linearSpeed - angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius)) * 255;
-    int PWM_right = (2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius)) * 255;
+    // Transforma os parâmetros de velocidade linear e angular em sinal PWM para os motores
+    int PWM_left = (2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius)) * 255;
+    int PWM_right = (2 * linearSpeed - angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius)) * 255;
 
     //Assegura que a velocidade angular vai ser exercida como pedido, podendo alterar a velocidade linear para isso
     double maxSpeed = (PWM_left > PWM_right) ? PWM_left : PWM_right;
@@ -96,26 +119,5 @@ void rotateRobot(int degrees, Direction direction)
     delay(static_cast<int>(degrees * 25 / robotConfiguration.maxSpeed)); // O tempo até completar a rotação precisa ser verificado com testes
     stopMotors();
 };
-
-// Realiza as configurações necessárias para a parte de locomoção do robô
-void initMotors()
-{
-#ifdef ESP32_ENV
-    // Define a resolução de saída dos pinos de PWM do ESP32
-    analogWriteResolution(pins::motors::leftMotor, 12);
-    analogWriteResolution(pins::motors::rightMotor, 12);
-#endif
-    pinMode(pins::motors::leftMotor, OUTPUT);
-    pinMode(pins::motors::rightMotor, OUTPUT);
-    analogWrite(pins::motors::leftMotor, 0);
-    analogWrite(pins::motors::rightMotor, 0);
-}
-
-#endif //ifdef REAL_ROBOT
-
-// No caso de simulação, importa a biblioteca com as funções de locomoção do WeBots
-#ifndef REAL_ROBOT
-#include "../webots/motors.hpp"
-#endif
 
 #endif //DRIVE_MOTORS_HPP
