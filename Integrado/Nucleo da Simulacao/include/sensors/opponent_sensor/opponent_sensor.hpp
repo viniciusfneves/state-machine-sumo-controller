@@ -10,8 +10,8 @@
 
 // SUMO 3KG
 #ifdef SUMO3KG
-#define NUMBER_OF_OPPONENT_SENSORS 7
-int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-4, -2, -1, 0, 1, 2, 4};
+#define NUMBER_OF_OPPONENT_SENSORS 5
+int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-2, -1, 0, 1, 2};
 #endif
 
 #ifdef SUMOMINI

@@ -10,23 +10,28 @@ namespace pins
     {
         int leftMotor = 25;
         int rightMotor = 26;
+        int servo = 27;
     }
     namespace edgeSensors
     {
-        int leftEdge = 33;
-        int rightEdge = 32;
+        int leftFrontEdge = 35;
+        int rightFrontEdge = 34;
+        int leftRearEdge = 39;
+        int rightRearEdge = 36;
     }
     namespace opponentsSensors
     {
-        int farLeft = 23;
-        int left = 22;
-        int center = 21;
-        int right = 19;
+        int leftSide = 5;
+        int farLeft = 12;
+        int left = 13;
+        int center = 14;
+        int right = 15;
         int farRight = 18;
+        int rightSide = 19;
 
         int sensors[] = {farLeft, left, center, right, farRight};
     }
-#endif
+#endif // SUMO3KG
 
 // Definição de pinos para os robôs sumo mini
 #ifdef SUMOMINI
@@ -37,8 +42,8 @@ namespace pins
     }
     namespace edgeSensors
     {
-        int leftEdge = 2;
-        int rightEdge = 4;
+        int leftFrontEdge = 2;
+        int rightFrontEdge = 4;
     }
     namespace opponentsSensors
     {
@@ -48,6 +53,5 @@ namespace pins
         int sensors[] = {left, right};
     }
 #endif
-};
-
+}
 #endif
