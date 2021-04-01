@@ -69,10 +69,12 @@ void readEdgeSensors()
 #define NUMBER_OF_OPPONENT_SENSORS 2
 int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
 bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
-double detectionError;
-bool opDetected = false;
+double _detectionError;
+bool _opDetected = false;
 
-bool isOpponentDetected() { return opDetected; }
+bool isOpponentDetected() { return _opDetected; }
+
+double getErrorFromOPSensors() { return _detectionError; };
 
 int sumArray(bool vector[])
 {
@@ -92,11 +94,11 @@ void readOpponentSensors()
     int buffer = sumArray(opponentSensorDetectionArray);
     if (buffer >= 1)
     {
-        opDetected = true;
+        _opDetected = true;
     }
     else
     {
-        opDetected = false;
+        _opDetected = false;
     }
 }
 #endif

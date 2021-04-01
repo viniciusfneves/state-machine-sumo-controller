@@ -23,11 +23,13 @@ int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
 
 bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
 
-bool opDetected = false;
+bool _opDetected = false;
 
-double detectionError;
+double _detectionError;
 
-bool isOpponentDetected() { return opDetected; }
+bool isOpponentDetected() { return _opDetected; }
+
+double getErrorFromOPSensors() { return _detectionError; };
 
 void calculateError()
 {
@@ -41,7 +43,7 @@ void calculateError()
             readings += 1;
         }
     }
-    detectionError = sum / readings;
+    _detectionError = sum / readings;
 }
 
 int sumArray(bool vector[])
@@ -63,11 +65,11 @@ void readOpponentSensors()
     int buffer = sumArray(opponentSensorDetectionArray);
     if (buffer >= 1)
     {
-        opDetected = true;
+        _opDetected = true;
     }
     else
     {
-        opDetected = false;
+        _opDetected = false;
     }
     calculateError();
 }
