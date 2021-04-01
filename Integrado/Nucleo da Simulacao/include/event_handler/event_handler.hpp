@@ -38,21 +38,24 @@ void processMachineEvents()
             break;
         }
     }
-    else if (isTimeoutActive())
+    if (isTimeoutActive())
     {
         if (millis() >= timeoutTime)
         {
             cancelTimeout();
             Core.process_event(Timeout{});
+            return;
         }
     }
-    else if (isOpponentDetected())
+    if (isOpponentDetected())
     {
         Core.process_event(OpponentDetected{});
+        return;
     }
-    else if (isEdgeDetected())
+    if (isEdgeDetected())
     {
         Core.process_event(EdgeDetected{});
+        return;
     }
     else
     {
