@@ -4,6 +4,7 @@
 #include "../../../lib/boost/sml.hpp"
 #include "../../configuration/configurations.hpp"
 #include "../../utilities/messages/messages.hpp"
+#include "../../motors/PID_controller.hpp"
 #include "../../strategies/search_strategies/search_none.hpp"
 #include "../../strategies/search_strategies/radar.hpp"
 
@@ -19,7 +20,7 @@ struct SearchSelector
         auto radar       = [] { return robotConfiguration.search == Search::radar; };
 
         return make_transition_table(
-            *"entry"_s  / [] { displayMessage("Entered Search Selector"); } = "selector"_s,
+            *"entry"_s  / [] { displayMessage("Entered Search Selector"); resetPID(); } = "selector"_s,
             "selector"_s [none]  = state<SearchNone>,
             "selector"_s [radar] = state<SearchRadar>);
     }

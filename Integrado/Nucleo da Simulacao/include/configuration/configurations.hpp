@@ -1,7 +1,6 @@
 #if !defined(CONFIGURATIONS_HPP)
 #define CONFIGURATIONS_HPP
 
-#include <string.h>
 #include "../strategies/strategies.hpp"
 
 struct Configurations
@@ -9,9 +8,11 @@ struct Configurations
     // Define a velocidade máxima global do robô -> [0, 255]
     int maxSpeed = 255;
 
-    double Kp = 60;
+    double Kp = 1.7;
     double Ki = 0;
-    double Kd = 0;
+    double Kd = 0.6;
+
+    double maxAngularSpeedInChase = 0.55;
 
     // Define a inicialização padrão das estratégias
     InitialMove initialMove = InitialMove::none;
