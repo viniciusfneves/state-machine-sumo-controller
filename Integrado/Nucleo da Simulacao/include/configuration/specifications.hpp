@@ -5,8 +5,10 @@
 
 struct Specifications
 {
+#ifdef REAL_ROBOT
     // Define o nome do robõ
     String robotName = "Atena";
+#endif
 
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
     const int wheelBase = 132;           // Distância entre as rodas em milímetros
