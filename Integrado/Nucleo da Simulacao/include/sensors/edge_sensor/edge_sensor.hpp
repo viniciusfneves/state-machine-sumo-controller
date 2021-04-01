@@ -1,6 +1,8 @@
 #ifndef EDGE_SENSOR_HPP
 #define EDGE_SENSOR_HPP
 
+#include "../../utilities/calculus/calculus.hpp"
+
 #ifdef REAL_ROBOT
 #include <pins/pins.hpp>
 #define NUMBER_OF_EDGE_SENSORS 2
@@ -13,9 +15,12 @@ bool isEdgeDetected() { return _edgeDetected; }
 
 void readEdgeSensors()
 {
-    edgeSensorDetectionArray[0] = digitalRead(pins::edgeSensors::leftEdge);
-    edgeSensorDetectionArray[1] = digitalRead(pins::edgeSensors::rightEdge);
-    if (edgeSensorDetectionArray[0] || edgeSensorDetectionArray[1])
+    edgeSensorDetectionArray[0] = digitalRead(pins::edgeSensors::leftFrontEdge);
+    edgeSensorDetectionArray[1] = digitalRead(pins::edgeSensors::rightFrontEdge);
+
+    int reading = sumArray(edgeSensorDetectionArray, NUMBER_OF_EDGE_SENSORS);
+
+    if (reading > 0)
     {
         _edgeDetected = true;
     }
@@ -28,8 +33,8 @@ void readEdgeSensors()
 // Realiza as configurações necessárias para o sensoriamento de borda do robô
 void initEdgeSensors()
 {
-    pinMode(pins::edgeSensors::leftEdge, INPUT);
-    pinMode(pins::edgeSensors::rightEdge, INPUT);
+    pinMode(pins::edgeSensors::leftFrontEdge, INPUT);
+    pinMode(pins::edgeSensors::rightFrontEdge, INPUT);
 };
 #endif
 

@@ -1,6 +1,8 @@
 #ifndef OPPONENT_SENSOR_HPP
 #define OPPONENT_SENSOR_HPP
 
+#include "../../utilities/calculus/calculus.hpp"
+
 // SIMULAÇÃO
 #ifndef REAL_ROBOT
 #include "../../webots/sensors.hpp"
@@ -8,8 +10,8 @@
 
 // SUMO 3KG
 #ifdef SUMO3KG
-#define NUMBER_OF_OPPONENT_SENSORS 5
-int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-2, -1, 0, 1, 2};
+#define NUMBER_OF_OPPONENT_SENSORS 7
+int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-4, -2, -1, 0, 1, 2, 4};
 #endif
 
 #ifdef SUMOMINI
@@ -46,24 +48,14 @@ void calculateError()
     _detectionError = sum / readings;
 }
 
-int sumArray(bool vector[])
-{
-    int sum = 0;
-    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
-    {
-        sum += vector[index];
-    }
-    return sum;
-}
-
 void readOpponentSensors()
 {
     for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
     {
         opponentSensorDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
     }
-    int buffer = sumArray(opponentSensorDetectionArray);
-    if (buffer >= 1)
+    int reading = sumArray(opponentSensorDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
+    if (reading >= 1)
     {
         _opDetected = true;
     }
