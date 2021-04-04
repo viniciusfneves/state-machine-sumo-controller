@@ -24,21 +24,21 @@ struct Configurations
 Configurations robotConfiguration;
 
 // Muda a configuração de estratégia de movimento inicial
-// (enum) InitialMove -> void
+// strategy -> (enum) InitialMove
 void setInitialStrategy(InitialMove strategy)
 {
     robotConfiguration.initialMove = strategy;
 };
 
 // Muda a configuração de estratégia de busca
-// (enum) Search -> void
+// strategy -> (enum) Search
 void setSearchStrategy(Search strategy)
 {
     robotConfiguration.search = strategy;
 };
 
 // Muda a configuração de estratégia de perseguição
-// (enum) Chase -> void
+// strategy -> (enum) Chase
 void setChaseStrategy(Chase strategy)
 {
     robotConfiguration.chase = strategy;
