@@ -76,8 +76,8 @@ void driveRobot(double linearSpeed, double angularSpeed)
     angularSpeed = constrain(angularSpeed, -1, 1) * robotSpecifications.maxAngularSpeed;
 
     // Transforma os parâmetros de velocidade linear e angular em sinal PWM para os motores
-    int PWM_left = (2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius)) * 255;
-    int PWM_right = (2 * linearSpeed - angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius)) * 255;
+    int PWM_left  = ((2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
+    int PWM_right = ((2 * linearSpeed - angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
 
     //Assegura que a velocidade angular vai ser exercida como pedido, podendo alterar a velocidade linear para isso
     double maxSpeed = (PWM_left > PWM_right) ? PWM_left : PWM_right;
