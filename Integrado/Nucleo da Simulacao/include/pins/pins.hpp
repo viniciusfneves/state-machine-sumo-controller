@@ -23,7 +23,7 @@ namespace pins
     {
         int leftSide = 5;
         int farLeft = 12;
-        int left = 13;
+        int left = 33;
         int center = 14;
         int right = 15;
         int farRight = 18;
