@@ -9,6 +9,7 @@
 // No caso de simulação, importa a biblioteca com as funções de locomoção do WeBots
 #ifndef REAL_ROBOT
 #include "../webots/motors.hpp"
+#include "../webots/webots_time.hpp"
 #endif
 
 #ifdef REAL_ROBOT
@@ -116,7 +117,7 @@ void rotateRobot(int degrees, Direction direction)
         PWM_left *= -1;
     }
     driveMotors(PWM_left, PWM_right);
-    //delay(static_cast<int>(degrees * 25 / robotConfiguration.maxSpeed)); // O tempo até completar a rotação precisa ser verificado com testes
+    delay(static_cast<int>(degrees * 25 / robotConfiguration.maxSpeed)); // O tempo até completar a rotação precisa ser verificado com testes
     stopMotors();
 };
 
