@@ -4,9 +4,9 @@
 #include "../../../lib/boost/sml.hpp"
 #include "../../configuration/configurations.hpp"
 #include "../../utilities/messages/messages.hpp"
-#include "../../strategies/initial_move_strategies/initial_none.hpp"
-#include "../../strategies/initial_move_strategies/full_frente.hpp"
-#include "../../strategies/initial_move_strategies/zig_zag.hpp"
+#include "strategies/initial_move_strategies/initial_none.hpp"
+#include "strategies/initial_move_strategies/full_frente.hpp"
+#include "strategies/initial_move_strategies/zig_zag.hpp"
 
 namespace sml = boost::sml;
 
