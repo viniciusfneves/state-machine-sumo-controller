@@ -5,8 +5,8 @@
 #include "../../configuration/configurations.hpp"
 #include "../../utilities/messages/messages.hpp"
 #include "../../motors/PID_controller.hpp"
-#include "strategies/search_strategies/search_none.hpp"
-#include "strategies/search_strategies/radar.hpp"
+#include "../../strategies/search_strategies/search_none.hpp"
+#include "../../strategies/search_strategies/radar.hpp"
 
 namespace sml = boost::sml;
 
