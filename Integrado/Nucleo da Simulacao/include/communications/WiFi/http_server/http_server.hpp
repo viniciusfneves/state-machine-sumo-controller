@@ -10,7 +10,7 @@ AsyncWebServer server(80); // Configura o servidor HTTP para a porta 80
 void setRequestsResponse()
 {
     // Request da Home pelo cliente. Retorna index.html
-    server.on("/", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/index.html"); });
+    server.on("/", [](AsyncWebServerRequest *request) { request->redirect("/config"); });
 
     // Request da página de configurações do robô
     server.on("/config", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/pages/config/config.html"); });
