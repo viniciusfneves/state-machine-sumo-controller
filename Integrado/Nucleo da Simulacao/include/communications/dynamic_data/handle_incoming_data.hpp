@@ -36,6 +36,7 @@ void processMessages(String message)
     if (jsonMessage.containsKey("initial"))
     {
         const char *strategy = jsonMessage["initial"];
+
         if (strcmp(strategy, "none") == 0)
         {
             setInitialStrategy(InitialMove::none);
@@ -54,6 +55,7 @@ void processMessages(String message)
     if (jsonMessage.containsKey("search"))
     {
         const char *strategy = jsonMessage["search"];
+
         if (strcmp(strategy, "none") == 0)
         {
             setSearchStrategy(Search::none);
@@ -68,12 +70,23 @@ void processMessages(String message)
     if (jsonMessage.containsKey("chase"))
     {
         const char *strategy = jsonMessage["chase"];
+
         if (strcmp(strategy, "standard") == 0)
         {
             setChaseStrategy(Chase::standard);
         }
     }
     addEventToQueue(Event::SendRobotConfig);
+
+    if (jsonMessage.containsKey("controller") && robotConfiguration.mode == Mode::RC)
+    {
+        double linearSpeed = jsonMessage["controller"]["linearSpeed"];
+        double angularSpeed = jsonMessage["controller"]["angularSpeed"];
+        Serial.print("Linear: ");
+        Serial.print(linearSpeed);
+        Serial.print("  Angular: ");
+        Serial.println(angularSpeed);
+    }
 };
 
 #endif // DYNAMIC_DATA_HPP
