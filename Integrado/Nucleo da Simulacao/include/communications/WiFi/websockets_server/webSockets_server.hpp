@@ -20,19 +20,13 @@ void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *payload, si
     case WStype_ERROR:
         Serial.printf("Client id (%u) -> ERROR\n", client_id);
         break;
-    case WStype_DISCONNECTED:
-        Serial.printf("Client id (%u) -> Disconnecting\n", client_id);
-        break;
     case WStype_CONNECTED:
-        Serial.printf("Client Connected! Assigned ID: %u\n", client_id);
         addEventToQueue(Event::SendRobotConfig);
         break;
     case WStype_TEXT:
-        Serial.printf("JSON recieved from Id: %u\n", client_id);
         processMessages(String((char *)payload));
         break;
     default:
-        Serial.println("Tipo de mensagem WebSocket não programada recebida. Lide com ela em \"communications/WiFi/websocket_server -> Função (handleWSIncomingData)\"");
         break;
     }
 }
