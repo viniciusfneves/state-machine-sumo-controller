@@ -18,6 +18,7 @@ struct Configurations
     InitialMove initialMove = InitialMove::full_frente;
     Search search = Search::radar;
     Chase chase = Chase::standard;
+    Mode mode   = Mode::Auto;
 };
 
 // Objeto global de configurações do robô

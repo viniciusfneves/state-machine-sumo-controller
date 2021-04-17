@@ -20,4 +20,9 @@ enum class Chase
     standard
 };
 
+enum class Mode{
+    Auto,
+    RC
+};
+
 #endif // STRATEGIES_HPP
