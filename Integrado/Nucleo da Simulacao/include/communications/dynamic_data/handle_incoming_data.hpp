@@ -83,10 +83,6 @@ void processMessages(String message)
     {
         double linearSpeed = jsonMessage["controller"]["linearSpeed"];
         double angularSpeed = jsonMessage["controller"]["angularSpeed"];
-        Serial.print("Linear: ");
-        Serial.print(linearSpeed);
-        Serial.print("  Angular: ");
-        Serial.println(angularSpeed);
     }
 };
 
