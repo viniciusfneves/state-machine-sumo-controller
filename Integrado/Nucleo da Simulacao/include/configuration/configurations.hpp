@@ -29,20 +29,25 @@ Configurations robotConfiguration;
 void setInitialStrategy(InitialMove strategy)
 {
     robotConfiguration.initialMove = strategy;
-};
+}
 
 // Muda a configuração de estratégia de busca
 // strategy -> (enum) Search
 void setSearchStrategy(Search strategy)
 {
     robotConfiguration.search = strategy;
-};
+}
 
 // Muda a configuração de estratégia de perseguição
 // strategy -> (enum) Chase
 void setChaseStrategy(Chase strategy)
 {
     robotConfiguration.chase = strategy;
-};
+}
+
+void setMode(Mode mode)
+{
+    robotConfiguration.mode = mode;
+}
 
 #endif // CONFIGURATION_OBJECT_HPP

@@ -4,6 +4,7 @@
 #include <ArduinoJson.h>
 #include <configuration/configurations.hpp>
 #include <events/events.hpp>
+#include <event_handler/circular_buffer.hpp>
 
 void processMessages(String message)
 {

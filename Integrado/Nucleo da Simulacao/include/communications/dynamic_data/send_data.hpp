@@ -52,7 +52,7 @@ void serializeAndBroadcast(StaticJsonDocument<128> readings)
 
     serializeJson(readings, JSONBuffer);
     webSocket.broadcastTXT(JSONBuffer);
-};
+}
 
 // Envia as leituras dos sensores de oponentes para todos os clientes do WebSockets -> TELEMETRIA
 void broadcastOPReadings(bool opSensorArray[])
@@ -66,7 +66,7 @@ void broadcastOPReadings(bool opSensorArray[])
     readings["readings"]["opponent"][4] = opSensorArray[4];
 
     serializeAndBroadcast(readings);
-};
+}
 
 // Envia as leituras dos sensores de borda para todos os clientes do WebSockets -> TELEMETRIA
 void broadcastEdgeReadings(bool edgeSensorArray[])
@@ -77,7 +77,7 @@ void broadcastEdgeReadings(bool edgeSensorArray[])
     readings["readings"]["edge"][1] = edgeSensorArray[1];
 
     serializeAndBroadcast(readings);
-};
+}
 
 // Envia as leituras das potências dos motores para todos os clientes do WebSockets -> TELEMETRIA
 void broadcastMotorsPower(int left_motor_PWM, int right_motor_PWM)
@@ -88,6 +88,6 @@ void broadcastMotorsPower(int left_motor_PWM, int right_motor_PWM)
     readings["readings"]["motor"][1] = right_motor_PWM;
 
     serializeAndBroadcast(readings);
-};
+}
 
 #endif // SEND_DATA_HPP
