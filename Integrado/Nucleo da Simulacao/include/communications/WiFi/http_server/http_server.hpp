@@ -3,6 +3,8 @@
 
 #include <ESPAsyncWebServer.h>
 #include <SPIFFS.h>
+#include <ArduinoJson.h>
+#include <communications/dynamic_data/handle_incoming_data.hpp>
 
 AsyncWebServer server(80); // Configura o servidor HTTP para a porta 80
 
@@ -21,6 +23,20 @@ void setRequestsResponse()
     server.on("/telemetry", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/pages/telemetry/telemetry.html"); });
     server.on("/telemetry.css", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/pages/telemetry/telemetry.css"); });
     server.on("/scripts/telemetry.js", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/scripts/telemetry.js"); });
+
+    server.on("/controller", HTTP_POST, [](AsyncWebServerRequest *request) {
+        StaticJsonDocument<128> jsonMessage;
+
+        jsonMessage["controller"]["linearSpeed"] = request->getParam("linear", true)->value().toDouble();
+
+        jsonMessage["controller"]["angularSpeed"] = request->getParam("angular", true)->value().toDouble();
+
+        String JSONBuffer;
+
+        serializeJson(jsonMessage, JSONBuffer);
+        processMessages(JSONBuffer);
+        request->send(200, "text/plain", "Command Received");
+    });
 
     // Caso o usuário procure um endereço que não exista
     server.onNotFound([](AsyncWebServerRequest *request) { request->send(404, "text/plain", "Not found"); });
