@@ -3,6 +3,7 @@
 
 #include <ArduinoJson.h>
 #include <configuration/configurations.hpp>
+#include <configuration/specifications.hpp>
 #include "../WiFi/websockets_server/webSockets_server.hpp"
 
 void broadcastConfigurations()
@@ -12,6 +13,15 @@ void broadcastConfigurations()
 
     configs["robot_name"] = robotSpecifications.robotName;
 
+    switch (robotConfiguration.mode)
+    {
+    case Mode::Auto:
+        configs["configurations"]["mode"] = "auto";
+        break;
+    case Mode::RC:
+        configs["configurations"]["mode"] = "rc";
+        break;
+    }
     switch (robotConfiguration.initialMove)
     {
     case InitialMove::none:

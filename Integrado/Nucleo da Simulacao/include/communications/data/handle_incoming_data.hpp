@@ -5,16 +5,20 @@
 #include <configuration/configurations.hpp>
 #include <events/events.hpp>
 #include <event_handler/circular_buffer.hpp>
+#include <dynamic_data/dynamic_data.hpp>
 
+// Responsável por pegar as mensagens do tipo JSON e decodificá-las de acordo com as informações para atuarem sobre o robô
 void processMessages(String message)
 {
     StaticJsonDocument<128> jsonMessage;
     DeserializationError JSONerror = deserializeJson(jsonMessage, message);
     if (JSONerror)
     {
-        Serial.println("JSON -> Ocorreu um erro ao deserializar a mensagem");
+        Serial.println("(Função processMessages) -> JSON-> Ocorreu um erro ao deserializar a mensagem!");
         return;
     }
+
+    // Processa as requisições de emissão de eventos para a máquina
     if (jsonMessage.containsKey("event_request"))
     {
         const char *request = jsonMessage["event_request"];
@@ -33,7 +37,22 @@ void processMessages(String message)
         }
     }
 
-    // Processa as requisições de estratégia inicial
+    // Processa as requisições de alteração de modo de operação
+    if (jsonMessage.containsKey("mode"))
+    {
+        const char *strategy = jsonMessage["mode"];
+
+        if (strcmp(strategy, "auto") == 0)
+        {
+            setMode(Mode::Auto);
+        }
+        if (strcmp(strategy, "rc") == 0)
+        {
+            setMode(Mode::RC);
+        }
+    }
+
+    // Processa as requisições de alteração da estratégia inicial
     if (jsonMessage.containsKey("initial"))
     {
         const char *strategy = jsonMessage["initial"];
@@ -52,7 +71,7 @@ void processMessages(String message)
         }
     }
 
-    // Processa as requisições de estratégia de busca
+    // Processa as requisições de alteração da estratégia de busca
     if (jsonMessage.containsKey("search"))
     {
         const char *strategy = jsonMessage["search"];
@@ -67,7 +86,7 @@ void processMessages(String message)
         }
     }
 
-    // Processa as requisições de estratégia de perseguição
+    // Processa as requisições de alteração da estratégia de perseguição
     if (jsonMessage.containsKey("chase"))
     {
         const char *strategy = jsonMessage["chase"];
@@ -79,10 +98,11 @@ void processMessages(String message)
     }
     addEventToQueue(Event::SendRobotConfig);
 
+    // Caso receba comandos de controle, atua nos motores se o modo RC estiver ativo
     if (jsonMessage.containsKey("controller") && robotConfiguration.mode == Mode::RC)
     {
-        double linearSpeed = jsonMessage["controller"]["linearSpeed"];
-        double angularSpeed = jsonMessage["controller"]["angularSpeed"];
+        robotData.controllerInputs[0] = jsonMessage["controller"]["linearSpeed"];
+        robotData.controllerInputs[1] = jsonMessage["controller"]["angularSpeed"];
     }
 };
 
