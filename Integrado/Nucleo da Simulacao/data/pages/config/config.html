@@ -23,6 +23,11 @@
     <button class="button-red" onclick="requestEvent('terminate')">Terminate</button>
     <button class="button-green" onclick="requestEvent('reset')">Reset</button>
 
+    <h3>Seleção do Modo de Operação</h3>
+
+    <button id="mode_auto" onclick="setStrategy(strategy_type.mode, mode_selector.auto)">Auto</button>
+    <button id="mode_rc" onclick="setStrategy(strategy_type.mode, mode_selector.rc)">RC</button>
+
     <h3>Configure a estratégia de movimento inicial</h3>
 
     <button id="initial_none" onclick="setStrategy(strategy_type.initial, initial_move_strategy.none)">None</button>

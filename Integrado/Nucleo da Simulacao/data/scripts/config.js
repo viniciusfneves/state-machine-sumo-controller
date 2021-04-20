@@ -3,9 +3,16 @@ var connection = new WebSocket("ws://" + location.hostname + ":81");
 
 // Enum com os tipos de estratégias aceitas pelo robô
 const strategy_type = {
+    mode: "mode",
     initial: "initial",
     search: "search",
     chase: "chase"
+}
+
+// Enum com os modos de operação
+const mode_selector = {
+    auto: "auto",
+    rc: "rc"
 }
 
 // Enum com estratégias iniciais
@@ -36,6 +43,9 @@ var selected_strategy_color = "#008080";
 function clearButtons(buttons) {
     let type;
     switch (buttons) {
+        case mode_selector:
+            type = "mode";
+            break;
         case initial_move_strategy:
             type = "initial";
             break;
@@ -57,6 +67,10 @@ function clearButtons(buttons) {
 function setStrategy(strategyType, strategy) {
     let type;
     switch (strategyType) {
+        case strategy_type.mode:
+            type = "mode";
+            clearButtons(mode_selector)
+            break;
         case strategy_type.initial:
             type = "initial";
             clearButtons(initial_move_strategy);
@@ -83,6 +97,8 @@ function requestEvent(event) {
 // Atualiza visulmente na tela para quais estratégias o robô está atualmente configurado
 function updateRobotConfigurations(type, strategy) {
     switch (type) {
+        case strategy_type.mode:
+            clearButtons(mode_selector)
         case strategy_type.initial:
             clearButtons(initial_move_strategy);
             break;
@@ -129,6 +145,17 @@ connection.onmessage = function(response) {
 
     // Recebendo Array de estratégias
     if ("configurations" in json) {
+        let mode_configured;
+        switch (json["configurations"]["mode"]) {
+            case "auto":
+                mode_configured = mode_selector.auto;
+                break;
+            case "rc":
+                mode_configured = mode_selector.rc;
+                break;
+        }
+        updateRobotConfigurations(strategy_type.mode, mode_configured);
+
         let initial_move_configured;
         switch (json["configurations"]["initial_move"]) {
             case "none":
