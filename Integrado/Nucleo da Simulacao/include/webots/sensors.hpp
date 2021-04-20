@@ -2,7 +2,8 @@
 #define WEBOTS_SENSORS_HPP
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
 #include "C:/Program Files/Webots/include/controller/cpp/webots/DistanceSensor.hpp"
-#include "../utilities/messages/messages.hpp"
+#include "../dynamic_data/dynamic_data.hpp"
+#include "../utilities/calculus/calculus.hpp"
 
 using namespace webots;
 
@@ -46,59 +47,28 @@ void initSensors(Robot *robot, int _timeStep)
 
 // SENSORES DE BORDA
 
-bool edgeDetected = false;
-
-bool isEdgeDetected() { return edgeDetected; }
-
 void readEdgeSensors()
 {
     // 0=borda | 1024=semBorda
-    bool left_edge = leftEdgeSensor->getValue() < 300;
-    bool right_edge = rightEdgeSensor->getValue() < 300;
-    if (left_edge || right_edge)
-    {
-        edgeDetected = true;
-    }
-    else
-    {
-        edgeDetected = false;
-    }
+    robotData.edgeSensorDetectionArray[0] = leftEdgeSensor->getValue() < 300;
+    robotData.edgeSensorDetectionArray[1] = rightEdgeSensor->getValue() < 300;
+    robotData.edgeDetected = verifyArray(robotData.edgeSensorDetectionArray, 2);
 }
 
 // SENSORES DE OPONENTE
 #define NUMBER_OF_OPPONENT_SENSORS 2
 int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
-bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
-double _detectionError;
-bool _opDetected = false;
-
-bool isOpponentDetected() { return _opDetected; }
-
-double getErrorFromOPSensors() { return _detectionError; };
-
-int sumArray(bool vector[])
-{
-    int sum = 0;
-    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
-    {
-        sum += vector[index];
-    }
-    return sum;
-}
 
 void readOpponentSensors()
 {
     // 0=semObjeto | 0(longe)->1060(perto)=objeto
-    opponentSensorDetectionArray[0] = leftDistanceSensor->getValue() > 0.35;
-    opponentSensorDetectionArray[1] = rightDistanceSensor->getValue() > 0.35;
-    int buffer = sumArray(opponentSensorDetectionArray);
-    if (buffer >= 1)
+    robotData.opponentSensorDetectionArray[0] = leftDistanceSensor->getValue() > 0.35;
+    robotData.opponentSensorDetectionArray[1] = rightDistanceSensor->getValue() > 0.35;
+
+    robotData.opDetected = verifyArray(robotData.opponentSensorDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
+    if (isOpponentDetected())
     {
-        _opDetected = true;
-    }
-    else
-    {
-        _opDetected = false;
+        robotData.opError = calculateError(robotData.opponentSensorDetectionArray, opponentSensorWeight, NUMBER_OF_OPPONENT_SENSORS);
     }
 }
 #endif
