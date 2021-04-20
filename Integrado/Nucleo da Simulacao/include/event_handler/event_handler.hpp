@@ -2,11 +2,11 @@
 #define EVENT_HANDLER_HPP
 
 #include "../machine/main_machine.hpp"
+#include "../dynamic_data/dynamic_data.hpp"
 #include "../event_handler/circular_buffer.hpp"
-#include "../sensors/sensors.hpp"
 #include "../utilities/timeout_implementation/timeout.hpp"
 #ifdef ESP32_ENV
-#include <communications/dynamic_data/send_data.hpp>
+#include <communications/data/send_data.hpp>
 #endif
 
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina

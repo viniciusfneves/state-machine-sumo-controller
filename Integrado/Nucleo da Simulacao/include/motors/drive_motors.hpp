@@ -20,7 +20,7 @@
 // Adiciona a função analogWrite para compilação com ESP32
 #ifdef ESP32_ENV
 #include <analogWrite.h>
-#include <communications/dynamic_data/send_data.hpp>
+#include <communications/data/send_data.hpp>
 #endif
 
 // Movimenta os motores com os PWM definidos como parâmetro de entrada
