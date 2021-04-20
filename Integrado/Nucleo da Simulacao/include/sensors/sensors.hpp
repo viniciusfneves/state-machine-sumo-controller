@@ -5,6 +5,7 @@
 #include "opponent_sensor/opponent_sensor.hpp"
 #ifdef ESP32_ENV
 #include <communications/data/send_data.hpp>
+#include <dynamic_data/dynamic_data.hpp>
 #endif
 
 void readSensors()
@@ -12,8 +13,8 @@ void readSensors()
     readOpponentSensors();
     readEdgeSensors();
     #ifdef ESP32_ENV
-    broadcastOPReadings(opponentSensorDetectionArray);
-    broadcastEdgeReadings(edgeSensorDetectionArray);
+    broadcastOPReadings(robotData.opponentSensorDetectionArray);
+    broadcastEdgeReadings(robotData.edgeSensorDetectionArray);
     #endif
 };
 

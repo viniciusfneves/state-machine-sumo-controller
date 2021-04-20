@@ -18,6 +18,8 @@ namespace pins
         int rightFrontEdge = 34;
         int leftRearEdge = 39;
         int rightRearEdge = 36;
+
+        int sensors[] = {leftFrontEdge, rightFrontEdge, leftRearEdge, rightRearEdge};
     }
     namespace opponentsSensors
     {
@@ -44,6 +46,8 @@ namespace pins
     {
         int leftFrontEdge = 2;
         int rightFrontEdge = 4;
+
+        int sensors[] = {leftFrontEdge, rightFrontEdge};
     }
     namespace opponentsSensors
     {

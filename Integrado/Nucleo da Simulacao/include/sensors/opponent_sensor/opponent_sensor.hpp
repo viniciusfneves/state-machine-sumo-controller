@@ -2,6 +2,7 @@
 #define OPPONENT_SENSOR_HPP
 
 #include "../../utilities/calculus/calculus.hpp"
+#include "../../dynamic_data/dynamic_data.hpp"
 
 // SIMULAÇÃO
 #ifndef REAL_ROBOT
@@ -23,47 +24,34 @@ int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
 #ifdef REAL_ROBOT
 #include <pins/pins.hpp>
 
-bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
-
-bool _opDetected = false;
-
-double _detectionError;
-
-bool isOpponentDetected() { return _opDetected; }
-
-double getErrorFromOPSensors() { return _detectionError; };
-
-void calculateError()
+// Calcula o erro atralado à leitura dos sensores de acordo com os pesos de cada sensor
+double calculateError()
 {
     double sum = 0.;
     double readings = 0.;
     for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
     {
-        if (opponentSensorDetectionArray[index] == 1)
+        if (robotData.opponentSensorDetectionArray[index] == 1)
         {
             sum += opponentSensorWeight[index];
             readings += 1;
         }
     }
-    _detectionError = sum / readings;
+    return sum / readings;
 }
 
+// Lê e atualiza as informações sobre as leituras dos sensores de oponente do robô
+// Atualiza o array de leitura, se o oponente foi detectado ou não e o erro relacionado à detecção
 void readOpponentSensors()
 {
     for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
     {
-        opponentSensorDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
+        robotData.opponentSensorDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
     }
-    int reading = sumArray(opponentSensorDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
-    if (reading >= 1)
-    {
-        _opDetected = true;
-    }
-    else
-    {
-        _opDetected = false;
-    }
-    calculateError();
+
+    robotData.opDetected = verifyArray(robotData.opponentSensorDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
+
+    robotData.opError = calculateError();
 }
 
 // Realiza as configurações necessárias para a parte de sensoriamento de oponentes do robô
