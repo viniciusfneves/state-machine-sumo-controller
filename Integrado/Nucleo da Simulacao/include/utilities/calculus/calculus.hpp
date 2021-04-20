@@ -34,4 +34,24 @@ bool verifyArray(bool vector[], int length)
         return true;
     }
 }
+
+// Calcula o erro atralado à leitura dos sensores de acordo com os pesos de cada sensor
+// OS VETORES DE LEITURA E DE PESO PRECISAM TER A MESMA DIMENSÃO
+// (vetor de booleanos) readingVector -> Vetor das leituras
+// (vetor de inteiros) weightVector -> Vetor dos pesos
+// (int) length -> Tamanho dos vetores
+double calculateError(bool readingVector[], int weightVector[], int length)
+{
+    double sum = 0.;
+    double readings = 0.;
+    for (int index = 0; index < length; index++)
+    {
+        if (readingVector[index] == 1)
+        {
+            sum += weightVector[index];
+            readings += 1;
+        }
+    }
+    return sum / readings;
+}
 #endif // CALCULUS_HPP

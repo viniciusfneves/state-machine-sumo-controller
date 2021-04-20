@@ -24,22 +24,6 @@ int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
 #ifdef REAL_ROBOT
 #include <pins/pins.hpp>
 
-// Calcula o erro atralado à leitura dos sensores de acordo com os pesos de cada sensor
-double calculateError()
-{
-    double sum = 0.;
-    double readings = 0.;
-    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
-    {
-        if (robotData.opponentSensorDetectionArray[index] == 1)
-        {
-            sum += opponentSensorWeight[index];
-            readings += 1;
-        }
-    }
-    return sum / readings;
-}
-
 // Lê e atualiza as informações sobre as leituras dos sensores de oponente do robô
 // Atualiza o array de leitura, se o oponente foi detectado ou não e o erro relacionado à detecção
 void readOpponentSensors()
@@ -51,7 +35,10 @@ void readOpponentSensors()
 
     robotData.opDetected = verifyArray(robotData.opponentSensorDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
 
-    robotData.opError = calculateError();
+    if (isOpponentDetected())
+    {
+        robotData.opError = calculateError(robotData.opponentSensorDetectionArray, opponentSensorWeight, NUMBER_OF_OPPONENT_SENSORS);
+    }
 }
 
 // Realiza as configurações necessárias para a parte de sensoriamento de oponentes do robô
