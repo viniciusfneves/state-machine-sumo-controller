@@ -12,8 +12,6 @@
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina
 void processMachineEvents()
 {
-    readSensors();
-
     if (anyEventOnQueue())
     {
         switch (eventToProcess())

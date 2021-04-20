@@ -40,5 +40,6 @@ void loop()
 #ifdef ESP32_ENV
     processWebSocketEvents();
 #endif
+    readSensors();
     processMachineEvents();
 }
