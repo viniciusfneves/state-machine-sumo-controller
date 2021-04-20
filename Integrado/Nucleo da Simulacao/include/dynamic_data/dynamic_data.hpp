@@ -32,7 +32,7 @@ DynamicData robotData;
 // Retorna true se um oponente foi ou não detectado por um dos sensores
 bool isOpponentDetected() { return robotData.opDetected; }
 // Retorna o erro calculado de acordo com o peso de cada sensor de oponente que detectou um objeto
-double getErrorFromOPSensors() { return robotData.opError; };
+double getErrorFromOPSensors() { return robotData.opError; }
 
 // Funções para pegar leituras dos sensores de borda
 
