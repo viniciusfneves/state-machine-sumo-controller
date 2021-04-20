@@ -19,7 +19,8 @@ int main(int argc, char **argv) {
   initTime(robot, TIME_STEP);
   addEventToQueue(Event::Start);
   while (robot->step(TIME_STEP) != -1) {
-    readSensors();
+    readEdgeSensors();
+    readOpponentSensors();
     processMachineEvents();
   }
 

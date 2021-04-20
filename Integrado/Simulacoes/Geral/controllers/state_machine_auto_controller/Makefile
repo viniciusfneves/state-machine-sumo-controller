@@ -66,7 +66,7 @@
 ###-----------------------------------------------------------------------------
 
 # Codigos c++ do Webots
-CXX_SOURCES = main.cpp
+CXX_SOURCES = state_machine_auto_controller.cpp
 # ------------
 # Bibliotecas
 # ------------
