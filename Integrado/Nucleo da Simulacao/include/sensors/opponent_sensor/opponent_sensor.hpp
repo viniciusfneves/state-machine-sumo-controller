@@ -3,6 +3,7 @@
 
 #include "../../utilities/calculus/calculus.hpp"
 #include "../../dynamic_data/dynamic_data.hpp"
+#include "../../configuration/specifications.hpp"
 
 // SIMULAÇÃO
 #ifndef REAL_ROBOT
@@ -11,12 +12,10 @@
 
 // SUMO 3KG
 #ifdef SUMO3KG
-#define NUMBER_OF_OPPONENT_SENSORS 5
 int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-2, -1, 0, 1, 2};
 #endif
 
 #ifdef SUMOMINI
-#define NUMBER_OF_OPPONENT_SENSORS 2
 int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
 #endif
 

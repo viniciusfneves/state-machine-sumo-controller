@@ -3,6 +3,10 @@
 
 #include <string.h>
 
+#define NUMBER_OF_EDGE_SENSORS 2
+#define NUMBER_OF_OPPONENT_SENSORS 5
+#define NUMBER_OF_CONTROLLER_CHANNELS 2
+
 struct Specifications
 {
 #ifdef REAL_ROBOT
