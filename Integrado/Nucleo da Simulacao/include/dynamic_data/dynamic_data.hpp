@@ -1,29 +1,32 @@
 #if !defined(DYNAMIC_DATA_HPP)
 #define DYNAMIC_DATA_HPP
 
+#include "../configuration/specifications.hpp"
+
 struct DynamicData
 {
+    // --------------------------> IMPORTANTE <-------------------------- //
+    // NÃO UTILIZAR ARRAYS DE TAMANHO DINÂMICO!!!
+    // - PROBLEMAS AO COMPILAR PARA O AMBIENTE DO ARDUINO UNO
+    // - PROBLEMAS NA TELEMETRIA NO AMBIENTE DOS 3KG
+    // - PROBLEMAS AO COMPILAR DENTRO DO WEBOTS
+    // RESUMINDO: NÃO FUNCIONA EM 2 DOS 3 AMBIENTES PRINCIPAIS E FUNCIONA CAPEGANDA NO OUTRO
+    // NÃO USE!!!!
+
     // SENSOR DE OPONENTES
+    bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
     bool opDetected;
     double opError;
 
     // SENSOR DE BORDA
+    bool edgeSensorDetectionArray[NUMBER_OF_EDGE_SENSORS];
     bool edgeDetected;
 
     // POTÊNCIA DOS MOTORES
     //int motorsPower[];
 
-    // --------------------------> IMPORTANTE <-------------------------- //
-    // ARRAYS DINÂMICOS PRECISAM SER OS ÚLTIMOS DENTRO DA STRUCT, SE NÃO O AMBIENTE DOS MINIS (Arduino Uno) APRESENTA ERRO
-    // O AMBIENTE DOS 3KG APRESENTA UM WARNING PQ O ARRAY É DINÂMICO, DESDE QUE NÃO SE TENTE ACESSAR UM INDEX QUE NÃO EXISTA, O PROGRAMA RODARÁ NORMALMENTE
-    // DEFINIR O TAMANHO DOS VETORES PARA O AMBIENTE DE SIMULAÇÃO OU ENTÃO A COMPILAÇÃO APRESENTARÁ UM ERRO
-
-    // Array de detecção de oponentes
-    bool opponentSensorDetectionArray[];
-    // Array de detecção de borda
-    bool edgeSensorDetectionArray[];
     // INPUTS DO CONTROLE -> MODO RC
-    double controllerInputs[]; // [0] -> linearSpeed, [1] -> angularSpeed
+    double controllerInputs[NUMBER_OF_CONTROLLER_CHANNELS]; // [0] -> linearSpeed, [1] -> angularSpeed
 };
 
 DynamicData robotData;
