@@ -56,7 +56,7 @@ void broadcastConfigurations()
 }
 
 // Serializa qualquer objeto JSON e envia para todos os clientes conectados no WebSocket
-void serializeAndBroadcast(StaticJsonDocument<128> readings)
+void serializeAndBroadcast(DynamicJsonDocument readings)
 {
     String JSONBuffer;
 
@@ -65,9 +65,9 @@ void serializeAndBroadcast(StaticJsonDocument<128> readings)
 }
 
 // Envia as leituras dos sensores de oponentes para todos os clientes do WebSockets -> TELEMETRIA
-void broadcastOPReadings(bool opSensorArray[])
+void broadcastSensorsReadings(bool opSensorArray[], bool edgeSensorArray[])
 {
-    StaticJsonDocument<128> readings;
+    StaticJsonDocument<256> readings;
 
     readings["readings"]["opponent"][0] = opSensorArray[0];
     readings["readings"]["opponent"][1] = opSensorArray[1];
@@ -75,24 +75,17 @@ void broadcastOPReadings(bool opSensorArray[])
     readings["readings"]["opponent"][3] = opSensorArray[3];
     readings["readings"]["opponent"][4] = opSensorArray[4];
 
-    serializeAndBroadcast(readings);
-}
-
-// Envia as leituras dos sensores de borda para todos os clientes do WebSockets -> TELEMETRIA
-void broadcastEdgeReadings(bool edgeSensorArray[])
-{
-    StaticJsonDocument<128> readings;
-
     readings["readings"]["edge"][0] = edgeSensorArray[0];
     readings["readings"]["edge"][1] = edgeSensorArray[1];
 
     serializeAndBroadcast(readings);
 }
 
+
 // Envia as leituras das potências dos motores para todos os clientes do WebSockets -> TELEMETRIA
 void broadcastMotorsPower(int left_motor_PWM, int right_motor_PWM)
 {
-    StaticJsonDocument<128> readings;
+    StaticJsonDocument<64> readings;
 
     readings["readings"]["motor"][0] = left_motor_PWM;
     readings["readings"]["motor"][1] = right_motor_PWM;
