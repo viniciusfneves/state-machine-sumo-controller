@@ -24,6 +24,7 @@ void setRequestsResponse()
     server.on("/telemetry.css", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/pages/telemetry/telemetry.css"); });
     server.on("/scripts/telemetry.js", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/scripts/telemetry.js"); });
 
+    server.on("/controller", HTTP_GET, [](AsyncWebServerRequest *request) { request->send(404, "text/plain", "Exclusivo para POST requests"); });
     server.on("/controller", HTTP_POST, [](AsyncWebServerRequest *request) {
         StaticJsonDocument<128> jsonMessage;
 

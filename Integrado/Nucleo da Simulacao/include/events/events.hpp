@@ -11,6 +11,7 @@ enum class Event
     Start,
     EdgeDetected,
     OpponentDetected,
+    Controller,
     Reset,
     None
 };
@@ -26,6 +27,8 @@ struct Start{};
 struct EdgeDetected{};
 
 struct OpponentDetected{};
+
+struct Controller{};
 
 struct Reset{};
 

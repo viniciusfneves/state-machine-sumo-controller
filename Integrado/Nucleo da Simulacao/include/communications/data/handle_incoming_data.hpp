@@ -18,6 +18,9 @@ void processMessages(String message)
         return;
     }
 
+    // Variável de controle para emissão do evento que envia as novas configurações do robô aos clientes
+    bool configHasChanges = false;
+
     // Processa as requisições de emissão de eventos para a máquina
     if (jsonMessage.containsKey("event_request"))
     {
@@ -50,6 +53,7 @@ void processMessages(String message)
         {
             setMode(Mode::RC);
         }
+        configHasChanges = true;
     }
 
     // Processa as requisições de alteração da estratégia inicial
@@ -69,6 +73,7 @@ void processMessages(String message)
         {
             setInitialStrategy(InitialMove::zig_zag);
         }
+        configHasChanges = true;
     }
 
     // Processa as requisições de alteração da estratégia de busca
@@ -84,6 +89,7 @@ void processMessages(String message)
         {
             setSearchStrategy(Search::radar);
         }
+        configHasChanges = true;
     }
 
     // Processa as requisições de alteração da estratégia de perseguição
@@ -95,14 +101,20 @@ void processMessages(String message)
         {
             setChaseStrategy(Chase::standard);
         }
+        configHasChanges = true;
     }
-    addEventToQueue(Event::SendRobotConfig);
 
     // Caso receba comandos de controle, atua nos motores se o modo RC estiver ativo
     if (jsonMessage.containsKey("controller") && robotConfiguration.mode == Mode::RC)
     {
-        robotData.controllerInputs[0] = jsonMessage["controller"]["linearSpeed"];
-        robotData.controllerInputs[1] = jsonMessage["controller"]["angularSpeed"];
+        robotData.controllerInputs[Input::linearSpeed] = jsonMessage["controller"]["linearSpeed"];
+        robotData.controllerInputs[Input::angularSpeed] = jsonMessage["controller"]["angularSpeed"];
+        addEventToQueue(Event::Controller);
+    }
+
+    if (configHasChanges)
+    {
+        addEventToQueue(Event::SendRobotConfig);
     }
 };
 

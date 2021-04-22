@@ -27,6 +27,10 @@ void processMachineEvents()
         case Event::Reset:
             Core.process_event(Reset{});
             break;
+
+        case Event::Controller:
+            Core.process_event(Controller{});
+            break;
 #ifdef ESP32_ENV
         case Event::SendRobotConfig:
             broadcastConfigurations();
