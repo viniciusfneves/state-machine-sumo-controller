@@ -48,7 +48,7 @@ class FightMachine
             auto executeCommand = [] { driveRobot(robotData.controllerInputs[Input::linearSpeed], robotData.controllerInputs[Input::angularSpeed]); };
 
             return make_transition_table(
-                *"entry"_s = "command"_s,
+                *"entry"_s = "commands"_s,
                 "commands"_s + event<Controller> / executeCommand);
         }
     };
