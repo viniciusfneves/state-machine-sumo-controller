@@ -45,10 +45,11 @@ class FightMachine
             using namespace sml;
 
             // Funções
-            auto executeCommands = [] {  };
+            auto executeCommand = [] { driveRobot(robotData.controllerInputs[Input::linearSpeed], robotData.controllerInputs[Input::angularSpeed]); };
 
             return make_transition_table(
-                *"entry"_s = "execute_command"_s);
+                *"entry"_s = "command"_s,
+                "commands"_s + event<Controller> / executeCommand);
         }
     };
 

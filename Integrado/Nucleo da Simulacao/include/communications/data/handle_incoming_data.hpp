@@ -103,6 +103,7 @@ void processMessages(String message)
     {
         robotData.controllerInputs[Input::linearSpeed] = jsonMessage["controller"]["linearSpeed"];
         robotData.controllerInputs[Input::angularSpeed] = jsonMessage["controller"]["angularSpeed"];
+        addEventToQueue(Event::Controller);
     }
 };
 
