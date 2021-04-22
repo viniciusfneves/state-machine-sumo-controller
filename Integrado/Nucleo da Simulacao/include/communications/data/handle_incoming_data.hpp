@@ -101,8 +101,8 @@ void processMessages(String message)
     // Caso receba comandos de controle, atua nos motores se o modo RC estiver ativo
     if (jsonMessage.containsKey("controller") && robotConfiguration.mode == Mode::RC)
     {
-        robotData.controllerInputs[0] = jsonMessage["controller"]["linearSpeed"];
-        robotData.controllerInputs[1] = jsonMessage["controller"]["angularSpeed"];
+        robotData.controllerInputs[Input::linearSpeed] = jsonMessage["controller"]["linearSpeed"];
+        robotData.controllerInputs[Input::angularSpeed] = jsonMessage["controller"]["angularSpeed"];
     }
 };
 

@@ -3,6 +3,11 @@
 
 #include "../configuration/specifications.hpp"
 
+enum Input{
+    linearSpeed,
+    angularSpeed
+};
+
 struct DynamicData
 {
     // --------------------------> IMPORTANTE <-------------------------- //
@@ -26,7 +31,7 @@ struct DynamicData
     //int motorsPower[];
 
     // INPUTS DO CONTROLE -> MODO RC
-    double controllerInputs[NUMBER_OF_CONTROLLER_CHANNELS]; // [0] -> linearSpeed, [1] -> angularSpeed
+    double controllerInputs[NUMBER_OF_CONTROLLER_CHANNELS]; // Segue a ordem do enum Input
 };
 
 DynamicData robotData;
