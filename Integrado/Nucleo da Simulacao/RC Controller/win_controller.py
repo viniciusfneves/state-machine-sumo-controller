@@ -1,19 +1,33 @@
 from threading import Thread
 from inputs import get_gamepad
 
+## --> Altere aqui a dead-zone do controle <-- ##
+dead_zone = 10  #em porcentagem
+
+##---> NÃO MEXER <---##
+max_input = 32768 # não mexer
+
+dead_zone_size = max_input/dead_zone # não mexer
 
 def map(x, in_min, in_max, out_min, out_max):
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
-
+# Mixa o canal da velocidade linear
 def mixLinearChannels(forward_input, backward_input):
     mixedLinearSpeed = forward_input + backward_input*-1
     mixedLinearSpeed = round(map(mixedLinearSpeed, -255, 255, -1, 1), 2)
     return mixedLinearSpeed
 
-
+# Mixa e aplica dead-zone no comando da velocidade angular
 def mixAngularChannels(input):
-    mixedAngularSpeed = round(map(input, -32768, 32768, -1, 1), 2)
+    if input < dead_zone_size and input > 0:
+        mixedAngularSpeed = 0
+    elif input > -dead_zone_size and input < 0:
+        mixedAngularSpeed = 0
+    elif input > 0:
+        mixedAngularSpeed = round(map(input, dead_zone_size, max_input, 0, 1), 2)
+    else:
+        mixedAngularSpeed = round(map(input, -max_input, -dead_zone_size, -1, 0), 2)
     return mixedAngularSpeed
 
 

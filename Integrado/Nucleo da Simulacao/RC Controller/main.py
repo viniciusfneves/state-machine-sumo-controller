@@ -11,11 +11,22 @@ payload = {"linear": 0, "angular": 0}
 def main():
     global payload
 
+    calibrated = False
+
     controller = Joystick()         # cria o objeto do controlle com multi-threading
 
     controller.start()              # Inicia o serviço de threads -> Roda em looping
 
     while True:
+        # É necessário pimeiramente mover o stick esquerdo para que ele comece a ler os valores corretos
+        # Essa função garante a execução do código após a leitura estar 100% correta
+        if (calibrated == False):
+                print("Mova o Stick esquerdo para os lados para calibrar")
+                while(controller.angularSpeed != 1):
+                    pass
+                calibrated = True
+                print("Calibrado!")
+        
         payload["linear"] = controller.linearSpeed
         payload["angular"] = controller.angularSpeed
 
@@ -39,8 +50,7 @@ def main():
 
         time.sleep(taxa_de_atualização/1000)
 
-    controller.join()  # Aguarda o fim do processamento da thread
-
+    exit()
 
 if __name__ == "__main__":
     main()
