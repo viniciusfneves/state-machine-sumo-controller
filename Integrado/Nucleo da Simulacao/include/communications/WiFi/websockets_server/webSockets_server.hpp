@@ -3,7 +3,7 @@
 
 #include <WebSocketsServer.h>
 #include <event_handler/circular_buffer.hpp>
-#include <communications/data/handle_incoming_data.hpp>
+#include <communications/data/data_handler.hpp>
 
 WebSocketsServer webSocket(81); // Configura o serviço do WebSockets para a porta 81
 

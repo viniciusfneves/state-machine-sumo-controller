@@ -4,7 +4,7 @@
 #include <ESPAsyncWebServer.h>
 #include <SPIFFS.h>
 #include <ArduinoJson.h>
-#include <communications/data/handle_incoming_data.hpp>
+#include <communications/data/data_handler.hpp>
 
 AsyncWebServer server(80); // Configura o servidor HTTP para a porta 80
 
