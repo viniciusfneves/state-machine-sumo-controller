@@ -4,7 +4,7 @@
 #ifdef REAL_ROBOT
 #include <Arduino.h>
 #endif
-#ifndef REAL_ROBOT
+#ifdef WEBOTS
 #include <iostream>
 using namespace std;
 #endif
@@ -14,7 +14,7 @@ void displayMessage(const char *message)
 #ifdef REAL_ROBOT
     Serial.println(message);
 #endif
-#ifndef REAL_ROBOT
+#ifdef WEBOTS
     cout << message << endl;
 #endif
 };

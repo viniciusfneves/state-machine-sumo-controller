@@ -7,7 +7,7 @@
 #include <utilities/code_parameters/code_parameters.hpp>
 
 // No caso de simulação, importa a biblioteca com as funções de locomoção do WeBots
-#ifndef REAL_ROBOT
+#ifdef WEBOTS
 #include "../webots/motors.hpp"
 #include "../webots/webots_time.hpp"
 #endif

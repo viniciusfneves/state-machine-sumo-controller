@@ -6,7 +6,7 @@
 #include "../../configuration/specifications.hpp"
 
 // SIMULAÇÃO
-#ifndef REAL_ROBOT
+#ifdef WEBOTS
 #include "../../webots/sensors.hpp"
 #endif
 

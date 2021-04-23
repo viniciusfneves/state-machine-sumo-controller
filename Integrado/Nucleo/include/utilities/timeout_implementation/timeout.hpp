@@ -4,7 +4,7 @@
 #ifdef REAL_ROBOT
 #include <Arduino.h>
 #endif
-#ifndef REAL_ROBOT
+#ifdef WEBOTS
 #include "../../webots/webots_time.hpp"
 #endif
 

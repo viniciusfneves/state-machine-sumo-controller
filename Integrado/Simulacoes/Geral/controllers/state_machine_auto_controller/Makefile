@@ -75,8 +75,8 @@ INCLUDE = -I"../../../../Nucleo/lib"
 #Bibliotecas do Nucleo criadas pela equipe em include (actions, events, etc) 
 INCLUDE = -I"../../../../Nucleo/include"
 
-
-
+#Flag de compilação do ambiente exclusivo do WeBots
+CFLAGS = -D WEBOTS
 
 ### Do not modify: this includes Webots global Makefile.include
 null :=
