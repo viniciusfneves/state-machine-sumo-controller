@@ -1,10 +1,10 @@
 // Biblioteca de integração do Arduino
 #include <webots/Robot.hpp>
 #include <webots/Motor.hpp>
-#include "../../../../Nucleo da Simulacao/include/webots/motors.hpp"
-#include "../../../../Nucleo da Simulacao/include/webots/sensors.hpp"
-#include "../../../../Nucleo da Simulacao/include/event_handler/event_handler.hpp"
-#include "../../../../Nucleo da Simulacao/include/events/events.hpp"
+#include "../../../../Nucleo/include/webots/motors.hpp"
+#include "../../../../Nucleo/include/webots/sensors.hpp"
+#include "../../../../Nucleo/include/event_handler/event_handler.hpp"
+#include "../../../../Nucleo/include/events/events.hpp"
 
 #define TIME_STEP 1
 

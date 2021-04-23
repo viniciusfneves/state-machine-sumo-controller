@@ -71,9 +71,9 @@ CXX_SOURCES = state_machine_auto_controller.cpp
 # Bibliotecas
 # ------------
 #Bibliotecas do Nucleo importadas em lib (boost, Thread) 
-INCLUDE = -I"../../../../Nucleo da Simulacao/lib"
+INCLUDE = -I"../../../../Nucleo/lib"
 #Bibliotecas do Nucleo criadas pela equipe em include (actions, events, etc) 
-INCLUDE = -I"../../../../Nucleo da Simulacao/include"
+INCLUDE = -I"../../../../Nucleo/include"
 
 
 
