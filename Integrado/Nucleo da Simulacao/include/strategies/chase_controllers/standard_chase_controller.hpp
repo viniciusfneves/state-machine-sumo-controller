@@ -17,7 +17,7 @@ struct StandardChase
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "chase"_s,
-            "chase"_s + event<OpponentDetected> / chase_action);
+            "chase"_s  + event<OpponentDetected>  / chase_action);
     }
 };
 

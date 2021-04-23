@@ -14,12 +14,12 @@ struct FullFrente
     {
         using namespace sml;
         // Funções
-        auto config_exit = [] { setTimeout(400); };
+        auto config_exit  = [] { setTimeout(400); };
         auto run_forwards = [] { driveRobot(1, 0); };
         
         return make_transition_table(
             *"entry"_s = "moving"_s,
-            "moving"_s + on_entry<_> / (config_exit, run_forwards));
+            "moving"_s  + on_entry<_>  / (config_exit, run_forwards));
     }
 };
 

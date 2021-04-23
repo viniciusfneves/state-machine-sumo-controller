@@ -16,8 +16,8 @@ struct SearchSelector
     {
         using namespace sml;
         // Guards
-        auto none        = [] { return robotConfiguration.search == Search::none; };
-        auto radar       = [] { return robotConfiguration.search == Search::radar; };
+        auto none   = [] { return robotConfiguration.search == Search::none; };
+        auto radar  = [] { return robotConfiguration.search == Search::radar; };
 
         return make_transition_table(
             *"entry"_s  / [] { displayMessage("Entered Search Selector"); resetPID(); } = "selector"_s,

@@ -20,13 +20,13 @@ struct SearchRadar
         auto rotate_right = [] { driveMotors(192, -192); };
 
         return make_transition_table(
-            *"entry"_s                  = "switch"_s,
+            *"entry"_s = "switch"_s,
 
-            "switch"_s  [left]          = "rotate_left"_s,
-            "switch"_s  [right]         = "rotate_right"_s,
+            "switch"_s  [left]   = "rotate_left"_s,
+            "switch"_s  [right]  = "rotate_right"_s,
 
-            "rotate_left"_s  + on_entry<_> / rotate_left,
-            "rotate_right"_s + on_entry<_> / rotate_right);
+            "rotate_left"_s   + on_entry<_>  / rotate_left,
+            "rotate_right"_s  + on_entry<_>  / rotate_right);
     }
 };
 #endif
