@@ -2,7 +2,6 @@
 #define EVENT_HANDLER_HPP
 
 #include "../machine/main_machine.hpp"
-#include "../dynamic_data/dynamic_data.hpp"
 #include "../event_handler/circular_buffer.hpp"
 #include "../utilities/timeout_implementation/timeout.hpp"
 #ifdef ESP32_ENV

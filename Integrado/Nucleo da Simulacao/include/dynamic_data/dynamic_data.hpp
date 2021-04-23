@@ -3,7 +3,8 @@
 
 #include "../configuration/specifications.hpp"
 
-enum Input{
+enum Input
+{
     linearSpeed,
     angularSpeed
 };

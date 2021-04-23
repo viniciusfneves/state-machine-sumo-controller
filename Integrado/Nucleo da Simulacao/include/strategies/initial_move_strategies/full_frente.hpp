@@ -2,7 +2,6 @@
 #define FULL_FRENTE_HPP
 
 #include "../../../lib/boost/sml.hpp"
-#include "../../event_handler/event_handler.hpp"
 #include "../../utilities/timeout_implementation/timeout.hpp"
 #include "../../motors/drive_motors.hpp"
 

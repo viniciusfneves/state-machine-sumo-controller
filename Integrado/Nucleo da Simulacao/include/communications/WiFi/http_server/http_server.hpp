@@ -1,9 +1,9 @@
 #ifndef HTTP_SERVER_HPP
 #define HTTP_SERVER_HPP
 
+#include <ArduinoJson.h>
 #include <ESPAsyncWebServer.h>
 #include <SPIFFS.h>
-#include <ArduinoJson.h>
 #include <communications/data/data_handler.hpp>
 
 AsyncWebServer server(80); // Configura o servidor HTTP para a porta 80

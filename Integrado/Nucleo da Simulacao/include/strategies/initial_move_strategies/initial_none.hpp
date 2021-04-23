@@ -2,7 +2,6 @@
 #define INITIAL_NONE_HPP
 
 #include "../../../lib/boost/sml.hpp"
-#include "../../event_handler/event_handler.hpp"
 #include "../../motors/drive_motors.hpp"
 #include "../../utilities/timeout_implementation/timeout.hpp"
 
