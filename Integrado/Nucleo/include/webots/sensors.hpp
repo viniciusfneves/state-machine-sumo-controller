@@ -56,7 +56,6 @@ void readEdgeSensors()
 }
 
 // SENSORES DE OPONENTE
-#define NUMBER_OF_OPPONENT_SENSORS 2
 int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
 
 void readOpponentSensors()
