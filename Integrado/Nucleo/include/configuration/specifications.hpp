@@ -3,9 +3,26 @@
 
 #include <string.h>
 
+/* ---> PRECISA ESTAR DEFINIDO INDEPENDENTE DO AMBIENTE <--- */
+#define NUMBER_OF_CONTROLLER_CHANNELS 2
+
+// Especificações dos robôs 3Kg
+#ifdef SUMO3KG
 #define NUMBER_OF_EDGE_SENSORS 2
 #define NUMBER_OF_OPPONENT_SENSORS 5
-#define NUMBER_OF_CONTROLLER_CHANNELS 2
+#endif
+
+// Especificações dos robôs Minis
+#ifdef SUMOMINI
+#define NUMBER_OF_EDGE_SENSORS 2
+#define NUMBER_OF_OPPONENT_SENSORS 2
+#endif
+
+// Especificações da simulação com Webots
+#ifdef WEBOTS
+#define NUMBER_OF_EDGE_SENSORS 2
+#define NUMBER_OF_OPPONENT_SENSORS 2
+#endif
 
 struct Specifications
 {
