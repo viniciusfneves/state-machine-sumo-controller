@@ -20,12 +20,12 @@ struct DynamicData
     // NÃO USE!!!!
 
     // SENSOR DE OPONENTES
-    bool opponentSensorDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
+    bool opponentSensorsDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
     bool opDetected;
     double opError;
 
     // SENSOR DE BORDA
-    bool edgeSensorDetectionArray[NUMBER_OF_EDGE_SENSORS];
+    bool edgeSensorsDetectionArray[NUMBER_OF_EDGE_SENSORS];
     bool edgeDetected;
 
     // POTÊNCIA DOS MOTORES
@@ -37,12 +37,14 @@ struct DynamicData
 
 DynamicData robotData;
 
+
 // Funções para pegar leituras dos sensores de oponente
 
 // Retorna true se um oponente foi ou não detectado por um dos sensores
 bool isOpponentDetected() { return robotData.opDetected; }
 // Retorna o erro calculado de acordo com o peso de cada sensor de oponente que detectou um objeto
 double getErrorFromOPSensors() { return robotData.opError; }
+
 
 // Funções para pegar leituras dos sensores de borda
 

@@ -29,14 +29,14 @@ void readOpponentSensors()
 {
     for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
     {
-        robotData.opponentSensorDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
+        robotData.opponentSensorsDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
     }
 
-    robotData.opDetected = checkTrueOnArray(robotData.opponentSensorDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
+    robotData.opDetected = checkTrueOnArray(robotData.opponentSensorsDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
 
     if (isOpponentDetected())
     {
-        robotData.opError = calculateError(robotData.opponentSensorDetectionArray, opponentSensorWeight, NUMBER_OF_OPPONENT_SENSORS);
+        robotData.opError = calculateError(robotData.opponentSensorsDetectionArray, opponentSensorWeight, NUMBER_OF_OPPONENT_SENSORS);
     }
 }
 

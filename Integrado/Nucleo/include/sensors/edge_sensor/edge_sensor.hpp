@@ -13,10 +13,10 @@ void readEdgeSensors()
 {
     for (int index = 0; index < NUMBER_OF_EDGE_SENSORS; index++)
     {
-        robotData.edgeSensorDetectionArray[index] = digitalRead(pins::edgeSensors::sensors[index]);
+        robotData.edgeSensorsDetectionArray[index] = digitalRead(pins::edgeSensors::sensors[index]);
     }
 
-    robotData.edgeDetected = checkTrueOnArray(robotData.edgeSensorDetectionArray, NUMBER_OF_EDGE_SENSORS);
+    robotData.edgeDetected = checkTrueOnArray(robotData.edgeSensorsDetectionArray, NUMBER_OF_EDGE_SENSORS);
 };
 
 // Realiza as configurações necessárias para o sensoriamento de borda do robô

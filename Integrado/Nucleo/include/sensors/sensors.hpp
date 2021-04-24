@@ -13,7 +13,7 @@ void readSensors()
     readOpponentSensors();
     readEdgeSensors();
     #ifdef ESP32_ENV
-    broadcastSensors(robotData.opponentSensorDetectionArray, robotData.edgeSensorDetectionArray);
+    broadcastSensors(robotData.opponentSensorsDetectionArray, robotData.edgeSensorsDetectionArray);
     #endif
 };
 
