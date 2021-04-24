@@ -4,7 +4,6 @@
 // Dependências gerais
 #include <configuration/specifications.hpp>
 #include <configuration/configurations.hpp>
-#include <utilities/code_parameters/code_parameters.hpp>
 
 // No caso de simulação, importa a biblioteca com as funções de locomoção do WeBots
 #ifdef WEBOTS
@@ -34,19 +33,14 @@ void driveMotors(int PWM_left, int PWM_right)
     analogWrite(pins::motors::rightMotor, PWM_right);
 
 #ifdef ESP32_ENV
-    broadcastMotorsPower(PWM_left, PWM_right);
+    broadcastMotors(PWM_left, PWM_right);
 #endif
 };
 
 // Para toda a locomoção do robô
 void stopMotors()
 {
-    analogWrite(pins::motors::leftMotor, 0);
-    analogWrite(pins::motors::rightMotor, 0);
-
-#ifdef ESP32_ENV
-    broadcastMotorsPower(0, 0);
-#endif
+    driveMotors(0, 0);
 };
 
 // Realiza as configurações necessárias para a parte de locomoção do robô
@@ -63,7 +57,14 @@ void initMotors()
     analogWrite(pins::motors::rightMotor, 0);
 }
 
-#endif //ifdef REAL_ROBOT
+#endif // REAL_ROBOT
+
+// Usado para dizer as funções se o robô deve se mover para a esquerda ou direita
+enum class Direction
+{
+    left,
+    right
+};
 
 // Movimenta o robô baseado nos parâmetros de entrada de velocidade linear e velocidade angular desejada
 // double linearSpeed -> Velocidade linear do robô -> Range [-1,1]

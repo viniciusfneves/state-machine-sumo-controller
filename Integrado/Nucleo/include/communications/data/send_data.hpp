@@ -6,10 +6,18 @@
 #include <configuration/specifications.hpp>
 #include "../WiFi/websockets_server/webSockets_server.hpp"
 
-void broadcastConfigurations()
+// Serializa qualquer objeto JSON e envia para todos os clientes conectados no WebSocket
+void serializeAndBroadcast(DynamicJsonDocument readings)
+{
+    String JSONBuffer;
+
+    serializeJson(readings, JSONBuffer);
+    webSocket.broadcastTXT(JSONBuffer);
+}
+
+void broadcastRobotConfiguration()
 {
     StaticJsonDocument<128> configs;
-    String JSONBuffer;
 
     configs["robot_name"] = robotSpecifications.robotName;
 
@@ -50,22 +58,11 @@ void broadcastConfigurations()
         break;
     }
 
-    // Serializa o JSON em um buffer e depois o envia para os clientes do WebSocket
-    serializeJson(configs, JSONBuffer);
-    webSocket.broadcastTXT(JSONBuffer);
-}
-
-// Serializa qualquer objeto JSON e envia para todos os clientes conectados no WebSocket
-void serializeAndBroadcast(DynamicJsonDocument readings)
-{
-    String JSONBuffer;
-
-    serializeJson(readings, JSONBuffer);
-    webSocket.broadcastTXT(JSONBuffer);
+    serializeAndBroadcast(configs);
 }
 
 // Envia as leituras dos sensores de oponentes para todos os clientes do WebSockets -> TELEMETRIA
-void broadcastSensorsReadings(bool opSensorArray[], bool edgeSensorArray[])
+void broadcastSensors(bool opSensorArray[], bool edgeSensorArray[])
 {
     StaticJsonDocument<256> readings;
 
@@ -81,9 +78,8 @@ void broadcastSensorsReadings(bool opSensorArray[], bool edgeSensorArray[])
     serializeAndBroadcast(readings);
 }
 
-
 // Envia as leituras das potências dos motores para todos os clientes do WebSockets -> TELEMETRIA
-void broadcastMotorsPower(int left_motor_PWM, int right_motor_PWM)
+void broadcastMotors(int left_motor_PWM, int right_motor_PWM)
 {
     StaticJsonDocument<64> readings;
 

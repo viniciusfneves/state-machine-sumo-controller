@@ -22,7 +22,7 @@ int sumArray(bool vector[], int quantity)
 // Verifica se um ou mais valores de um vetor é true ou 1
 // (vetor de booleanos) vector -> Vetor à ser analisado
 // (int) length -> Tamanho dos vetores
-bool verifyArray(bool vector[], int length)
+bool checkTrueOnArray(bool vector[], int length)
 {
     int reading = sumArray(vector, length);
     if (reading == 0)

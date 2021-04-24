@@ -21,7 +21,7 @@ void setup()
 
     SPIFFS.begin(); // Inicia o File System do ESP32
 
-    initAccessPointRouter();
+    initAccessPoint();
     initHTTPServer();
     initWebSocketsServer();
 #endif

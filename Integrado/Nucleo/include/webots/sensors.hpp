@@ -52,7 +52,7 @@ void readEdgeSensors()
     // 0=borda | 1024=semBorda
     robotData.edgeSensorDetectionArray[0] = leftEdgeSensor->getValue() < 300;
     robotData.edgeSensorDetectionArray[1] = rightEdgeSensor->getValue() < 300;
-    robotData.edgeDetected = verifyArray(robotData.edgeSensorDetectionArray, 2);
+    robotData.edgeDetected = checkTrueOnArray(robotData.edgeSensorDetectionArray, 2);
 }
 
 // SENSORES DE OPONENTE
@@ -64,7 +64,7 @@ void readOpponentSensors()
     robotData.opponentSensorDetectionArray[0] = leftDistanceSensor->getValue() > 0.35;
     robotData.opponentSensorDetectionArray[1] = rightDistanceSensor->getValue() > 0.35;
 
-    robotData.opDetected = verifyArray(robotData.opponentSensorDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
+    robotData.opDetected = checkTrueOnArray(robotData.opponentSensorDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
     if (isOpponentDetected())
     {
         robotData.opError = calculateError(robotData.opponentSensorDetectionArray, opponentSensorWeight, NUMBER_OF_OPPONENT_SENSORS);

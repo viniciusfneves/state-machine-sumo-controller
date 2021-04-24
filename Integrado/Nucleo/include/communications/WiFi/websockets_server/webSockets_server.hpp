@@ -30,7 +30,7 @@ void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *payload, si
         break;
     // Caso a mensagem seja do tipo text (JSON), passa ela para ser decodificada pelo código
     case WStype_TEXT:
-        processMessages(String((char *)payload));
+        processJsonMessage(String((char *)payload));
         break;
     default:
         break;

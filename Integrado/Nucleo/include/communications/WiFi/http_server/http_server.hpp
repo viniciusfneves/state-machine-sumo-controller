@@ -35,7 +35,7 @@ void setRequestsResponse()
         String JSONBuffer;
 
         serializeJson(jsonMessage, JSONBuffer);
-        processMessages(JSONBuffer);
+        processJsonMessage(JSONBuffer);
         request->send(200, "text/plain", "Command Received");
     });
 

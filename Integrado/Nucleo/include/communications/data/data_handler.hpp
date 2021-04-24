@@ -8,13 +8,13 @@
 #include <dynamic_data/dynamic_data.hpp>
 
 // Responsável por pegar as mensagens do tipo JSON e decodificá-las de acordo com as informações para atuarem sobre o robô
-void processMessages(String message)
+void processJsonMessage(String message)
 {
     StaticJsonDocument<128> jsonMessage;
     DeserializationError JSONerror = deserializeJson(jsonMessage, message);
     if (JSONerror)
     {
-        Serial.println("(Função processMessages) -> JSON-> Ocorreu um erro ao deserializar a mensagem!");
+        Serial.println("(Função processJsonMessage) -> JSON-> Ocorreu um erro ao deserializar a mensagem!");
         return;
     }
 

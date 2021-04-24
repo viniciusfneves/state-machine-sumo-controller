@@ -16,7 +16,7 @@ void readEdgeSensors()
         robotData.edgeSensorDetectionArray[index] = digitalRead(pins::edgeSensors::sensors[index]);
     }
 
-    robotData.edgeDetected = verifyArray(robotData.edgeSensorDetectionArray, NUMBER_OF_EDGE_SENSORS);
+    robotData.edgeDetected = checkTrueOnArray(robotData.edgeSensorDetectionArray, NUMBER_OF_EDGE_SENSORS);
 };
 
 // Realiza as configurações necessárias para o sensoriamento de borda do robô

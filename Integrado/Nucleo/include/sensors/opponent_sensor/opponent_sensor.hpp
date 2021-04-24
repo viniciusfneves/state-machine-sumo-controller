@@ -32,7 +32,7 @@ void readOpponentSensors()
         robotData.opponentSensorDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
     }
 
-    robotData.opDetected = verifyArray(robotData.opponentSensorDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
+    robotData.opDetected = checkTrueOnArray(robotData.opponentSensorDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
 
     if (isOpponentDetected())
     {
