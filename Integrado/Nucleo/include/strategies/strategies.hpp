@@ -8,18 +8,21 @@ enum class InitialMove
     full_frente,
     zig_zag
 };
+
 // Estratégias de busca
 enum class Search
 {
     none,
     radar
 };
+
 // Estratégias de perseguição
 enum class Chase
 {
     standard
 };
 
+// Modos de operação
 enum class Mode{
     Auto,
     RC
