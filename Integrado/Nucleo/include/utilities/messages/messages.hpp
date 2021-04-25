@@ -9,14 +9,16 @@
 using namespace std;
 #endif
 
-void displayMessage(const char *message)
+template <class T>
+void displayMessage(T message)
 {
 #ifdef REAL_ROBOT
     Serial.println(message);
-#endif
+#endif // REAL_ROBOT
+
 #ifdef WEBOTS
     cout << message << endl;
-#endif
+#endif // WEBOTS
 };
 
 #endif // MESSAGES_HPP
