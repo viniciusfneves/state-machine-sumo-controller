@@ -17,8 +17,6 @@ void setup()
 {
 // Configurações específicas para o ESP32
 #ifdef ESP32_ENV
-    Serial.begin(115200); // Porta Serial
-
     SPIFFS.begin(); // Inicia o File System do ESP32
 
     initAccessPoint();
