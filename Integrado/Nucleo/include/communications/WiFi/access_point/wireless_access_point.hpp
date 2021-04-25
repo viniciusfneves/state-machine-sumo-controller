@@ -12,9 +12,6 @@ void initAccessPoint()
     // Cria a rede Wi-Fi própria do ESP com os parametros de nome da rede e senha
     WiFi.softAP(ssid, password);
     delay(100);
-    // Printa o endereço IP do Server na Serial
-    Serial.print("Rede gerada! Conectado em: ");
-    Serial.println(WiFi.softAPIP());
 }
 
 #endif

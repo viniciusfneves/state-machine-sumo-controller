@@ -22,7 +22,6 @@ void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *payload, si
     {
     // Caso haja um erro no recebimento de uma mensagem do cliente, expõe isso na Serial
     case WStype_ERROR:
-        Serial.printf("ID do Cliente (%u) -> Erro na mensagem!\n", client_id);
         break;
     // Caso uma nova conexão seja aceita, envia automaticamente as configurações atuais do robô para o novo client
     case WStype_CONNECTED:
@@ -42,7 +41,6 @@ void initWebSocketsServer()
 {
     // Inicia o serviço de WebSockets
     webSocket.begin();
-    Serial.println("WebSockets Server Started");
 
     // Configura qual função é executada a cada evento recebido pelo WebSocket
     webSocket.onEvent(handleWSIncomingData);

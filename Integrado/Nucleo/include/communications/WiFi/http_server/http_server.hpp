@@ -49,7 +49,6 @@ void initHTTPServer()
 
     // Inicia o servidor HTTP
     server.begin();
-    Serial.println("HTTP Server Started");
 }
 
 #endif
