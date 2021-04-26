@@ -21,7 +21,7 @@ struct InitialMoveSelector
         auto zig_zag      = [] { return robotConfiguration.initialMove == InitialMove::zig_zag; };
 
         return make_transition_table(
-            *"entry"_s / [] { displayMessage("Entered Initial Move Selector"); } = "selector"_s,
+            *"entry"_s = "selector"_s,
             "selector"_s  [none]         = state<InitialNone>,
             "selector"_s  [full_frente]  = state<FullFrente>,
             "selector"_s  [zig_zag]      = state<ZigZag>);

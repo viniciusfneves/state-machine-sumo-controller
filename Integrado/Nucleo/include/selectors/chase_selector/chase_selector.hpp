@@ -17,7 +17,7 @@ struct ChaseSelector
         auto standard = [] { return robotConfiguration.chase == Chase::standard; };
 
         return make_transition_table(
-            *"entry"_s / [] { displayMessage("Entered Chase Selector"); }  = "selector"_s,
+            *"entry"_s = "selector"_s,
             "selector"_s [standard] = state<StandardChase>);
     }
 };
