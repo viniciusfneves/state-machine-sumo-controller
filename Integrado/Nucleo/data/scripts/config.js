@@ -85,13 +85,11 @@ function setStrategy(strategyType, strategy) {
             break;
     }
     connection.send('{ "' + type + '" : "' + strategy + '" }');
-    console.log('{ "' + type + '" : "' + strategy + '" }');
 }
 
 //Envia um request para a máquina do robô emitir um evento específico
 function requestEvent(event) {
     connection.send('{ "event_request" : "' + event + '" }');
-    console.log('{ "event_request" : "' + event + '" }');
 }
 
 // Atualiza visulmente na tela para quais estratégias o robô está atualmente configurado

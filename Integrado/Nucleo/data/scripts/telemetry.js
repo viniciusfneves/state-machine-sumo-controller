@@ -25,7 +25,6 @@ connection.onclose = function(event) {
 
 function requestEvent(event) {
     connection.send('{ "event_request" : "' + event + '" }');
-    console.log('{ "event_request" : "' + event + '" }');
 }
 
 function setOpponentSensor(id, reading) {
