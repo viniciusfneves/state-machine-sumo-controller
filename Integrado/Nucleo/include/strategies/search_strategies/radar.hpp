@@ -16,8 +16,8 @@ struct SearchRadar
         auto right = [] { return false; }; // Implementar função para verificar qual o último lado visto pelos sensores de oponentes
 
         // Funções
-        auto rotate_left  = [] { driveMotors(-192, 192); };
-        auto rotate_right = [] { driveMotors(192, -192); };
+        auto rotate_left  = [] { driveRobot(0,-1); };
+        auto rotate_right = [] { driveRobot(0,1); };
 
         return make_transition_table(
             *"entry"_s = "switch"_s,

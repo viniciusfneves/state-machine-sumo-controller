@@ -12,12 +12,12 @@ struct StandardChase
 {
     auto operator()() const
     {
-        auto chase_action = [] { driveRobot(1, pid(getErrorFromOPSensors())); };
+        auto chaseAction = [] { driveRobot(1, pid(getErrorFromOPSensors())); };
         
         using namespace sml;
         return make_transition_table(
             *"entry"_s = "chase"_s,
-            "chase"_s  + event<OpponentDetected>  / chase_action);
+            "chase"_s  + event<OpponentDetected>  / chaseAction);
     }
 };
 

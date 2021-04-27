@@ -13,17 +13,17 @@ struct ZigZag
     {
         using namespace sml;
 
-        auto run_forwards1  = [] { driveMotors(100, 100) ; delay(250); };
-        auto spin_left      = [] { driveMotors(-70,70); delay(120); };
-        auto run_forwards2  = [] { driveMotors(120, 120) ; delay(250); };
-        auto exit_state     = [] { setTimeout(0); };
+        auto run_1      = [] { driveRobot(1, 0); delay(150); };
+        auto rotate     = [] { driveMotors(-127, 127); delay(90); };
+        auto run_2      = [] { driveRobot(1, 0); delay(190); };
+        auto exitState  = [] { setTimeout(0); };
 
         //Zigzag curto pela direita
         return make_transition_table(
-            *"entry"_s                                                           = "run_forwards1"_s,
-            "run_forwards1"_s                 / run_forwards1                    = "spin"_s,
-            "spin"_s                          / spin_left                        = "run_forwards2"_s,
-            "run_forwards2"_s  + on_entry<_>  / (run_forwards2, exit_state));
+            *"entry"_s                                                        = "first_run"_s,
+            "first_run"_s                      / run_1                        = "rotate"_s,
+            "rotate"_s                         / rotate                       = "second_run"_s,
+            "second_run"_s    + on_entry<_>    / (run_2, exitState));
     }
 };
 
