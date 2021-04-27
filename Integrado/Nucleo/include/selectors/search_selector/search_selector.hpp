@@ -20,7 +20,7 @@ struct SearchSelector
         auto radar  = [] { return robotConfiguration.search == Search::radar; };
 
         return make_transition_table(
-            *"entry"_s  / [] { displayMessage("Entered Search Selector"); resetPID(); } = "selector"_s,
+            *"entry"_s  / [] { resetPID(); } = "selector"_s,
             "selector"_s [none]  = state<SearchNone>,
             "selector"_s [radar] = state<SearchRadar>);
     }
