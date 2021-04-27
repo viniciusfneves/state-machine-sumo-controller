@@ -5,32 +5,32 @@
 // ser emitidos para que a máquina os processe
 enum class Event
 {
-    Terminate,
-    Timeout,
-    SendRobotConfig,
     Start,
+    Terminate,
+    Reset,
+    Timeout,
     EdgeDetected,
     OpponentDetected,
+    SendRobotConfig,
     Controller,
-    Reset,
     None
 };
 
+struct Start{};
+
 struct Terminate{};
 
+struct Reset{};
+
 struct Timeout{};
-
-struct SendRobotConfig{};
-
-struct Start{};
 
 struct EdgeDetected{};
 
 struct OpponentDetected{};
 
-struct Controller{};
+struct SendRobotConfig{};
 
-struct Reset{};
+struct Controller{};
 
 struct None{};
 
