@@ -1,0 +1,17 @@
+@startuml Initial-ZigZag
+
+title Estratégia Inicial - Zig Zag
+
+[*] --> first_run
+first_run --> rotate
+rotate --> second_run
+
+/'
+' Descrições
+'/
+
+first_run : driveRobot();
+second_run : driveRobot(); exitState();
+rotate : rotateRobot();
+
+@enduml

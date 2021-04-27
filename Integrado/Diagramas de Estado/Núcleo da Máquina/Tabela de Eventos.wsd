@@ -1,32 +1,46 @@
 @startuml Events
 
-title Situações/Leituras e seus eventos correspondentes
+title Eventos do Mesin Negara
 
 
-state Ações_e_Leituras{
-    Parar_o_Robo -[hidden]-> Encerrar_estado_atual
-    Encerrar_estado_atual -[hidden]-> Comecar_a_luta
-    Comecar_a_luta -[hidden]-> Borda_detectada
-    Borda_detectada -[hidden]-> Oponente_detectado
-    Oponente_detectado -[hidden]-> Resetar_o_robo
-    Resetar_o_robo -[hidden]-> Nenhum_comando_recebido
+entity Start {
+    {field} Escopo: Main Machine
+    {method} Inicia o modo de luta do robô
 }
-state Eventos_Gerados{
-    Terminate -[hidden]-> Timeout
-    Timeout -[hidden]-> Start
-    Start -[hidden]-> BorderDetected
-    BorderDetected -[hidden]-> OpponentDetected
-    OpponentDetected -[hidden]-> Reset
-    Reset -[hidden]-> None
+entity Terminate {
+    {field} Escopo: Main Machine
+    {method} Para toda a locomoção do robô! FailSafe
+}
+entity Reset {
+    {field} Escopo: Main Machine
+    {method} Reseta o robô para poder começar uma nova luta
+}
+entity Timeout {
+    {field} Escopo: Global
+    {method} Sinaliza a passagem de "x" millisegundos. - Configurável
+}
+entity EdgeDetected {
+    {field} Escopo: Fight Machine
+    {method} Sinaliza a detecção de uma borda pelo robô
+}
+entity OpponentDetected {
+    {field} Escopo: Fight Machine
+    {method} Sinaliza a detecção de um inimigo pelo robô
+}
+entity SendRobotConfig {
+    {field} Escopo: Event_Handler - ONLY
+    {method} Envia as configurações atuais do robô via websocket
+}
+entity Controller {
+    {field} Escopo: Fight Machine - RC
+    {method} Novo comando recebido do controle
+}
+entity None {
+    {field} Escopo: Global
+    {method} Emite um evento nulo
 }
 
-Parar_o_Robo -> Terminate
-Encerrar_estado_atual -> Timeout
-Comecar_a_luta -> Start
-Borda_detectada -> BorderDetected
-Oponente_detectado -> OpponentDetected
-Resetar_o_robo -> Reset
-Nenhum_comando_recebido -> None
+
 /'
 ' Descrições
 '/

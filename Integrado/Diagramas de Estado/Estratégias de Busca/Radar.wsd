@@ -1,23 +1,15 @@
-@startuml RadarSearch
+@startuml Search-Radar
 
-title Busca por Radar
+title Estratégia de Busca - Radar
 
-[*] --> Dojo
-Dojo -> OnEdge : BorderDetected
-OnEdge -> Dojo
+state switch <<choice>>
 
-state Dojo{
-    [*] --> Blind
-    Blind -> Chase : OpponentDetected
-    Chase -> Blind : OpponentLost
-}
+[*] --> switch
+switch -l-> rotate_left  : [sideLastSeen == left]
+switch -r-> rotate_right : [sideLastSeen == right]
 
 /'
 ' Descrições
 '/
-
-Blind : radar()
-Chase : chaseAction() (PID)
-OnEdge : avoidEdge()
 
 @enduml

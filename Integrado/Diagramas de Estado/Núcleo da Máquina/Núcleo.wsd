@@ -1,23 +1,35 @@
-@startuml SimulationController
+@startuml Mesin Negara - Núcleo
 
-title Núcleo da Simulação
+title Núcleo
 
 [*] --> Configuration
-Configuration --> StartClock : Start
+Configuration -r-> StartClock : Start
 StartClock --> FightState : Timeout
-StartClock -r-> DisengageRobot : Terminate
-FightState -r-> DisengageRobot : Terminate
+StartClock --> DisengageRobot : Terminate
+FightState -up-> DisengageRobot : Terminate
 DisengageRobot -> Configuration : Reset
 
 state FightState{
-    state Strategies{
-        [*] --> InitialMove
-        InitialMove --> SearchStrategy : Timeout
-        SearchStrategy --> ChaseState : OpponentDetected
-        ChaseState --> SearchStrategy : None
+    state selector <<choice>>
+
+    state Auto{
+        [*] --> InitialMoveSelector
+        InitialMoveSelector --> SearchSelector : Timeout
+        SearchSelector --> ChaseSelector : OpponentDetected
+        ChaseSelector --> SearchSelector : None
+
+        InitialMoveSelector -> AvoidEdge :  BorderDetected
+         AvoidEdge --> SearchSelector
     }
-    [*] --> Strategies
-    Strategies -> AvoidEdge :  BorderDetected
+
+    state RC{
+        [*] -> Command
+        Command -> Command: Controller / executeCommmand
+    }
+
+    [*] --> selector 
+    selector -> Auto : [mode == Auto]
+    selector --> RC : [mode == RC]
 }
 
 
@@ -26,10 +38,12 @@ state FightState{
 ' Descrições
 '/
 
-Configuration : Check for bluetooth communications\nand run configuration routine
-StartClock : Halt for T ms and start fight -> setTimeout(T)
-DisengageRobot : Stop all robot functions and halt
-InitialMove : Execute selected inital move strategy
-SearchStrategy : Execute selected search strategy
+Configuration : Executa as operações de configuração do robô recebidas via Wi-Fi ou Bluetooth
+StartClock : Estado de espera para início da luta. Setar tempo de espera "T" com a função -> setTimeout(T)
+DisengageRobot : Para a locomoção do robô
+InitialMoveSelector : Executa uma das máquinas das estratégias de movimento inicial
+SearchSelector : Executa uma das máquinas das estratégias de busca
+ChaseSelector : Executa uma das máquinas das estratégias de perseguição
+AvoidEdge : Desvia da borda do dojo
 
 @enduml
