@@ -7,7 +7,8 @@
 #include <event_handler/circular_buffer.hpp>
 #include <dynamic_data/dynamic_data.hpp>
 
-// Responsável por pegar as mensagens do tipo JSON e decodificá-las de acordo com as informações para atuarem sobre o robô
+/* --> ENVIAR SOMENTE JSON PARA ESSA FUNÇÃO <-- */
+// Responsável por pegar as mensagens do tipo JSON, decodificá-las e atuar corretamente no robô conforme as instruções
 void processJsonMessage(String message)
 {
     StaticJsonDocument<128> jsonMessage;
@@ -18,10 +19,11 @@ void processJsonMessage(String message)
         return;
     }
 
-    // Variável de controle para emissão do evento que envia as novas configurações do robô aos clientes
+    // Variável de controle
+    // True caso haja mudança nas configurações do robô e os clientes precisam ser avisados
     bool configHasChanges = false;
 
-    // Processa as requisições de emissão de eventos para a máquina
+    // Processa as requisições de emissão de eventos
     if (jsonMessage.containsKey("event_request"))
     {
         const char *request = jsonMessage["event_request"];
@@ -112,6 +114,7 @@ void processJsonMessage(String message)
         addEventToQueue(Event::Controller);
     }
 
+    // Caso haja mudança nas configurações do robô, agenda a emissão dessas novas configurações para os clientes
     if (configHasChanges)
     {
         addEventToQueue(Event::SendRobotConfig);

@@ -4,7 +4,7 @@
 #include "../events/events.hpp"
 #include "../../lib/CircularBuffer/CircularBuffer.h"
 // Buffer circular
-// Utilizado nesse código com lógica FIFO - First In -> First Out
+// Utilizado nesse código com lógica FIFO ---> |First In -> First Out|
 // Mais informações da biblioteca utilizada em: https://github.com/rlogiacco/CircularBuffer?utm_source=platformio&utm_medium=piohome
 CircularBuffer<Event, 10> eventQueue;
 

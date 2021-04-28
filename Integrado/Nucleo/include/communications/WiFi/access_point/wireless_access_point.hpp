@@ -9,7 +9,6 @@ const char *password = "12345678"; // Senha da rede
 // Realiza as configurações necessárias para a parte de comunicação do ESP32 
 void initAccessPoint()
 {
-    // Cria a rede Wi-Fi própria do ESP com os parametros de nome da rede e senha
     WiFi.softAP(ssid, password);
     delay(100);
 }

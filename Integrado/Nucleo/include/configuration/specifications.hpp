@@ -27,7 +27,7 @@
 struct Specifications
 {
 #ifdef REAL_ROBOT
-    // Define o nome do robõ
+    // Define o nome do robô
     String robotName = "Atena";
 #endif
 
@@ -38,6 +38,7 @@ struct Specifications
     const double maxAngularSpeed = 2 * wheelRadius / wheelBase;
 };
 
+// Objeto de especificações do robô
 Specifications robotSpecifications;
 
 #endif // SPECIFICATIONS_HPP

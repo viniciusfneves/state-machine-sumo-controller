@@ -5,20 +5,16 @@
 #include <configuration/specifications.hpp>
 #include <configuration/configurations.hpp>
 
-// No caso de simulação, importa a biblioteca com as funções de locomoção do WeBots
 #ifdef WEBOTS
 #include "../webots/motors.hpp"
 #include "../webots/webots_time.hpp"
 #endif
 
 #ifdef REAL_ROBOT
-
-// Dependências gerais dos microcontroladores
 #include <pins/pins.hpp>
 
-// Adiciona a função analogWrite para compilação com ESP32
 #ifdef ESP32_ENV
-#include <analogWrite.h>
+#include <analogWrite.h> // Adiciona a função analogWrite para compilação com ESP32
 #include <communications/data/send_data.hpp>
 #endif
 
@@ -59,7 +55,7 @@ void initMotors()
 
 #endif // REAL_ROBOT
 
-// Usado para dizer as funções se o robô deve se mover para a esquerda ou direita
+// Usado para dizer em qual direção o robô deve se mover
 enum class Direction
 {
     left,
@@ -118,7 +114,7 @@ void rotateRobot(int degrees, Direction direction)
         PWM_left *= -1;
     }
     driveMotors(PWM_left, PWM_right);
-    delay(static_cast<int>(degrees * 25 / robotConfiguration.maxSpeed)); // O tempo até completar a rotação precisa ser verificado com testes
+    delay(static_cast<int>(degrees * 25 / robotConfiguration.maxSpeed)); // O tempo até completar a rotação ainda precisa ser verificado com testes e modelado para uma função
     stopMotors();
 };
 

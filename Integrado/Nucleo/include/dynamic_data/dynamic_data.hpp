@@ -3,6 +3,8 @@
 
 #include "../configuration/specifications.hpp"
 
+// Enumera os inputs recebidos pelo controle.
+// Define a ordem de armazenamento desses inputs no array que guarda essas informações
 enum Input
 {
     linearSpeed,
@@ -35,18 +37,16 @@ struct DynamicData
     double controllerInputs[NUMBER_OF_CONTROLLER_CHANNELS]; // Segue a ordem do enum Input
 };
 
+// Objeto dos dados dinâmicas do robô
 DynamicData robotData;
 
-
-// Funções para pegar leituras dos sensores de oponente
+/*   ##-----> Funções de retorno dos dados <-----##   */
 
 // Retorna true se um oponente foi ou não detectado por um dos sensores
 bool isOpponentDetected() { return robotData.opDetected; }
-// Retorna o erro calculado de acordo com o peso de cada sensor de oponente que detectou um objeto
+
+// Retorna o erro do alinhamento do robô com a detecção do oponente
 double getErrorFromOPSensors() { return robotData.opError; }
-
-
-// Funções para pegar leituras dos sensores de borda
 
 // Retorna true se uma borda foi detectada ou não
 bool isEdgeDetected() { return robotData.edgeDetected; }

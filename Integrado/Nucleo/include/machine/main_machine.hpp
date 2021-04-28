@@ -9,10 +9,10 @@
 namespace sml = boost::sml;
 
 // MÁQUINA PRINCIPAL
-// Responsável pelas macro transições entre estados do robô
-// Nela exitem os estados de configuração inicial do robô, máquina de luta
-// e todas as transições entre elas, incluindo o desligamento do robô após
-// o evento de <Terminate>
+// Responsável pelas macrotransições entre estados do robô
+
+// Função principal de estruturar as máquinas aninhadas e acioná-las conforme necessário
+// Além de garantir transições existentes para o estado "DISENGAGED", servindo como FailSafe 
 
 struct machine
 {
