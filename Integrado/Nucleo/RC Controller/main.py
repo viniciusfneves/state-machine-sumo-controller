@@ -3,10 +3,12 @@ from send_commands import *
 import time
 
 # Define de quanto em quanto tempo os comandos devem ser atualizados no robô
-taxa_de_atualização = 30    # Em milissegundos
+taxa_de_atualizacao = 30    # Em milissegundos
 
 payload = {"linear": 0, "angular": 0}
 
+def initMessage():
+    print("Conectando")
 
 def main():
     global payload
@@ -20,13 +22,17 @@ def main():
     while True:
         # É necessário pimeiramente mover o stick esquerdo para que ele comece a ler os valores corretos
         # Essa função garante a execução do código após a leitura estar 100% correta
-        if (calibrated == False):
-                print("Mova o Stick esquerdo para os lados para calibrar")
-                while(controller.angularSpeed != 1):
-                    pass
-                calibrated = True
-                print("Calibrado!")
-        
+        if(calibrated == False):
+            initMessage()
+            print("Calibrando controle...")
+            print("Mova o Stick esquerdo para os lados para calibrar")
+            while(controller.angularSpeed != -1):
+                pass
+            while(controller.angularSpeed != 1):
+                pass
+            calibrated = True
+        print("Calibrado!\nEnviando comandos...")
+
         payload["linear"] = controller.linearSpeed
         payload["angular"] = controller.angularSpeed
 
@@ -48,9 +54,10 @@ def main():
             print("Exiting!")
             break
 
-        time.sleep(taxa_de_atualização/1000)
+        time.sleep(taxa_de_atualizacao/1000)
 
     exit()
+
 
 if __name__ == "__main__":
     main()
