@@ -14,7 +14,7 @@ namespace sml = boost::sml;
 // Função principal de estruturar as máquinas aninhadas e acioná-las conforme necessário
 // Além de garantir transições existentes para o estado "DISENGAGED", servindo como FailSafe 
 
-struct machine
+struct Machine
 {
     auto operator()() const
     {
@@ -42,6 +42,6 @@ struct machine
 
 
 // Definição global da máquina de estados
-sml::sm<machine> Core;
+sml::sm<Machine> Core;
 
 #endif
