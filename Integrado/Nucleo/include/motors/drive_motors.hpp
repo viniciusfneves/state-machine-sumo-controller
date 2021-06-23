@@ -23,16 +23,44 @@
 // int PWM_right -> PWM que será enviado ao motor direito
 void driveMotors(int PWM_left, int PWM_right)
 {
+#ifdef SUMO3KG
     PWM_left = constrain(PWM_left, -255, 255);
     PWM_right = constrain(PWM_right, -255, 255);
     analogWrite(pins::motors::leftMotor, PWM_left);
     analogWrite(pins::motors::rightMotor, PWM_right);
+#endif
+
+#ifdef SUMOMINI
+    drvDrive(PWM_left, pins::motors::leftMotorIn1, pins::motors::leftMotorIn2);
+    drvDrive(PWM_right, pins::motors::rightMotorIn1, pins::motors::rightMotorIn2);
+#endif
 
 #ifdef ESP32_ENV
     broadcastMotors(PWM_left, PWM_right);
 #endif
 };
 
+#ifdef SUMOMINI
+void drvDrive(int pwm, int drvIn1, int drvIn2)
+{
+    if ( pwm == 0 )    // Caso for parada
+    {
+        digitalWrite ( drvIn1, true );
+        digitalWrite ( drvIn2, true );
+    }
+    else if ( pwm > 0 )  //  Caso for sentido horário
+    {
+        analogWrite ( drvIn1, pwm );
+        digitalWrite ( drvIn2, false );
+    }
+    else 
+    {
+        // Caso for sentido anti-horario
+        analogWrite ( drvIn2, -1 * pwm );
+        digitalWrite ( drvIn1, false );
+    }
+}
+#endif
 // Para toda a locomoção do robô
 void stopMotors()
 {

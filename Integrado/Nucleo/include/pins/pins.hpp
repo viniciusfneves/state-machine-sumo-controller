@@ -39,8 +39,19 @@ namespace pins
 #ifdef SUMOMINI
     namespace motors
     {
-        int leftMotor = 5;
-        int rightMotor = 6;
+        #ifndef MERI
+        int leftMotorIn1 = 00;
+        int leftMotorIn2 = 00;
+        int rightMotorIn1 = 00;
+        int rightMotorIn2 = 00;
+        #endif
+
+        #ifdef MERI
+        int leftMotorIn1 = 00;
+        int leftMotorIn2 = 00;
+        int rightMotorIn1 = 00;
+        int rightMotorIn2 = 00;
+        #endif
     }
     namespace edgeSensors
     {
