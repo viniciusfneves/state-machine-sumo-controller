@@ -15,8 +15,13 @@
 int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-2, -1, 0, 1, 2};
 #endif
 
-#ifdef SUMOMINI
+// SUMO MINI
+#if defined(ET_MINI) || defined(ZE_PEQUENO)
 int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
+#endif
+
+#ifdef MERI
+int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-3, -1, 0, 1, 3};
 #endif
 
 // FUNÇÕES GLOBAIS - ARDUINO & ESP
