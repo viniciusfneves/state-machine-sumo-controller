@@ -36,64 +36,65 @@ namespace pins
 #endif // SUMO3KG
 
 // Definição de pinos para os robôs sumo mini
-#ifdef SUMOMINI
-    namespace motors
-    {
-        #ifndef ZE_PEQUENO
+#ifdef ZE_PEQUENO
+    namespace motors{
         int motorIn1 = 13;
         int motorIn2 = 14;
-        #endif
-
-        #ifdef ET_MINI
-        int leftMotorIn1 = 14;
-        int leftMotorIn2 = 13;
-        int rightMotorIn1 = 10;
-        int rightMotorIn2 = 09;
-        #endif
-
-        #ifdef MERI
-        int leftMotorIn1 = 24;
-        int leftMotorIn2 = 25;
-        int rightMotorIn1 = 10;
-        int rightMotorIn2 = 09;
-        #endif
     }
-
-    namespace edgeSensors
-    {
-        #ifdef ZE_PEQUENO
+    namespace edgeSensors{
         int leftFrontEdge = 24;
         int rightFrontEdge = 25;
 
         int sensors[] = {leftFrontEdge, rightFrontEdge};
-        #endif
-        
-        #ifdef ET_MINI
-        int leftFrontEdge = 01;
-        int rightFrontEdge = 32;
-
-        int sensors[] = {leftFrontEdge, rightFrontEdge};
-        #endif
     }
-
-    namespace opponentsSensors
-    {
-        #ifdef ZE_PEQUENO
+    namespace opponentsSensors{
         int rightFrontOpponent = 01;
         int leftFrontOpponent = 32;
 
         int sensors[] = {leftFrontOpponent, rightFrontOpponent};
-        #endif
+    }
+    namespace configuration{
+        int led = 00;
+        int start = 00;
+        int XHUT = 00;
+    }
+#endif
 
-        #ifdef ET_MINI
+#ifdef ET_MINI
+    namespace motors{
+        int leftMotorIn1 = 14;
+        int leftMotorIn2 = 13;
+        int rightMotorIn1 = 10;
+        int rightMotorIn2 = 09;
+    }
+    namespace edgeSensors{
+        int leftFrontEdge = 01;
+        int rightFrontEdge = 32;
+
+        int sensors[] = {leftFrontEdge, rightFrontEdge};
+    }
+    namespace opponentsSensors{
         int leftFrontOpponent = 11;
         int centralFrontOpponent = 12;
         int rightFrontOpponent = 02;
 
         int sensor[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent}
-        #endif
+    }
+    namespace configuration{
+        int led = 00;
+        int start = 00;
+        int XHUT = 00;
+    }
+#endif
 
-        #ifdef MERI
+#ifdef MERI
+    namespace motors{
+        int leftMotorIn1 = 24;
+        int leftMotorIn2 = 25;
+        int rightMotorIn1 = 10;
+        int rightMotorIn2 = 09;
+    }
+    namespace opponentsSensors{
         int leftFrontOpponent = 03;
         int centralFrontOpponent = 04;
         int rightFrontOpponent = 05;
@@ -101,47 +102,12 @@ namespace pins
         int rightLatOpponent = 08;
 
         int sensor[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent, leftLatOpponent, rightLatOpponent}
-        #endif
     }
-
-    namespace Debug
-    {
-        // Os RX, TX, SDA e SCL estão comentados pois 
-        // não tinha certeza do uso
-        
-        #ifdef ZE_PEQUENO
-        int led = 11;
-        int start = 02;
-
-        // int RX = 30;
-        // int TX = 31;
-        // int SDA = 27;
-        // int SCL = 28;
-        #endif
-
-        #ifdef ET_MINI
-        int led = 17; // define o LED?
-        int reset = 29;
-        int start = 25;
-
-        // int RX = 30;
-        // int TX = 31;
-        // int SDA = 27;
-        // int SCL = 28;
-        #endif
-
-        #ifdef MERI
+    namespace configuration{
         int ledConfig = 20;
         int ledCMD = 13;
         int batRead = 07;
-
-        // int RX = 21;
-        // int TX = 22;
-        // int SDA = 26;
-        // int SCL = 29;
-        #endif
     }
-
 #endif
 }
 #endif
