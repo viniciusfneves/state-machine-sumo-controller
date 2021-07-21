@@ -23,9 +23,10 @@
 // int PWM_right -> PWM que será enviado ao motor direito
 void driveMotors(int PWM_left, int PWM_right)
 {
-#ifdef SUMO3KG
     PWM_left = constrain(PWM_left, -255, 255);
     PWM_right = constrain(PWM_right, -255, 255);
+
+#ifdef SUMO3KG
     analogWrite(pins::motors::leftMotor, PWM_left);
     analogWrite(pins::motors::rightMotor, PWM_right);
 #endif
