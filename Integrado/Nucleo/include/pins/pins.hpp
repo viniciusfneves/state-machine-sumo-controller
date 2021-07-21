@@ -38,75 +38,75 @@ namespace pins
 // Definição de pinos para os robôs sumo mini
 #ifdef ZE_PEQUENO
     namespace motors{
-        int motorIn1 = 13;
-        int motorIn2 = 14;
+        int motorIn1 = 9;
+        int motorIn2 = 10;
     }
     namespace edgeSensors{
-        int leftFrontEdge = 24;
-        int rightFrontEdge = 25;
+        int leftFrontEdge = 15;
+        int rightFrontEdge = 16;
 
         int sensors[] = {leftFrontEdge, rightFrontEdge};
     }
     namespace opponentsSensors{
-        int rightFrontOpponent = 01;
-        int leftFrontOpponent = 32;
+        int rightFrontOpponent = 03;
+        int leftFrontOpponent = 02;
 
         int sensors[] = {leftFrontOpponent, rightFrontOpponent};
     }
     namespace configuration{
-        int led = 00;
-        int start = 00;
-        int XHUT = 00;
+        int led = 07;
+        int start = 04;
+        int XHUT = 08;
     }
 #endif
 
 #ifdef ET_MINI
     namespace motors{
-        int leftMotorIn1 = 14;
-        int leftMotorIn2 = 13;
-        int rightMotorIn1 = 10;
-        int rightMotorIn2 = 09;
+        int leftMotorIn1 = 10;
+        int leftMotorIn2 = 09;
+        int rightMotorIn1 = 06;
+        int rightMotorIn2 = 05;
     }
     namespace edgeSensors{
-        int leftFrontEdge = 01;
-        int rightFrontEdge = 32;
+        int leftFrontEdge = 03;
+        int rightFrontEdge = 02;
 
         int sensors[] = {leftFrontEdge, rightFrontEdge};
     }
     namespace opponentsSensors{
-        int leftFrontOpponent = 11;
-        int centralFrontOpponent = 12;
-        int rightFrontOpponent = 02;
+        int leftFrontOpponent = 07;
+        int centralFrontOpponent = 08;
+        int rightFrontOpponent = 04;
 
         int sensor[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent}
     }
     namespace configuration{
-        int led = 00;
-        int start = 00;
-        int XHUT = 00;
+        int led = 13;
+        int start = 16;
+        int XHUT = 17;
     }
 #endif
 
 #ifdef MERI
     namespace motors{
-        int leftMotorIn1 = 24;
-        int leftMotorIn2 = 25;
-        int rightMotorIn1 = 10;
-        int rightMotorIn2 = 09;
+        int leftMotorIn1 = 18;
+        int leftMotorIn2 = 29;
+        int rightMotorIn1 = 27;
+        int rightMotorIn2 = 26;
     }
     namespace opponentsSensors{
-        int leftFrontOpponent = 03;
-        int centralFrontOpponent = 04;
-        int rightFrontOpponent = 05;
-        int leftLatOpponent = 02;
-        int rightLatOpponent = 08;
+        int leftFrontOpponent = 39;
+        int centralFrontOpponent = 34;
+        int rightFrontOpponent = 35;
+        int leftLatOpponent = 36;
+        int rightLatOpponent = 25;
 
         int sensor[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent, leftLatOpponent, rightLatOpponent}
     }
     namespace configuration{
-        int ledConfig = 20;
-        int ledCMD = 13;
-        int batRead = 07;
+        int ledConfig = 04;*
+        int ledCMD = 13;*
+        int batRead = 33;*
     }
 #endif
 }
