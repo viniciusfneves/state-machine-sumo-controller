@@ -23,14 +23,15 @@
 // int PWM_right -> PWM que será enviado ao motor direito
 void driveMotors(int PWM_left, int PWM_right)
 {
-#ifdef SUMO3KG
     PWM_left = constrain(PWM_left, -255, 255);
     PWM_right = constrain(PWM_right, -255, 255);
+
+#ifdef SUMO3KG
     analogWrite(pins::motors::leftMotor, PWM_left);
     analogWrite(pins::motors::rightMotor, PWM_right);
 #endif
 
-#ifdef SUMOMINI
+#if defined(ET_MINI) || defined(ZE_PEQUENO) || defined(MERI)
     drvDrive(PWM_left, pins::motors::leftMotorIn1, pins::motors::leftMotorIn2);
     drvDrive(PWM_right, pins::motors::rightMotorIn1, pins::motors::rightMotorIn2);
 #endif
@@ -40,7 +41,7 @@ void driveMotors(int PWM_left, int PWM_right)
 #endif
 };
 
-#ifdef SUMOMINI
+#if defined(ET_MINI) || defined(ZE_PEQUENO) || defined(MERI)
 void drvDrive(int pwm, int drvIn1, int drvIn2)
 {
     if ( pwm == 0 )    // Caso for parada
