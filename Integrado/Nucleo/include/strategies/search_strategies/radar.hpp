@@ -12,8 +12,8 @@ struct SearchRadar
     {
         using namespace sml;
         // Guards
-        auto left  = [] { return true; };  // Implementar função para verificar qual o último lado visto pelos sensores de oponentes
-        auto right = [] { return false; }; // Implementar função para verificar qual o último lado visto pelos sensores de oponentes
+        auto left  = [] { return getErrorFromOPSensors() < 0 ? true : false; };
+        auto right = [] { return getErrorFromOPSensors() > 0 ? true : false; };
 
         // Funções
         auto rotate_left  = [] { driveRobot(0,-1); };
