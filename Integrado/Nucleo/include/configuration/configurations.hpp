@@ -12,6 +12,8 @@ struct Configurations
     double Ki = 0;
     double Kd = 0.6;
 
+    double tal = 100;
+
     // Define uma velocidade angular máxima para o modo de perseguição -> (double)[0,1]
     double maxAngularSpeedInChase = 0.55;
 
