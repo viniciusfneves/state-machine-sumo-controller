@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="icon" href="#">
+    <link rel="stylesheet" href="telemetry.css">
+    <script src="scripts/telemetry.js"></script>
+
+    <title>Robot Telemetry</title>
+</head>
+
+<body>
+    <h1>Telemetria</h1>
+
+    <div id="connection-container">
+        <h4 id="connection-info">Connection Status: </h4>
+        <div id="connection-status-circle"></div>
+        <h4 id="connection-status-text">Trying upgrade to WebSocket</h4>
+    </div>
+
+    <button id="start-request" onclick="requestEvent('start')">Start</button>
+    <button id="configs" onclick="window.location.href='/'">Configurações</button>
+    <button id="terminate-request" onclick="requestEvent('terminate')">Terminate</button>
+
+    <div id="robot">
+        <div id="robot-body">
+            <div id="left-side-op" class="op-sensor"></div>
+            <div id="far-left-op" class="op-sensor"></div>
+            <div id="left-op" class="op-sensor"></div>
+            <div id="center-op" class="op-sensor"></div>
+            <div id="right-op" class="op-sensor"></div>
+            <div id="far-right-op" class="op-sensor"></div>
+            <div id="right-side-op" class="op-sensor"></div>
+            <div id="left-edge" class="edge-sensor"></div>
+            <div id="right-edge" class="edge-sensor"></div>
+            <div id="left-motor" class="motor"></div>
+            <div id="right-motor" class="motor"></div>
+            <h4 id="left-motor-power">0</h4>
+            <h4 id="right-motor-power">0</h4>
+        </div>
+    </div>
+</body>
+
+</html>

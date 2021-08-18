@@ -1,0 +1,90 @@
+html {
+    font-family: Helvetica;
+    display: inline-block;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.inline-text {
+    display: inline;
+}
+
+body {
+    margin-top: 50px;
+}
+
+h1 {
+    color: #444444;
+    margin: 50px auto 30px;
+}
+
+button {
+    border: none;
+    width: 115px;
+    padding: 12px;
+    margin: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #868686;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.button-green {
+    background-color: #00770c;
+}
+
+.button-red {
+    background-color: #bd0101;
+}
+
+#connection-info {
+    display: inline-block;
+    margin: 0px;
+}
+
+#connection-status-text {
+    display: inline-block;
+    margin: 0px;
+    color: midnightblue;
+}
+
+#connection-status-circle {
+    display: inline-block;
+    background: #e4c200;
+    vertical-align: baseline;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+.PID-regulator-setter {
+    display: inline;
+}
+
+.setter-value-field {
+    font-family: Helvetica;
+    font-size: 20px;
+    text-align: center;
+    width: 12%;
+    height: 35px;
+    margin: 8px;
+    min-width: 75px;
+    max-width: 115px;
+    border-style: solid;
+    border-radius: 8px;
+}
+
+#set-pid-button {
+    display: block;
+    margin: 20px auto;
+    width: 115px;
+    background-color: rgb(100, 0, 100);
+    color: white;
+}
+
+#start-time {
+    min-width: 100px;
+    max-width: 140px;
+}
