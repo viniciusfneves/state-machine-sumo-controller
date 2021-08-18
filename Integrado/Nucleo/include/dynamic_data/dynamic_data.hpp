@@ -35,6 +35,9 @@ struct DynamicData
 
     // INPUTS DO CONTROLE -> MODO RC
     double controllerInputs[NUMBER_OF_CONTROLLER_CHANNELS]; // Segue a ordem do enum Input
+
+    // CONSTANTES DE TEMPO
+    long double tempoRadar; // Tempo em millis() que foi acionado o radar
 };
 
 // Objeto dos dados dinâmicas do robô
