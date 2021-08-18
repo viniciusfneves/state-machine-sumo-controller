@@ -1,0 +1,49 @@
+@startuml Mesin Negara - Núcleo
+
+title Núcleo
+
+[*] --> Configuration
+Configuration -r-> StartClock : Start
+StartClock --> FightState : Timeout
+StartClock --> DisengageRobot : Terminate
+FightState -up-> DisengageRobot : Terminate
+DisengageRobot -> Configuration : Reset
+
+state FightState{
+    state selector <<choice>>
+
+    state Auto{
+        [*] --> InitialMoveSelector
+        InitialMoveSelector --> SearchSelector : Timeout
+        SearchSelector --> ChaseSelector : OpponentDetected
+        ChaseSelector --> SearchSelector : None
+
+        InitialMoveSelector -> AvoidEdge :  BorderDetected
+         AvoidEdge --> SearchSelector
+    }
+
+    state RC{
+        [*] -> Command
+        Command -> Command: Controller / executeCommmand
+    }
+
+    [*] --> selector 
+    selector -> Auto : [mode == Auto]
+    selector --> RC : [mode == RC]
+}
+
+
+
+/'
+' Descrições
+'/
+
+Configuration : Executa as operações de configuração do robô recebidas via Wi-Fi ou Bluetooth
+StartClock : Estado de espera para início da luta. Setar tempo de espera "T" com a função -> setTimeout(T)
+DisengageRobot : Para a locomoção do robô
+InitialMoveSelector : Executa uma das máquinas das estratégias de movimento inicial
+SearchSelector : Executa uma das máquinas das estratégias de busca
+ChaseSelector : Executa uma das máquinas das estratégias de perseguição
+AvoidEdge : Desvia da borda do dojo
+
+@enduml

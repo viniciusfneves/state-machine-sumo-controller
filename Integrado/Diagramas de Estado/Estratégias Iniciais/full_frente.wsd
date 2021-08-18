@@ -1,0 +1,13 @@
+@startuml Initial-FullFrente
+
+title Estratégia Inicial - Full Frente
+
+[*] -->Moving
+
+/'
+' Descrições
+'/
+
+Moving : driveRobot(1,0); exitState()
+
+@enduml

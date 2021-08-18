@@ -1,0 +1,49 @@
+@startuml Events
+
+title Eventos do Mesin Negara
+
+
+entity Start {
+    {field} Escopo: Main Machine
+    {method} Inicia o modo de luta do robô
+}
+entity Terminate {
+    {field} Escopo: Main Machine
+    {method} Para toda a locomoção do robô! FailSafe
+}
+entity Reset {
+    {field} Escopo: Main Machine
+    {method} Reseta o robô para poder começar uma nova luta
+}
+entity Timeout {
+    {field} Escopo: Global
+    {method} Sinaliza a passagem de "x" millisegundos. - Configurável
+}
+entity EdgeDetected {
+    {field} Escopo: Fight Machine
+    {method} Sinaliza a detecção de uma borda pelo robô
+}
+entity OpponentDetected {
+    {field} Escopo: Fight Machine
+    {method} Sinaliza a detecção de um inimigo pelo robô
+}
+entity SendRobotConfig {
+    {field} Escopo: Event_Handler - ONLY
+    {method} Envia as configurações atuais do robô via websocket
+}
+entity Controller {
+    {field} Escopo: Fight Machine - RC
+    {method} Novo comando recebido do controle
+}
+entity None {
+    {field} Escopo: Global
+    {method} Emite um evento nulo
+}
+
+
+/'
+' Descrições
+'/
+
+
+@enduml

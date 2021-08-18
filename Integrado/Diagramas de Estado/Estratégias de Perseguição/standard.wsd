@@ -1,0 +1,15 @@
+@startuml Chase-Standard
+
+title Estratégia de Perseguição - Standard(Padrão)
+
+[*] --> chase 
+chase --> chase : OpponentDetected
+
+/'
+' Descrições
+'/
+
+chase : chaseAction() --> Usa das leituras dinamicas dos sensores de oponente para 
+chase : ajustar a velocidade angular do robô enquanto mantém velocidade máxima à frente
+
+@enduml
