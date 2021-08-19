@@ -20,7 +20,7 @@ struct Machine
     {
         using namespace sml;
         // Funções
-        auto set_startClock = []{ setTimeout(4000); };
+        auto set_startClock = [] { setTimeout(4000); };
         auto disengage = [] { stopMotors(); };
 
         return make_transition_table(
