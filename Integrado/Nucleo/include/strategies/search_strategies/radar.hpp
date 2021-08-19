@@ -15,19 +15,27 @@ struct SearchRadar
         auto left  = [] { return getErrorFromOPSensors() < 0 ? true : false; };
         auto right = [] { return getErrorFromOPSensors() > 0 ? true : false; };
 
-        // Funções
-        auto rotate_left  = [] {
+#if defined(ET_MINI) || defined(ZE_PEQUENO) || defined(MERI)
+        // Funções MINI
+        auto rotate_left = []
+        {
             driveRobot(
                 0,
-                -1 + exp(-(millis() - robotData.tempoRadar) * robotConfiguration.tal)
-                ); 
-            };
-        auto rotate_right = [] {
+                -1 + exp(-(millis() - robotData.tempoRadar) * robotConfiguration.tal));
+        };
+        auto rotate_right = []
+        {
             driveRobot(
                 0,
-                1 - exp(-(millis() - robotData.tempoRadar) * robotConfiguration.tal)
-                );
-            };
+                1 - exp(-(millis() - robotData.tempoRadar) * robotConfiguration.tal));
+        };
+#endif
+
+#ifdef SUMO3KG
+        // Funções 3KG
+        auto rotate_left = [] { driveRobot(0, -1); };
+        auto rotate_right = [] { driveRobot(0, 1); };
+#endif
 
         return make_transition_table(
             *"entry"_s = "switch"_s,
