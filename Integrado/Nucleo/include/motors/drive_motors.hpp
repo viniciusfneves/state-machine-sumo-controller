@@ -18,6 +18,27 @@
 #include <communications/data/send_data.hpp>
 #endif
 
+// Função de controles dos pinos de ativação dos drivers para motores brushed
+void drvDrive(int pwm, int drvIn1, int drvIn2)
+{
+    if (pwm == 0) // Caso for parada
+    {
+        digitalWrite(drvIn1, true);
+        digitalWrite(drvIn2, true);
+    }
+    else if (pwm > 0) //  Caso for sentido horário
+    {
+        analogWrite(drvIn1, pwm);
+        digitalWrite(drvIn2, false);
+    }
+    else
+    {
+        // Caso for sentido anti-horario
+        analogWrite(drvIn2, -1 * pwm);
+        digitalWrite(drvIn1, false);
+    }
+}
+
 // Movimenta os motores com os PWM definidos como parâmetro de entrada
 // int PWM_left -> PWM que será enviado ao motor esquerdo
 // int PWM_right -> PWM que será enviado ao motor direito
@@ -26,14 +47,14 @@ void driveMotors(int PWM_left, int PWM_right)
     PWM_left = constrain(PWM_left, -255, 255);
     PWM_right = constrain(PWM_right, -255, 255);
 
-#ifdef SUMO3KG
+#ifdef BRUSHLESS
     analogWrite(pins::motors::leftMotor, PWM_left);
     analogWrite(pins::motors::rightMotor, PWM_right);
 #endif
 
-#if defined(ET_MINI) || defined(ZE_PEQUENO) || defined(MERI)
-    drvDrive(PWM_left, pins::motors::leftMotorIn1, pins::motors::leftMotorIn2);
-    drvDrive(PWM_right, pins::motors::rightMotorIn1, pins::motors::rightMotorIn2);
+#ifdef BRUSHED
+    drvDrive(PWM_left, pins::motors::leftMotorIN1, pins::motors::leftMotorIN2);
+    drvDrive(PWM_right, pins::motors::rightMotorIN1, pins::motors::rightMotorIN2);
 #endif
 
 #ifdef ESP32_ENV
@@ -41,27 +62,6 @@ void driveMotors(int PWM_left, int PWM_right)
 #endif
 };
 
-#if defined(ET_MINI) || defined(ZE_PEQUENO) || defined(MERI)
-void drvDrive(int pwm, int drvIn1, int drvIn2)
-{
-    if ( pwm == 0 )    // Caso for parada
-    {
-        digitalWrite ( drvIn1, true );
-        digitalWrite ( drvIn2, true );
-    }
-    else if ( pwm > 0 )  //  Caso for sentido horário
-    {
-        analogWrite ( drvIn1, pwm );
-        digitalWrite ( drvIn2, false );
-    }
-    else 
-    {
-        // Caso for sentido anti-horario
-        analogWrite ( drvIn2, -1 * pwm );
-        digitalWrite ( drvIn1, false );
-    }
-}
-#endif
 // Para toda a locomoção do robô
 void stopMotors()
 {
@@ -72,14 +72,35 @@ void stopMotors()
 void initMotors()
 {
 #ifdef ESP32_ENV
+#ifdef BRUSHLESS
     // Define a resolução de saída dos pinos de PWM do ESP32
     analogWriteResolution(pins::motors::leftMotor, 12);
     analogWriteResolution(pins::motors::rightMotor, 12);
 #endif
+#ifdef BRUSHED
+    // Define a resolução de saída dos pinos de PWM do ESP32
+    analogWriteResolution(pins::motors::leftMotorIN1, 12);
+    analogWriteResolution(pins::motors::leftMotorIN2, 12);
+    analogWriteResolution(pins::motors::rightMotorIN1, 12);
+    analogWriteResolution(pins::motors::rightMotorIN2, 12);
+#endif
+#endif
+#ifdef BRUSHLESS
     pinMode(pins::motors::leftMotor, OUTPUT);
     pinMode(pins::motors::rightMotor, OUTPUT);
     analogWrite(pins::motors::leftMotor, 0);
     analogWrite(pins::motors::rightMotor, 0);
+#endif
+#ifdef BRUSHED
+    pinMode(pins::motors::leftMotorIN1, OUTPUT);
+    pinMode(pins::motors::leftMotorIN2, OUTPUT);
+    pinMode(pins::motors::rightMotorIN1, OUTPUT);
+    pinMode(pins::motors::rightMotorIN2, OUTPUT);
+    digitalWrite(pins::motors::leftMotorIN1, HIGH);
+    digitalWrite(pins::motors::leftMotorIN2, HIGH);
+    digitalWrite(pins::motors::rightMotorIN1, HIGH);
+    digitalWrite(pins::motors::rightMotorIN2, HIGH);
+#endif
 }
 
 #endif // REAL_ROBOT
@@ -102,7 +123,7 @@ void driveRobot(double linearSpeed, double angularSpeed)
     angularSpeed = constrain(angularSpeed, -1, 1) * robotSpecifications.maxAngularSpeed;
 
     // Transforma os parâmetros de velocidade linear e angular em sinal PWM para os motores
-    int PWM_left  = ((2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
+    int PWM_left = ((2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
     int PWM_right = ((2 * linearSpeed - angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
 
     //Assegura que a velocidade angular vai ser exercida como pedido, podendo alterar a velocidade linear para isso
