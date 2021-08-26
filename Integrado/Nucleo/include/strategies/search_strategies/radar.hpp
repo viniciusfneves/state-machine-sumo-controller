@@ -3,6 +3,7 @@
 
 #include "../../../lib/boost/sml.hpp"
 #include "../../motors/drive_motors.hpp"
+#include "../../dynamic_data/dynamic_data.hpp"
 
 namespace sml = boost::sml;
 
@@ -31,7 +32,7 @@ struct SearchRadar
         };
 #endif
 
-#ifdef SUMO3KG
+#if defined(VAL) || defined(ATENA) || defined(APOLO)
         // Funções 3KG
         auto rotate_left = [] { driveRobot(0, -1); };
         auto rotate_right = [] { driveRobot(0, 1); };
