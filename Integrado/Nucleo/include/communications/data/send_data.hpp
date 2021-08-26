@@ -18,10 +18,14 @@ void serializeAndBroadcast(DynamicJsonDocument readings)
 // Envia as configurações atuais do robô
 void broadcastRobotConfiguration()
 {
-    StaticJsonDocument<128> configs;
+    StaticJsonDocument<256> configs;
 
     // Nome do robô
     configs["robot_name"] = robotSpecifications.robotName;
+
+    // Quantidade de sensores
+    configs["available_opponent_sensors"] = NUMBER_OF_OPPONENT_SENSORS;
+    configs["available_edge_sensors"] = NUMBER_OF_EDGE_SENSORS;
 
     // Modo de operação
     switch (robotConfiguration.mode)
@@ -73,18 +77,19 @@ void broadcastRobotConfiguration()
 // Envia as leituras dos sensores de borda e dos sensores de oponente -> TELEMETRIA
 void broadcastSensors(bool opSensorArray[], bool edgeSensorArray[])
 {
-    StaticJsonDocument<256> readings;
+    StaticJsonDocument<384> readings;
 
     // Sensores de oponente
-    readings["readings"]["opponent"][0] = opSensorArray[0];
-    readings["readings"]["opponent"][1] = opSensorArray[1];
-    readings["readings"]["opponent"][2] = opSensorArray[2];
-    readings["readings"]["opponent"][3] = opSensorArray[3];
-    readings["readings"]["opponent"][4] = opSensorArray[4];
+    for (int i = 0; i < NUMBER_OF_OPPONENT_SENSORS; i++)
+    {
+        readings["readings"]["opponent"][i] = opSensorArray[i];
+    }
 
     //Sensores de borda
-    readings["readings"]["edge"][0] = edgeSensorArray[0];
-    readings["readings"]["edge"][1] = edgeSensorArray[1];
+    for (int i = 0; i < NUMBER_OF_EDGE_SENSORS; i++)
+    {
+        readings["readings"]["edge"][i] = edgeSensorArray[i];
+    }
 
     serializeAndBroadcast(readings);
 }
