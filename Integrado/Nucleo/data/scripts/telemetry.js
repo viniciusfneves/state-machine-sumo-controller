@@ -3,16 +3,14 @@ var connection = new WebSocket("ws://" + location.hostname + ":81");
 
 // Conexão estabelecida
 connection.onopen = function () {
-	document.getElementById("connection-status-circle").style.background =
-		"#00770c";
+	document.getElementById("connection-status-circle").style.background = "#00770c";
 	document.getElementById("connection-status-circle").style.color = "#00770c";
 	document.getElementById("connection-status-text").innerHTML = "Connected";
 };
 
 // Erro na conexão
 connection.onerror = function () {
-	document.getElementById("connection-status-circle").style.background =
-		"#bd0101";
+	document.getElementById("connection-status-circle").style.background = "#bd0101";
 	document.getElementById("connection-status-text").style.color = "#bd0101";
 	document.getElementById("connection-status-text").innerHTML = "ERRO!";
 };
@@ -77,6 +75,7 @@ function refreshOpSensorReadings(opReadings) {
 			setOpponentSensor("right", opReadings[4]);
 			setOpponentSensor("far-right", opReadings[5]);
 			setOpponentSensor("right-side", opReadings[6]);
+			break;
 	}
 }
 
