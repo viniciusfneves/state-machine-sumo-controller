@@ -12,7 +12,7 @@ struct Specifications
 
 #ifdef VAL
     // Define o nome do robo
-    String robotName = "Valeska";
+    const char *robotName = "Valeska";
     // Quantidade de sensores de cada categoria (Borda e Oponente)
 #define NUMBER_OF_EDGE_SENSORS 2
 #define NUMBER_OF_OPPONENT_SENSORS 5
@@ -23,7 +23,7 @@ struct Specifications
 
 #ifdef ATENA
     // Define o nome do robo
-    String robotName = "Atena";
+    const char *robotName = "Atena";
     // Quantidade de sensores de cada categoria (Borda e Oponente)
 #define NUMBER_OF_EDGE_SENSORS 2
 #define NUMBER_OF_OPPONENT_SENSORS 5
@@ -34,7 +34,7 @@ struct Specifications
 
 #ifdef APOLO
     // Define o nome do robo
-    String robotName = "Apolo";
+    const char *robotName = "Apolo";
     // Quantidade de sensores de cada categoria (Borda e Oponente)
 #define NUMBER_OF_EDGE_SENSORS 4
 #define NUMBER_OF_OPPONENT_SENSORS 7
@@ -58,7 +58,7 @@ struct Specifications
 
 #ifdef ET_MINI
     // Define o nome do robô
-    String robotName = "ET";
+    const char *robotName = "ET";
     // Quantidade de sensores de cada categoria (Borda e Oponente)
 #define NUMBER_OF_EDGE_SENSORS 2
 #define NUMBER_OF_OPPONENT_SENSORS 2
