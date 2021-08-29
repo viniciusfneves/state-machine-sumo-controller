@@ -9,11 +9,18 @@ connection.onopen = function () {
 };
 
 // Erro na conexão
-connection.onerror = function () {
-	document.getElementById("connection-status-circle").style.background = "#bd0101";
-	document.getElementById("connection-status-text").style.color = "#bd0101";
-	document.getElementById("connection-status-text").innerHTML = "ERRO!";
-};
+connection.onerror = function() {
+    document.getElementById("connection-status-circle").style.background = "#bd0101";
+    document.getElementById("connection-status-text").style.color = "#bd0101";
+    document.getElementById("connection-status-text").innerHTML = "Erro de conexão";
+}
+
+// Conexão encerrada
+connection.onclose = function(event) {
+    document.getElementById("connection-status-circle").style.background = "#bd0101";
+    document.getElementById("connection-status-text").style.color = "#bd0101";
+    document.getElementById("connection-status-text").innerHTML = "O robô encerrou a conxão";
+}
 
 function requestEvent(event) {
 	connection.send('{ "event_request" : "' + event + '" }');

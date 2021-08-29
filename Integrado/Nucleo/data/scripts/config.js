@@ -121,15 +121,14 @@ connection.onopen = function() {
 connection.onerror = function() {
     document.getElementById("connection-status-circle").style.background = "#bd0101";
     document.getElementById("connection-status-text").style.color = "#bd0101";
-    document.getElementById("connection-status-text").innerHTML = "ERRO!";
+    document.getElementById("connection-status-text").innerHTML = "Erro de conexão";
 }
 
 // Conexão encerrada
 connection.onclose = function(event) {
-    if (event.wasClean) {
-        document.getElementById("connection-status-circle").style.background = "#e4c200";
-        document.getElementById("connection-status-text").innerHTML = "O robô encerrou a conxão";
-    }
+    document.getElementById("connection-status-circle").style.background = "#bd0101";
+    document.getElementById("connection-status-text").style.color = "#bd0101";
+    document.getElementById("connection-status-text").innerHTML = "O robô encerrou a conxão";
 }
 
 // Quando recebe-se dados do robô
