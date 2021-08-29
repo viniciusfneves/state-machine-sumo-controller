@@ -1,207 +1,251 @@
 html {
-    font-family: Helvetica;
-    display: inline-block;
-    margin: 0px auto;
-    text-align: center;
+	font-family: Helvetica;
+	display: inline-block;
+	margin: 0px auto;
+	text-align: center;
 }
 
 body {
-    margin-top: 50px;
+	margin-top: 50px;
 }
 
 h1 {
-    color: #444444;
-    margin: 50px auto 30px;
+	color: #444444;
+	margin: 50px auto 30px;
 }
 
 #connection-container {
-    margin-bottom: 35px;
+	margin-bottom: 35px;
 }
 
 button {
-    display: block;
-    border: none;
-    width: 150px;
-    height: 50px;
-    padding: 12px;
-    margin: 8px auto;
-    cursor: pointer;
-    border-radius: 8px;
-    background-color: #868686;
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
+	display: block;
+	border: none;
+	width: 150px;
+	height: 50px;
+	padding: 12px;
+	margin: 8px auto;
+	cursor: pointer;
+	border-radius: 8px;
+	background-color: #868686;
+	color: white;
+	text-decoration: none;
+	font-size: 18px;
 }
 
 #start-request {
-    display: inline-block;
-    padding: 12px;
-    margin-left: 15px;
-    margin-right: 15px;
-    background-color: #00770c;
+	display: inline-block;
+	padding: 12px;
+	margin-left: 15px;
+	margin-right: 15px;
+	background-color: #00770c;
 }
 
 #configs {
-    display: inline-block;
-    padding: 12px;
-    margin-left: 15px;
-    margin-right: 15px;
-    background-color: #b1a117;
+	display: inline-block;
+	padding: 12px;
+	margin-left: 15px;
+	margin-right: 15px;
+	background-color: #b1a117;
 }
 
 #terminate-request {
-    width: 75%;
-    height: 100px;
-    background-color: #bd0101;
+	width: 75%;
+	height: 100px;
+	background-color: #bd0101;
+    margin-bottom: 42px;
 }
 
 #connection-info {
-    display: inline-block;
-    margin: 0px;
+	display: inline-block;
+	margin: 0px;
 }
 
 #connection-status-text {
-    display: inline-block;
-    margin: 0px;
-    color: midnightblue;
+	display: inline-block;
+	margin: 0px;
+	color: midnightblue;
 }
 
 #connection-status-circle {
+	display: inline-block;
+	background: #e4c200;
+	vertical-align: baseline;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+}
+
+#initial-moviment-indicator{
     display: inline-block;
-    background: #e4c200;
-    vertical-align: baseline;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
+    padding: 12px;
+    margin-left: 30px;
+	margin-right: 95px;
+}
+#search-indicator{
+    display: inline-block;
+}
+#chase-indicator{
+    display: inline-block;
+	padding: 12px;
+	margin-left: 60px;
+}
+
+#initial-strategy-status-circle{
+    display: inline-block;
+	background: #868686;
+	vertical-align: baseline;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+}
+
+#search-strategy-status-circle{
+    display: inline-block;
+	background: #868686;
+	vertical-align: baseline;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+}
+
+#chase-strategy-status-circle{
+    display: inline-block;
+	background: #868686;
+	vertical-align: baseline;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
 }
 
 #robot-body {
-    position: relative;
-    margin: 15em auto;
-    background: rgb(125, 125, 125);
-    border-radius: 12px;
-    width: 15em;
-    height: 15em;
-    box-shadow: inset 6px 1px 12px rgb(128, 128, 128), 6px 2px 1em rgb(112, 112, 112);
+	position: relative;
+	margin: 12vh auto;
+	background: rgb(125, 125, 125);
+	border-radius: 12px;
+	width: 15em;
+	height: 15em;
+	box-shadow: inset 6px 1px 12px rgb(128, 128, 128),
+		6px 2px 1em rgb(112, 112, 112);
 }
 
 .op-sensor {
-    display: none;
-    position: absolute;
-    border-radius: 4px;
-    width: 2em;
-    height: 16px;
+	display: none;
+	position: absolute;
+	border-radius: 4px;
+	width: 2em;
+	height: 16px;
 }
 
 #left-side-op {
-    top: 5em;
-    left: 0;
-    transform: rotate(90deg);
-    background: black;
+	top: 5em;
+	left: 0;
+	transform: rotate(90deg);
+	background: black;
 }
 
 #far-left-op {
-    top: 2.5em;
-    left: 0.8em;
-    transform: rotate(-25deg);
-    background: black;
+	top: 2.5em;
+	left: 0.8em;
+	transform: rotate(-25deg);
+	background: black;
 }
 
 #left-op {
-    top: 1.5em;
-    left: 3.5em;
-    transform: rotate(-15deg);
-    background: black;
+	top: 1.5em;
+	left: 3.5em;
+	transform: rotate(-15deg);
+	background: black;
 }
 
 #center-op {
-    top: 1em;
-    left: 6.45em;
-    background: black;
+	top: 1em;
+	left: 6.45em;
+	background: black;
 }
 
 #right-op {
-    top: 1.5em;
-    right: 3.5em;
-    transform: rotate(15deg);
-    background: black;
+	top: 1.5em;
+	right: 3.5em;
+	transform: rotate(15deg);
+	background: black;
 }
 
 #far-right-op {
-    top: 2.5em;
-    right: 0.8em;
-    transform: rotate(25deg);
-    background: black;
+	top: 2.5em;
+	right: 0.8em;
+	transform: rotate(25deg);
+	background: black;
 }
 
 #right-side-op {
-    top: 5em;
-    right: 0;
-    transform: rotate(90deg);
-    background: black;
+	top: 5em;
+	right: 0;
+	transform: rotate(90deg);
+	background: black;
 }
 
 .edge-sensor {
-    display: none;
-    position: absolute;
-    border-radius: 15px;
-    width: 1.2em;
-    height: 1.2em;
+	display: none;
+	position: absolute;
+	border-radius: 15px;
+	width: 1.2em;
+	height: 1.2em;
 }
 
 #front-left-edge {
-    background: white;
-    top: 0.7em;
-    left: 0.72em;
+	background: white;
+	top: 0.7em;
+	left: 0.72em;
 }
 
 #front-right-edge {
-    background: white;
-    top: 0.7em;
-    right: 0.72em;
+	background: white;
+	top: 0.7em;
+	right: 0.72em;
 }
 
 #rear-left-edge {
-    background: white;
-    bottom: 0.7em;
-    left: 0.72em;
+	background: white;
+	bottom: 0.7em;
+	left: 0.72em;
 }
 
 #rear-right-edge {
-    background: white;
-    bottom: 0.7em;
-    right: 0.72em;
+	background: white;
+	bottom: 0.7em;
+	right: 0.72em;
 }
 
 .motor {
-    position: absolute;
-    background: rgb(0, 50, 100);
-    border-radius: 5px;
-    width: 2.2em;
-    height: 3.6em;
-    box-shadow: inset 0 0 4px rgb(27, 27, 27);
+	position: absolute;
+	background: rgb(0, 50, 100);
+	border-radius: 5px;
+	width: 2.2em;
+	height: 3.6em;
+	box-shadow: inset 0 0 4px rgb(27, 27, 27);
 }
 
 #right-motor {
-    top: 8em;
-    right: 0.5em;
+	top: 8em;
+	right: 0.5em;
 }
 
 #left-motor {
-    top: 8em;
-    left: 0.5em;
+	top: 8em;
+	left: 0.5em;
 }
 
 #right-motor-power {
-    position: absolute;
-    font-size: 32px;
-    top: 3.1em;
-    right: -3em;
+	position: absolute;
+	font-size: 2em;
+	top: 3.1em;
+	right: -2.5em;
 }
 
 #left-motor-power {
-    position: absolute;
-    font-size: 32px;
-    top: 3.1em;
-    left: -3em;
+	position: absolute;
+	font-size: 2em;
+	top: 3.1em;
+	left: -2.5em;
 }

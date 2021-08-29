@@ -23,6 +23,23 @@
     <button id="configs" onclick="window.location.href='/'">Configurações</button>
     <button id="terminate-request" onclick="requestEvent('terminate')">Terminate</button>
 
+    <h3>Estratégia em Execução</h3>
+
+    <div id="strategys-indicator">
+        <div id="initial-moviment-indicator">
+            <h3>Start</h3>
+            <div id="initial-strategy-status-circle"></div>
+        </div>
+        <div id="search-indicator">
+            <h3>Busca</h3>
+            <div id="search-strategy-status-circle"></div>
+        </div>
+        <div id="chase-indicator">
+            <h3>Perseguição</h3>
+            <div id="chase-strategy-status-circle"></div>
+        </div>
+    </div>
+
     <div id="robot">
         <div id="robot-body">
             <div id="left-side-op" class="op-sensor"></div>
