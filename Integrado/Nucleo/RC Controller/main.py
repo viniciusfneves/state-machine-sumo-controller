@@ -31,7 +31,7 @@ def main():
             while(controller.angularSpeed != 1):
                 pass
             calibrated = True
-        print("Calibrado!\nEnviando comandos...")
+            print("Calibrado!\nEnviando comandos...")
 
         payload["linear"] = controller.linearSpeed
         payload["angular"] = controller.angularSpeed
@@ -45,13 +45,13 @@ def main():
 
         # Botão Start encerra o programa e envia comando para parar os motores
         if controller.Start == 1:
-            print("Comandando parada...")
+            print("Encerrando robô...")
             payload["linear"] = 0
             payload["angular"] = 0
             # Continua enviando sinal de parada dos motores até que recebe uma confirmação do robô que o sinal foi interpretado corretamente
             while (send_commands(payload) == False):
                 pass
-            print("Exiting!")
+            print("Encerrado!")
             break
 
         time.sleep(taxa_de_atualizacao/1000)

@@ -10,6 +10,7 @@ dead_zone = 10  # em porcentagem
 max_input = 32768  # não mexer
 
 dead_zone_size = max_input/dead_zone  # não mexer
+##---><---##
 
 
 def clearConsole():
@@ -19,17 +20,15 @@ def clearConsole():
 def map(x, in_min, in_max, out_min, out_max):
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
+
 # Mixa o canal da velocidade linear
-
-
 def mixLinearChannels(forward_input, backward_input):
     mixedLinearSpeed = forward_input + backward_input*-1
     mixedLinearSpeed = round(map(mixedLinearSpeed, -255, 255, -1, 1), 2)
     return mixedLinearSpeed
 
+
 # Mixa e aplica dead-zone no comando da velocidade angular
-
-
 def mixAngularChannels(input):
     if input < dead_zone_size and input > 0:
         mixedAngularSpeed = 0
