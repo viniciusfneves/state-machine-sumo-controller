@@ -27,6 +27,29 @@ void broadcastRobotConfiguration()
     configs["available_opponent_sensors"] = NUMBER_OF_OPPONENT_SENSORS;
     configs["available_edge_sensors"] = NUMBER_OF_EDGE_SENSORS;
 
+    // Estado de execução
+    switch (robotConfiguration.robotState)
+    {
+    case RobotState::ready:
+        configs["robot_status"] = "ready";
+        break;
+    case RobotState::stopped:
+        configs["robot_status"] = "stopped";
+        break;
+    case RobotState::starting:
+        configs["robot_status"] = "starting";
+        break;
+    case RobotState::exec_initial:
+        configs["robot_status"] = "exec_initial";
+        break;
+    case RobotState::exec_search:
+        configs["robot_status"] = "exec_search";
+        break;
+    case RobotState::exec_chase:
+        configs["robot_status"] = "exec_chase";
+        break;
+    }
+
     // Modo de operação
     switch (robotConfiguration.mode)
     {
@@ -105,4 +128,34 @@ void broadcastMotors(int left_motor_PWM, int right_motor_PWM)
     serializeAndBroadcast(readings);
 }
 
+// Envia informações sobre o estado atual do robô
+void broadcastRobotState(RobotState state)
+{
+    changeRobotState(state);
+
+    StaticJsonDocument<64> readings;
+
+    switch (robotConfiguration.robotState)
+    {
+    case RobotState::ready:
+        readings["robot_status"] = "ready";
+        break;
+    case RobotState::stopped:
+        readings["robot_status"] = "stopped";
+        break;
+    case RobotState::starting:
+        readings["robot_status"] = "starting";
+        break;
+    case RobotState::exec_initial:
+        readings["robot_status"] = "exec_initial";
+        break;
+    case RobotState::exec_search:
+        readings["robot_status"] = "exec_search";
+        break;
+    case RobotState::exec_chase:
+        readings["robot_status"] = "exec_chase";
+        break;
+    }
+    serializeAndBroadcast(readings);
+}
 #endif // SEND_DATA_HPP

@@ -5,6 +5,10 @@
 #include "../events/events.hpp"
 #include "../machine/fight_machine.hpp"
 #include "../motors/drive_motors.hpp"
+#include "../configuration/configurations.hpp"
+#ifdef ESP32_ENV
+#include "../communications/data/send_data.hpp"
+#endif
 
 namespace sml = boost::sml;
 
@@ -12,7 +16,7 @@ namespace sml = boost::sml;
 // Responsável pelas macrotransições entre estados do robô
 
 // Função principal de estruturar as máquinas aninhadas e acioná-las conforme necessário
-// Além de garantir transições existentes para o estado "DISENGAGED", servindo como FailSafe 
+// Além de garantir transições existentes para o estado "DisengageRobot", servindo como failsafe 
 
 struct Machine
 {
@@ -20,8 +24,18 @@ struct Machine
     {
         using namespace sml;
         // Funções
-        auto set_startClock = [] { setTimeout(4000); };
-        auto disengage = [] { stopMotors(); };
+        auto set_startClock = [] { 
+            setTimeout(robotConfiguration.startTime); 
+#ifdef ESP32_ENV 
+            broadcastRobotState(RobotState::starting); 
+#endif
+        };
+        auto disengage = [] { 
+            stopMotors(); 
+#ifdef ESP32_ENV 
+            broadcastRobotState(RobotState::stopped); 
+#endif
+        };
 
         return make_transition_table(
             *"initial"_s                                                      = "Configuration"_s,
@@ -35,7 +49,7 @@ struct Machine
 
             state<FightMachine>  +  event<Terminate>                          =   "DisengageRobot"_s,
 
-            "DisengageRobot"_s   +  on_entry<_>         / disengage,
+            "DisengageRobot"_s   +  on_entry<_>         /  disengage,
             "DisengageRobot"_s   +  event<Reset>                              =   "Configuration"_s);
     }
 };

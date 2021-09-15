@@ -54,6 +54,12 @@ function setMotorPower(id, reading) {
 	}
 }
 
+function clearRobotState(){
+	document.getElementById("initial-strategy-status-circle").style.background = "#868686";
+	document.getElementById("search-strategy-status-circle").style.background = "#868686";
+	document.getElementById("chase-strategy-status-circle").style.background = "#868686";
+}
+
 var NUMBER_OF_OPPONENT_SENSORS = 0;
 
 function refreshOpSensorReadings(opReadings) {
@@ -131,6 +137,35 @@ connection.onmessage = function (response) {
 		if ("motor" in json["readings"]) {
 			setMotorPower("left", json["readings"]["motor"][0]);
 			setMotorPower("right", json["readings"]["motor"][1]);
+		}
+	}
+
+	if("robot_status" in json){
+		if(json["robot_status"] == "ready"){
+			clearRobotState();
+		}
+
+		if(json["robot_status"] == "starting"){
+			clearRobotState();
+		}
+
+		if(json["robot_status"] == "stopped"){
+			clearRobotState();
+		}
+
+		if(json["robot_status"] == "exec_initial"){
+			clearRobotState();
+			document.getElementById("initial-strategy-status-circle").style.background = "#00770c";
+		}
+
+		if(json["robot_status"] == "exec_search"){
+			clearRobotState();
+			document.getElementById("search-strategy-status-circle").style.background = "#00770c";
+		}
+
+		if(json["robot_status"] == "exec_chase"){
+			clearRobotState();
+			document.getElementById("chase-strategy-status-circle").style.background = "#00770c";
 		}
 	}
 };

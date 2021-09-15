@@ -3,11 +3,26 @@
 
 #include "../strategies/strategies.hpp"
 
+// Status de execução das estratégias do robô
+enum class RobotState{
+    ready,
+    starting,
+    stopped,
+    exec_initial,
+    exec_search,
+    exec_chase
+};
+
 struct Configurations
 {
     // Define a velocidade máxima global do robô -> (int)[0, 255]
     int maxSpeed = 255;
+    // Define o tempo de acionamento do robô para a luta
+    int startTime = 4000;
+    // Guarda o estado atual do robô -> Inicializado com stopped
+    RobotState robotState = RobotState::stopped;
 
+    // Parâmetros do PID
     double Kp = 1.7;
     double Ki = 0;
     double Kd = 0.6;
@@ -53,6 +68,16 @@ void setChaseStrategy(Chase strategy)
 void setMode(Mode mode)
 {
     robotConfiguration.mode = mode;
+}
+
+// Muda o tempo de acionamento do robô para começar a luta
+void setStartTime(int time)
+{
+    robotConfiguration.startTime = time;
+}
+
+void changeRobotState(RobotState state){
+    robotConfiguration.robotState = state;
 }
 
 #endif // CONFIGURATIONS_HPP
