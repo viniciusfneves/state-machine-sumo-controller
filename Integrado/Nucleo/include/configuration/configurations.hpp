@@ -17,6 +17,7 @@ struct Configurations
 {
     // Define a velocidade máxima global do robô -> (int)[0, 255]
     int maxSpeed = 255;
+    double radarSpeed = 1;
     // Define o tempo de acionamento do robô para a luta
     int startTime = 4000;
     // Guarda o estado atual do robô -> Inicializado com stopped
@@ -26,8 +27,6 @@ struct Configurations
     double Kp = 1.7;
     double Ki = 0;
     double Kd = 0.6;
-
-    double tal = 100;
 
     // Define uma velocidade angular máxima para o modo de perseguição -> (double)[0,1]
     double maxAngularSpeedInChase = 0.55;

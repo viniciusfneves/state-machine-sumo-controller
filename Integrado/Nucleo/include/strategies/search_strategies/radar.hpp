@@ -4,6 +4,7 @@
 #include "../../../lib/boost/sml.hpp"
 #include "../../motors/drive_motors.hpp"
 #include "../../dynamic_data/dynamic_data.hpp"
+#include "../../configuration/configurations.hpp"
 
 namespace sml = boost::sml;
 
@@ -16,27 +17,9 @@ struct SearchRadar
         auto left  = [] { return getErrorFromOPSensors() < 0 ? true : false; };
         auto right = [] { return getErrorFromOPSensors() > 0 ? true : false; };
 
-#if defined(ET_MINI) || defined(ZE_PEQUENO) || defined(MERI)
-        // Funções MINI
-        auto rotate_left = []
-        {
-            driveRobot(
-                0,
-                -1 + exp(-(millis() - robotData.tempoRadar) * robotConfiguration.tal));
-        };
-        auto rotate_right = []
-        {
-            driveRobot(
-                0,
-                1 - exp(-(millis() - robotData.tempoRadar) * robotConfiguration.tal));
-        };
-#endif
-
-#if defined(VAL) || defined(ATENA) || defined(APOLO)
-        // Funções 3KG
-        auto rotate_left = [] { driveRobot(0, -1); };
-        auto rotate_right = [] { driveRobot(0, 1); };
-#endif
+        // Funções
+        auto rotate_left = [] { driveRobot(0, -1 * robotConfiguration.radarSpeed); };
+        auto rotate_right = [] { driveRobot(0, robotConfiguration.radarSpeed); };
 
         return make_transition_table(
             *"entry"_s = "switch"_s,
