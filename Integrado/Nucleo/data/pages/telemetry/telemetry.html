@@ -25,18 +25,18 @@
 
     <h3>Estratégia em Execução</h3>
 
-    <div id="strategys-indicator">
-        <div id="initial-moviment-indicator">
-            <h3>Start</h3>
-            <div id="initial-strategy-status-circle"></div>
+    <div id="strategys-indicator-container">
+        <div class="status-indicator">
+            <h3 class="status-text">Start</h3>
+            <div class="status-circle" id="initial-strategy-status-circle"></div>
         </div>
-        <div id="search-indicator">
-            <h3>Busca</h3>
-            <div id="search-strategy-status-circle"></div>
+        <div class="status-indicator">
+            <h3 class="status-text">Busca</h3>
+            <div class="status-circle" id="search-strategy-status-circle"></div>
         </div>
-        <div id="chase-indicator">
-            <h3>Perseguição</h3>
-            <div id="chase-strategy-status-circle"></div>
+        <div class="status-indicator">
+            <h3 class="status-text">Perseguição</h3>
+            <div class="status-circle" id="chase-strategy-status-circle"></div>
         </div>
     </div>
 
@@ -55,8 +55,8 @@
             <div id="rear-right-edge" class="edge-sensor"></div>
             <div id="left-motor" class="motor"></div>
             <div id="right-motor" class="motor"></div>
-            <h4 id="left-motor-power">0</h4>
-            <h4 id="right-motor-power">0</h4>
+            <h4 id="left-motor-power"> - </h4>
+            <h4 id="right-motor-power"> - </h4>
         </div>
     </div>
 </body>
