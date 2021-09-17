@@ -18,12 +18,7 @@ struct InitialMoveSelector
     {
         using namespace sml;
         //Funções
-        auto entry = []
-        { 
-#ifdef ESP32_ENV
-            broadcastRobotState(RobotState::exec_initial); 
-#endif
-        };
+        auto entry        = [] { changeRobotState(RobotState::exec_initial); };
 
         // Guards
         auto none         = [] { return robotConfiguration.initialMove == InitialMove::none; };

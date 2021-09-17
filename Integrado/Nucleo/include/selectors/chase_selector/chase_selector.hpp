@@ -4,9 +4,6 @@
 #include "../../../lib/boost/sml.hpp"
 #include "../../configuration/configurations.hpp"
 #include "../../strategies/chase_controllers/standard_chase_controller.hpp"
-#ifdef ESP32_ENV
-#include "../../communications/data/send_data.hpp"
-#endif
 
 namespace sml = boost::sml;
 
@@ -15,13 +12,8 @@ struct ChaseSelector
     auto operator()() const
     {
         using namespace sml;
-                //Funções
-        auto entry = []
-        { 
-#ifdef ESP32_ENV
-            broadcastRobotState(RobotState::exec_chase); 
-#endif
-        };
+        //Funções
+        auto entry    = [] { changeRobotState(RobotState::exec_chase); };
 
         // Guards
         auto standard = [] { return robotConfiguration.chase == Chase::standard; };

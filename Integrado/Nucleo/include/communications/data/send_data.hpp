@@ -127,35 +127,4 @@ void broadcastMotors(int left_motor_PWM, int right_motor_PWM)
 
     serializeAndBroadcast(readings);
 }
-
-// Envia informações sobre o estado atual do robô
-void broadcastRobotState(RobotState state)
-{
-    changeRobotState(state);
-
-    StaticJsonDocument<64> readings;
-
-    switch (robotConfiguration.robotState)
-    {
-    case RobotState::ready:
-        readings["robot_status"] = "ready";
-        break;
-    case RobotState::stopped:
-        readings["robot_status"] = "stopped";
-        break;
-    case RobotState::starting:
-        readings["robot_status"] = "starting";
-        break;
-    case RobotState::exec_initial:
-        readings["robot_status"] = "exec_initial";
-        break;
-    case RobotState::exec_search:
-        readings["robot_status"] = "exec_search";
-        break;
-    case RobotState::exec_chase:
-        readings["robot_status"] = "exec_chase";
-        break;
-    }
-    serializeAndBroadcast(readings);
-}
 #endif // SEND_DATA_HPP

@@ -6,9 +6,6 @@
 #include "../machine/fight_machine.hpp"
 #include "../motors/drive_motors.hpp"
 #include "../configuration/configurations.hpp"
-#ifdef ESP32_ENV
-#include "../communications/data/send_data.hpp"
-#endif
 
 namespace sml = boost::sml;
 
@@ -24,28 +21,13 @@ struct Machine
     {
         using namespace sml;
         // Funções
-        auto set_startClock = [] { 
-            setTimeout(robotConfiguration.startTime); 
-#ifdef ESP32_ENV 
-            broadcastRobotState(RobotState::starting); 
-#endif
-        };
-        auto disengage = [] { 
-            stopMotors(); 
-#ifdef ESP32_ENV 
-            broadcastRobotState(RobotState::stopped); 
-#endif
-        };
-        auto engage = [] { 
-            stopMotors(); 
-#ifdef ESP32_ENV 
-            broadcastRobotState(RobotState::ready); 
-#endif
-        };
+        auto set_startClock = [] { setTimeout(robotConfiguration.startTime); changeRobotState(RobotState::starting); };
+        auto disengage      = [] { stopMotors(); changeRobotState(RobotState::stopped); };
 
         return make_transition_table(
-            *"initial"_s                                /  engage             = "Configuration"_s,
+            *"initial"_s                                                      = "Configuration"_s,
 
+            "Configuration"_s    +  on_entry<_>         /  [] { changeRobotState(RobotState::ready); },
             "Configuration"_s    +  event<Start>                              =   "StartClock"_s,
 
 
@@ -53,10 +35,12 @@ struct Machine
             "StartClock"_s       +  event<Timeout>                            =   state<FightMachine>,
             "StartClock"_s       +  event<Terminate>                          =   "DisengageRobot"_s,
 
+
             state<FightMachine>  +  event<Terminate>                          =   "DisengageRobot"_s,
 
+
             "DisengageRobot"_s   +  on_entry<_>         /  disengage,
-            "DisengageRobot"_s   +  event<Reset>        /  engage             =   "Configuration"_s);
+            "DisengageRobot"_s   +  event<Reset>                              =   "Configuration"_s);
     }
 };
 

@@ -18,13 +18,7 @@ struct SearchSelector
     {
         using namespace sml;
         //Funções
-        auto entry = []
-        { 
-            resetPID(); 
-#ifdef ESP32_ENV
-            broadcastRobotState(RobotState::exec_search); 
-#endif
-        };
+        auto entry  = [] { resetPID(); changeRobotState(RobotState::exec_search); };
 
         // Guards
         auto none   = [] { return robotConfiguration.search == Search::none; };

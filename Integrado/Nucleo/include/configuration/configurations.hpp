@@ -2,6 +2,7 @@
 #define CONFIGURATIONS_HPP
 
 #include "../strategies/strategies.hpp"
+#include "../event_handler/circular_buffer.hpp"
 
 // Status de execução das estratégias do robô
 enum class RobotState{
@@ -46,6 +47,7 @@ Configurations robotConfiguration;
 void setInitialStrategy(InitialMove strategy)
 {
     robotConfiguration.initialMove = strategy;
+    addEventToQueue(Event::SendRobotConfig);
 }
 
 // strategy -> (enum) Search
@@ -53,6 +55,7 @@ void setInitialStrategy(InitialMove strategy)
 void setSearchStrategy(Search strategy)
 {
     robotConfiguration.search = strategy;
+    addEventToQueue(Event::SendRobotConfig);
 }
 
 // strategy -> (enum) Chase
@@ -60,6 +63,7 @@ void setSearchStrategy(Search strategy)
 void setChaseStrategy(Chase strategy)
 {
     robotConfiguration.chase = strategy;
+    addEventToQueue(Event::SendRobotConfig);
 }
 
 // mode -> (enum) Mode
@@ -67,28 +71,34 @@ void setChaseStrategy(Chase strategy)
 void setMode(Mode mode)
 {
     robotConfiguration.mode = mode;
+    addEventToQueue(Event::SendRobotConfig);
 }
 
 // Muda o tempo de acionamento do robô para começar a luta
 void setStartTime(int time)
 {
     robotConfiguration.startTime = time;
+    addEventToQueue(Event::SendRobotConfig);
 }
 
 // Muda na memória do robô o seu estado de execução atual
 void changeRobotState(RobotState state){
     robotConfiguration.robotState = state;
+    addEventToQueue(Event::SendRobotConfig);
 }
 
 // Altera a velocidade linear máxima global permitida para o robô
 void changeMaxSpeed(int newSpeed){
     robotConfiguration.maxSpeed = newSpeed;
+    addEventToQueue(Event::SendRobotConfig);
 }
 
+// Altera os parâmetros para cálculo do controle PID
 void changePIDSettings(double set_kp, double set_ki, double set_kd){
     robotConfiguration.Kp = set_kp;
     robotConfiguration.Ki = set_ki;
     robotConfiguration.Kd = set_kd;
+    addEventToQueue(Event::SendRobotConfig);
 }
 
 #endif // CONFIGURATIONS_HPP
