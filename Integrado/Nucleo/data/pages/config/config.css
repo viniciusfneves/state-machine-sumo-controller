@@ -66,6 +66,7 @@ button {
 .setter-value-field {
     font-family: Helvetica;
     font-size: 20px;
+    color: white;
     text-align: center;
     width: 12%;
     height: 35px;
@@ -76,15 +77,15 @@ button {
     border-radius: 8px;
 }
 
-#set-pid-button {
+#set-button {
     display: block;
     margin: 20px auto;
     width: 115px;
-    background-color: rgb(100, 0, 100);
+    background-color: rgb(155, 0, 120);
     color: white;
 }
 
 #start-time-value {
-    min-width: 100px;
-    max-width: 140px;
+    min-width: 75px;
+    max-width: 115px;
 }
