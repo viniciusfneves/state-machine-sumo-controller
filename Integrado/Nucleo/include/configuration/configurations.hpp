@@ -75,8 +75,20 @@ void setStartTime(int time)
     robotConfiguration.startTime = time;
 }
 
+// Muda na memória do robô o seu estado de execução atual
 void changeRobotState(RobotState state){
     robotConfiguration.robotState = state;
+}
+
+// Altera a velocidade linear máxima global permitida para o robô
+void changeMaxSpeed(int newSpeed){
+    robotConfiguration.maxSpeed = newSpeed;
+}
+
+void changePIDSettings(double set_kp, double set_ki, double set_kd){
+    robotConfiguration.Kp = set_kp;
+    robotConfiguration.Ki = set_ki;
+    robotConfiguration.Kd = set_kd;
 }
 
 #endif // CONFIGURATIONS_HPP
