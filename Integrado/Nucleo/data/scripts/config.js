@@ -10,31 +10,31 @@ window.onload = function () {
 		} else {
             // Verifica se há alterações não salvas no campo Start Time
 			if (document.getElementById("start-time-value").value == start_time) {
-				document.getElementById("start-time-value").style.background = "green";
+				document.getElementById("start-time-value").style.background = "#00770c";
 			} else {
-				document.getElementById("start-time-value").style.background = "blue";
+				document.getElementById("start-time-value").style.background = "#cc8b00";
 			}
 		}
         
         // Verifica se há alterações não salvas no campo P do PID
         if (document.getElementById("P-regulator-value").value == pid_kp) {
-            document.getElementById("P-regulator-value").style.background = "green";
+            document.getElementById("P-regulator-value").style.background = "#00770c";
         } else {
-            document.getElementById("P-regulator-value").style.background = "blue";
+            document.getElementById("P-regulator-value").style.background = "#cc8b00";
         }
 
         // Verifica se há alterações não salvas no campo I do PID
         if (document.getElementById("I-regulator-value").value == pid_ki) {
-            document.getElementById("I-regulator-value").style.background = "green";
+            document.getElementById("I-regulator-value").style.background = "#00770c";
         } else {
-            document.getElementById("I-regulator-value").style.background = "blue";
+            document.getElementById("I-regulator-value").style.background = "#cc8b00";
         }
 
         // Verifica se há alterações não salvas no campo D do PID
         if (document.getElementById("D-regulator-value").value == pid_kd) {
-            document.getElementById("D-regulator-value").style.background = "green";
+            document.getElementById("D-regulator-value").style.background = "#00770c";
         } else {
-            document.getElementById("D-regulator-value").style.background = "blue";
+            document.getElementById("D-regulator-value").style.background = "#cc8b00";
         }
 	}, 200);
 };
@@ -42,7 +42,7 @@ window.onload = function () {
 // Conexão estabelecida
 connection.onopen = function () {
 	document.getElementById("connection-status-circle").style.background = "#00770c";
-	document.getElementById("connection-status-circle").style.color = "#00770c";
+	document.getElementById("connection-status-text").style.color = "#00770c";
 	document.getElementById("connection-status-text").innerHTML = "Connected";
 };
 
@@ -192,6 +192,12 @@ function updateVariableSettings(start_time, pid_kp, pid_ki, pid_kd) {
 	document.getElementById("P-regulator-value").value = pid_kp;
 	document.getElementById("I-regulator-value").value = pid_ki;
 	document.getElementById("D-regulator-value").value = pid_kd;
+}
+
+function clearRobotState(){
+	document.getElementById("armed-status-circle").style.background = "#868686";
+	document.getElementById("fight-status-circle").style.background = "#868686";
+	document.getElementById("disabled-status-circle").style.background = "#868686";
 }
 
 // Quando recebe dados do robô
