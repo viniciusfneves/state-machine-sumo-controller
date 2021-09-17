@@ -110,6 +110,13 @@ function updateRobotConfigurations(type, strategy) {
     document.getElementById(type + "_" + strategy).style.backgroundColor = selected_strategy_color;
 }
 
+function updateVariableSettings(start_time, pid_kp, pid_ki, pid_kd){
+    document.getElementById("start-time-value").value = start_time;
+    document.getElementById("P-regulator-value").value = pid_kp;
+    document.getElementById("I-regulator-value").value = pid_ki;
+    document.getElementById("D-regulator-value").value = pid_kd;
+}
+
 // Conexão estabelecida
 connection.onopen = function() {
     document.getElementById("connection-status-circle").style.background = "#00770c";
@@ -142,6 +149,12 @@ connection.onmessage = function(response) {
 
     // Recebendo Array de estratégias
     if ("configurations" in json) {
+        let start_time = json["configurations"]["settings"]["start_time"];
+        let pid_kp = json["configurations"]["settings"]["pid"]["kp"];
+        let pid_ki = json["configurations"]["settings"]["pid"]["ki"];
+        let pid_kd = json["configurations"]["settings"]["pid"]["kd"];
+        updateVariableSettings(start_time, pid_kp, pid_ki, pid_kd);
+
         let mode_configured;
         switch (json["configurations"]["mode"]) {
             case "auto":

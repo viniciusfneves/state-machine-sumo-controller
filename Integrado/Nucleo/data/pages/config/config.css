@@ -84,7 +84,7 @@ button {
     color: white;
 }
 
-#start-time {
+#start-time-value {
     min-width: 100px;
     max-width: 140px;
 }
