@@ -27,6 +27,12 @@ void broadcastRobotConfiguration()
     configs["available_opponent_sensors"] = NUMBER_OF_OPPONENT_SENSORS;
     configs["available_edge_sensors"] = NUMBER_OF_EDGE_SENSORS;
 
+    // Parâmetros configuráveis
+    configs["configurations"]["settings"]["start_time"] = robotConfiguration.startTime;
+    configs["configurations"]["settings"]["pid"]["kp"] = robotConfiguration.Kp;
+    configs["configurations"]["settings"]["pid"]["ki"] = robotConfiguration.Ki;
+    configs["configurations"]["settings"]["pid"]["kd"] = robotConfiguration.Kd;
+
     // Estado de execução
     switch (robotConfiguration.robotState)
     {
