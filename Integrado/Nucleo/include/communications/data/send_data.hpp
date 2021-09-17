@@ -18,7 +18,7 @@ void serializeAndBroadcast(DynamicJsonDocument readings)
 // Envia as configurações atuais do robô
 void broadcastRobotConfiguration()
 {
-    StaticJsonDocument<256> configs;
+    StaticJsonDocument<320> configs;
 
     // Nome do robô
     configs["robot_name"] = robotSpecifications.robotName;
@@ -100,7 +100,7 @@ void broadcastRobotConfiguration()
 // Envia as leituras dos sensores de borda e dos sensores de oponente -> TELEMETRIA
 void broadcastSensors(bool opSensorArray[], bool edgeSensorArray[])
 {
-    StaticJsonDocument<384> readings;
+    StaticJsonDocument<128> readings;
 
     // Sensores de oponente
     for (int i = 0; i < NUMBER_OF_OPPONENT_SENSORS; i++)
