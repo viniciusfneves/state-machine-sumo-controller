@@ -38,6 +38,18 @@ void processJsonMessage(String message)
         }
     }
 
+    // Processa pedido de alteração do tempo para início do luta
+    if (jsonMessage.containsKey("start_time"))
+    {
+        setStartTime(jsonMessage["start_time"]);
+    }
+
+    // Processa pedido de alteração das constantes do pid
+    if (jsonMessage.containsKey("pid"))
+    {
+        changePIDSettings(jsonMessage["pid"]["kp"], jsonMessage["pid"]["ki"], jsonMessage["pid"]["kd"]);
+    }
+
     // Processa as requisições de alteração de modo de operação
     if (jsonMessage.containsKey("mode"))
     {
