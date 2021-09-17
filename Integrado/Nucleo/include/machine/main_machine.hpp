@@ -36,9 +36,15 @@ struct Machine
             broadcastRobotState(RobotState::stopped); 
 #endif
         };
+        auto engage = [] { 
+            stopMotors(); 
+#ifdef ESP32_ENV 
+            broadcastRobotState(RobotState::ready); 
+#endif
+        };
 
         return make_transition_table(
-            *"initial"_s                                                      = "Configuration"_s,
+            *"initial"_s                                /  engage             = "Configuration"_s,
 
             "Configuration"_s    +  event<Start>                              =   "StartClock"_s,
 
@@ -50,7 +56,7 @@ struct Machine
             state<FightMachine>  +  event<Terminate>                          =   "DisengageRobot"_s,
 
             "DisengageRobot"_s   +  on_entry<_>         /  disengage,
-            "DisengageRobot"_s   +  event<Reset>                              =   "Configuration"_s);
+            "DisengageRobot"_s   +  event<Reset>        /  engage             =   "Configuration"_s);
     }
 };
 
