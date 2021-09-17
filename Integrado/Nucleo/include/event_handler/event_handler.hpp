@@ -33,7 +33,6 @@ void processMachineEvents()
 #ifdef ESP32_ENV
         case Event::SendRobotConfig:
             broadcastRobotConfiguration();
-            broadcastMotors(0, 0);
 #endif
         default:
             break;
