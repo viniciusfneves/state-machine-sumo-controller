@@ -256,4 +256,34 @@ connection.onmessage = function (response) {
 		}
 		updateRobotConfigurations(strategy_type.chase, chase_configured);
 	}
+
+	// Atualiza Status do Robô
+	if("robot_status" in json){
+		if(json["robot_status"] == "ready"){
+			clearRobotState();
+			document.getElementById("armed-status-circle").style.background = "#cc8b00";
+		}
+
+		if(json["robot_status"] == "starting"){
+			clearRobotState();
+			document.getElementById("fight-status-circle").style.background = "#00770c";
+		}
+
+		if(json["robot_status"] == "stopped"){
+			clearRobotState();
+			document.getElementById("disabled-status-circle").style.background = "#bd0101";
+		}
+
+		if(json["robot_status"] == "exec_initial"){
+			clearRobotState();
+			document.getElementById("fight-status-circle").style.background = "#00770c";		}
+
+		if(json["robot_status"] == "exec_search"){
+			clearRobotState();
+			document.getElementById("fight-status-circle").style.background = "#00770c";		}
+
+		if(json["robot_status"] == "exec_chase"){
+			clearRobotState();
+			document.getElementById("fight-status-circle").style.background = "#00770c";		}
+	}
 };
