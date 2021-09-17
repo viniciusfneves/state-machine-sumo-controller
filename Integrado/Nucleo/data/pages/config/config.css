@@ -18,6 +18,10 @@ h1 {
     margin: 50px auto 30px;
 }
 
+#h3-status{
+    margin: 35px 0 10px 0;
+}
+
 button {
     border: none;
     width: 115px;
@@ -39,6 +43,10 @@ button {
     background-color: #bd0101;
 }
 
+.button-orange{
+    background-color: #cc8b00;
+}
+
 #connection-info {
     display: inline-block;
     margin: 0px;
@@ -47,12 +55,12 @@ button {
 #connection-status-text {
     display: inline-block;
     margin: 0px;
-    color: midnightblue;
+    color: #cc8b00;
 }
 
 #connection-status-circle {
     display: inline-block;
-    background: #e4c200;
+    background: #cc8b00;
     vertical-align: baseline;
     width: 18px;
     height: 18px;
@@ -88,4 +96,34 @@ button {
 #start-time-value {
     min-width: 75px;
     max-width: 115px;
+}
+
+#status-container{
+    display: flex;
+    width: 50%;
+    max-width: 460px;
+    min-width: 320px;
+    margin: auto;
+    justify-content: space-around;
+}
+
+.status-indicator{
+    display: inline-block;
+    margin: auto;
+}
+
+.status-circle{
+	background: #868686;
+	margin: auto;
+	width: 3vw;
+	height: 3vw;
+	max-width: 22px;
+	max-height: 22px;
+	min-width: 18px;
+	min-height: 18px;
+	border-radius: 50%;
+}
+
+.status-text{
+	font-size: medium;
 }
