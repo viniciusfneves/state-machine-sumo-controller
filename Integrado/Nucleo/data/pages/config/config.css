@@ -3,6 +3,7 @@ html {
     display: inline-block;
     margin: 0px auto;
     text-align: center;
+    background-color: rgb(245, 245, 245);
 }
 
 .inline-text {
@@ -75,6 +76,7 @@ button {
     font-family: Helvetica;
     font-size: 20px;
     color: white;
+    background-color: #6b6b6b;
     text-align: center;
     width: 12%;
     height: 35px;
