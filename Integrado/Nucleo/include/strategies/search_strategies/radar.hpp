@@ -18,8 +18,8 @@ struct SearchRadar
         auto right = [] { return getErrorFromOPSensors() > 0 ? true : false; };
 
         // Funções
-        auto rotate_left = [] { driveRobot(0, -1 * robotConfiguration.radarSpeed); };
-        auto rotate_right = [] { driveRobot(0, robotConfiguration.radarSpeed); };
+        auto rotate_left = [] { driveRobot(0, -1 * robotConfiguration.radarSpeed); std::cout << "radar" << std::endl;};
+        auto rotate_right = [] { driveRobot(0, robotConfiguration.radarSpeed); std::cout << "radar" << std::endl;};
 
         return make_transition_table(
             *"entry"_s = "switch"_s,

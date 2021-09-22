@@ -25,7 +25,17 @@ struct Timeout{};
 
 struct EdgeDetected{};
 
+struct OpponentInFront{};
+
+struct OpponentDetectedNotInFront{};
+
 struct OpponentDetected{};
+
+struct NotOpponentDetected{};
+
+struct LostOpponentAtLeft{};
+
+struct LostOpponentAtRight{};
 
 struct SendRobotConfig{};
 

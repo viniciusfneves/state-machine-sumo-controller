@@ -49,7 +49,21 @@ void processMachineEvents()
     }
     if (isOpponentDetected())
     {
+        if (getErrorFromOPSensors() == 0) {
+            Core.process_event(OpponentInFront{});
+        } else {
+            Core.process_event(OpponentDetectedNotInFront{});
+        }
         Core.process_event(OpponentDetected{});
+        return;
+    } else {
+        if (getErrorFromOPSensors() < 0) {
+            Core.process_event(LostOpponentAtLeft{});
+        } else if (getErrorFromOPSensors() > 0) {
+            Core.process_event(LostOpponentAtRight{});
+        }
+        
+        Core.process_event(NotOpponentDetected{});
         return;
     }
     if (isEdgeDetected())
