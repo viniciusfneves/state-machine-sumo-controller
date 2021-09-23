@@ -35,18 +35,13 @@ void setRequestsResponse()
     // Esses parametros são repassados para o código como JSON para serem interpretados como comandos do controle para o modo RC
     /* --> ERROS COM O CONTROLE <-- */
     // Caso não haja os parâmetros esperados, apresenta erro no código!!! -> Implementar futuras verificações para inibir isso
-    server.on("/controller", HTTP_POST, [](AsyncWebServerRequest *request) {
-        StaticJsonDocument<128> jsonMessage;
-
-        jsonMessage["controller"]["linearSpeed"] = request->getParam("linear", true)->value().toDouble();
-
-        jsonMessage["controller"]["angularSpeed"] = request->getParam("angular", true)->value().toDouble();
-
-        String JSONBuffer;
-
-        serializeJson(jsonMessage, JSONBuffer);
-        processJsonMessage(JSONBuffer);
-        request->send(200, "text/plain", "Command Received");
+    server.on("/controller", HTTP_POST, [](AsyncWebServerRequest * request){}, NULL, [](AsyncWebServerRequest * request, uint8_t *data, size_t len, size_t index, size_t total) {
+        String jsonpayload = "";
+        for (size_t i = 0; i < len; i++) {
+            jsonpayload += char(data[i]);
+        }
+        processJsonMessage(jsonpayload);
+        request->send(200, "text/plain", "Ok");
     });
 
     // Caso o usuário procure um endereço que não exista
