@@ -93,7 +93,7 @@ void changeRobotState(RobotState state){
 }
 
 // Altera a velocidade linear máxima global permitida para o robô
-void changeMaxSpeed(int newSpeed){
+void setMaxSpeed(int newSpeed){
     robotConfiguration.maxSpeed = newSpeed;
     addEventToQueue(Event::SendRobotConfig);
 }

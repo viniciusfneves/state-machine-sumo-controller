@@ -44,6 +44,12 @@ void processJsonMessage(String message)
         setStartTime(jsonMessage["start_time"]);
     }
 
+    // Processa pedido de alteração da velocidade máxima permitida para o robô
+    if (jsonMessage.containsKey("max_speed"))
+    {
+        setMaxSpeed(jsonMessage["max_speed"]);
+    }
+
     // Processa pedido de alteração das constantes do pid
     if (jsonMessage.containsKey("pid"))
     {

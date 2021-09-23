@@ -29,6 +29,7 @@ void broadcastRobotConfiguration()
 
     // Parâmetros configuráveis
     configs["configurations"]["settings"]["start_time"] = robotConfiguration.startTime;
+    configs["configurations"]["settings"]["max_speed"] = robotConfiguration.maxSpeed;
     configs["configurations"]["settings"]["pid"]["kp"] = robotConfiguration.Kp;
     configs["configurations"]["settings"]["pid"]["ki"] = robotConfiguration.Ki;
     configs["configurations"]["settings"]["pid"]["kd"] = robotConfiguration.Kd;
