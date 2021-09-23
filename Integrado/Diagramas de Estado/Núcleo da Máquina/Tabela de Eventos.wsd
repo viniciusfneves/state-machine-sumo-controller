@@ -2,7 +2,6 @@
 
 title Eventos do Mesin Negara
 
-
 entity Start {
     {field} Escopo: Main Machine
     {method} Inicia o modo de luta do robô
@@ -38,12 +37,7 @@ entity Controller {
 entity None {
     {field} Escopo: Global
     {method} Emite um evento nulo
+    ' Esse evento é emitido quando um robô não é detectado ou sua localização é perdida, por exemplo.
+    ' O mesmo exemplo vale para a borda da arena
 }
-
-
-/'
-' Descrições
-'/
-
-
 @enduml
