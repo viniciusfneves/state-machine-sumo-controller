@@ -106,7 +106,7 @@ void broadcastRobotConfiguration()
 // Envia as leituras dos sensores de borda e dos sensores de oponente -> TELEMETRIA
 void broadcastSensors(bool opSensorArray[], bool edgeSensorArray[])
 {
-    StaticJsonDocument<128> readings;
+    StaticJsonDocument<192> readings;
 
     // Sensores de oponente
     for (int i = 0; i < NUMBER_OF_OPPONENT_SENSORS; i++)
