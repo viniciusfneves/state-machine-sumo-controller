@@ -8,11 +8,9 @@
 #include "../../webots/webots_time.hpp"
 #endif
 
-// VARIAVEIS GLOBAIS
-//---    ---    ---    ---//
-bool timeoutActive = false; //Indica se Timeout está ativo
+bool _timeoutActive = false; //Indica se Timeout está ativo
 
-bool isTimeoutActive() { return timeoutActive; };
+bool isTimeoutActive() { return _timeoutActive; };
 
 unsigned long timeoutTime; //Indica qual o tempo, em milissegundos, que o evento Timeout deve ser disparado
 //---    ---    ---    ---//
@@ -21,7 +19,7 @@ unsigned long timeoutTime; //Indica qual o tempo, em milissegundos, que o evento
 //Após "time" millisegundos o evento será disparado
 void setTimeout(unsigned long time)
 {
-    timeoutActive = true;
+    _timeoutActive = true;
     timeoutTime = millis() + time;
 }
 
@@ -29,7 +27,7 @@ void setTimeout(unsigned long time)
 //Essa função deve vir OBRIGATÓRIAMENTE antes da máquina processar o evento de timeout
 void cancelTimeout()
 {
-    timeoutActive = false;
+    _timeoutActive = false;
 }
 
 #endif
