@@ -23,4 +23,8 @@ void addEventToQueue(Event event){
     eventQueue.push(event);
 };
 
+bool eventQueueIsFull(){
+    return eventQueue.isFull();
+}
+
 #endif // CIRCULAR_BUFFER_HPP
