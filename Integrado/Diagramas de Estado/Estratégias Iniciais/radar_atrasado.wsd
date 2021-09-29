@@ -4,10 +4,11 @@ title Estratégia Inicial - Radar Atrasado
 
 [*] --> SetTimeout
 SetTimeout --> Seeing
-Seeing -l-> Rotate_Left : [left]
-Seeing -r-> Rotate_Right : [right]
-Rotate_Left --> StayStopped : [opponentInFront]
-Rotate_Right --> StayStopped : [opponentInFront]
+Seeing -l-> Rotate_Left : [lostLeft]
+Seeing -r-> Rotate_Right : [lostRight]
+Rotate_Left -r-> Seeing : [foundOpponent]
+Rotate_Right -l-> Seeing : [foundOpponent]
+Seeing --> StayStopped : [opponentInFront]
 StayStopped -u-> Seeing : [lostOpponent]
 
 /'
@@ -18,6 +19,6 @@ SetTimeout : setTimeout(1000);
 Rotate_Left : driveRobot(0, -1 * robotConfiguration.radarSpeed);
 Rotate_Right : driveRobot(0, 1 * robotConfiguration.radarSpeed);
 StayStopped : stopMotors();
-Blind : driveRobot(0, pid(getErrorFromOPSensors()));
+Seeing : driveRobot(0, pid(getErrorFromOPSensors()));
 
 @enduml
