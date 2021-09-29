@@ -31,7 +31,7 @@ struct DynamicData
     bool edgeDetected;
 
     // POTÊNCIA DOS MOTORES
-    //int motorsPower[];
+    int motorsPower[2];
 
     // INPUTS DO CONTROLE -> MODO RC
     double controllerInputs[NUMBER_OF_CONTROLLER_CHANNELS]; // Segue a ordem do enum Input

@@ -4,6 +4,7 @@
 // Dependências gerais
 #include <configuration/specifications.hpp>
 #include <configuration/configurations.hpp>
+#include <dynamic_data/dynamic_data.hpp>
 
 #ifdef WEBOTS
 #include "../webots/motors.hpp"
@@ -58,7 +59,8 @@ void driveMotors(int PWM_left, int PWM_right)
 #endif
 
 #ifdef ESP32_ENV
-    broadcastMotors(PWM_left, PWM_right);
+    robotData.motorsPower[0] = PWM_left;
+    robotData.motorsPower[1] = PWM_right;
 #endif
 };
 

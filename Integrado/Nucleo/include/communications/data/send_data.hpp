@@ -104,10 +104,10 @@ void broadcastRobotConfiguration()
     serializeAndBroadcast(configs);
 }
 
-// Envia as leituras dos sensores de borda e dos sensores de oponente -> TELEMETRIA
-void broadcastSensors(bool opSensorArray[], bool edgeSensorArray[])
+// Envia as leituras dos sensores de borda, dos sensores de oponente e da potência dos motores -> TELEMETRIA
+void broadcastTelemetryData(bool opSensorArray[], bool edgeSensorArray[], int powerOnWheels[])
 {
-    StaticJsonDocument<192> readings;
+    StaticJsonDocument<320> readings;
 
     // Sensores de oponente
     for (int i = 0; i < NUMBER_OF_OPPONENT_SENSORS; i++)
@@ -121,16 +121,8 @@ void broadcastSensors(bool opSensorArray[], bool edgeSensorArray[])
         readings["readings"]["edge"][i] = edgeSensorArray[i];
     }
 
-    serializeAndBroadcast(readings);
-}
-
-// Envia a potência dos motores -> TELEMETRIA
-void broadcastMotors(int left_motor_PWM, int right_motor_PWM)
-{
-    StaticJsonDocument<64> readings;
-
-    readings["readings"]["motor"][0] = left_motor_PWM;
-    readings["readings"]["motor"][1] = right_motor_PWM;
+    readings["readings"]["motor"][0] = powerOnWheels[0];
+    readings["readings"]["motor"][1] = powerOnWheels[1];
 
     serializeAndBroadcast(readings);
 }
