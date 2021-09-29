@@ -4,6 +4,7 @@
 #include "../machine/main_machine.hpp"
 #include "../event_handler/circular_buffer.hpp"
 #include "../utilities/timeout_implementation/timeout.hpp"
+#include "../utilities/timeout_implementation/telemetry_interval_timeout.hpp"
 #ifdef ESP32_ENV
 #include <communications/data/send_data.hpp>
 #endif
@@ -31,11 +32,26 @@ void processMachineEvents()
             Core.process_event(Controller{});
             break;
 #ifdef ESP32_ENV
-        case Event::SendRobotConfig:
+        case Event::BroadcastRobotConfiguration:
             broadcastRobotConfiguration();
+            setTelemetryBroadcast();
+
+        case Event::BroadcastTelemetryData:
+            broadcastTelemetryData(
+                robotData.opponentSensorsDetectionArray,
+                robotData.edgeSensorsDetectionArray,
+                robotData.motorsPower);
+            updateTelemetry();
 #endif
         default:
             break;
+        }
+    }
+    if (isTelemetryActive())
+    {
+        if (readToSend(millis()))
+        {
+            addEventToQueue(Event::BroadcastTelemetryData);
         }
     }
     if (isTimeoutActive())

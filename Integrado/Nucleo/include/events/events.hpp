@@ -10,7 +10,8 @@ enum class Event
     Timeout,
     EdgeDetected,
     OpponentDetected,
-    SendRobotConfig,
+    BroadcastRobotConfiguration,
+    BroadcastTelemetryData,
     Controller,
     None
 };
@@ -31,13 +32,9 @@ struct OpponentDetectedNotInFront{};
 
 struct OpponentDetected{};
 
-struct NotOpponentDetected{};
+struct BroadcastRobotConfiguration{};
 
-struct LostOpponentAtLeft{};
-
-struct LostOpponentAtRight{};
-
-struct SendRobotConfig{};
+struct BroadcastTelemetryData{};
 
 struct Controller{};
 
