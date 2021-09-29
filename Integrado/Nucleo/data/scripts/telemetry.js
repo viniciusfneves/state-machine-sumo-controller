@@ -126,18 +126,10 @@ connection.onmessage = function (response) {
 	}
 
 	if ("readings" in json) {
-		if ("opponent" in json["readings"]) {
-			refreshOpSensorReadings(json["readings"]["opponent"]);
-		}
-
-		if ("edge" in json["readings"]) {
-			refreshEdgeSensorReadings(json["readings"]["edge"]);
-		}
-
-		if ("motor" in json["readings"]) {
-			setMotorPower("left", json["readings"]["motor"][0]);
-			setMotorPower("right", json["readings"]["motor"][1]);
-		}
+		refreshOpSensorReadings(json["readings"]["opponent"]);
+		refreshEdgeSensorReadings(json["readings"]["edge"]);
+		setMotorPower("left", json["readings"]["motor"][0]);
+		setMotorPower("right", json["readings"]["motor"][1]);
 	}
 
 	if("robot_status" in json){
