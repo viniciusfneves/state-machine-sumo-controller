@@ -1,0 +1,12 @@
+@startuml
+title Arco Curto - Direita
+
+[*] --> Arco_Curto_Direita
+
+/'
+' Descrições
+'/
+
+Arco_Curto_Direita : driveRobot(robotConfiguration.archLinearVelocity,robotConfiguration.shortArchAngularVelocity);
+Arco_Curto_Direita : exitState();
+@enduml

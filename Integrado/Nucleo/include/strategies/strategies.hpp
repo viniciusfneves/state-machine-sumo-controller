@@ -7,7 +7,8 @@ enum class InitialMove
     none,
     full_frente,
     zig_zag,
-    delayed_radar
+    delayed_radar,
+    short_right_arch
 };
 
 // Estratégias de busca
