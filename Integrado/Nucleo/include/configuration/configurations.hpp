@@ -38,7 +38,7 @@ struct Configurations
     double maxAngularSpeedInChase = 0.55;
 
     // Define a inicialização padrão das estratégias
-    InitialMove initialMove = InitialMove::short_right_arch;
+    InitialMove initialMove = InitialMove::full_frente;
     Search search = Search::radar;
     Chase chase = Chase::standard;
     Mode mode   = Mode::Auto;

@@ -24,11 +24,11 @@ struct DelayedRadar
         auto opponentInFront = [] { return (getErrorFromOPSensors() == 0 && isOpponentDetected()); };
 
         // Funções
-        auto rotate_left = [] { driveRobot(0, -1 * robotConfiguration.radarSpeed); std::cout << "left" << std::endl;}; // Talvez um PID seja melhor?
-        auto rotate_right = [] { driveRobot(0, robotConfiguration.radarSpeed); std::cout << "right" << std::endl; };     // Talvez um PID seja melhor?
-        auto stay_stopped = [] { stopMotors(); std::cout << "stop" << std::endl; };
-        auto exitState = [] { setTimeout(2000); std::cout << "Set Timeout" << std::endl; };
-        auto seeing = [] { driveRobot(0, pid(getErrorFromOPSensors())); std::cout << "seeing" << std::endl; };
+        auto rotate_left = [] { driveRobot(0, -1 * robotConfiguration.radarSpeed); }; // Talvez um PID seja melhor?
+        auto rotate_right = [] { driveRobot(0, robotConfiguration.radarSpeed); };     // Talvez um PID seja melhor?
+        auto stay_stopped = [] { stopMotors(); };
+        auto exitState = [] { setTimeout(2000); };
+        auto seeing = [] { driveRobot(0, pid(getErrorFromOPSensors())); };
 
         return make_transition_table(
             *"entry"_s = "setTimeout"_s,
