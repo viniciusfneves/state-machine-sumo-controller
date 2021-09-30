@@ -18,17 +18,14 @@ struct SearchRadar
         auto right = [] { return getErrorFromOPSensors() > 0; };
 
         // Funções
-        auto rotate_left = [] { driveRobot(0, -1 * robotConfiguration.radarSpeed); };
-        auto rotate_right = [] { driveRobot(0, robotConfiguration.radarSpeed); };
+        auto rotateLeft  = [] { driveRobot(0, -1 * robotConfiguration.radarSpeed); };
+        auto rotateRight = [] { driveRobot(0, robotConfiguration.radarSpeed); };
 
         return make_transition_table(
             *"entry"_s = "switch"_s,
 
-            "switch"_s  [left]   = "rotate_left"_s,
-            "switch"_s  [right]  = "rotate_right"_s,
-
-            "rotate_left"_s   + on_entry<_>  / rotate_left,
-            "rotate_right"_s  + on_entry<_>  / rotate_right);
+            "switch"_s  [left]   / rotateLeft   = "rotate_left"_s,
+            "switch"_s  [right]  / rotateRight  = "rotate_right"_s);
     }
 };
 #endif
