@@ -14,8 +14,8 @@ struct SearchRadar
     {
         using namespace sml;
         // Guards
-        auto left  = [] { return getErrorFromOPSensors() < 0 ? true : false; };
-        auto right = [] { return getErrorFromOPSensors() > 0 ? true : false; };
+        auto left  = [] { return getErrorFromOPSensors() <= 0; };
+        auto right = [] { return getErrorFromOPSensors() > 0; };
 
         // Funções
         auto rotate_left = [] { driveRobot(0, -1 * robotConfiguration.radarSpeed); };
