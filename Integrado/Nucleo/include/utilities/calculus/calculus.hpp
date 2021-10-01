@@ -7,32 +7,23 @@ double map_double(double x, double in_min, double in_max, double out_min, double
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-// Soma os valores de um vetor de booleanos
-// return (int)
-int sumArray(bool vector[], int quantity)
-{
-    int sum = 0;
-    for (int index = 0; index < quantity; index++)
-    {
-        sum += vector[index];
-    }
-    return sum;
-}
-
 // Verifica se um ou mais valores de um vetor é true ou 1
 // (vetor de booleanos) vector -> Vetor à ser analisado
 // (int) length -> Tamanho dos vetores
 bool checkTrueOnArray(bool vector[], int length)
 {
-    int reading = sumArray(vector, length);
-    if (reading == 0)
+    for (int index = 0; index < length; index++)
     {
-        return false;
+        if (vector[index] == 0)
+        {
+            ;
+        }
+        else
+        {
+            return true;
+        }
     }
-    else
-    {
-        return true;
-    }
+    return false;
 }
 
 // Calcula o erro atralado à leitura dos sensores de acordo com os pesos de cada sensor
