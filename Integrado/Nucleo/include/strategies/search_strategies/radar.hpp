@@ -19,7 +19,7 @@ struct SearchRadar
 
         // Funções
         auto rotateLeft  = [] { driveRobot(0, -1 * robotConfiguration.radarSpeed); };
-        auto rotateRight = [] { driveRobot(0, robotConfiguration.radarSpeed); };
+        auto rotateRight = [] { driveRobot(0, robotConfigurationradarSpeed); };
 
         return make_transition_table(
             *"entry"_s = "switch"_s,
