@@ -60,40 +60,11 @@ connection.onclose = function (event) {
 	document.getElementById("connection-status-text").innerHTML = "Conexão encerrada";
 };
 
-// Enum com os tipos de estratégias aceitas pelo robô
-const strategy_type = {
-	mode: "mode",
-	initial: "initial",
-	search: "search",
-	chase: "chase",
-};
-
-// Enum com os modos de operação
-const mode_selector = {
-	auto: "auto",
-	rc: "rc",
-};
-
-// Enum com estratégias iniciais
-const initial_move_strategy = {
-	none: "none",
-	full_frente: "full_frente",
-	zig_zag: "zig_zag",
-};
-
-// Enum com estratégias de busca
-const search_strategy = {
-	none: "none",
-	radar: "radar",
-};
-
-// Enum com estratégias de perseguição
-const chase_strategy = {
-	standard: "standard",
-};
-
 // Variáveis que guardam infos de configurações para verificação posterior no código
 
+var initial_strategys;
+var search_strategys;
+var chase_strategys;
 var start_time;
 var pid_kp;
 var pid_ki;
@@ -105,52 +76,9 @@ var strategies_color = "#868686";
 // Define a cor do botão das estratégias selecionadas
 var selected_strategy_color = "#008080";
 
-// Redefine os botões dos seletores para a cor padrão -> Não selecionado
-function clearButtons(buttons) {
-	let type;
-	switch (buttons) {
-		case mode_selector:
-			type = "mode";
-			break;
-		case initial_move_strategy:
-			type = "initial";
-			break;
-		case search_strategy:
-			type = "search";
-			break;
-		case chase_strategy:
-			type = "chase";
-			break;
-	}
-	for (let move in buttons) {
-		document.getElementById(type + "_" + move).style.backgroundColor = strategies_color;
-	}
-}
-
-// Envia um request pro robô para alterar sua configuração de estratégias
-// strategyType -> Qual tipo de estratégia está sendo alterada
-// strategy     -> Nova estratégia a ser selecionada
-function setStrategy(strategyType, strategy) {
-	let type;
-	switch (strategyType) {
-		case strategy_type.mode:
-			type = "mode";
-			clearButtons(mode_selector);
-			break;
-		case strategy_type.initial:
-			type = "initial";
-			clearButtons(initial_move_strategy);
-			break;
-		case strategy_type.search:
-			type = "search";
-			clearButtons(search_strategy);
-			break;
-		case strategy_type.chase:
-			type = "chase";
-			clearButtons(chase_strategy);
-			break;
-	}
-	connection.send('{ "' + type + '" : "' + strategy + '" }');
+// Envia um request pro robô para alterar sua configuração de estratégias ou emitir um evento para a máquina
+function sendRequest(requestType, request) {
+	connection.send('{"' + requestType + '":"' + request + '"}');
 }
 
 // Envia um request pro robô para alterar sua configuração de parâmetros de start_time e constantes do PID
@@ -161,29 +89,6 @@ function setParameters(){
     let parameter_pid_ki = document.getElementById("I-regulator-value").value;
     let parameter_pid_kd = document.getElementById("D-regulator-value").value;
     connection.send('{"start_time":' + parameter_start_time + ',"pid":{"kp":' + parameter_pid_kp + ',"ki":' + parameter_pid_ki + ',"kd":' + parameter_pid_kd + '}}');
-}
-
-//Envia um request para a máquina do robô emitir um evento específico
-function requestEvent(event) {
-	connection.send('{ "event_request" : "' + event + '" }');
-}
-
-// Atualiza visulmente na tela para quais estratégias o robô está atualmente configurado
-function updateRobotConfigurations(type, strategy) {
-	switch (type) {
-		case strategy_type.mode:
-			clearButtons(mode_selector);
-		case strategy_type.initial:
-			clearButtons(initial_move_strategy);
-			break;
-		case strategy_type.search:
-			clearButtons(search_strategy);
-			break;
-		case strategy_type.chase:
-			clearButtons(chase_strategy);
-			break;
-	}
-	document.getElementById(type + "_" + strategy).style.backgroundColor = selected_strategy_color;
 }
 
 // Atualiza as informações na tela sobre as configurações do robô de start_time e constantes do PID
@@ -207,6 +112,12 @@ connection.onmessage = function (response) {
 	// Processa o nome do robô recebido
 	if ("info" in json) {
 		document.getElementById("connection-status-text").innerHTML = "Connected to " + json["info"]["robot_name"];
+		initial_strategys = json["info"]["available_initial_strategies"];
+		search_strategys = json["info"]["available_search_strategies"];
+		chase_strategys = json["info"]["available_chase_strategies"];
+		makeStrategyButtons(json["info"]["available_initial_strategies"], 'initial');
+		makeStrategyButtons(json["info"]["available_search_strategies"], 'search');
+		makeStrategyButtons(json["info"]["available_chase_strategies"], 'chase');
 	}
 
 	// Processa Array de configurações do robô
@@ -218,49 +129,11 @@ connection.onmessage = function (response) {
 		pid_kd = json["configurations"]["pid"]["kd"];
 		updateVariableSettings(start_time, pid_kp, pid_ki, pid_kd);
 
-		let mode_configured;
-		switch (json["configurations"]["mode"]) {
-			case "auto":
-				mode_configured = mode_selector.auto;
-				break;
-			case "rc":
-				mode_configured = mode_selector.rc;
-				break;
-		}
-		updateRobotConfigurations(strategy_type.mode, mode_configured);
-
-		let initial_move_configured;
-		switch (json["configurations"]["initial_move"]) {
-			case "none":
-				initial_move_configured = initial_move_strategy.none;
-				break;
-			case "full_frente":
-				initial_move_configured = initial_move_strategy.full_frente;
-				break;
-			case "zig_zag":
-				initial_move_configured = initial_move_strategy.zig_zag;
-				break;
-		}
-		updateRobotConfigurations(strategy_type.initial, initial_move_configured);
-
-		let search_configured;
-		switch (json["configurations"]["search"]) {
-			case "none":
-				search_configured = search_strategy.none;
-				break;
-			case "radar":
-				search_configured = search_strategy.radar;
-				break;
-		}
-		updateRobotConfigurations(strategy_type.search, search_configured);
-
-		let chase_configured;
-		switch (json["configurations"]["chase"]) {
-			case "standard":
-				chase_configured = chase_strategy.standard;
-				break;
-		}
-		updateRobotConfigurations(strategy_type.chase, chase_configured);
+		let mode = json["configurations"]["mode"];
+		let initial = json["configurations"]["initial_move"];
+		let search = json["configurations"]["search"];
+		let chase = json["configurations"]["chase"];
+		updateStrategyButtons(mode, initial, search, chase);
 	}
 
 	// Atualiza Status do Robô
@@ -294,3 +167,37 @@ connection.onmessage = function (response) {
 			document.getElementById("fight-status-circle").style.background = "#00770c";		}
 	}
 };
+
+function makeStrategyButtons(strategyList, strategyType){
+	strategyList.forEach(element => {
+		let widget = document.createElement("button");
+		widget.addEventListener("click", _ => sendRequest(strategyType, element));
+		widget.id = strategyType+'_'+element;
+		let elementName = element.replace('_', ' ');
+		elementName = elementName.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));;
+		widget.innerHTML = elementName;
+		document.getElementById(strategyType+"-container").appendChild(widget);
+	});
+}
+
+function updateStrategyButtons(mode, initial, search, chase){
+	clearStrategyButtons();
+	document.getElementById('mode_'+mode).style.background = selected_strategy_color;
+	document.getElementById('initial_'+initial).style.background = selected_strategy_color;
+	document.getElementById('search_'+search).style.background = selected_strategy_color;
+	document.getElementById('chase_'+chase).style.background = selected_strategy_color;
+}
+
+function clearStrategyButtons(){
+	document.getElementById('mode_auto').style.background = strategies_color;
+	document.getElementById('mode_rc').style.background = strategies_color;
+	initial_strategys.forEach(element => {
+		document.getElementById('initial_'+element).style.background = strategies_color;
+	});
+	search_strategys.forEach(element => {
+		document.getElementById('search_'+element).style.background = strategies_color;
+	});
+	chase_strategys.forEach(element => {
+		document.getElementById('chase_'+element).style.background = strategies_color;
+	});
+}

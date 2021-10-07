@@ -36,29 +36,23 @@
 
     <h3>Emita eventos para a State Machine</h3>
 
-    <button class="button-green" onclick="requestEvent('start'); window.location.href='/telemetry';">Start</button>
-    <button class="button-red" onclick="requestEvent('terminate')">Disengage</button>
-    <button class="button-orange" onclick="requestEvent('reset')">Arm</button>
+    <button class="button-green" onclick="sendRequest('event_request', 'start'); window.location.href='/telemetry';">Start</button>
+    <button class="button-red" onclick="sendRequest('event_request', 'terminate')">Disengage</button>
+    <button class="button-orange" onclick="sendRequest('event_request', 'reset')">Arm</button>
 
     <h3>Seleção do Modo de Operação</h3>
 
-    <button id="mode_auto" onclick="setStrategy(strategy_type.mode, mode_selector.auto)">Auto</button>
-    <button id="mode_rc" onclick="setStrategy(strategy_type.mode, mode_selector.rc)">RC</button>
+    <button id="mode_auto" onclick="sendRequest('mode', 'auto')">Auto</button>
+    <button id="mode_rc" onclick="sendRequest('mode', 'rc')">RC</button>
 
     <h3>Configure a estratégia de movimento inicial</h3>
-
-    <button id="initial_none" onclick="setStrategy(strategy_type.initial, initial_move_strategy.none)">None</button>
-    <button id="initial_full_frente" onclick="setStrategy(strategy_type.initial, initial_move_strategy.full_frente)">Full Frente</button>
-    <button id="initial_zig_zag" onclick="setStrategy(strategy_type.initial, initial_move_strategy.zig_zag)">ZigZag</button>
+    <div id="initial-container"></div>
 
     <h3>Configure a estratégia de busca</h3>
-
-    <button id="search_none" onclick="setStrategy(strategy_type.search, search_strategy.none)">None</button>
-    <button id="search_radar" onclick="setStrategy(strategy_type.search, search_strategy.radar)">Radar</button>
+    <div id="search-container"></div>
 
     <h3>Configure a estratégia de perseguição</h3>
-
-    <button id="chase_standard" onclick="setStrategy(strategy_type.chase, chase_strategy.standard)">Standard</button>
+    <div id="chase-container"></div>
 
     <h3>Configurações gerais</h3>
 
