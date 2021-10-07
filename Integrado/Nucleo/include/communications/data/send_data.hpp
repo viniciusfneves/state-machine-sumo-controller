@@ -15,48 +15,48 @@ void serializeAndBroadcast(DynamicJsonDocument readings)
     webSocket.broadcastTXT(JSONBuffer);
 }
 
+// Envia as informações estáticas do robô
+// Essas informações são em sua maioria usadas para construir a interface do usuário e possibilitar uma interface de comunicação com o usuário
+void broadcastRobotInfos()
+{
+    StaticJsonDocument<512> configs;
+
+    // Nome do robô
+    configs["info"]["robot_name"] = robotSpecifications.robotName;
+
+    // Quantidade de sensores
+    configs["info"]["available_opponent_sensors"] = NUMBER_OF_OPPONENT_SENSORS;
+    configs["info"]["available_edge_sensors"] = NUMBER_OF_EDGE_SENSORS;
+
+    // Estratégias disponíveis em cada um dos movimentos possíveis
+    for (int index = 0; index < initialStrategies.size(); index++)
+    {
+        configs["info"]["available_initial_strategies"][index] = initialStrategies[index];
+    }
+    for (int index = 0; index < searchStrategies.size(); index++)
+    {
+        configs["info"]["available_search_strategies"][index] = searchStrategies[index];
+    }
+    for (int index = 0; index < chaseStrategies.size(); index++)
+    {
+        configs["info"]["available_chase_strategies"][index] = chaseStrategies[index];
+    }
+
+    serializeAndBroadcast(configs);
+}
+
 // Envia as configurações atuais do robô
 void broadcastRobotConfiguration()
 {
-    StaticJsonDocument<320> configs;
-
-    // Nome do robô
-    configs["robot_name"] = robotSpecifications.robotName;
-
-    // Quantidade de sensores
-    configs["available_opponent_sensors"] = NUMBER_OF_OPPONENT_SENSORS;
-    configs["available_edge_sensors"] = NUMBER_OF_EDGE_SENSORS;
+    StaticJsonDocument<512> configs;
 
     // Parâmetros configuráveis
-    configs["configurations"]["settings"]["start_time"] = robotConfiguration.startTime;
-    configs["configurations"]["settings"]["max_speed"] = robotConfiguration.maxSpeed;
-    configs["configurations"]["settings"]["pid"]["kp"] = robotConfiguration.Kp;
-    configs["configurations"]["settings"]["pid"]["ki"] = robotConfiguration.Ki;
-    configs["configurations"]["settings"]["pid"]["kd"] = robotConfiguration.Kd;
-
-    // Estado de execução
-    switch (robotConfiguration.robotState)
-    {
-    case RobotState::ready:
-        configs["robot_status"] = "ready";
-        break;
-    case RobotState::stopped:
-        configs["robot_status"] = "stopped";
-        break;
-    case RobotState::starting:
-        configs["robot_status"] = "starting";
-        break;
-    case RobotState::exec_initial:
-        configs["robot_status"] = "exec_initial";
-        break;
-    case RobotState::exec_search:
-        configs["robot_status"] = "exec_search";
-        break;
-    case RobotState::exec_chase:
-        configs["robot_status"] = "exec_chase";
-        break;
-    }
-
+    configs["configurations"]["start_time"] = robotConfiguration.startTime;
+    configs["configurations"]["max_speed"]  = robotConfiguration.maxSpeed;
+    configs["configurations"]["pid"]["kp"]  = robotConfiguration.Kp;
+    configs["configurations"]["pid"]["ki"]  = robotConfiguration.Ki;
+    configs["configurations"]["pid"]["kd"]  = robotConfiguration.Kd;
+ 
     // Modo de operação
     switch (robotConfiguration.mode)
     {
@@ -107,7 +107,30 @@ void broadcastRobotConfiguration()
 // Envia as leituras dos sensores de borda, dos sensores de oponente e da potência dos motores -> TELEMETRIA
 void broadcastTelemetryData(bool opSensorArray[], bool edgeSensorArray[], int powerOnWheels[])
 {
-    StaticJsonDocument<320> readings;
+    StaticJsonDocument<512> readings;
+
+    // Estado de execução
+    switch (robotConfiguration.robotState)
+    {
+    case RobotState::ready:
+        readings["readings"]["robot_status"] = "ready";
+        break;
+    case RobotState::stopped:
+        readings["readings"]["robot_status"] = "stopped";
+        break;
+    case RobotState::starting:
+        readings["readings"]["robot_status"] = "starting";
+        break;
+    case RobotState::exec_initial:
+        readings["readings"]["robot_status"] = "exec_initial";
+        break;
+    case RobotState::exec_search:
+        readings["readings"]["robot_status"] = "exec_search";
+        break;
+    case RobotState::exec_chase:
+        readings["readings"]["robot_status"] = "exec_chase";
+        break;
+    }
 
     // Sensores de oponente
     for (int i = 0; i < NUMBER_OF_OPPONENT_SENSORS; i++)
