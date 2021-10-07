@@ -1,6 +1,20 @@
 #if !defined(STRATEGIES_HPP)
 #define STRATEGIES_HPP
 
+using std::vector;
+
+vector<String> modesAvailable     = {"auto", "rc"};
+vector<String> initialStrategies  = {"none", "full_frente", "zig_zag"};
+vector<String> searchStrategies   = {"none", "radar"};
+vector<String> chaseStrategies    = {"standard"};
+
+// Modos de operação
+enum class Mode
+{
+    Auto,
+    RC
+};
+
 // Estratégias iniciais
 enum class InitialMove
 {
@@ -22,12 +36,6 @@ enum class Search
 enum class Chase
 {
     standard
-};
-
-// Modos de operação
-enum class Mode{
-    Auto,
-    RC
 };
 
 #endif // STRATEGIES_HPP
