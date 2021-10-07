@@ -14,6 +14,7 @@ void processMachineEvents()
 {
     if (anyEventOnQueue())
     {
+        // NÃO RETORNAR AQUI
         switch (eventToProcess())
         {
         case Event::Start:
@@ -32,9 +33,15 @@ void processMachineEvents()
             Core.process_event(Controller{});
             break;
 #ifdef ESP32_ENV
-        case Event::BroadcastRobotConfiguration:
+        case Event::SetUpClient:
+            broadcastRobotInfos();
             broadcastRobotConfiguration();
             setTelemetryBroadcast();
+            break;
+
+        case Event::BroadcastRobotConfiguration:
+            broadcastRobotConfiguration();
+            break;
 
         case Event::BroadcastTelemetryData:
             broadcastTelemetryData(
@@ -42,6 +49,7 @@ void processMachineEvents()
                 robotData.edgeSensorsDetectionArray,
                 robotData.motorsPower);
             updateTelemetry();
+            break;
 #endif
         default:
             break;
@@ -49,6 +57,7 @@ void processMachineEvents()
     }
     if (isTelemetryActive())
     {
+        // NÃO RETORNAR AQUI
         if (readToSend(millis()))
         {
             addEventToQueue(Event::BroadcastTelemetryData);
@@ -56,11 +65,11 @@ void processMachineEvents()
     }
     if (isTimeoutActive())
     {
+        // NÃO RETORNAR AQUI
         if (millis() >= timeoutTime)
         {
             cancelTimeout();
             Core.process_event(Timeout{});
-            return;
         }
     }
     if (isOpponentDetected())

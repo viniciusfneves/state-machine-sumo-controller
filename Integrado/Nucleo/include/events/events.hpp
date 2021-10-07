@@ -10,6 +10,7 @@ enum class Event
     Timeout,
     EdgeDetected,
     OpponentDetected,
+    SetUpClient,
     BroadcastRobotConfiguration,
     BroadcastTelemetryData,
     Controller,
@@ -31,6 +32,8 @@ struct OpponentInFront{};
 struct OpponentDetectedNotInFront{};
 
 struct OpponentDetected{};
+
+struct SetUpClient{};
 
 struct BroadcastRobotConfiguration{};
 

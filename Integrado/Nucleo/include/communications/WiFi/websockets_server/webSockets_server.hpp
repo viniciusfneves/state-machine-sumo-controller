@@ -25,7 +25,7 @@ void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *payload, si
         break;
     // Caso uma nova conexão seja aceita
     case WStype_CONNECTED:
-        addEventToQueue(Event::BroadcastRobotConfiguration);
+        addEventToQueue(Event::SetUpClient);
         break;
     // Caso a mensagem seja do tipo text
     case WStype_TEXT:
