@@ -205,17 +205,17 @@ connection.onmessage = function (response) {
 	let json = JSON.parse(response.data);
 
 	// Processa o nome do robô recebido
-	if ("robot_name" in json) {
-		document.getElementById("connection-status-text").innerHTML = "Connected to " + json["robot_name"];
+	if ("info" in json) {
+		document.getElementById("connection-status-text").innerHTML = "Connected to " + json["info"]["robot_name"];
 	}
 
 	// Processa Array de configurações do robô
 	if ("configurations" in json) {
 		// Altera a variável global start_time, pid_kp... etc
-		start_time = json["configurations"]["settings"]["start_time"];
-		pid_kp = json["configurations"]["settings"]["pid"]["kp"];
-		pid_ki = json["configurations"]["settings"]["pid"]["ki"];
-		pid_kd = json["configurations"]["settings"]["pid"]["kd"];
+		start_time = json["configurations"]["start_time"];
+		pid_kp = json["configurations"]["pid"]["kp"];
+		pid_ki = json["configurations"]["pid"]["ki"];
+		pid_kd = json["configurations"]["pid"]["kd"];
 		updateVariableSettings(start_time, pid_kp, pid_ki, pid_kd);
 
 		let mode_configured;
@@ -264,31 +264,32 @@ connection.onmessage = function (response) {
 	}
 
 	// Atualiza Status do Robô
-	if("robot_status" in json){
-		if(json["robot_status"] == "ready"){
+	if("readings" in json){
+		let status = json["readings"]["robot_status"];
+		if (status == "ready") {
 			clearRobotState();
 			document.getElementById("armed-status-circle").style.background = "#cc8b00";
 		}
 
-		if(json["robot_status"] == "starting"){
+		if (status == "starting") {
 			clearRobotState();
 			document.getElementById("fight-status-circle").style.background = "#00770c";
 		}
 
-		if(json["robot_status"] == "stopped"){
+		if (status == "stopped") {
 			clearRobotState();
 			document.getElementById("disabled-status-circle").style.background = "#bd0101";
 		}
 
-		if(json["robot_status"] == "exec_initial"){
+		if (status == "exec_initial") {
 			clearRobotState();
 			document.getElementById("fight-status-circle").style.background = "#00770c";		}
 
-		if(json["robot_status"] == "exec_search"){
+		if (status == "exec_search") {
 			clearRobotState();
 			document.getElementById("fight-status-circle").style.background = "#00770c";		}
 
-		if(json["robot_status"] == "exec_chase"){
+		if (status == "exec_chase") {
 			clearRobotState();
 			document.getElementById("fight-status-circle").style.background = "#00770c";		}
 	}

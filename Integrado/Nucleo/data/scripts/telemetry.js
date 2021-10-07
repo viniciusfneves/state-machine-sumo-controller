@@ -109,55 +109,48 @@ function refreshEdgeSensorReadings(edgeReadings) {
 	}
 }
 
+function updateRobotState(robot_status) {
+	if (robot_status == "ready") {
+		clearRobotState();
+	}
+
+	if (robot_status == "starting") {
+		clearRobotState();
+	}
+
+	if (robot_status == "stopped") {
+		clearRobotState();
+	}
+
+	if (robot_status == "exec_initial") {
+		clearRobotState();
+		document.getElementById("initial-strategy-status-circle").style.background = "#00770c";
+	}
+
+	if (robot_status == "exec_search") {
+		clearRobotState();
+		document.getElementById("search-strategy-status-circle").style.background = "#00770c";
+	}
+
+	if (robot_status == "exec_chase") {
+		clearRobotState();
+		document.getElementById("chase-strategy-status-circle").style.background = "#00770c";
+	}
+}
+
 connection.onmessage = function (response) {
 	let json = JSON.parse(response.data);
 
-	if ("robot_name" in json) {
-		document.getElementById("connection-status-text").innerHTML =
-			"Connected to " + json["robot_name"];
+	if ("info" in json) {
+		document.getElementById("connection-status-text").innerHTML = "Connected to " + json["info"]["robot_name"];
+		NUMBER_OF_OPPONENT_SENSORS = json["info"]["available_opponent_sensors"];
+		NUMBER_OF_EDGE_SENSORS = json["info"]["available_edge_sensors"];
 	}
-
-	if ("available_opponent_sensors" in json) {
-		NUMBER_OF_OPPONENT_SENSORS = json["available_opponent_sensors"];
-	}
-
-	if ("available_edge_sensors" in json) {
-		NUMBER_OF_EDGE_SENSORS = json["available_edge_sensors"];
-	}
-
 	if ("readings" in json) {
+		updateRobotState(json["readings"]["robot_status"]);
 		refreshOpSensorReadings(json["readings"]["opponent"]);
 		refreshEdgeSensorReadings(json["readings"]["edge"]);
 		setMotorPower("left", json["readings"]["motor"][0]);
 		setMotorPower("right", json["readings"]["motor"][1]);
-	}
-
-	if("robot_status" in json){
-		if(json["robot_status"] == "ready"){
-			clearRobotState();
-		}
-
-		if(json["robot_status"] == "starting"){
-			clearRobotState();
-		}
-
-		if(json["robot_status"] == "stopped"){
-			clearRobotState();
-		}
-
-		if(json["robot_status"] == "exec_initial"){
-			clearRobotState();
-			document.getElementById("initial-strategy-status-circle").style.background = "#00770c";
-		}
-
-		if(json["robot_status"] == "exec_search"){
-			clearRobotState();
-			document.getElementById("search-strategy-status-circle").style.background = "#00770c";
-		}
-
-		if(json["robot_status"] == "exec_chase"){
-			clearRobotState();
-			document.getElementById("chase-strategy-status-circle").style.background = "#00770c";
-		}
 	}
 };
