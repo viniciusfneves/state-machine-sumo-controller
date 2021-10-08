@@ -71,6 +71,7 @@ connection.onclose = function (event) {
 var initial_strategys;
 var search_strategys;
 var chase_strategys;
+var settingUp = true;
 var start_time;
 var pid_kp;
 var pid_ki;
@@ -112,12 +113,15 @@ connection.onmessage = function (response) {
 	// Processa o nome do robô recebido
 	if ("info" in json) {
 		document.getElementById("connection-status-text").innerHTML = "Connected to " + json["info"]["robot_name"];
-		initial_strategys = json["info"]["available_initial_strategies"];
-		search_strategys = json["info"]["available_search_strategies"];
-		chase_strategys = json["info"]["available_chase_strategies"];
-		makeStrategyButtons(json["info"]["available_initial_strategies"], 'initial');
-		makeStrategyButtons(json["info"]["available_search_strategies"], 'search');
-		makeStrategyButtons(json["info"]["available_chase_strategies"], 'chase');
+		if(settingUp){
+			initial_strategys = json["info"]["available_initial_strategies"];
+			makeStrategyButtons(initial_strategys, 'initial');
+			search_strategys = json["info"]["available_search_strategies"];
+			makeStrategyButtons(search_strategys, 'search');
+			chase_strategys = json["info"]["available_chase_strategies"];
+			makeStrategyButtons(chase_strategys, 'chase');
+			settingUp = false;
+		}
 	}
 
 	// Processa Array de configurações do robô
