@@ -1,6 +1,13 @@
 /*Abre a conexão com serviço WebSocket do ESP*/
 var connection = new WebSocket("ws://" + location.hostname + ":81");
 
+// Estilos e cores padrão usadas
+var std_color = '#868686'; // Define a cor do botão das estratégias disponíveis
+var highlight_color = '#008080'; // Define a cor do botão das estratégias selecionadas
+var std_red = '#bd0101';
+var std_green = '#00770c';
+var std_ambar = '#cc8b00';
+
 window.onload = function () {
 	setInterval(function () {
         // Verifica se o campo de start-time é válido e adapta conforme regulado com o robô ou precisando de atualização
@@ -10,58 +17,57 @@ window.onload = function () {
 		} else {
             // Verifica se há alterações não salvas no campo Start Time
 			if (document.getElementById("start-time-value").value == start_time) {
-				document.getElementById("start-time-value").style.background = "#00770c";
+				document.getElementById("start-time-value").style.background = std_green;
 			} else {
-				document.getElementById("start-time-value").style.background = "#cc8b00";
+				document.getElementById("start-time-value").style.background = std_ambar;
 			}
 		}
         
         // Verifica se há alterações não salvas no campo P do PID
         if (document.getElementById("P-regulator-value").value == pid_kp) {
-            document.getElementById("P-regulator-value").style.background = "#00770c";
+            document.getElementById("P-regulator-value").style.background = std_green;
         } else {
-            document.getElementById("P-regulator-value").style.background = "#cc8b00";
+            document.getElementById("P-regulator-value").style.background = std_ambar;
         }
 
         // Verifica se há alterações não salvas no campo I do PID
         if (document.getElementById("I-regulator-value").value == pid_ki) {
-            document.getElementById("I-regulator-value").style.background = "#00770c";
+            document.getElementById("I-regulator-value").style.background = std_green;
         } else {
-            document.getElementById("I-regulator-value").style.background = "#cc8b00";
+            document.getElementById("I-regulator-value").style.background = std_ambar;
         }
 
         // Verifica se há alterações não salvas no campo D do PID
         if (document.getElementById("D-regulator-value").value == pid_kd) {
-            document.getElementById("D-regulator-value").style.background = "#00770c";
+            document.getElementById("D-regulator-value").style.background = std_green;
         } else {
-            document.getElementById("D-regulator-value").style.background = "#cc8b00";
+            document.getElementById("D-regulator-value").style.background = std_ambar;
         }
 	}, 200);
 };
 
 // Conexão estabelecida
 connection.onopen = function () {
-	document.getElementById("connection-status-circle").style.background = "#00770c";
-	document.getElementById("connection-status-text").style.color = "#00770c";
+	document.getElementById("connection-status-circle").style.background = std_green;
+	document.getElementById("connection-status-text").style.color = std_green;
 	document.getElementById("connection-status-text").innerHTML = "Connected";
 };
 
 // Erro na conexão
 connection.onerror = function () {
-	document.getElementById("connection-status-circle").style.background = "#bd0101";
-	document.getElementById("connection-status-text").style.color = "#bd0101";
+	document.getElementById("connection-status-circle").style.background = std_red;
+	document.getElementById("connection-status-text").style.color = std_red;
 	document.getElementById("connection-status-text").innerHTML = "Erro de conexão";
 };
 
 // Conexão encerrada
 connection.onclose = function (event) {
-	document.getElementById("connection-status-circle").style.background = "#bd0101";
-	document.getElementById("connection-status-text").style.color = "#bd0101";
+	document.getElementById("connection-status-circle").style.background = std_red;
+	document.getElementById("connection-status-text").style.color = std_red;
 	document.getElementById("connection-status-text").innerHTML = "Conexão encerrada";
 };
 
 // Variáveis que guardam infos de configurações para verificação posterior no código
-
 var initial_strategys;
 var search_strategys;
 var chase_strategys;
@@ -69,12 +75,6 @@ var start_time;
 var pid_kp;
 var pid_ki;
 var pid_kd;
-
-// Define a cor do botão das estratégias disponíveis
-var strategies_color = "#868686";
-
-// Define a cor do botão das estratégias selecionadas
-var selected_strategy_color = "#008080";
 
 // Envia um request pro robô para alterar sua configuração de estratégias ou emitir um evento para a máquina
 function sendRequest(requestType, request) {
@@ -100,9 +100,9 @@ function updateVariableSettings(start_time, pid_kp, pid_ki, pid_kd) {
 }
 
 function clearRobotState(){
-	document.getElementById("armed-status-circle").style.background = "#868686";
-	document.getElementById("fight-status-circle").style.background = "#868686";
-	document.getElementById("disabled-status-circle").style.background = "#868686";
+	document.getElementById("armed-status-circle").style.background = std_color;
+	document.getElementById("fight-status-circle").style.background = std_color;
+	document.getElementById("disabled-status-circle").style.background = std_color;
 }
 
 // Quando recebe dados do robô
@@ -141,30 +141,30 @@ connection.onmessage = function (response) {
 		let status = json["readings"]["robot_status"];
 		if (status == "ready") {
 			clearRobotState();
-			document.getElementById("armed-status-circle").style.background = "#cc8b00";
+			document.getElementById("armed-status-circle").style.background = std_ambar;
 		}
 
 		if (status == "starting") {
 			clearRobotState();
-			document.getElementById("fight-status-circle").style.background = "#00770c";
+			document.getElementById("fight-status-circle").style.background = std_green;
 		}
 
 		if (status == "stopped") {
 			clearRobotState();
-			document.getElementById("disabled-status-circle").style.background = "#bd0101";
+			document.getElementById("disabled-status-circle").style.background = std_red;
 		}
 
 		if (status == "exec_initial") {
 			clearRobotState();
-			document.getElementById("fight-status-circle").style.background = "#00770c";		}
+			document.getElementById("fight-status-circle").style.background = std_green;		}
 
 		if (status == "exec_search") {
 			clearRobotState();
-			document.getElementById("fight-status-circle").style.background = "#00770c";		}
+			document.getElementById("fight-status-circle").style.background = std_green;		}
 
 		if (status == "exec_chase") {
 			clearRobotState();
-			document.getElementById("fight-status-circle").style.background = "#00770c";		}
+			document.getElementById("fight-status-circle").style.background = std_green;		}
 	}
 };
 
@@ -182,22 +182,22 @@ function makeStrategyButtons(strategyList, strategyType){
 
 function updateStrategyButtons(mode, initial, search, chase){
 	clearStrategyButtons();
-	document.getElementById('mode_'+mode).style.background = selected_strategy_color;
-	document.getElementById('initial_'+initial).style.background = selected_strategy_color;
-	document.getElementById('search_'+search).style.background = selected_strategy_color;
-	document.getElementById('chase_'+chase).style.background = selected_strategy_color;
+	document.getElementById('mode_'+mode).style.background = highlight_color;
+	document.getElementById('initial_'+initial).style.background = highlight_color;
+	document.getElementById('search_'+search).style.background = highlight_color;
+	document.getElementById('chase_'+chase).style.background = highlight_color;
 }
 
 function clearStrategyButtons(){
-	document.getElementById('mode_auto').style.background = strategies_color;
-	document.getElementById('mode_rc').style.background = strategies_color;
+	document.getElementById('mode_auto').style.background = std_color;
+	document.getElementById('mode_rc').style.background = std_color;
 	initial_strategys.forEach(element => {
-		document.getElementById('initial_'+element).style.background = strategies_color;
+		document.getElementById('initial_'+element).style.background = std_color;
 	});
 	search_strategys.forEach(element => {
-		document.getElementById('search_'+element).style.background = strategies_color;
+		document.getElementById('search_'+element).style.background = std_color;
 	});
 	chase_strategys.forEach(element => {
-		document.getElementById('chase_'+element).style.background = strategies_color;
+		document.getElementById('chase_'+element).style.background = std_color;
 	});
 }

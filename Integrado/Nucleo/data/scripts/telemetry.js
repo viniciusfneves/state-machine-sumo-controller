@@ -1,24 +1,30 @@
 /*Abre a conexão com serviço WebSocket do ESP*/
 var connection = new WebSocket("ws://" + location.hostname + ":81");
 
+// Estilos e cores padrão usadas
+var std_color = '#868686'; // Define a cor do botão das estratégias disponíveis
+var std_red = '#bd0101';
+var std_green = '#00770c';
+var std_ambar = '#cc8b00';
+
 // Conexão estabelecida
 connection.onopen = function () {
-	document.getElementById("connection-status-circle").style.background = "#00770c";
-	document.getElementById("connection-status-text").style.color = "#00770c";
+	document.getElementById("connection-status-circle").style.background = std_green;
+	document.getElementById("connection-status-text").style.color = std_green;
 	document.getElementById("connection-status-text").innerHTML = "Connected";
 };
 
 // Erro na conexão
 connection.onerror = function () {
-	document.getElementById("connection-status-circle").style.background = "#bd0101";
-	document.getElementById("connection-status-text").style.color = "#bd0101";
+	document.getElementById("connection-status-circle").style.background = std_red;
+	document.getElementById("connection-status-text").style.color = std_red;
 	document.getElementById("connection-status-text").innerHTML = "Erro de conexão";
 };
 
 // Conexão encerrada
 connection.onclose = function (event) {
-	document.getElementById("connection-status-circle").style.background = "#bd0101";
-	document.getElementById("connection-status-text").style.color = "#bd0101";
+	document.getElementById("connection-status-circle").style.background = std_red;
+	document.getElementById("connection-status-text").style.color = std_red;
 	document.getElementById("connection-status-text").innerHTML = "Conexão encerrada";
 };
 
@@ -55,9 +61,9 @@ function setMotorPower(id, reading) {
 }
 
 function clearRobotState(){
-	document.getElementById("initial-strategy-status-circle").style.background = "#868686";
-	document.getElementById("search-strategy-status-circle").style.background = "#868686";
-	document.getElementById("chase-strategy-status-circle").style.background = "#868686";
+	document.getElementById("initial-strategy-status-circle").style.background = std_color;
+	document.getElementById("search-strategy-status-circle").style.background = std_color;
+	document.getElementById("chase-strategy-status-circle").style.background = std_color;
 }
 
 var NUMBER_OF_OPPONENT_SENSORS = 0;
@@ -124,17 +130,17 @@ function updateRobotState(robot_status) {
 
 	if (robot_status == "exec_initial") {
 		clearRobotState();
-		document.getElementById("initial-strategy-status-circle").style.background = "#00770c";
+		document.getElementById("initial-strategy-status-circle").style.background = std_green;
 	}
 
 	if (robot_status == "exec_search") {
 		clearRobotState();
-		document.getElementById("search-strategy-status-circle").style.background = "#00770c";
+		document.getElementById("search-strategy-status-circle").style.background = std_green;
 	}
 
 	if (robot_status == "exec_chase") {
 		clearRobotState();
-		document.getElementById("chase-strategy-status-circle").style.background = "#00770c";
+		document.getElementById("chase-strategy-status-circle").style.background = std_green;
 	}
 }
 
