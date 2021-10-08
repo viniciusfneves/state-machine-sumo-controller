@@ -11,6 +11,7 @@ unsigned long _pollingTime; //Indica qual o tempo, em milissegundos, que o event
 
 bool isTelemetryActive() { return _interval_active; };
 
+// Retorna se o intervalo de tempo para envio de informações já foi atingido, liberando o envio da telemetria
 bool readToSend(unsigned long time){
     if(time >= _pollingTime){
         return true;
@@ -26,6 +27,7 @@ void setTelemetryBroadcast(int rate = 0)
     _pollingTime = millis() + _refreshRate;
 }
 
+// Atualiza o tempo do próximo envio de informações da telemetria
 void updateTelemetry()
 {
     _pollingTime = millis() + _refreshRate;

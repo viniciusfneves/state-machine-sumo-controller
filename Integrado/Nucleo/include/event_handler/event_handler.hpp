@@ -66,7 +66,7 @@ void processMachineEvents()
     if (isTimeoutActive())
     {
         // NÃO RETORNAR AQUI
-        if (millis() >= timeoutTime)
+        if (timeoutAllowed(millis()))
         {
             cancelTimeout();
             Core.process_event(Timeout{});
