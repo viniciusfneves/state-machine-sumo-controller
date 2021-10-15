@@ -16,7 +16,7 @@ double map(int x, double in_min, double in_max, double out_min, double out_max)
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-int constrain(int input, int minimumValue, int maximumValue)
+double constrain(double input, double minimumValue, double maximumValue)
 {
     if (input >= maximumValue)
         return maximumValue;
