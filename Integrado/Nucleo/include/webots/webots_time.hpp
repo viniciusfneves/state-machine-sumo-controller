@@ -1,32 +1,27 @@
 #ifndef WEBOTS_TIME_HPP
 #define WEBOTS_TIME_HPP
-#include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
-#include <chrono>
+#include <webots/Robot.hpp>
 
-using namespace std::chrono;
+using namespace webots;
 
-auto startTime = high_resolution_clock::now();
-int timeStepSimulation = 0;
-Robot *robotTime;
+Robot * robot;
 
-void initTime(Robot *robot, int timeStep)
+void initTime(Robot *robot)
 {
-    robotTime = robot;
-    timeStepSimulation = timeStep;
+    robot = robot;
 }
 
 unsigned long millis()
 {
-    robotTime->step(timeStepSimulation);
-    return (unsigned long)duration_cast<milliseconds>(high_resolution_clock::now() - startTime).count();
+    return (unsigned long)(robot->getTime()*1000);
 }
 
 void delay(unsigned long time)
 {
-    unsigned long now = millis();
-    while (millis() < time + now)
+    unsigned long now = robot->getTime()*1000;
+    while (millis() < now + time)
     {
-        robotTime->step(timeStepSimulation);
+        ;
     }
 }
 
