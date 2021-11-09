@@ -56,14 +56,13 @@ def driveRobot(linearSpeed, angularSpeed):
     right_motor.setVelocity(PWM_right)
 
 def getAxis():
-    global l
-    global r
+
     CH2 = xbox.getAxisValue(5)
     CH2 = round(map(CH2, 0,32768,-1,1),2)
     
     CH1 = xbox.getAxisValue(1)
     CH1 = round(map(CH1, -32768,32768,-1,1),2)
-    
+
     CH3 = xbox.getAxisValue(4)*-1
     CH3 = round(map(CH3, 0,32768,-1,1),2)
     
