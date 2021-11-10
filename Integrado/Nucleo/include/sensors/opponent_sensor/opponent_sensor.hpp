@@ -52,9 +52,9 @@ void readOpponentSensors()
 // Realiza as configurações necessárias para a parte de sensoriamento de oponentes do robô
 void initOpponentSensors()
 {
-    for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++)
+    for (int opPin : pins::opponentsSensors::sensors)
     {
-        pinMode(pins::opponentsSensors::sensors[index], INPUT);
+        pinMode(opPin, INPUT);
     }
 }
 #endif

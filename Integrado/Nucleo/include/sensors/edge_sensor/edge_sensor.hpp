@@ -22,9 +22,9 @@ void readEdgeSensors()
 // Realiza as configurações necessárias para o sensoriamento de borda do robô
 void initEdgeSensors()
 {
-    for (int index = 0; index < NUMBER_OF_EDGE_SENSORS; index++)
+    for (int edgePin : pins::edgeSensors::sensors)
     {
-        pinMode(pins::edgeSensors::sensors[index], INPUT);
+        pinMode(edgePin, INPUT);
     }
 };
 #endif
