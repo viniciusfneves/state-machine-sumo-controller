@@ -8,29 +8,25 @@
 #include "../../webots/webots_time.hpp"
 #endif
 
-bool _interval_active = false; //Indica se Timeout está ativo
+bool _interval_active = false;  //Indica se Timeout está ativo
 
-int _refreshRate = 42; // Taxa de envio dos dados da telemetria via websocket
+int _refreshRate = 42;  // Taxa de envio dos dados da telemetria via websocket
 
-unsigned long _pollingTime; //Indica qual o tempo, em milissegundos, que o evento Timeout deve ser disparado
+unsigned long _pollingTime;  //Indica qual o tempo, em milissegundos, que o evento Timeout deve ser disparado
 
 bool isTelemetryActive() { return _interval_active; };
 
 // Retorna se o intervalo de tempo para envio de informações já foi atingido, liberando o envio da telemetria
-bool readToSend(unsigned long time)
-{
-    if (time >= _pollingTime)
-    {
+bool readToSend(unsigned long time) {
+    if (time >= _pollingTime) {
         return true;
     }
     return false;
 }
 
 //Ativa a função de telemetria do robô e seta o intervalo entre atualizações de dados
-void setTelemetryBroadcast(int rate = 0)
-{
-    if (rate != 0)
-    {
+void setTelemetryBroadcast(int rate = 0) {
+    if (rate != 0) {
         _refreshRate = rate;
     }
     _interval_active = true;
@@ -38,8 +34,7 @@ void setTelemetryBroadcast(int rate = 0)
 }
 
 // Atualiza o tempo do próximo envio de informações da telemetria
-void updateTelemetry()
-{
+void updateTelemetry() {
     _pollingTime = millis() + _refreshRate;
 }
 #endif

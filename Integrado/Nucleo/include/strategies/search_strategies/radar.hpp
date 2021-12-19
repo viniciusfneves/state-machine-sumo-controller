@@ -8,10 +8,8 @@
 
 namespace sml = boost::sml;
 
-struct SearchRadar
-{
-    auto operator()() const
-    {
+struct SearchRadar {
+    auto operator()() const {
         using namespace sml;
         // Guards
         auto left  = [] { return getErrorFromOPSensors() <= 0; };

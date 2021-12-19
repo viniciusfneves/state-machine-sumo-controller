@@ -1,8 +1,8 @@
 #ifndef MOTORS_HPP
 #define MOTORS_HPP
 
-#include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Motor.hpp"
+#include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
 #define MAX_SPEED 190
 #define MAX_PWM   255
 
@@ -11,13 +11,11 @@ using namespace webots;
 Motor *leftMotor;
 Motor *rightMotor;
 
-double map(int x, double in_min, double in_max, double out_min, double out_max)
-{
+double map(int x, double in_min, double in_max, double out_min, double out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-double constrain(double input, double minimumValue, double maximumValue)
-{
+double constrain(double input, double minimumValue, double maximumValue) {
     if (input >= maximumValue)
         return maximumValue;
     if (input <= minimumValue)
@@ -25,13 +23,11 @@ double constrain(double input, double minimumValue, double maximumValue)
     return input;
 }
 
-double convertPWMinSpeed(int pwm)
-{
+double convertPWMinSpeed(int pwm) {
     return map(pwm, -MAX_PWM, MAX_PWM, -MAX_SPEED, MAX_SPEED);
 }
 
-void driveMotors(int leftPWM, int rightPWM)
-{
+void driveMotors(int leftPWM, int rightPWM) {
     leftPWM = constrain(leftPWM, -MAX_PWM, MAX_PWM);
     rightPWM = constrain(rightPWM, -MAX_PWM, MAX_PWM);
     int leftSpeed = convertPWMinSpeed(leftPWM);
@@ -40,22 +36,19 @@ void driveMotors(int leftPWM, int rightPWM)
     rightMotor->setVelocity(rightSpeed);
 }
 
-void stopMotors()
-{
+void stopMotors() {
     leftMotor->setVelocity(0);
     rightMotor->setVelocity(0);
 }
 
-Motor *initMotor(Robot *robot, char *motorName)
-{
+Motor *initMotor(Robot *robot, char *motorName) {
     Motor *motor = robot->getMotor(motorName);
     motor->setPosition(INFINITY);
     motor->setVelocity(0);
     return motor;
 }
 
-void initMotors(Robot *robot)
-{
+void initMotors(Robot *robot) {
     leftMotor = initMotor(robot, (char *)"left wheel motor");
     rightMotor = initMotor(robot, (char *)"right wheel motor");
 }

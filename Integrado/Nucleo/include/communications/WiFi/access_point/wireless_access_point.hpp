@@ -2,14 +2,14 @@
 #define WIFI_ACESS_POINT_HPP
 
 #include <WiFi.h>
+
 #include "../../../configuration/specifications.hpp"
 
-const char *ssid = robotSpecifications.robotName;    // Nome da rede - SSID
-const char *password = "12345678";                  // Senha da rede
+const char *ssid = robotSpecifications.robotName;  // Nome da rede - SSID
+const char *password = "12345678";                 // Senha da rede
 
 // Realiza as configurações necessárias para a parte de comunicação do ESP32
-void initAccessPoint()
-{
+void initAccessPoint() {
     WiFi.softAP(ssid, password);
     delay(100);
 }

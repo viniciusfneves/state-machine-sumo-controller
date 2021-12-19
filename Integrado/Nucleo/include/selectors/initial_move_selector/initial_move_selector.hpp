@@ -14,10 +14,8 @@
 
 namespace sml = boost::sml;
 
-struct InitialMoveSelector
-{
-    auto operator()() const
-    {
+struct InitialMoveSelector {
+    auto operator()() const {
         using namespace sml;
         //Funções
         auto entry        = [] { changeRobotState(RobotState::exec_initial); };

@@ -7,10 +7,8 @@
 
 namespace sml = boost::sml;
 
-struct ChaseSelector
-{
-    auto operator()() const
-    {
+struct ChaseSelector {
+    auto operator()() const {
         using namespace sml;
         //Funções
         auto entry    = [] { changeRobotState(RobotState::exec_chase); };

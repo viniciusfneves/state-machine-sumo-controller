@@ -1,30 +1,30 @@
 #if !defined(CIRCULAR_BUFFER_HPP)
 #define CIRCULAR_BUFFER_HPP
 
-#include "../events/events.hpp"
 #include "../../lib/CircularBuffer/CircularBuffer.h"
+#include "../events/events.hpp"
 // Buffer circular
 // Utilizado nesse código com lógica FIFO ---> |First In -> First Out|
 // Mais informações da biblioteca utilizada em: https://github.com/rlogiacco/CircularBuffer?utm_source=platformio&utm_medium=piohome
 CircularBuffer<Event, 10> eventQueue;
 
 // Retorna se há eventos para a máquina processar na fila
-bool anyEventOnQueue(){
+bool anyEventOnQueue() {
     return !eventQueue.isEmpty();
 }
 
 // Retorna o evento que precisa ser processado
-Event eventToProcess(){
+Event eventToProcess() {
     return eventQueue.shift();
 };
 
 // Adiciona um evento na fila para ser processado
-void addEventToQueue(Event event){
+void addEventToQueue(Event event) {
     eventQueue.push(event);
 };
 
-bool eventQueueIsFull(){
+bool eventQueueIsFull() {
     return eventQueue.isFull();
 }
 
-#endif // CIRCULAR_BUFFER_HPP
+#endif  // CIRCULAR_BUFFER_HPP

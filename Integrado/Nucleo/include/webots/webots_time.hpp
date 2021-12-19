@@ -4,23 +4,19 @@
 
 using namespace webots;
 
-Robot * robot;
+Robot *robot;
 
-void initTime(Robot *robot)
-{
+void initTime(Robot *robot) {
     robot = robot;
 }
 
-unsigned long millis()
-{
-    return (unsigned long)(robot->getTime()*1000);
+unsigned long millis() {
+    return (unsigned long)(robot->getTime() * 1000);
 }
 
-void delay(unsigned long time)
-{
-    unsigned long now = robot->getTime()*1000;
-    while (millis() < now + time)
-    {
+void delay(unsigned long time) {
+    unsigned long now = robot->getTime() * 1000;
+    while (millis() < now + time) {
         ;
     }
 }

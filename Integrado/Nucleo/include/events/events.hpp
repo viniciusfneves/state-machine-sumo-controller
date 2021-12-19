@@ -2,8 +2,7 @@
 #define EVENTS_HPP
 
 // Aqui são definidos todos os possíveis eventos que podem ser emitidos para a máquina
-enum class Event
-{
+enum class Event {
     Start,
     Terminate,
     Reset,
@@ -17,30 +16,26 @@ enum class Event
     None
 };
 
-struct Start{};
+struct Start {};
 
-struct Terminate{};
+struct Terminate {};
 
-struct Reset{};
+struct Reset {};
 
-struct Timeout{};
+struct Timeout {};
 
-struct EdgeDetected{};
+struct EdgeDetected {};
 
-struct OpponentInFront{};
+struct OpponentDetected {};
 
-struct OpponentDetectedNotInFront{};
+struct SetUpClient {};
 
-struct OpponentDetected{};
+struct BroadcastRobotConfiguration {};
 
-struct SetUpClient{};
+struct BroadcastTelemetryData {};
 
-struct BroadcastRobotConfiguration{};
+struct Controller {};
 
-struct BroadcastTelemetryData{};
-
-struct Controller{};
-
-struct None{};
+struct None {};
 
 #endif

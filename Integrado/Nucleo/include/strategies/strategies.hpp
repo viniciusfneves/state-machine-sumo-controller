@@ -4,22 +4,20 @@
 #ifndef WEBOTS
 using std::vector;
 
-vector<String> modesAvailable     = {"auto", "rc"};
-vector<String> initialStrategies  = {"none", "full_frente", "zig_zag"};
-vector<String> searchStrategies   = {"none", "radar"};
-vector<String> chaseStrategies    = {"standard"};
+vector<String> modesAvailable       = {"auto", "rc"};
+vector<String> initialStrategies    = {"none", "full_frente", "zig_zag"};
+vector<String> searchStrategies     = {"none", "radar"};
+vector<String> chaseStrategies      = {"standard"};
 #endif
 
 // Modos de operação
-enum class Mode
-{
+enum class Mode {
     Auto,
     RC
 };
 
 // Estratégias iniciais
-enum class InitialMove
-{
+enum class InitialMove {
     none,
     full_frente,
     zig_zag,
@@ -28,16 +26,14 @@ enum class InitialMove
 };
 
 // Estratégias de busca
-enum class Search
-{
+enum class Search {
     none,
     radar
 };
 
 // Estratégias de perseguição
-enum class Chase
-{
+enum class Chase {
     standard
 };
 
-#endif // STRATEGIES_HPP
+#endif  // STRATEGIES_HPP

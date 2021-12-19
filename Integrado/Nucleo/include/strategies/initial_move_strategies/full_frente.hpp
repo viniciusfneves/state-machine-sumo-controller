@@ -7,10 +7,8 @@
 
 namespace sml = boost::sml;
 
-struct FullFrente
-{
-    auto operator()() const
-    {
+struct FullFrente {
+    auto operator()() const {
         using namespace sml;
         // Funções
         auto configExit  = [] { setTimeout(250); };

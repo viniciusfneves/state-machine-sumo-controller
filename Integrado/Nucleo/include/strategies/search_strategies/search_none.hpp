@@ -7,10 +7,8 @@
 
 namespace sml = boost::sml;
 
-struct SearchNone
-{
-    auto operator()() const
-    {
+struct SearchNone {
+    auto operator()() const {
         using namespace sml;
         // Funções
         auto exit_state = [] { setTimeout(0); };

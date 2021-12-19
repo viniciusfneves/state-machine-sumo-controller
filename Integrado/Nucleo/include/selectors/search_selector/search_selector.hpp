@@ -12,10 +12,8 @@
 
 namespace sml = boost::sml;
 
-struct SearchSelector
-{
-    auto operator()() const
-    {
+struct SearchSelector {
+    auto operator()() const {
         using namespace sml;
         //Funções
         auto entry  = [] { resetPID(); changeRobotState(RobotState::exec_search); };

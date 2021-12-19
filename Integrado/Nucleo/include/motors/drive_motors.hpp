@@ -2,8 +2,8 @@
 #define DRIVE_MOTORS_HPP
 
 // Dependências gerais
-#include <configuration/specifications.hpp>
 #include <configuration/configurations.hpp>
+#include <configuration/specifications.hpp>
 #include <dynamic_data/dynamic_data.hpp>
 
 #ifdef WEBOTS
@@ -15,25 +15,22 @@
 #include <pins/pins.hpp>
 
 #ifdef ESP32_ENV
-#include <analogWrite.h> // Adiciona a função analogWrite para compilação com ESP32
+#include <analogWrite.h>  // Adiciona a função analogWrite para compilação com ESP32
+
 #include <communications/data/send_data.hpp>
 #endif
 
 // Função de controles dos pinos de ativação dos drivers para motores brushed
-void drvDrive(int pwm, int drvIn1, int drvIn2)
-{
-    if (pwm == 0) // Caso for parada
+void drvDrive(int pwm, int drvIn1, int drvIn2) {
+    if (pwm == 0)  // Caso for parada
     {
         digitalWrite(drvIn1, true);
         digitalWrite(drvIn2, true);
-    }
-    else if (pwm > 0) //  Caso for sentido horário
+    } else if (pwm > 0)  //  Caso for sentido horário
     {
         analogWrite(drvIn1, pwm);
         digitalWrite(drvIn2, false);
-    }
-    else
-    {
+    } else {
         // Caso for sentido anti-horario
         analogWrite(drvIn2, -1 * pwm);
         digitalWrite(drvIn1, false);
@@ -43,8 +40,7 @@ void drvDrive(int pwm, int drvIn1, int drvIn2)
 // Movimenta os motores com os PWM definidos como parâmetro de entrada
 // int PWM_left -> PWM que será enviado ao motor esquerdo
 // int PWM_right -> PWM que será enviado ao motor direito
-void driveMotors(int PWM_left, int PWM_right)
-{
+void driveMotors(int PWM_left, int PWM_right) {
     PWM_left = constrain(PWM_left, -255, 255);
     PWM_right = constrain(PWM_right, -255, 255);
 
@@ -65,14 +61,12 @@ void driveMotors(int PWM_left, int PWM_right)
 };
 
 // Para toda a locomoção do robô
-void stopMotors()
-{
+void stopMotors() {
     driveMotors(0, 0);
 };
 
 // Realiza as configurações necessárias para a parte de locomoção do robô
-void initMotors()
-{
+void initMotors() {
 #ifdef ESP32_ENV
 #ifdef BRUSHLESS
     // Define a resolução de saída dos pinos de PWM do ESP32
@@ -105,11 +99,10 @@ void initMotors()
 #endif
 }
 
-#endif // REAL_ROBOT
+#endif  // REAL_ROBOT
 
 // Usado para dizer em qual direção o robô deve se mover
-enum class Direction
-{
+enum class Direction {
     left,
     right
 };
@@ -117,8 +110,7 @@ enum class Direction
 // Movimenta o robô baseado nos parâmetros de entrada de velocidade linear e velocidade angular desejada
 // double linearSpeed -> Velocidade linear do robô -> Range [-1,1]
 // double angularSpeed -> Velocidade angular do robô -> Range [-1,1]
-void driveRobot(double linearSpeed, double angularSpeed)
-{
+void driveRobot(double linearSpeed, double angularSpeed) {
     // Limita os parâmetros de entrada aos permitidos pela função
     // Só funciona se os parametros forem de -1 à 1, caso contrário utilize um MAP para definir as velocidas linear e angular
     linearSpeed = constrain(linearSpeed, -1, 1) * robotSpecifications.maxLinearSpeed;
@@ -132,13 +124,10 @@ void driveRobot(double linearSpeed, double angularSpeed)
     double maxSpeed = (PWM_left > PWM_right) ? PWM_left : PWM_right;
     double minSpeed = (PWM_left < PWM_right) ? PWM_left : PWM_right;
 
-    if (maxSpeed > robotConfiguration.maxSpeed)
-    {
+    if (maxSpeed > robotConfiguration.maxSpeed) {
         PWM_left -= maxSpeed - robotConfiguration.maxSpeed;
         PWM_right -= maxSpeed - robotConfiguration.maxSpeed;
-    }
-    else if (minSpeed < -robotConfiguration.maxSpeed)
-    {
+    } else if (minSpeed < -robotConfiguration.maxSpeed) {
         PWM_left -= minSpeed + robotConfiguration.maxSpeed;
         PWM_right -= minSpeed + robotConfiguration.maxSpeed;
     }
@@ -150,24 +139,20 @@ void driveRobot(double linearSpeed, double angularSpeed)
 // Movimenta o robô em torno do próprio eixo rotacionando-o em 'degrees' graus, recebidos como parâmetro
 // int degrees -> Graus de rotação
 // (enum) Direction  -> Define para qual lado o robô irá virar
-void rotateRobot(int degrees, Direction direction)
-{
+void rotateRobot(int degrees, Direction direction) {
     // Limita os parâmetros de entrada aos permitidos pela função
     degrees = constrain(degrees, 1, 359);
     int PWM_left = robotConfiguration.maxSpeed;
     int PWM_right = robotConfiguration.maxSpeed;
 
-    if (direction == Direction::right)
-    {
+    if (direction == Direction::right) {
         PWM_right *= -1;
-    }
-    else
-    {
+    } else {
         PWM_left *= -1;
     }
     driveMotors(PWM_left, PWM_right);
-    delay(static_cast<int>(degrees * 25 / robotConfiguration.maxSpeed)); // O tempo até completar a rotação ainda precisa ser verificado com testes e modelado para uma função
+    delay(static_cast<int>(degrees * 25 / robotConfiguration.maxSpeed));  // O tempo até completar a rotação ainda precisa ser verificado com testes e modelado para uma função
     stopMotors();
 };
 
-#endif //DRIVE_MOTORS_HPP
+#endif  //DRIVE_MOTORS_HPP

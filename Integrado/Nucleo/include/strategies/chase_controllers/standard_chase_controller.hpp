@@ -8,10 +8,8 @@
 
 namespace sml = boost::sml;
 
-struct StandardChase
-{
-    auto operator()() const
-    {
+struct StandardChase {
+    auto operator()() const {
         auto chaseAction = [] { driveRobot(1, pid(getErrorFromOPSensors())); };
         
         using namespace sml;

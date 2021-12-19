@@ -7,10 +7,8 @@
 
 namespace sml = boost::sml;
 
-struct ZigZag
-{
-    auto operator()() const
-    {
+struct ZigZag {
+    auto operator()() const {
         using namespace sml;
 
         auto run_1      = [] { driveRobot(1, 0); setTimeout(140); };
