@@ -1,21 +1,10 @@
 #if !defined(CONFIGURATIONS_HPP)
 #define CONFIGURATIONS_HPP
 
-#include "../strategies/strategies.hpp"
 #include "../event_handler/circular_buffer.hpp"
+#include "../strategies/strategies.hpp"
 
-// Status de execução das estratégias do robô
-enum class RobotState{
-    ready,
-    starting,
-    stopped,
-    exec_initial,
-    exec_search,
-    exec_chase
-};
-
-struct Configurations
-{
+struct Configurations {
     // Define a velocidade máxima global do robô -> (int)[0, 255]
     int maxSpeed = 255;
     double radarSpeed = 1;
@@ -26,8 +15,6 @@ struct Configurations
 
     // Define o tempo de acionamento do robô para a luta
     int startTime = 4000;
-    // Guarda o estado atual do robô -> Inicializado com stopped
-    RobotState robotState = RobotState::stopped;
 
     // Parâmetros do PID
     double Kp = 1.7;
@@ -41,7 +28,7 @@ struct Configurations
     InitialMove initialMove = InitialMove::full_frente;
     Search search = Search::radar;
     Chase chase = Chase::standard;
-    Mode mode   = Mode::Auto;
+    Mode mode = Mode::Auto;
 };
 
 // Objeto global de configurações do robô
@@ -49,60 +36,50 @@ Configurations robotConfiguration;
 
 // strategy -> (enum) InitialMove
 // Muda a configuração de estratégia de movimento inicial
-void setInitialStrategy(InitialMove strategy)
-{
+void setInitialStrategy(InitialMove strategy) {
     robotConfiguration.initialMove = strategy;
     addEventToQueue(Event::BroadcastRobotConfiguration);
 }
 
 // strategy -> (enum) Search
 // Muda a configuração de estratégia de busca
-void setSearchStrategy(Search strategy)
-{
+void setSearchStrategy(Search strategy) {
     robotConfiguration.search = strategy;
     addEventToQueue(Event::BroadcastRobotConfiguration);
 }
 
 // strategy -> (enum) Chase
 // Muda a configuração de estratégia de perseguição
-void setChaseStrategy(Chase strategy)
-{
+void setChaseStrategy(Chase strategy) {
     robotConfiguration.chase = strategy;
     addEventToQueue(Event::BroadcastRobotConfiguration);
 }
 
 // mode -> (enum) Mode
 // Muda a configuração de modo de operação
-void setMode(Mode mode)
-{
+void setMode(Mode mode) {
     robotConfiguration.mode = mode;
     addEventToQueue(Event::BroadcastRobotConfiguration);
 }
 
 // Muda o tempo de acionamento do robô para começar a luta
-void setStartTime(int time)
-{
+void setStartTime(int time) {
     robotConfiguration.startTime = time;
     addEventToQueue(Event::BroadcastRobotConfiguration);
 }
 
 // Altera a velocidade linear máxima global permitida para o robô
-void setMaxSpeed(int newSpeed){
+void setMaxSpeed(int newSpeed) {
     robotConfiguration.maxSpeed = newSpeed;
     addEventToQueue(Event::BroadcastRobotConfiguration);
 }
 
 // Altera os parâmetros para cálculo do controle PID
-void changePIDSettings(double set_kp, double set_ki, double set_kd){
+void changePIDSettings(double set_kp, double set_ki, double set_kd) {
     robotConfiguration.Kp = set_kp;
     robotConfiguration.Ki = set_ki;
     robotConfiguration.Kd = set_kd;
     addEventToQueue(Event::BroadcastRobotConfiguration);
 }
 
-// Muda na memória do robô o seu estado de execução atual
-void changeRobotState(RobotState state){
-    robotConfiguration.robotState = state;
-}
-
-#endif // CONFIGURATIONS_HPP
+#endif  // CONFIGURATIONS_HPP
