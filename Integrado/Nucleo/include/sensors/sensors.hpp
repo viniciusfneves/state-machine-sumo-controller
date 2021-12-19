@@ -1,17 +1,16 @@
 #if !defined(SENSORS_HPP)
 #define SENSORS_HPP
 
+#include "configuration/configurations.hpp"
 #include "edge_sensor/edge_sensor.hpp"
 #include "opponent_sensor/opponent_sensor.hpp"
-#ifdef ESP32_ENV
-#include <communications/data/send_data.hpp>
-#include <dynamic_data/dynamic_data.hpp>
-#endif
+#include "start_module/start_module.hpp"
 
-void readSensors()
-{
+void readSensors() {
+    if (robotConfiguration.mode == Mode::Auto)
+        readStartModule();
     readOpponentSensors();
     readEdgeSensors();
 };
 
-#endif // SENSORS_HPP
+#endif  // SENSORS_HPP
