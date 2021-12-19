@@ -11,90 +11,91 @@ namespace pins
 #ifdef VAL
     namespace motors
     {
-        int leftMotorIN1 = 25;
-        int leftMotorIN2 = 25;
-        int rightMotorIN1 = 26;
-        int rightMotorIN2 = 26;
-        int servo = 27;
+        const int leftMotorIN1 = 25;
+        const int leftMotorIN2 = 25;
+        const int rightMotorIN1 = 26;
+        const int rightMotorIN2 = 26;
+        const int servo = 27;
     }
     namespace edgeSensors
     {
-        int leftFrontEdge = 35;
-        int rightFrontEdge = 34;
+        const int leftFrontEdge = 35;
+        const int rightFrontEdge = 34;
 
-        int sensors[] = {leftFrontEdge, rightFrontEdge};
+        const int sensors[] = {leftFrontEdge, rightFrontEdge};
     }
     namespace opponentsSensors
     {
-        int leftSide = 5;
-        int farLeft = 12;
-        int left = 33;
-        int center = 14;
-        int right = 15;
-        int farRight = 18;
-        int rightSide = 19;
+        const int leftSide = 5;
+        const int farLeft = 12;
+        const int left = 33;
+        const int center = 14;
+        const int right = 15;
+        const int farRight = 18;
+        const int rightSide = 19;
 
-        int sensors[] = {farLeft, left, center, right, farRight};
+        const int sensors[] = {farLeft, left, center, right, farRight};
     }
+    const int startModule = 23;
 #endif // VAL
 
 #ifdef ATENA
     namespace motors
     {
-        int leftMotorIN1 = 25;
-        int leftMotorIN2 = 25;
-        int rightMotorIN1 = 26;
-        int rightMotorIN2 = 26;
-        int servo = 27;
+        const int leftMotorIN1 = 25;
+        const int leftMotorIN2 = 25;
+        const int rightMotorIN1 = 26;
+        const int rightMotorIN2 = 26;
+        const int servo = 27;
     }
     namespace edgeSensors
     {
-        int leftFrontEdge = 35;
-        int rightFrontEdge = 34;
+        const int leftFrontEdge = 35;
+        const int rightFrontEdge = 34;
 
-        int sensors[] = {leftFrontEdge, rightFrontEdge};
+        const int sensors[] = {leftFrontEdge, rightFrontEdge};
     }
     namespace opponentsSensors
     {
-        int leftSide = 5;
-        int farLeft = 12;
-        int left = 33;
-        int center = 14;
-        int right = 15;
-        int farRight = 18;
-        int rightSide = 19;
+        const int leftSide = 5;
+        const int farLeft = 12;
+        const int left = 33;
+        const int center = 14;
+        const int right = 15;
+        const int farRight = 18;
+        const int rightSide = 19;
 
-        int sensors[] = {farLeft, left, center, right, farRight};
+        const int sensors[] = {farLeft, left, center, right, farRight};
     }
 #endif // ATENA
 
 #ifdef APOLO
     namespace motors
     {
-        int leftMotor = 25;
-        int rightMotor = 26;
-        int servo = 27;
+        const int leftMotor = 25;
+        const int rightMotor = 26;
+        const int servo = 27;
     }
     namespace edgeSensors
     {
-        int leftFrontEdge = 35;
-        int rightFrontEdge = 34;
-        int leftRearEdge = 39;
-        int rightRearEdge = 36;
+        const int leftFrontEdge = 35;
+        const int rightFrontEdge = 34;
+        const int leftRearEdge = 39;
+        const int rightRearEdge = 36;
 
-        int sensors[] = {leftFrontEdge, rightFrontEdge, leftRearEdge, rightRearEdge};
+        const int sensors[] = {leftFrontEdge, rightFrontEdge, leftRearEdge, rightRearEdge};
     }
     namespace opponentsSensors
     {
-        int leftSide = 5;
-        int farLeft = 12;
-        int left = 33;
-        int center = 14;
-        int right = 15;
-        int farRight = 18;
-        int rightSide = 19;
+        const int leftSide = 5;
+        const int farLeft = 12;
+        const int left = 33;
+        const int center = 14;
+        const int right = 15;
+        const int farRight = 18;
+        const int rightSide = 19;
 
-        int sensors[] = {leftSide, farLeft, left, center, right, farRight, rightSide};
+        const int sensors[] = {leftSide, farLeft, left, center, right, farRight, rightSide};
     }
 #endif // APOLO
 
@@ -105,95 +106,94 @@ namespace pins
 #ifdef ZE_PEQUENO
     namespace motors
     {
-        int leftMotorIN1 = 18;
-        int leftMotorIN2 = 19;
-        int rightMotorIN1 = 14;
-        int rightMotorIN2 = 15;
+        const int leftMotorIN1 = 10;
+        const int leftMotorIN2 = 9;
+        const int rightMotorIN1 = 6;
+        const int rightMotorIN2 = 5;
     }
     namespace edgeSensors
     {
-        int leftFrontEdge = 27;
-        int rightFrontEdge = 32;
+        const int leftFrontEdge = 15;
+        const int rightFrontEdge = 16;
 
-        int sensors[] = {leftFrontEdge, rightFrontEdge};
+        const int sensors[] = {leftFrontEdge, rightFrontEdge};
     }
     namespace opponentsSensors
     {
-        int leftFrontOpponent = 23;
-        int centralFrontOpponent = 25;
-        int rightFrontOpponent = 26;
+        const int rightFrontOpponent = 3;
+        const int leftFrontOpponent = 2;
 
-        int sensors[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent};
+        const int sensors[] = {leftFrontOpponent, rightFrontOpponent};
     }
     namespace configuration
     {
-        int led = 4;
-        int start = 5;
-        int XHUT = 33;
+        const int led = 7;
+        const int start = 4;
+        const int XHUT = 8;
     }
 #endif
 
 #ifdef ET_MINI
     namespace motors
     {
-        int leftMotorIN1 = 18;
-        int leftMotorIN2 = 19;
-        int rightMotorIN1 = 14;
-        int rightMotorIN2 = 15;
+        const int leftMotorIN1 = 10;
+        const int leftMotorIN2 = 9;
+        const int rightMotorIN1 = 6;
+        const int rightMotorIN2 = 5;
     }
     namespace edgeSensors
     {
-        int leftFrontEdge = 27;
-        int rightFrontEdge = 32;
+        const int leftFrontEdge = 3;
+        const int rightFrontEdge = 2;
 
-        int sensors[] = {leftFrontEdge, rightFrontEdge};
+        const int sensors[] = {leftFrontEdge, rightFrontEdge};
     }
     namespace opponentsSensors
     {
-        int leftFrontOpponent = 23;
-        int centralFrontOpponent = 25;
-        int rightFrontOpponent = 26;
+        const int leftFrontOpponent = 7;
+        const int centralFrontOpponent = 8;
+        const int rightFrontOpponent = 4;
 
-        int sensors[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent};
+        const int sensors[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent};
     }
     namespace configuration
     {
-        int led = 4;
-        int start = 5;
-        int XHUT = 33;
+        const int led = 13;
+        const int start = 16;
+        const int XHUT = 17;
     }
 #endif
 
 #ifdef MERI
     namespace motors
     {
-        int leftMotorIN1 = 18;
-        int leftMotorIN2 = 29;
-        int rightMotorIN1 = 27;
-        int rightMotorIN2 = 26;
+        const int leftMotorIN1 = 18;
+        const int leftMotorIN2 = 29;
+        const int rightMotorIN1 = 27;
+        const int rightMotorIN2 = 26;
     }
     namespace edgeSensors
     {
-        int leftFrontEdge = 3;
-        int rightFrontEdge = 2;
+        const int leftFrontEdge = 3;
+        const int rightFrontEdge = 2;
 
-        int sensors[] = {leftFrontEdge, rightFrontEdge};
+        const int sensors[] = {leftFrontEdge, rightFrontEdge};
     }
     namespace opponentsSensors
     {
-        int leftFrontOpponent = 39;
-        int centralFrontOpponent = 34;
-        int rightFrontOpponent = 35;
-        int leftLatOpponent = 36;
-        int rightLatOpponent = 25;
+        const int leftFrontOpponent = 39;
+        const int centralFrontOpponent = 34;
+        const int rightFrontOpponent = 35;
+        const int leftLatOpponent = 36;
+        const int rightLatOpponent = 25;
 
-        int sensors[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent, leftLatOpponent, rightLatOpponent};
+        const int sensors[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent, leftLatOpponent, rightLatOpponent};
     }
     namespace configuration
     {
-        int ledConfig = 4;
-        int ledCMD = 13;
-        int batRead = 33;
+        const int ledConfig = 4;
+        const int ledCMD = 13;
+        const int batRead = 33;
     }
 #endif
 }
