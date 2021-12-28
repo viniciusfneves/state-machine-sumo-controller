@@ -41,10 +41,7 @@ void processMachineEvents() {
                 break;
 
             case Event::BroadcastTelemetryData:
-                broadcastTelemetryData(
-                    robotData.opponentSensorsDetectionArray,
-                    robotData.edgeSensorsDetectionArray,
-                    robotData.motorsPower);
+                broadcastTelemetryData();
                 updateTelemetry();
                 break;
 #endif

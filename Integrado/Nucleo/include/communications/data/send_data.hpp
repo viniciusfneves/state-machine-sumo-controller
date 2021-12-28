@@ -97,7 +97,7 @@ void broadcastRobotConfiguration() {
 }
 
 // Envia as leituras dos sensores de borda, dos sensores de oponente e da potência dos motores -> TELEMETRIA
-void broadcastTelemetryData(bool opSensorArray[], bool edgeSensorArray[], int powerOnWheels[]) {
+void broadcastTelemetryData() {
     StaticJsonDocument<512> readings;
 
     // Estado de execução
@@ -124,16 +124,18 @@ void broadcastTelemetryData(bool opSensorArray[], bool edgeSensorArray[], int po
 
     // Sensores de oponente
     for (int i = 0; i < NUMBER_OF_OPPONENT_SENSORS; i++) {
-        readings["readings"]["opponent"][i] = opSensorArray[i];
+        readings["readings"]["opponent"][i] = robotData.opponentSensorsDetectionArray[i];
     }
 
     //Sensores de borda
     for (int i = 0; i < NUMBER_OF_EDGE_SENSORS; i++) {
-        readings["readings"]["edge"][i] = edgeSensorArray[i];
+        readings["readings"]["edge"][i] = robotData.edgeSensorsDetectionArray[i];
     }
 
-    readings["readings"]["motor"][0] = powerOnWheels[0];
-    readings["readings"]["motor"][1] = powerOnWheels[1];
+    readings["readings"]["motor"][0] = robotData.motorsPower[0];
+    readings["readings"]["motor"][1] = robotData.motorsPower[1];
+
+    readings["controller"]["status"] = robotData.controllerStatus == ControllerStatus::connected ? "connected" : "disconnected";
 
     serializeAndBroadcast(readings);
 }

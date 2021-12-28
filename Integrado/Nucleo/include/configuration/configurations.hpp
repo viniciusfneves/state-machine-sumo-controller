@@ -14,7 +14,7 @@ struct Configurations {
     double shortArchAngularVelocity = 0.7;
 
     // Define o tempo de acionamento do robô para a luta
-    int startTime = 4000;
+    int startTime = 25;
 
     // Parâmetros do PID
     double Kp = 1.7;
