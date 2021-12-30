@@ -14,4 +14,12 @@ void initAccessPoint() {
     delay(100);
 }
 
+void connectToWiFi(const char *ssid, const char *passphrase) {
+    WiFi.begin(ssid, passphrase);
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(200);
+    }
+    Serial.print("Connected to adress ");
+    Serial.println(WiFi.localIP());
+}
 #endif
