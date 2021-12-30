@@ -34,6 +34,7 @@ struct DynamicData {
     // - PROBLEMAS AO COMPILAR DENTRO DO WEBOTS
     // RESUMINDO: NÃO FUNCIONA EM 2 DOS 3 AMBIENTES PRINCIPAIS E FUNCIONA CAPEGANDA NO OUTRO
     // NÃO USE!!!!
+    // Tentar utilizar vetores ao invés disso -> Implementação futura
 
     // Guarda o estado atual do robô -> Inicializado com stopped
     RobotState robotState = RobotState::stopped;
