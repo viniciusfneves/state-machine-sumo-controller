@@ -21,26 +21,28 @@ struct Machine
     {
         using namespace sml;
         // Funções
-        auto set_startClock = [] { setTimeout(robotConfiguration.startTime); changeRobotState(RobotState::starting); };
-        auto disengage      = [] { stopMotors(); changeRobotState(RobotState::stopped); };
+        auto armRobot        = [] { changeRobotState(RobotState::ready); };
+        auto setStartClock   = [] { setTimeout(robotConfiguration.startTime); changeRobotState(RobotState::starting); };
+        auto disengageRobot  = [] { stopMotors(); changeRobotState(RobotState::stopped); };
 
         return make_transition_table(
-            *"initial"_s                                                      = "Configuration"_s,
+            *"entry"_s                                                         =  "disengaged"_s,
 
-            "Configuration"_s    +  on_entry<_>         /  [] { changeRobotState(RobotState::ready); },
-            "Configuration"_s    +  event<Start>                              =   "StartClock"_s,
-
-
-            "StartClock"_s       +  on_entry<_>         /  set_startClock,
-            "StartClock"_s       +  event<Timeout>                            =   state<FightMachine>,
-            "StartClock"_s       +  event<Terminate>                          =   "DisengageRobot"_s,
+            "ready_to_fight"_s    +  on_entry<_>         /  armRobot,
+            "ready_to_fight"_s    +  event<Start>                              =  "start_clock"_s,
+            "ready_to_fight"_s    +  event<Terminate>                          =  "disengaged"_s,
 
 
-            state<FightMachine>  +  event<Terminate>                          =   "DisengageRobot"_s,
+            "start_clock"_s       +  on_entry<_>         /  setStartClock,
+            "start_clock"_s       +  event<Timeout>                            =  state<FightMachine>,
+            "start_clock"_s       +  event<Terminate>                          =  "disengaged"_s,
 
 
-            "DisengageRobot"_s   +  on_entry<_>         /  disengage,
-            "DisengageRobot"_s   +  event<Reset>                              =   "Configuration"_s);
+            state<FightMachine>   +  event<Terminate>                          =  "disengaged"_s,
+
+
+            "disengaged"_s        +  on_entry<_>         /  disengageRobot,
+            "disengaged"_s        +  event<Arm>                                =  "ready_to_fight"_s);
     }
 };
 

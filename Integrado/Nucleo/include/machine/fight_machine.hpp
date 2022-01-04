@@ -22,19 +22,20 @@ class FightMachine
             using namespace sml;
 
             // Funções
-            auto avoidEdge = [] { stopMotors(); driveRobot(-1,0); delay(350); };
+            auto avoidEdge = [] { stopMotors(); driveRobot(-0.7,0); setTimeout(400); };
 
             return make_transition_table(
                 *"entry"_s = state<InitialMoveSelector>,
                 
-                state<InitialMoveSelector>  + event<Timeout>                            = state<SearchSelector>,
-                state<InitialMoveSelector>  + event<EdgeDetected>      / avoidEdge      = "AvoidEdge"_s,
+                state<InitialMoveSelector>  + event<Timeout>                            =  state<SearchSelector>,
+                state<InitialMoveSelector>  + event<EdgeDetected>                       =  "avoid_edge"_s,
 
-                "AvoidEdge"_s = state<SearchSelector>,
+                "avoid_edge"_s              + on_entry<_>               /  avoidEdge,
+                "avoid_edge"_s              + event<Timeout>                            =  state<SearchSelector>,
 
-                state<SearchSelector>       + event<OpponentDetected>                   = state<ChaseSelector>,
+                state<SearchSelector>       + event<OpponentDetected>                   =  state<ChaseSelector>,
 
-                state<ChaseSelector>        + event<None>                               = state<SearchSelector>);
+                state<ChaseSelector>        + event<None>                               =  state<SearchSelector>);
         }
     };
 
@@ -50,7 +51,7 @@ class FightMachine
 
             return make_transition_table(
                 *"entry"_s = "commands"_s,
-                "commands"_s  + event<Controller>  / executeCommand);
+                "commands"_s  +  event<Controller>  /  executeCommand);
         }
     };
 
@@ -64,9 +65,9 @@ public:
         auto rc_mode = [] { return robotConfiguration.mode == Mode::RC; };
 
         return make_transition_table(
-            *"entry"_s                  = "selector"_s,
-            "selector"_s [auto_mode]    = state<Auto>,
-            "selector"_s [rc_mode]      = state<RC>);
+            *"entry"_s                  =  "selector"_s,
+            "selector"_s [auto_mode]    =  state<Auto>,
+            "selector"_s [rc_mode]      =  state<RC>);
     }
 };
 #endif

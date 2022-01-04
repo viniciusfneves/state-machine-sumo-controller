@@ -22,8 +22,8 @@ void processMachineEvents() {
                 Core.process_event(Terminate{});
                 break;
 
-            case Event::Reset:
-                Core.process_event(Reset{});
+            case Event::Arm:
+                Core.process_event(Arm{});
                 break;
 
             case Event::Controller:

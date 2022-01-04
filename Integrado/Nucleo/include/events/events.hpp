@@ -5,7 +5,7 @@
 enum class Event {
     Start,
     Terminate,
-    Reset,
+    Arm,
     Timeout,
     EdgeDetected,
     OpponentDetected,
@@ -20,7 +20,7 @@ struct Start {};
 
 struct Terminate {};
 
-struct Reset {};
+struct Arm {};
 
 struct Timeout {};
 

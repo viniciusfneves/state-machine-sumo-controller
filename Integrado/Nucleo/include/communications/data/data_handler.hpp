@@ -28,8 +28,8 @@ void processJsonMessage(String message) {
         if (strcmp(request, "terminate") == 0) {
             addEventToQueue(Event::Terminate);
         }
-        if (strcmp(request, "reset") == 0) {
-            addEventToQueue(Event::Reset);
+        if (strcmp(request, "arm") == 0) {
+            addEventToQueue(Event::Arm);
         }
     }
 
