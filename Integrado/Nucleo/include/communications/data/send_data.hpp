@@ -120,6 +120,9 @@ void broadcastTelemetryData() {
         case RobotState::exec_chase:
             readings["readings"]["robot_status"] = "exec_chase";
             break;
+        case RobotState::exec_controller:
+            readings["readings"]["robot_status"] = "exec_controller";
+            break;
     }
 
     // Sensores de oponente

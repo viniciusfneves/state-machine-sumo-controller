@@ -10,7 +10,8 @@ enum RobotState {
     stopped,
     exec_initial,
     exec_search,
-    exec_chase
+    exec_chase,
+    exec_controller
 };
 
 // Status de conexão do controle de PS4

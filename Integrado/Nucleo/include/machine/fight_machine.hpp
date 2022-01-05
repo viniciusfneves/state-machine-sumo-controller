@@ -27,15 +27,15 @@ class FightMachine
             return make_transition_table(
                 *"entry"_s = state<InitialMoveSelector>,
                 
-                state<InitialMoveSelector>  + event<Timeout>                            =  state<SearchSelector>,
-                state<InitialMoveSelector>  + event<EdgeDetected>                       =  "avoid_edge"_s,
+                state<InitialMoveSelector>  +  event<Timeout>                            =  state<SearchSelector>,
+                state<InitialMoveSelector>  +  event<EdgeDetected>                       =  "avoid_edge"_s,
 
-                "avoid_edge"_s              + on_entry<_>               /  avoidEdge,
-                "avoid_edge"_s              + event<Timeout>                            =  state<SearchSelector>,
+                "avoid_edge"_s              +  on_entry<_>               /  avoidEdge,
+                "avoid_edge"_s              +  event<Timeout>                            =  state<SearchSelector>,
 
-                state<SearchSelector>       + event<OpponentDetected>                   =  state<ChaseSelector>,
+                state<SearchSelector>       +  event<OpponentDetected>                   =  state<ChaseSelector>,
 
-                state<ChaseSelector>        + event<None>                               =  state<SearchSelector>);
+                state<ChaseSelector>        +  event<None>                               =  state<SearchSelector>);
         }
     };
 
@@ -47,10 +47,11 @@ class FightMachine
             using namespace sml;
 
             // Funções
+            auto preSetup       = [] { changeRobotState(RobotState::exec_controller); };
             auto executeCommand = [] { driveRobot(robotData.controllerInputs[Input::linearSpeed], robotData.controllerInputs[Input::angularSpeed]); };
 
             return make_transition_table(
-                *"entry"_s = "commands"_s,
+                *"entry"_s    /  preSetup  =  "commands"_s,
                 "commands"_s  +  event<Controller>  /  executeCommand);
         }
     };
