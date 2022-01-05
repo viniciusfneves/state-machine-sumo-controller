@@ -138,6 +138,15 @@ connection.onmessage = function (response) {
 		let search = json["configurations"]["search"];
 		let chase = json["configurations"]["chase"];
 		updateStrategyButtons(mode, initial, search, chase);
+		
+		if(mode == "auto"){
+			document.getElementById("auto-settings").style.display = "block";
+			document.getElementById("rc-settings").style.display = "none";
+		}
+		if(mode == "rc"){
+			document.getElementById("auto-settings").style.display = "none";
+			document.getElementById("rc-settings").style.display = "block";
+		}
 	}
 
 	// Atualiza Status do Robô

@@ -1,120 +1,136 @@
 html {
-    font-family: Helvetica;
-    display: inline-block;
-    margin: 0px auto;
-    text-align: center;
-    background-color: rgb(245, 245, 245);
+	font-family: Helvetica;
+	display: inline-block;
+	margin: 0px auto;
+	text-align: center;
+	background-color: rgb(245, 245, 245);
 }
 
 .inline-text {
-    display: inline;
+	display: inline;
 }
 
 body {
-    margin-top: 50px;
+	margin-top: 50px;
 }
 
 h1 {
-    color: #444444;
-    margin: 50px auto 30px;
+	color: #444444;
+	margin: 50px auto 30px;
 }
 
-#h3-status{
-    margin: 35px 0 10px 0;
+#h3-status {
+	margin: 35px 0 10px 0;
 }
 
 button {
-    border: none;
-    width: 115px;
-    padding: 12px;
-    margin: 8px;
-    cursor: pointer;
-    border-radius: 8px;
-    background-color: #868686;
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
+	border: none;
+	width: 120px;
+    height: 50px;
+	padding: 12px;
+	margin: 8px;
+	cursor: pointer;
+	border-radius: 10px;
+	background-color: #868686;
+	color: white;
+	text-decoration: none;
+	font-size: 18px;
 }
 
 .button-green {
-    background-color: #00770c;
+	background-color: #00770c;
 }
 
 .button-red {
-    background-color: #bd0101;
+	background-color: #bd0101;
+    width: 156px;
 }
 
-.button-orange{
-    background-color: #cc8b00;
+.button-orange {
+	background-color: #cc8b00;
+}
+
+#telemetry-button {
+    background-color: rgb(8, 69, 182);
+    display: block;
+    margin: 13px auto
 }
 
 #connection-info {
-    display: inline-block;
-    margin: 0px;
+	display: inline-block;
+	margin: 0px;
 }
 
 #connection-status-text {
-    display: inline-block;
-    margin: 0px;
-    color: #cc8b00;
+	display: inline-block;
+	margin: 0px;
+	color: #cc8b00;
 }
 
 #connection-status-circle {
-    display: inline-block;
-    background: #cc8b00;
-    vertical-align: baseline;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
+	display: inline-block;
+	background: #cc8b00;
+	vertical-align: baseline;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+}
+
+#auto-settings {
+	display: none;
+}
+
+#rc-settings {
+	display: none;
 }
 
 .PID-regulator-setter {
-    display: inline;
+	display: inline;
 }
 
 .setter-value-field {
-    font-family: Helvetica;
-    font-size: 20px;
-    color: white;
-    background-color: #6b6b6b;
-    text-align: center;
-    width: 12%;
-    height: 35px;
-    margin: 8px;
-    min-width: 75px;
-    max-width: 115px;
-    border-style: solid;
-    border-radius: 8px;
+	font-family: Helvetica;
+	font-size: 20px;
+	color: white;
+	background-color: #6b6b6b;
+	text-align: center;
+	width: 12%;
+	height: 35px;
+	margin: 8px;
+	min-width: 75px;
+	max-width: 115px;
+	border-style: solid;
+	border-radius: 8px;
 }
 
 #set-button {
-    display: block;
-    margin: 20px auto;
-    width: 115px;
-    background-color: rgb(155, 0, 120);
-    color: white;
+	display: block;
+	margin: 20px auto;
+	width: 115px;
+	background-color: rgb(155, 0, 120);
+	color: white;
 }
 
 #start-time-value {
-    min-width: 75px;
-    max-width: 115px;
+	min-width: 75px;
+	max-width: 115px;
 }
 
-#status-container{
-    display: flex;
-    width: 50%;
-    max-width: 460px;
-    min-width: 320px;
-    margin: auto;
-    justify-content: space-around;
+#status-container {
+	display: flex;
+	width: 50%;
+	max-width: 460px;
+	min-width: 320px;
+	margin: auto;
+	justify-content: space-around;
 }
 
-.status-indicator{
-    display: inline-block;
-    margin: auto;
+.status-indicator {
+	display: inline-block;
+	margin: auto;
 }
 
-.status-circle{
+.status-circle {
 	background: #868686;
 	margin: auto;
 	width: 3vw;
@@ -126,6 +142,6 @@ button {
 	border-radius: 50%;
 }
 
-.status-text{
+.status-text {
 	font-size: medium;
 }
