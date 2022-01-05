@@ -6,6 +6,7 @@ var std_color = '#868686'; // Define a cor do botão das estratégias disponíve
 var highlight_color = '#008080'; // Define a cor do botão das estratégias selecionadas
 var std_red = '#bd0101';
 var std_green = '#00770c';
+var std_blue = '#0845b6';
 var std_ambar = '#cc8b00';
 
 window.onload = function () {
@@ -102,6 +103,7 @@ function updateVariableSettings(start_time, pid_kp, pid_ki, pid_kd) {
 
 function clearRobotState(){
 	document.getElementById("armed-status-circle").style.background = std_color;
+	document.getElementById("starting-status-circle").style.background = std_color;
 	document.getElementById("fight-status-circle").style.background = std_color;
 	document.getElementById("disabled-status-circle").style.background = std_color;
 }
@@ -138,7 +140,7 @@ connection.onmessage = function (response) {
 		let search = json["configurations"]["search"];
 		let chase = json["configurations"]["chase"];
 		updateStrategyButtons(mode, initial, search, chase);
-		
+
 		if(mode == "auto"){
 			document.getElementById("auto-settings").style.display = "block";
 			document.getElementById("rc-settings").style.display = "none";
@@ -151,33 +153,35 @@ connection.onmessage = function (response) {
 
 	// Atualiza Status do Robô
 	if("readings" in json){
+		clearRobotState();
 		let status = json["readings"]["robot_status"];
 		if (status == "ready") {
-			clearRobotState();
 			document.getElementById("armed-status-circle").style.background = std_ambar;
 		}
 
 		if (status == "starting") {
-			clearRobotState();
-			document.getElementById("fight-status-circle").style.background = std_green;
+			document.getElementById("starting-status-circle").style.background = std_blue;
 		}
 
 		if (status == "stopped") {
-			clearRobotState();
 			document.getElementById("disabled-status-circle").style.background = std_red;
 		}
 
 		if (status == "exec_initial") {
-			clearRobotState();
-			document.getElementById("fight-status-circle").style.background = std_green;		}
+			document.getElementById("fight-status-circle").style.background = std_green;
+		}
 
 		if (status == "exec_search") {
-			clearRobotState();
-			document.getElementById("fight-status-circle").style.background = std_green;		}
+			document.getElementById("fight-status-circle").style.background = std_green;		
+		}
 
 		if (status == "exec_chase") {
-			clearRobotState();
-			document.getElementById("fight-status-circle").style.background = std_green;		}
+			document.getElementById("fight-status-circle").style.background = std_green;		
+		}
+
+		if (status == "exec_controller") {
+			document.getElementById("fight-status-circle").style.background = std_green;		
+		}
 	}
 };
 
