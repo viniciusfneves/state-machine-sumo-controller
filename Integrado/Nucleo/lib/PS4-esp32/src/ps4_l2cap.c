@@ -107,6 +107,7 @@ void ps4_l2cap_send_hid( hid_cmd_t *hid_cmd, uint8_t len ) {
 
     if (!p_buf) {
         ESP_LOGE(PS4_TAG, "[%s] allocating buffer for sending the command failed", __func__);
+        return;
     }
 
     p_buf->length = len + ( sizeof(*hid_cmd) - sizeof(hid_cmd->data) );
