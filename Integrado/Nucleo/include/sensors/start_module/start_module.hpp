@@ -15,7 +15,7 @@ void readStartModule() {
         if (robotData.currentState == 1)
             addEventToQueue(Event::Start);
         else if (robotData.robotState != RobotState::ready)
-            addEventToQueue(Event::Terminate);
+            addEventToQueue(Event::Disengage);
     }
     robotData.lastState = robotData.currentState;
 }

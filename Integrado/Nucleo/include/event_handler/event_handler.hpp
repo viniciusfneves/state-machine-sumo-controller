@@ -18,8 +18,8 @@ void processMachineEvents() {
                 Core.process_event(Start{});
                 break;
 
-            case Event::Terminate:
-                Core.process_event(Terminate{});
+            case Event::Disengage:
+                Core.process_event(Disengage{});
                 break;
 
             case Event::Arm:

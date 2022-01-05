@@ -4,7 +4,7 @@
 // Aqui são definidos todos os possíveis eventos que podem ser emitidos para a máquina
 enum class Event {
     Start,
-    Terminate,
+    Disengage,
     Arm,
     Timeout,
     EdgeDetected,
@@ -18,7 +18,7 @@ enum class Event {
 
 struct Start {};
 
-struct Terminate {};
+struct Disengage {};
 
 struct Arm {};
 

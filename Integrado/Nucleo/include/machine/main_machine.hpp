@@ -30,15 +30,15 @@ struct Machine
 
             "ready_to_fight"_s    +  on_entry<_>         /  armRobot,
             "ready_to_fight"_s    +  event<Start>                              =  "start_clock"_s,
-            "ready_to_fight"_s    +  event<Terminate>                          =  "disengaged"_s,
+            "ready_to_fight"_s    +  event<Disengage>                          =  "disengaged"_s,
 
 
             "start_clock"_s       +  on_entry<_>         /  setStartClock,
             "start_clock"_s       +  event<Timeout>                            =  state<FightMachine>,
-            "start_clock"_s       +  event<Terminate>                          =  "disengaged"_s,
+            "start_clock"_s       +  event<Disengage>                          =  "disengaged"_s,
 
 
-            state<FightMachine>   +  event<Terminate>                          =  "disengaged"_s,
+            state<FightMachine>   +  event<Disengage>                          =  "disengaged"_s,
 
 
             "disengaged"_s        +  on_entry<_>         /  disengageRobot,

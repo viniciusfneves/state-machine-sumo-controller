@@ -25,8 +25,8 @@ void processJsonMessage(String message) {
         if (strcmp(request, "start") == 0) {
             addEventToQueue(Event::Start);
         }
-        if (strcmp(request, "terminate") == 0) {
-            addEventToQueue(Event::Terminate);
+        if (strcmp(request, "disengage") == 0) {
+            addEventToQueue(Event::Disengage);
         }
         if (strcmp(request, "arm") == 0) {
             addEventToQueue(Event::Arm);
