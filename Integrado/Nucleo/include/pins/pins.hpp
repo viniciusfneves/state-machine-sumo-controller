@@ -11,18 +11,17 @@ namespace pins
 #ifdef VAL
     namespace motors
     {
-        const int leftMotorIN1 = 25;
-        const int leftMotorIN2 = 25;
-        const int rightMotorIN1 = 26;
-        const int rightMotorIN2 = 26;
-        const int servo = 27;
+        const int leftIN1 = 25;
+        const int leftIN2 = 27;
+        const int rightIN1 = 26;
+        const int rightIN2 = 32;
     }
     namespace edgeSensors
     {
-        const int leftFrontEdge = 35;
-        const int rightFrontEdge = 34;
+        const int left = 35;
+        const int right = 34;
 
-        const int sensors[] = {leftFrontEdge, rightFrontEdge};
+        const int sensors[] = {left, right};
     }
     namespace opponentsSensors
     {
@@ -42,18 +41,17 @@ namespace pins
 #ifdef ATENA
     namespace motors
     {
-        const int leftMotorIN1 = 25;
-        const int leftMotorIN2 = 25;
-        const int rightMotorIN1 = 26;
-        const int rightMotorIN2 = 26;
-        const int servo = 27;
+        const int leftIN1 = 25;
+        const int leftIN2 = 25;
+        const int rightIN1 = 26;
+        const int rightIN2 = 26;
     }
     namespace edgeSensors
     {
-        const int leftFrontEdge = 35;
-        const int rightFrontEdge = 34;
+        const int left = 35;
+        const int right = 34;
 
-        const int sensors[] = {leftFrontEdge, rightFrontEdge};
+        const int sensors[] = {left, right};
     }
     namespace opponentsSensors
     {
@@ -72,18 +70,19 @@ namespace pins
 #ifdef APOLO
     namespace motors
     {
-        const int leftMotor = 25;
-        const int rightMotor = 26;
-        const int servo = 27;
+        const int leftIN1 = 25;
+        const int leftIN2 = 27;
+        const int rightIN1 = 26;
+        const int rightIN2 = 32;
     }
     namespace edgeSensors
     {
-        const int leftFrontEdge = 35;
-        const int rightFrontEdge = 34;
-        const int leftRearEdge = 39;
-        const int rightRearEdge = 36;
+        const int frontLeft = 35;
+        const int rearLeft = 39;
+        const int frontRight = 34;
+        const int rearRight = 36;
 
-        const int sensors[] = {leftFrontEdge, rightFrontEdge, leftRearEdge, rightRearEdge};
+        const int sensors[] = {frontLeft, frontRight};
     }
     namespace opponentsSensors
     {
@@ -97,6 +96,8 @@ namespace pins
 
         const int sensors[] = {leftSide, farLeft, left, center, right, farRight, rightSide};
     }
+    const int startModule = 23;
+    }
 #endif // APOLO
 
 // Definição de pinos para os robôs sumo mini
@@ -106,24 +107,24 @@ namespace pins
 #ifdef ZE_PEQUENO
     namespace motors
     {
-        const int leftMotorIN1 = 10;
-        const int leftMotorIN2 = 9;
-        const int rightMotorIN1 = 6;
-        const int rightMotorIN2 = 5;
+        const int leftIN1 = 10;
+        const int leftIN2 = 9;
+        const int rightIN1 = 6;
+        const int rightIN2 = 5;
     }
     namespace edgeSensors
     {
-        const int leftFrontEdge = 15;
-        const int rightFrontEdge = 16;
+        const int left = 15;
+        const int right = 16;
 
-        const int sensors[] = {leftFrontEdge, rightFrontEdge};
+        const int sensors[] = {left, right};
     }
     namespace opponentsSensors
     {
-        const int rightFrontOpponent = 3;
-        const int leftFrontOpponent = 2;
+        const int right = 3;
+        const int left = 2;
 
-        const int sensors[] = {leftFrontOpponent, rightFrontOpponent};
+        const int sensors[] = {left, right};
     }
     namespace configuration
     {
@@ -136,25 +137,25 @@ namespace pins
 #ifdef ET_MINI
     namespace motors
     {
-        const int leftMotorIN1 = 10;
-        const int leftMotorIN2 = 9;
-        const int rightMotorIN1 = 6;
-        const int rightMotorIN2 = 5;
+        const int leftIN1 = 10;
+        const int leftIN2 = 9;
+        const int rightIN1 = 6;
+        const int rightIN2 = 5;
     }
     namespace edgeSensors
     {
-        const int leftFrontEdge = 3;
-        const int rightFrontEdge = 2;
+        const int left = 3;
+        const int right = 2;
 
-        const int sensors[] = {leftFrontEdge, rightFrontEdge};
+        const int sensors[] = {left, right};
     }
     namespace opponentsSensors
     {
-        const int leftFrontOpponent = 7;
-        const int centralFrontOpponent = 8;
-        const int rightFrontOpponent = 4;
+        const int left = 7;
+        const int center = 8;
+        const int right = 4;
 
-        const int sensors[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent};
+        const int sensors[] = {left, center, right};
     }
     namespace configuration
     {
@@ -167,27 +168,27 @@ namespace pins
 #ifdef MERI
     namespace motors
     {
-        const int leftMotorIN1 = 18;
-        const int leftMotorIN2 = 29;
-        const int rightMotorIN1 = 27;
-        const int rightMotorIN2 = 26;
+        const int leftIN1 = 18;
+        const int leftIN2 = 29;
+        const int rightIN1 = 27;
+        const int rightIN2 = 26;
     }
     namespace edgeSensors
     {
-        const int leftFrontEdge = 3;
-        const int rightFrontEdge = 2;
+        const int left = 3;
+        const int right = 2;
 
-        const int sensors[] = {leftFrontEdge, rightFrontEdge};
+        const int sensors[] = {left, right};
     }
     namespace opponentsSensors
     {
-        const int leftFrontOpponent = 39;
-        const int centralFrontOpponent = 34;
-        const int rightFrontOpponent = 35;
-        const int leftLatOpponent = 36;
-        const int rightLatOpponent = 25;
+        const int leftLat = 36;
+        const int left= 39;
+        const int center = 34;
+        const int right = 35;
+        const int rightLat = 25;
 
-        const int sensors[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent, leftLatOpponent, rightLatOpponent};
+        const int sensors[] = {leftLat, left, center, right, rightLat};
     }
     namespace configuration
     {

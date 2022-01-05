@@ -45,13 +45,13 @@ void driveMotors(int PWM_left, int PWM_right) {
     PWM_right = constrain(PWM_right, -255, 255);
 
 #ifdef BRUSHLESS
-    analogWrite(pins::motors::leftMotor, PWM_left);
-    analogWrite(pins::motors::rightMotor, PWM_right);
+    analogWrite(pins::motors::left, PWM_left);
+    analogWrite(pins::motors::right, PWM_right);
 #endif
 
 #ifdef BRUSHED
-    drvDrive(PWM_left, pins::motors::leftMotorIN1, pins::motors::leftMotorIN2);
-    drvDrive(PWM_right, pins::motors::rightMotorIN1, pins::motors::rightMotorIN2);
+    drvDrive(PWM_left, pins::motors::leftIN1, pins::motors::leftIN2);
+    drvDrive(PWM_right, pins::motors::rightIN1, pins::motors::rightIN2);
 #endif
 
 #ifdef ESP32_ENV
@@ -75,10 +75,10 @@ void initMotors() {
 #endif
 #ifdef BRUSHED
     // Define a resolução de saída dos pinos de PWM do ESP32
-    analogWriteResolution(pins::motors::leftMotorIN1, 12);
-    analogWriteResolution(pins::motors::leftMotorIN2, 12);
-    analogWriteResolution(pins::motors::rightMotorIN1, 12);
-    analogWriteResolution(pins::motors::rightMotorIN2, 12);
+    analogWriteResolution(pins::motors::leftIN1, 12);
+    analogWriteResolution(pins::motors::leftIN2, 12);
+    analogWriteResolution(pins::motors::rightIN1, 12);
+    analogWriteResolution(pins::motors::rightIN2, 12);
 #endif
 #endif
 #ifdef BRUSHLESS
@@ -88,14 +88,14 @@ void initMotors() {
     analogWrite(pins::motors::rightMotor, 0);
 #endif
 #ifdef BRUSHED
-    pinMode(pins::motors::leftMotorIN1, OUTPUT);
-    pinMode(pins::motors::leftMotorIN2, OUTPUT);
-    pinMode(pins::motors::rightMotorIN1, OUTPUT);
-    pinMode(pins::motors::rightMotorIN2, OUTPUT);
-    digitalWrite(pins::motors::leftMotorIN1, HIGH);
-    digitalWrite(pins::motors::leftMotorIN2, HIGH);
-    digitalWrite(pins::motors::rightMotorIN1, HIGH);
-    digitalWrite(pins::motors::rightMotorIN2, HIGH);
+    pinMode(pins::motors::leftIN1, OUTPUT);
+    pinMode(pins::motors::leftIN2, OUTPUT);
+    pinMode(pins::motors::rightIN1, OUTPUT);
+    pinMode(pins::motors::rightIN2, OUTPUT);
+    digitalWrite(pins::motors::leftIN1, HIGH);
+    digitalWrite(pins::motors::leftIN2, HIGH);
+    digitalWrite(pins::motors::rightIN1, HIGH);
+    digitalWrite(pins::motors::rightIN2, HIGH);
 #endif
 }
 
