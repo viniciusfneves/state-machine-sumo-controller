@@ -19,7 +19,7 @@ void connectToWiFi(const char *ssid, const char *passphrase) {
     while (WiFi.status() != WL_CONNECTED) {
         delay(200);
     }
-    Serial.print("Connected to adress ");
+    Serial.print("Connected to adress: ");
     Serial.println(WiFi.localIP());
 }
 #endif

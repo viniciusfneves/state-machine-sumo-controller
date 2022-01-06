@@ -23,6 +23,7 @@ void setup() {
 
 // Configurações do ambiente para ESP32
 #ifdef ESP32_ENV
+    //Serial.begin(115200);
     SPIFFS.begin();  // Inicia o File System do ESP32
 
     // ---- AVISO PARA USO DO CONTROLE DE PS4 ---- //
@@ -50,9 +51,12 @@ void setup() {
 }
 
 void loop() {
+    // int time_1 = micros();
 #ifdef ESP32_ENV
+    processControllerEvents();
     processWebSocketEvents();
 #endif
     readSensors();
     processMachineEvents();
+    // Serial.println(micros() - time_1);
 }
