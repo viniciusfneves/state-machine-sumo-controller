@@ -5,8 +5,6 @@
 #include <ESPAsyncWebServer.h>
 #include <SPIFFS.h>
 
-#include <communications/data/data_handler.hpp>
-
 // Configura o servidor HTTP para a porta 80
 AsyncWebServer server(80);
 
@@ -24,24 +22,6 @@ void setRequestsResponse() {
     server.on("/telemetry", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/pages/telemetry/telemetry.html"); });
     server.on("/telemetry.css", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/pages/telemetry/telemetry.css"); });
     server.on("/scripts/telemetry.js", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/scripts/telemetry.js"); });
-
-    // Requests na página de informações do controle
-
-    // Caso o request seja do tipo GET -> Retorna um erro e uma mensagem
-    server.on("/controller", HTTP_GET, [](AsyncWebServerRequest *request) { request->send(404, "text/plain", "Exclusivo para POST requests"); });
-
-    // Caso o request seja do tipo POST -> Espera receber os parametros linear e angular.
-    // Esses parametros são repassados para o código como JSON para serem interpretados como comandos do controle para o modo RC
-    /* --> ERROS COM O CONTROLE <-- */
-    // Caso não haja os parâmetros esperados, apresenta erro no código!!! -> Implementar futuras verificações para inibir isso
-    server.on(
-        "/controller", HTTP_POST, [](AsyncWebServerRequest *request) {}, NULL, [](AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total) {
-        String jsonpayload = "";
-        for (size_t i = 0; i < len; i++) {
-            jsonpayload += char(data[i]);
-        }
-        processJsonMessage(jsonpayload);
-        request->send(200, "text/plain", "Ok"); });
 
     // Caso o usuário procure um endereço que não exista
     server.onNotFound([](AsyncWebServerRequest *request) { request->send(404, "text/plain", "Not found"); });
