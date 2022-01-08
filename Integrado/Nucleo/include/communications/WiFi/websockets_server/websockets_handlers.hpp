@@ -1,12 +1,19 @@
-#if !defined(INCOMING_DATA_HPP)
-#define INCOMING_DATA_HPP
+#ifndef WEBSOCKET_HANDLERS_HPP
+#define WEBSOCKET_HANDLERS_HPP
 
-#include <ArduinoJson.h>
+#include <communications/WiFi/websockets_server/websockets_server.hpp>
+#include <communications/data/robot_data_json_encoder.hpp>
+#include <configuration/set_configurations.hpp>
 
-#include <configuration/configurations.hpp>
-#include <dynamic_data/dynamic_data.hpp>
-#include <event_handler/circular_buffer.hpp>
-#include <events/events.hpp>
+namespace commDataValues {
+unsigned long lastTelemetryTimestamp = 0UL;
+};
+
+/* --> Colocar no loop <-- */
+// Lida com as requisições feitas ao server websocket
+void processWebSocketEvents() {
+    webSocket.loop();
+}
 
 /* --> ENVIAR SOMENTE JSON PARA ESSA FUNÇÃO <-- */
 // Responsável por pegar as mensagens do tipo JSON, decodificá-las e atuar corretamente no robô conforme as instruções
@@ -95,13 +102,41 @@ void processJsonMessage(String message) {
             setChaseStrategy(Chase::standard);
         }
     }
-
-    // Caso receba comandos de controle, atua nos motores se o modo RC estiver ativo
-    if (jsonMessage.containsKey("controller") && robotConfiguration.mode == Mode::RC) {
-        robotData.controllerInputs[Input::linearSpeed] = jsonMessage["controller"]["linearSpeed"];
-        robotData.controllerInputs[Input::angularSpeed] = jsonMessage["controller"]["angularSpeed"];
-        addEventToQueue(Event::Controller);
-    }
 };
 
-#endif  // DYNAMIC_DATA_HPP
+void pushTelemetry(unsigned long timestamp) {
+    if (timestamp - commDataValues::lastTelemetryTimestamp < 32)
+        return;
+    broadcastTelemetryData();
+}
+
+/* --> Enviar somente JSON <-- */
+// Lida com os dados recebidos pelo protocolo WebSocket
+void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *payload, size_t length) {
+    switch (type) {
+        // Caso haja um erro no recebimento de uma mensagem do cliente
+        case WStype_ERROR:
+            break;
+        // Caso uma nova conexão seja aceita
+        case WStype_CONNECTED:
+            broadcastRobotInfos();
+            broadcastRobotConfiguration();
+            break;
+        // Caso a mensagem seja do tipo text
+        case WStype_TEXT:
+            processJsonMessage(String((char *)payload));
+            break;
+        default:
+            break;
+    }
+}
+
+// Inicia o serviço websocket
+void initWebSocketsServer() {
+    webSocket.begin();
+
+    // Configura qual função é executada a cada evento recebido pelo WebSocket
+    webSocket.onEvent(handleWSIncomingData);
+}
+
+#endif  // WEBSOCKET_HANDLERS_HPP

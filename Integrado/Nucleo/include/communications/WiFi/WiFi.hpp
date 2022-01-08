@@ -1,9 +1,9 @@
-#ifndef WIFI_ACESS_POINT_HPP
-#define WIFI_ACESS_POINT_HPP
+#ifndef WIFI_POINT_HPP
+#define WIFI_POINT_HPP
 
 #include <WiFi.h>
 
-#include "../../../configuration/specifications.hpp"
+#include <configuration/specifications.hpp>
 
 const char *ssid = robotSpecifications.robotName;  // Nome da rede - SSID
 const char *password = "12345678";                 // Senha da rede

@@ -10,9 +10,9 @@
 #include <SPIFFS.h>
 
 #include <communications/PS4_controller/ps4_controller.hpp>
-#include <communications/WiFi/access_point/wireless_access_point.hpp>
+#include <communications/WiFi/WiFi.hpp>
 #include <communications/WiFi/http_server/http_server.hpp>
-#include <communications/WiFi/websockets_server/webSockets_server.hpp>
+#include <communications/WiFi/websockets_server/websockets_handlers.hpp>
 #endif
 
 void setup() {
