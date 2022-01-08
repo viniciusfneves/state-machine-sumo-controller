@@ -23,7 +23,7 @@ void setup() {
 
 // Configurações do ambiente para ESP32
 #ifdef ESP32_ENV
-    //Serial.begin(115200);
+    // Serial.begin(115200);
     SPIFFS.begin();  // Inicia o File System do ESP32
 
     // ---- AVISO PARA USO DO CONTROLE DE PS4 ---- //
@@ -35,8 +35,8 @@ void setup() {
     // junto com "connectToWiFi()"fornecendo à função o SSID e a senha da rede que deseja se conectar
     // Futuramente: Será implementado um serviço mDNS para facilitar a conexão via redes externas onde o IP é dinâmico
     // ------------------------------------------ // ------------------------------------------ //
-    //initController();
-    //connectToWiFi("SSID", "PASSWORD");
+    // initController();
+    // connectToWiFi("SSID", "PASSWORD");
 
     initAccessPoint();
     initHTTPServer();
@@ -63,5 +63,11 @@ void loop() {
 #endif
     readSensors();
     processMachineEvents();
-    // Serial.println(micros() - time_1);
+    // Serial.print(micros() - time_1);
+    // Serial.print(" | ");
+    // Serial.print(uxTaskGetNumberOfTasks());
+    // Serial.print(" | ");
+    // Serial.print(ESP.getFreeHeap());
+    // Serial.print(" | ");
+    // Serial.println(uxTaskGetStackHighWaterMark(NULL));
 }
