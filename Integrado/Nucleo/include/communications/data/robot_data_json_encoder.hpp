@@ -149,10 +149,12 @@ void broadcastRobotInfos() {
     DynamicJsonDocument infos = encodeRobotInfos();
     serializeAndBroadcast(infos);
 };
+
 void broadcastRobotConfiguration() {
     DynamicJsonDocument configs = EncodeRobotConfiguration();
     serializeAndBroadcast(configs);
 };
+
 void broadcastTelemetryData() {
     DynamicJsonDocument readings = encodeTelemetryData();
     serializeAndBroadcast(readings);

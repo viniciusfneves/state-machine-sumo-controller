@@ -108,6 +108,7 @@ void pushTelemetry(unsigned long timestamp) {
     if (timestamp - commDataValues::lastTelemetryTimestamp < 32)
         return;
     broadcastTelemetryData();
+    commDataValues::lastTelemetryTimestamp = timestamp;
 }
 
 /* --> Enviar somente JSON <-- */
