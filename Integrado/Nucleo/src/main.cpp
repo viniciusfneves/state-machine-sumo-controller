@@ -63,11 +63,11 @@ void loop() {
 #endif
     readSensors();
     processMachineEvents();
-    // Serial.print(micros() - time_1);
+    // Serial.printf("%04lu", micros() - time_1);
     // Serial.print(" | ");
     // Serial.print(uxTaskGetNumberOfTasks());
     // Serial.print(" | ");
-    // Serial.print(ESP.getFreeHeap());
+    // Serial.printf("%06d", ESP.getFreeHeap());
     // Serial.print(" | ");
     // Serial.println(uxTaskGetStackHighWaterMark(NULL));
 }
