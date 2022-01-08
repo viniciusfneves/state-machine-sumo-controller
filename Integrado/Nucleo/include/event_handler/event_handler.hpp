@@ -5,9 +5,6 @@
 #include "../machine/main_machine.hpp"
 #include "../utilities/timeout_implementation/telemetry_interval_timeout.hpp"
 #include "../utilities/timeout_implementation/timeout.hpp"
-#ifdef ESP32_ENV
-#include <communications/data/send_data.hpp>
-#endif
 
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina
 void processMachineEvents() {

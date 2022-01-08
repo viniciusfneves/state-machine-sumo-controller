@@ -47,11 +47,11 @@ class FightMachine
             using namespace sml;
 
             // Funções
-            auto preSetup       = [] { changeRobotState(RobotState::exec_controller); };
-            auto executeCommand = [] { driveRobot(robotData.controllerInputs[Input::linearSpeed], robotData.controllerInputs[Input::angularSpeed]); };
+            auto entry          = [] { changeRobotState(RobotState::exec_controller); };
+            auto executeCommand = [] { driveRobot(controllerData.controllerInputs[Input::linearSpeed], controllerData.controllerInputs[Input::angularSpeed]); };
 
             return make_transition_table(
-                *"entry"_s    /  preSetup  =  "commands"_s,
+                *"entry"_s    /  entry  =  "commands"_s,
                 "commands"_s  +  event<Controller>  /  executeCommand);
         }
     };
@@ -63,7 +63,7 @@ public:
 
         // Guards
         auto auto_mode = [] { return robotConfiguration.mode == Mode::Auto; };
-        auto rc_mode = [] { return robotConfiguration.mode == Mode::RC; };
+        auto rc_mode   = [] { return robotConfiguration.mode == Mode::RC; };
 
         return make_transition_table(
             *"entry"_s                  =  "selector"_s,

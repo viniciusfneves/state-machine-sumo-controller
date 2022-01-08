@@ -16,8 +16,6 @@
 
 #ifdef ESP32_ENV
 #include <analogWrite.h>  // Adiciona a função analogWrite para compilação com ESP32
-
-#include <communications/data/send_data.hpp>
 #endif
 
 // Função de controles dos pinos de ativação dos drivers para motores brushed

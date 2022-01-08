@@ -6,9 +6,6 @@
 #include "../../motors/PID_controller.hpp"
 #include "../../strategies/search_strategies/search_none.hpp"
 #include "../../strategies/search_strategies/radar.hpp"
-#ifdef ESP32_ENV
-#include "../../communications/data/send_data.hpp"
-#endif
 
 namespace sml = boost::sml;
 

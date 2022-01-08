@@ -6,11 +6,6 @@
 #include "../../strategies/initial_move_strategies/initial_none.hpp"
 #include "../../strategies/initial_move_strategies/full_frente.hpp"
 #include "../../strategies/initial_move_strategies/zig_zag.hpp"
-#include "../../strategies/initial_move_strategies/delayed_radar.hpp"
-#include "../../strategies/initial_move_strategies/short_right_arch.hpp"
-#ifdef ESP32_ENV
-#include "../../communications/data/send_data.hpp"
-#endif
 
 namespace sml = boost::sml;
 
