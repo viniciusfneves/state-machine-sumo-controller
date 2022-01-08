@@ -3,10 +3,10 @@
 
 #include <ArduinoJson.h>
 
+#include <communications/WiFi/websockets_server/webSockets_server.hpp>
 #include <configuration/configurations.hpp>
 #include <configuration/specifications.hpp>
-
-#include "../WiFi/websockets_server/webSockets_server.hpp"
+#include <dynamic_data/dynamic_data.hpp>
 
 // Serializa objetos JSON e os envia para todos os clientes conectados no WebSocket
 void serializeAndBroadcast(DynamicJsonDocument readings) {
@@ -18,32 +18,32 @@ void serializeAndBroadcast(DynamicJsonDocument readings) {
 
 // Envia as informações estáticas do robô
 // Essas informações são em sua maioria usadas para construir a interface do usuário e possibilitar uma interface de comunicação com o usuário
-void broadcastRobotInfos() {
-    StaticJsonDocument<512> configs;
+DynamicJsonDocument encodeRobotInfos() {
+    StaticJsonDocument<512> infos;
 
     // Nome do robô
-    configs["info"]["robot_name"] = robotSpecifications.robotName;
+    infos["info"]["robot_name"] = robotSpecifications.robotName;
 
     // Quantidade de sensores
-    configs["info"]["available_opponent_sensors"] = NUMBER_OF_OPPONENT_SENSORS;
-    configs["info"]["available_edge_sensors"] = NUMBER_OF_EDGE_SENSORS;
+    infos["info"]["available_opponent_sensors"] = NUMBER_OF_OPPONENT_SENSORS;
+    infos["info"]["available_edge_sensors"] = NUMBER_OF_EDGE_SENSORS;
 
     // Estratégias disponíveis em cada um dos movimentos possíveis
     for (int index = 0; index < initialStrategies.size(); index++) {
-        configs["info"]["available_initial_strategies"][index] = initialStrategies[index];
+        infos["info"]["available_initial_strategies"][index] = initialStrategies[index];
     }
     for (int index = 0; index < searchStrategies.size(); index++) {
-        configs["info"]["available_search_strategies"][index] = searchStrategies[index];
+        infos["info"]["available_search_strategies"][index] = searchStrategies[index];
     }
     for (int index = 0; index < chaseStrategies.size(); index++) {
-        configs["info"]["available_chase_strategies"][index] = chaseStrategies[index];
+        infos["info"]["available_chase_strategies"][index] = chaseStrategies[index];
     }
 
-    serializeAndBroadcast(configs);
+    return infos;
 }
 
 // Envia as configurações atuais do robô
-void broadcastRobotConfiguration() {
+DynamicJsonDocument EncodeRobotConfiguration() {
     StaticJsonDocument<512> configs;
 
     // Parâmetros configuráveis
@@ -93,11 +93,11 @@ void broadcastRobotConfiguration() {
             break;
     }
 
-    serializeAndBroadcast(configs);
+    return configs;
 }
 
 // Envia as leituras dos sensores de borda, dos sensores de oponente e da potência dos motores -> TELEMETRIA
-void broadcastTelemetryData() {
+DynamicJsonDocument encodeTelemetryData() {
     StaticJsonDocument<512> readings;
 
     // Estado de execução
@@ -138,8 +138,23 @@ void broadcastTelemetryData() {
     readings["readings"]["motor"][0] = robotData.motorsPower[0];
     readings["readings"]["motor"][1] = robotData.motorsPower[1];
 
-    readings["controller"]["status"] = robotData.controllerStatus == ControllerStatus::connected ? "connected" : "disconnected";
+    readings["controller"]["connection_status"] = controllerData.isControllerConnected() ? "connected" : "disconnected";
+    readings["controller"]["battery"] = controllerData.battery;
+    readings["controller"]["charging_status"] = controllerData.isCharging ? "true" : "false";
 
-    serializeAndBroadcast(readings);
+    return readings;
 }
+
+void broadcastRobotInfos() {
+    DynamicJsonDocument infos = encodeRobotInfos();
+    serializeAndBroadcast(infos);
+};
+void broadcastRobotConfiguration() {
+    DynamicJsonDocument configs = EncodeRobotConfiguration();
+    serializeAndBroadcast(configs);
+};
+void broadcastTelemetryData() {
+    DynamicJsonDocument readings = encodeTelemetryData();
+    serializeAndBroadcast(readings);
+};
 #endif  // SEND_DATA_HPP

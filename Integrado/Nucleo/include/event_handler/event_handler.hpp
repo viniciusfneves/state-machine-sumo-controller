@@ -3,7 +3,6 @@
 
 #include "../event_handler/circular_buffer.hpp"
 #include "../machine/main_machine.hpp"
-#include "../utilities/timeout_implementation/telemetry_interval_timeout.hpp"
 #include "../utilities/timeout_implementation/timeout.hpp"
 
 // Responsável por processar informações e emitir eventos dinamicamente para a máquina
@@ -26,30 +25,9 @@ void processMachineEvents() {
             case Event::Controller:
                 Core.process_event(Controller{});
                 break;
-#ifdef ESP32_ENV
-            case Event::SetUpClient:
-                broadcastRobotInfos();
-                broadcastRobotConfiguration();
-                setTelemetryBroadcast();
-                break;
 
-            case Event::BroadcastRobotConfiguration:
-                broadcastRobotConfiguration();
-                break;
-
-            case Event::BroadcastTelemetryData:
-                broadcastTelemetryData();
-                updateTelemetry();
-                break;
-#endif
             default:
                 break;
-        }
-    }
-    if (isTelemetryActive()) {
-        // NÃO RETORNAR AQUI
-        if (readToSend(millis())) {
-            addEventToQueue(Event::BroadcastTelemetryData);
         }
     }
     if (isTimeoutActive()) {
@@ -77,6 +55,7 @@ void processMachineEvents() {
         return;
     } else {
         Core.process_event(None{});
+        return;
     }
 }
 #endif

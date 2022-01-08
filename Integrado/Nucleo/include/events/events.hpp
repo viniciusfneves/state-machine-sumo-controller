@@ -9,9 +9,6 @@ enum class Event {
     Timeout,
     EdgeDetected,
     OpponentDetected,
-    SetUpClient,
-    BroadcastRobotConfiguration,
-    BroadcastTelemetryData,
     Controller,
     None
 };
@@ -27,12 +24,6 @@ struct Timeout {};
 struct EdgeDetected {};
 
 struct OpponentDetected {};
-
-struct SetUpClient {};
-
-struct BroadcastRobotConfiguration {};
-
-struct BroadcastTelemetryData {};
 
 struct Controller {};
 
