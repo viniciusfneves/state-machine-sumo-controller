@@ -3,9 +3,6 @@
 
 #include <string.h>
 
-/* ---> PRECISA ESTAR DEFINIDO INDEPENDENTE DO AMBIENTE <--- */
-#define NUMBER_OF_CONTROLLER_CHANNELS 2
-
 struct Specifications {
     // 3KG //
 

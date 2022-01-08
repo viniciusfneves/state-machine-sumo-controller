@@ -1,13 +1,15 @@
 #ifndef PS4_CONTROLLER_HPP
 #define PS4_CONTROLLER_HPP
 
+#define CONTROLLER_MAC_ADDRESS "00:1a:7d:da:71:03"
+
 #include <PS4Controller.h>
 #include <ps4.h>
 #include <ps4_int.h>
 
-#include "dynamic_data/dynamic_data.hpp"
-
-#define CONTROLLER_MAC_ADDRESS "00:1a:7d:da:71:03"
+#include <configuration/set_configurations.hpp>
+#include <dynamic_data/dynamic_data.hpp>
+#include <utilities/calculus/calculus.hpp>
 
 namespace ps4AmbientVariables {
 unsigned long lastControllerUpdateTimestamp = 0UL;
@@ -28,15 +30,17 @@ enum LightMode {
 void initController() {
     PS4.begin(CONTROLLER_MAC_ADDRESS);
     PS4.attachOnConnect([] {
-        robotData.controllerStatus = ControllerStatus::connected;
+        controllerData.controllerStatus = ControllerStatus::connected;
     });
     PS4.attachOnDisconnect([] {
-        robotData.controllerStatus = ControllerStatus::disconnected;
+        controllerData.controllerStatus = ControllerStatus::disconnected;
     });
 }
 
 // Lê os comandos do controle e atua na máquina(robô) conforme necessário
 void readControllerInputs() {
+    controllerData.isCharging = PS4.Charging();
+    controllerData.battery = PS4.Battery();
     if (PS4.Options()) {
         if (robotData.robotState == RobotState::stopped)
             addEventToQueue(Event::Arm);
@@ -66,10 +70,26 @@ void readControllerInputs() {
     int _stick = PS4.LStickX();
     double _linear = map_double(_trigger, -255, 255, -1, 1);
     double _angular = map_double(_stick, -128, 127, -1, 1);
+
     if (abs(_angular) < 0.07)
         _angular = 0;
-    robotData.controllerInputs[Input::linearSpeed] = pow(_linear, 3);
-    robotData.controllerInputs[Input::angularSpeed] = pow(_angular, 3);
+
+    switch (controllerData.mapSettings) {
+        case CommandMapping::linear:
+            controllerData.controllerInputs[Input::linearSpeed] = _linear;
+            controllerData.controllerInputs[Input::angularSpeed] = _angular;
+            break;
+
+        case CommandMapping::cubic:
+            controllerData.controllerInputs[Input::linearSpeed] = pow(_linear, 3);
+            controllerData.controllerInputs[Input::angularSpeed] = pow(_angular, 3);
+            break;
+
+        default:
+            controllerData.controllerInputs[Input::linearSpeed] = _linear;
+            controllerData.controllerInputs[Input::angularSpeed] = _angular;
+            break;
+    }
 
     if (robotConfiguration.mode == Mode::RC) {
         addEventToQueue(Event::Controller);
@@ -133,7 +153,7 @@ void configController(unsigned short* lightParams, LightMode mode) {
 
 void processControllerEvents() {
     // Verifica se o controle está conectado antes de prosseguir com a função
-    if (robotData.controllerStatus == ControllerStatus::disconnected)
+    if (!controllerData.isControllerConnected())
         return;
 
     readControllerInputs();

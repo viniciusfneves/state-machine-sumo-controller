@@ -14,19 +14,6 @@ enum RobotState {
     exec_controller
 };
 
-// Status de conexão do controle de PS4
-enum ControllerStatus {
-    connected,
-    disconnected
-};
-
-// Enumera os inputs recebidos pelo controle.
-// Define a ordem de armazenamento desses inputs no array que guarda essas informações
-enum Input {
-    linearSpeed,
-    angularSpeed
-};
-
 struct DynamicData {
     // --------------------------> IMPORTANTE <-------------------------- //
     // NÃO UTILIZAR ARRAYS DE TAMANHO DINÂMICO!!!
@@ -55,13 +42,6 @@ struct DynamicData {
 
     // POTÊNCIA DOS MOTORES
     int motorsPower[2];
-
-    // CONTROLE DE PS4 -> MODO RC
-    ControllerStatus controllerStatus = ControllerStatus::disconnected;
-    double controllerInputs[NUMBER_OF_CONTROLLER_CHANNELS];  // Segue a ordem do enum Input
-
-    // CONSTANTES DE TEMPO
-    long double tempoRadar;  // Tempo em millis() que foi acionado o radar
 };
 
 // Objeto dos dados dinâmicas do robô
@@ -81,6 +61,38 @@ bool isEdgeDetected() { return robotData.edgeDetected; }
 // Muda na memória do robô o seu estado de execução atual
 void changeRobotState(RobotState state) { robotData.robotState = state; }
 
-bool isControllerConnected() { return robotData.controllerStatus == ControllerStatus::connected ? true : false; }
+// ::::::::::::::::::::::::::::::::::::  ---  :::::::::::::::::::::::::::::::::::: //
 
+// Status de conexão do controle de PS4
+enum ControllerStatus {
+    connected,
+    disconnected
+};
+
+// Enumera os inputs recebidos pelo controle.
+// Define a ordem de armazenamento desses inputs no array que guarda essas informações
+enum Input {
+    linearSpeed,
+    angularSpeed,
+    length
+};
+
+enum CommandMapping {
+    linear,
+    cubic,
+    rc_controller_standard
+};
+
+// Informações e leituras do Controle de PS4
+struct ControllerData {
+    ControllerStatus controllerStatus = ControllerStatus::disconnected;
+    CommandMapping mapSettings = CommandMapping::cubic;
+    double controllerInputs[Input::length];  // Segue a ordem do enum Input
+    unsigned short battery = 0;
+    bool isCharging = false;
+
+    bool isControllerConnected() { return controllerStatus == ControllerStatus::connected ? true : false; }
+};
+
+ControllerData controllerData;
 #endif  // DYNAMIC_DATA_HPP
