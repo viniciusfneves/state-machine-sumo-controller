@@ -1,92 +1,122 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<meta
+			charset="utf-8"
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, user-scalable=no"
+		/>
+		<link rel="icon" href="#" />
+		<link rel="stylesheet" href="config.css" />
+		<script type="module" src="scripts/config.js"></script>
 
-<head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="icon" href="#">
-    <link rel="stylesheet" href="config.css">
-    <script src="scripts/config.js"></script>
+		<title>Robot WiFi Controller</title>
+	</head>
 
-    <title>Robot WiFi Controller</title>
-</head>
+	<body>
+		<h1 id="config-title">Configurações do Robô</h1>
 
-<body>
-    <h1 id="config-title">Configurações do Robô</h1>
+		<h4 id="connection-info">Connection Status:</h4>
+		<div id="connection-status-circle"></div>
+		<h4 id="connection-status-text">Trying upgrade to WebSocket</h4>
 
-    <h4 id="connection-info">Connection Status: </h4>
-    <div id="connection-status-circle"></div>
-    <h4 id="connection-status-text">Trying upgrade to WebSocket</h4>
+		<h3 id="h3-status">Status da State Machine</h3>
 
-    <h3 id="h3-status">Status da State Machine</h3>
+		<div id="status-container">
+			<div class="status-indicator">
+				<h3 class="status-text">Ready</h3>
+				<div class="status-circle" id="armed-status-circle"></div>
+			</div>
+			<div class="status-indicator">
+				<h3 class="status-text">Starting</h3>
+				<div class="status-circle" id="starting-status-circle"></div>
+			</div>
+			<div class="status-indicator">
+				<h3 class="status-text">Fighting</h3>
+				<div class="status-circle" id="fight-status-circle"></div>
+			</div>
+			<div class="status-indicator">
+				<h3 class="status-text">Disabled</h3>
+				<div class="status-circle" id="disabled-status-circle"></div>
+			</div>
+		</div>
 
-    <div id="status-container">
-        <div class="status-indicator">
-            <h3 class="status-text">Ready</h3>
-            <div class="status-circle" id="armed-status-circle"></div>
-        </div>
-        <div class="status-indicator">
-            <h3 class="status-text">Starting</h3>
-            <div class="status-circle" id="starting-status-circle"></div>
-        </div>
-        <div class="status-indicator">
-            <h3 class="status-text">Fighting</h3>
-            <div class="status-circle" id="fight-status-circle"></div>
-        </div>
-        <div class="status-indicator">
-            <h3 class="status-text">Disabled</h3>
-            <div class="status-circle" id="disabled-status-circle"></div>
-        </div>
-    </div>
+		<h3>Emita eventos para a State Machine</h3>
 
-    <h3>Emita eventos para a State Machine</h3>
+		<button class="button-green" id="event_start">Start</button>
+		<button class="button-red" id="event_disengage">Disengage</button>
+		<button class="button-orange" id="event_arm">Arm</button>
+		<button id="telemetry-button" onclick="window.location.href='/telemetry'">Telemetria</button>
 
-    <button class="button-green" onclick="sendRequest('event_request', 'start')">Start</button>
-    <button class="button-red" onclick="sendRequest('event_request', 'disengage')">Disengage</button>
-    <button class="button-orange" onclick="sendRequest('event_request', 'arm')">Arm</button>
-    <button id="telemetry-button" onclick="window.location.href='/telemetry'">Telemetria</button>
+		<h3>Seleção do Modo de Operação</h3>
 
-    <h3>Seleção do Modo de Operação</h3>
+		<div id="mode-container"></div>
 
-    <button id="mode_auto" onclick="sendRequest('mode', 'auto')">Auto</button>
-    <button id="mode_rc" onclick="sendRequest('mode', 'rc')">RC</button>
-    
-    <div id="auto-settings">
-        <h3>Configure a estratégia de movimento inicial</h3>
-        <div id="initial-container"></div>
+		<div id="auto-settings">
+			<h3>Configure a estratégia de movimento inicial</h3>
+			<div id="initial-container"></div>
 
-        <h3>Configure a estratégia de busca</h3>
-        <div id="search-container"></div>
+			<h3>Configure a estratégia de busca</h3>
+			<div id="search-container"></div>
 
-        <h3>Configure a estratégia de perseguição</h3>
-        <div id="chase-container"></div>
+			<h3>Configure a estratégia de perseguição</h3>
+			<div id="chase-container"></div>
 
-        <h3>Configurações gerais</h3>
+			<h3>Configurações gerais</h3>
 
-        <h4>Regulador</h4>
+			<h4>Regulador</h4>
 
-        <div id="PID-reg-container">
-            <div class="PID-regulator-setter">
-                <h4 class="inline-text">P:</h4>
-                <input type="number" class="setter-value-field" id="P-regulator-value" step="0.1" value="">
-            </div>
-            <div class="PID-regulator-setter">
-                <h4 class="inline-text">I:</h4>
-                <input type="number" class="setter-value-field" id="I-regulator-value" step="0.1" value="">
-            </div>
-            <div class="PID-regulator-setter">
-                <h4 class="inline-text">D:</h4>
-                <input type="number" class="setter-value-field" id="D-regulator-value" step="0.1" value="">
-            </div>
-        </div>
+			<div id="PID-reg-container">
+				<div class="PID-regulator-setter">
+					<h4 class="inline-text">P:</h4>
+					<input
+						type="number"
+						class="setter-value-field"
+						id="P-regulator-value"
+						step="0.1"
+						value=""
+					/>
+				</div>
+				<div class="PID-regulator-setter">
+					<h4 class="inline-text">I:</h4>
+					<input
+						type="number"
+						class="setter-value-field"
+						id="I-regulator-value"
+						step="0.1"
+						value=""
+					/>
+				</div>
+				<div class="PID-regulator-setter">
+					<h4 class="inline-text">D:</h4>
+					<input
+						type="number"
+						class="setter-value-field"
+						id="D-regulator-value"
+						step="0.1"
+						value=""
+					/>
+				</div>
+			</div>
 
-        <h4>Start Time (milissegundos)</h4>
-        <input type="number" class="setter-value-field" id="start-time-value" step="100" value="">
+			<h4>Start Time (milissegundos)</h4>
+			<input
+				type="number"
+				class="setter-value-field"
+				id="start-time-value"
+				step="100"
+				value=""
+			/>
 
-        <button id="set-button" onclick="setParameters()">Set</button>
-    </div>
-    <div id="rc-settings">
-        <h3>MODO RC</h3>
-    </div>
-</body>
-
+			<button id="set-button">Set</button>
+		</div>
+		<div id="rc-settings">
+			<h3>Tipo de controle</h3>
+			<div id="rc-type-container"></div>
+			<h3>Operação do controle</h3>
+			<div id="rc-operation-container"></div>
+			<h3>Filtros do controle</h3>
+			<div id="rc-filter-container"></div>
+		</div>
+	</body>
 </html>

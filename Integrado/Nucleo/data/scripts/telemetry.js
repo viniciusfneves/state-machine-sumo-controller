@@ -1,69 +1,43 @@
-/*Abre a conexão com serviço WebSocket do ESP*/
-var connection = new WebSocket("ws://" + location.hostname + ":81");
+import { connection, requestEvent } from './websocket_handler.js'
+import * as Colors from './colors.js'
 
-// Estilos e cores padrão usadas
-var std_color = '#868686'; // Define a cor do botão das estratégias disponíveis
-var std_red = '#bd0101';
-var std_green = '#00770c';
-var std_ambar = '#cc8b00';
-
-// Conexão estabelecida
-connection.onopen = function () {
-	document.getElementById("connection-status-circle").style.background = std_green;
-	document.getElementById("connection-status-text").style.color = std_green;
-	document.getElementById("connection-status-text").innerHTML = "Connected";
-};
-
-// Erro na conexão
-connection.onerror = function () {
-	document.getElementById("connection-status-circle").style.background = std_red;
-	document.getElementById("connection-status-text").style.color = std_red;
-	document.getElementById("connection-status-text").innerHTML = "Erro de conexão";
-};
-
-// Conexão encerrada
-connection.onclose = function (event) {
-	document.getElementById("connection-status-circle").style.background = std_red;
-	document.getElementById("connection-status-text").style.color = std_red;
-	document.getElementById("connection-status-text").innerHTML = "Conexão encerrada";
-};
-
-function requestEvent(event) {
-	connection.send('{ "event_request" : "' + event + '" }');
+window.onload = function (){
+	document.getElementById("event_start").addEventListener("click", _ => requestEvent("start"));
+	document.getElementById("event_disengage").addEventListener("click", _ => requestEvent("disengage"));
 }
 
 function setOpponentSensor(id, reading) {
 	document.getElementById(id + "-op").style.display = "block";
 	if (reading == true) {
-		document.getElementById(id + "-op").style.background = "red";
+		document.getElementById(id + "-op").style.background = Colors.std_red;
 	} else {
-		document.getElementById(id + "-op").style.background = "black";
+		document.getElementById(id + "-op").style.background = Colors.std_black;
 	}
 }
 
 function setEdgeSensor(id, reading) {
 	document.getElementById(id + "-edge").style.display = "block";
 	if (reading == true) {
-		document.getElementById(id + "-edge").style.background = "yellow";
+		document.getElementById(id + "-edge").style.background = Colors.std_ambar;
 	} else {
-		document.getElementById(id + "-edge").style.background = "black";
+		document.getElementById(id + "-edge").style.background = Colors.std_black;
 	}
 }
 
 function setMotorPower(id, reading) {
 	if (reading < 0) {
-		document.getElementById(id + "-motor-power").style.color = "red";
+		document.getElementById(id + "-motor-power").style.color = Colors.std_red;
 		document.getElementById(id + "-motor-power").innerHTML = reading * -1;
 	} else {
-		document.getElementById(id + "-motor-power").style.color = "green";
+		document.getElementById(id + "-motor-power").style.color = Colors.std_green;
 		document.getElementById(id + "-motor-power").innerHTML = reading;
 	}
 }
 
 function clearRobotState(){
-	document.getElementById("initial-strategy-status-circle").style.background = std_color;
-	document.getElementById("search-strategy-status-circle").style.background = std_color;
-	document.getElementById("chase-strategy-status-circle").style.background = std_color;
+	document.getElementById("initial-strategy-status-circle").style.background = Colors.std_color;
+	document.getElementById("search-strategy-status-circle").style.background = Colors.std_color;
+	document.getElementById("chase-strategy-status-circle").style.background = Colors.std_color;
 }
 
 var NUMBER_OF_OPPONENT_SENSORS = 0;
@@ -130,17 +104,17 @@ function updateRobotState(robot_status) {
 
 	if (robot_status == "exec_initial") {
 		clearRobotState();
-		document.getElementById("initial-strategy-status-circle").style.background = std_green;
+		document.getElementById("initial-strategy-status-circle").style.background = Colors.std_green;
 	}
 
 	if (robot_status == "exec_search") {
 		clearRobotState();
-		document.getElementById("search-strategy-status-circle").style.background = std_green;
+		document.getElementById("search-strategy-status-circle").style.background = Colors.std_green;
 	}
 
 	if (robot_status == "exec_chase") {
 		clearRobotState();
-		document.getElementById("chase-strategy-status-circle").style.background = std_green;
+		document.getElementById("chase-strategy-status-circle").style.background = Colors.std_green;
 	}
 }
 

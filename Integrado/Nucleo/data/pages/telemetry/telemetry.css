@@ -39,7 +39,7 @@ button {
 	font-size: 18px;
 }
 
-#start-request {
+#event_start {
 	display: inline-block;
 	max-width: 250px;
 	padding: 12px;
@@ -48,7 +48,7 @@ button {
 	background-color: #00770c;
 }
 
-#configs {
+#config_button {
 	display: inline-block;
 	max-width: 250px;
 	padding: 12px;
@@ -57,7 +57,7 @@ button {
 	background-color: rgb(8, 69, 182);
 }
 
-#disengage-request {
+#event_disengage {
 	width: 85%;
 	min-width: 250px;
 	max-width: 1000px;

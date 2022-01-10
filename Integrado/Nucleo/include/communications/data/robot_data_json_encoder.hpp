@@ -29,7 +29,10 @@ DynamicJsonDocument encodeRobotInfos() {
     infos["info"]["available_opponent_sensors"] = NUMBER_OF_OPPONENT_SENSORS;
     infos["info"]["available_edge_sensors"] = NUMBER_OF_EDGE_SENSORS;
 
-    // Estratégias disponíveis em cada um dos movimentos possíveis
+    // Estratégias disponíveis no robô
+    for (int index = 0; index < modesAvailable.size(); index++) {
+        infos["info"]["available_modes"][index] = modesAvailable[index];
+    }
     for (int index = 0; index < initialStrategies.size(); index++) {
         infos["info"]["available_initial_strategies"][index] = initialStrategies[index];
     }
