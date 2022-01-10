@@ -8,7 +8,7 @@
 #include <ps4_int.h>
 
 #include <configuration/set_configurations.hpp>
-#include <dynamic_data/dynamic_data.hpp>
+#include <dynamic_data/controller_data.hpp>
 #include <utilities/calculus/calculus.hpp>
 
 namespace ps4AmbientVariables {

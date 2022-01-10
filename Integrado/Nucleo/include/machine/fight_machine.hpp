@@ -3,6 +3,7 @@
 
 #include "../../lib/boost/sml.hpp"
 #include "../configuration/configurations.hpp"
+#include "../dynamic_data/controller_data.hpp"
 #include "../selectors/initial_move_selector/initial_move_selector.hpp"
 #include "../selectors/search_selector/search_selector.hpp"
 #include "../selectors/chase_selector/chase_selector.hpp"

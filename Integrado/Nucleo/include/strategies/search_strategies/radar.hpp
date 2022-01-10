@@ -3,7 +3,7 @@
 
 #include "../../../lib/boost/sml.hpp"
 #include "../../motors/drive_motors.hpp"
-#include "../../dynamic_data/dynamic_data.hpp"
+#include "../../dynamic_data/robot_data.hpp"
 #include "../../configuration/configurations.hpp"
 
 namespace sml = boost::sml;

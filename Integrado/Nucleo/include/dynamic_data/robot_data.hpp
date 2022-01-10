@@ -1,10 +1,10 @@
-#if !defined(DYNAMIC_DATA_HPP)
-#define DYNAMIC_DATA_HPP
+#if !defined(ROBOT_DATA_HPP)
+#define ROBOT_DATA_HPP
 
 #include "../configuration/specifications.hpp"
 
 // Status de execução das estratégias do robô
-enum RobotState {
+enum class RobotState {
     ready,
     starting,
     stopped,
@@ -14,7 +14,7 @@ enum RobotState {
     exec_controller
 };
 
-struct DynamicData {
+struct RobotData {
     // --------------------------> IMPORTANTE <-------------------------- //
     // NÃO UTILIZAR ARRAYS DE TAMANHO DINÂMICO!!!
     // - PROBLEMAS AO COMPILAR PARA O AMBIENTE DO ARDUINO UNO
@@ -26,10 +26,6 @@ struct DynamicData {
 
     // Guarda o estado atual do robô -> Inicializado com stopped
     RobotState robotState = RobotState::stopped;
-
-    //MÓDULO START
-    bool lastState = false;
-    bool currentState = false;
 
     // SENSOR DE OPONENTES
     bool opponentSensorsDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
@@ -45,7 +41,7 @@ struct DynamicData {
 };
 
 // Objeto dos dados dinâmicas do robô
-DynamicData robotData;
+RobotData robotData;
 
 /*   ##-----> Funções de retorno dos dados <-----##   */
 
@@ -61,38 +57,4 @@ bool isEdgeDetected() { return robotData.edgeDetected; }
 // Muda na memória do robô o seu estado de execução atual
 void changeRobotState(RobotState state) { robotData.robotState = state; }
 
-// ::::::::::::::::::::::::::::::::::::  ---  :::::::::::::::::::::::::::::::::::: //
-
-// Status de conexão do controle de PS4
-enum ControllerStatus {
-    connected,
-    disconnected
-};
-
-// Enumera os inputs recebidos pelo controle.
-// Define a ordem de armazenamento desses inputs no array que guarda essas informações
-enum Input {
-    linearSpeed,
-    angularSpeed,
-    length
-};
-
-enum CommandMapping {
-    linear,
-    cubic,
-    rc_controller_standard
-};
-
-// Informações e leituras do Controle de PS4
-struct ControllerData {
-    ControllerStatus controllerStatus = ControllerStatus::disconnected;
-    CommandMapping mapSettings = CommandMapping::cubic;
-    double controllerInputs[Input::length];  // Segue a ordem do enum Input
-    unsigned short battery = 0;
-    bool isCharging = false;
-
-    bool isControllerConnected() { return controllerStatus == ControllerStatus::connected ? true : false; }
-};
-
-ControllerData controllerData;
-#endif  // DYNAMIC_DATA_HPP
+#endif  // ROBOT_DATA_HPP

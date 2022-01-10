@@ -2,7 +2,7 @@
 #define CHASE_CONTROLLER_HPP
 
 #include "../../../lib/boost/sml.hpp"
-#include "../../dynamic_data/dynamic_data.hpp"
+#include "../../dynamic_data/robot_data.hpp"
 #include "../../events/events.hpp"
 #include "../../motors/PID_controller.hpp"
 

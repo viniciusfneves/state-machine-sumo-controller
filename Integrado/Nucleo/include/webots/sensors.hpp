@@ -1,6 +1,6 @@
 #ifndef WEBOTS_SENSORS_HPP
 #define WEBOTS_SENSORS_HPP
-#include "../dynamic_data/dynamic_data.hpp"
+#include "../dynamic_data/robot_data.hpp"
 #include "../utilities/calculus/calculus.hpp"
 #include "C:/Program Files/Webots/include/controller/cpp/webots/DistanceSensor.hpp"
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"

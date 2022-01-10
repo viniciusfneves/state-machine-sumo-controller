@@ -2,7 +2,7 @@
 #define EDGE_SENSOR_HPP
 
 #include "../../configuration/specifications.hpp"
-#include "../../dynamic_data/dynamic_data.hpp"
+#include "../../dynamic_data/robot_data.hpp"
 #include "../../utilities/calculus/calculus.hpp"
 #ifdef REAL_ROBOT
 #include <pins/pins.hpp>

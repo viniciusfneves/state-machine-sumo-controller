@@ -4,7 +4,7 @@
 // Dependências gerais
 #include <configuration/configurations.hpp>
 #include <configuration/specifications.hpp>
-#include <dynamic_data/dynamic_data.hpp>
+#include <dynamic_data/robot_data.hpp>
 
 #ifdef WEBOTS
 #include "../webots/motors.hpp"
@@ -20,12 +20,12 @@
 
 // Função de controles dos pinos de ativação dos drivers para motores brushed
 void drvDrive(int pwm, int drvIn1, int drvIn2) {
-    if (pwm == 0)  // Caso for parada
-    {
+    if (pwm == 0) {
+        // Caso for parada
         digitalWrite(drvIn1, true);
         digitalWrite(drvIn2, true);
-    } else if (pwm > 0)  //  Caso for sentido horário
-    {
+    } else if (pwm > 0) {
+        // Caso for sentido horário
         analogWrite(drvIn1, pwm);
         digitalWrite(drvIn2, false);
     } else {

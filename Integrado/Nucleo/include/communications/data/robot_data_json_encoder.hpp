@@ -6,7 +6,8 @@
 #include <communications/WiFi/websockets_server/webSockets_server.hpp>
 #include <configuration/configurations.hpp>
 #include <configuration/specifications.hpp>
-#include <dynamic_data/dynamic_data.hpp>
+#include <dynamic_data/controller_data.hpp>
+#include <dynamic_data/robot_data.hpp>
 
 // Serializa objetos JSON e os envia para todos os clientes conectados no WebSocket
 void serializeAndBroadcast(DynamicJsonDocument readings) {
