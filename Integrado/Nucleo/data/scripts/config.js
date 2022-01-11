@@ -6,6 +6,8 @@ window.onload = function () {
 	document.getElementById("event_disengage").addEventListener("click", _ => requestEvent("disengage"));
 	document.getElementById("event_arm").addEventListener("click", _ => requestEvent("arm"));
 	document.getElementById("set-button").addEventListener("click", _ => setParameters());
+	document.getElementById("debug-icon").addEventListener("click", _ => toggleDebbugingOptions());
+	document.getElementById("debug-send-button").addEventListener("click", _ => sendCustomMessage());
 	setInterval(function () {
         // Verifica se o campo de start-time é válido e adapta conforme regulado com o robô ou precisando de atualização
 		if (document.getElementById("start-time-value").value < 0) {
@@ -185,4 +187,22 @@ function clearConfigButtons(){
 	chase_strategys.forEach(element => {
 		document.getElementById('chase_'+element).style.background = Colors.std_color;
 	});
+}
+
+function toggleDebbugingOptions() {
+	let debug_container = document.getElementById("debugging-container");
+	if (debug_container.style.display == "inline-block") {
+		document.getElementById("debug-icon").src = 
+		"../../assets/debug_icon_bw.png";
+		debug_container.style.display = "none";
+	}else {
+		document.getElementById("debug-icon").src = 
+		"../../assets/debug_icon_color.png";
+		debug_container.style.display = "inline-block";
+	}
+}
+
+function sendCustomMessage(){
+	let message = document.getElementById("debug-message-text-field").value;
+	connection.send(message);
 }

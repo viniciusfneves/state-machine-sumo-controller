@@ -26,6 +26,8 @@ void setRequestsResponse() {
     server.on("/scripts/telemetry.js", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/scripts/telemetry.js"); });
     server.on("/scripts/colors.js", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/scripts/colors.js"); });
     server.on("/scripts/websocket_handler.js", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/scripts/websocket_handler.js"); });
+    server.on("/assets/debug_icon_bw.png", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/assets/debug_icon_bw.png"); });
+    server.on("/assets/debug_icon_color.png", [](AsyncWebServerRequest *request) { request->send(SPIFFS, "/assets/debug_icon_color.png"); });
 
     // Caso o usuário procure um endereço que não exista
     server.onNotFound([](AsyncWebServerRequest *request) { request->send(404, "text/plain", "Not found"); });
