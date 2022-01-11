@@ -9,7 +9,7 @@ window.onload = function (){
 function setOpponentSensor(id, reading) {
 	document.getElementById(id + "-op").style.display = "block";
 	if (reading == true) {
-		document.getElementById(id + "-op").style.background = Colors.std_red;
+		document.getElementById(id + "-op").style.background = Colors.bright_red;
 	} else {
 		document.getElementById(id + "-op").style.background = Colors.std_black;
 	}
@@ -26,7 +26,7 @@ function setEdgeSensor(id, reading) {
 
 function setMotorPower(id, reading) {
 	if (reading < 0) {
-		document.getElementById(id + "-motor-power").style.color = Colors.std_red;
+		document.getElementById(id + "-motor-power").style.color = Colors.light_red;
 		document.getElementById(id + "-motor-power").innerHTML = reading * -1;
 	} else {
 		document.getElementById(id + "-motor-power").style.color = Colors.std_green;

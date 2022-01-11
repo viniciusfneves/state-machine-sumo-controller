@@ -53,9 +53,10 @@ var start_time;
 var pid_kp;
 var pid_ki;
 var pid_kd;
+var buttonNameExceptions = ["rc","bt ps4"];
 
 // Atualiza as informações na tela sobre as configurações do robô de start_time e constantes do PID
-function updateVariableSettings(start_time, pid_kp, pid_ki, pid_kd) {
+function updateParameters(start_time, pid_kp, pid_ki, pid_kd) {
 	document.getElementById("start-time-value").value = start_time;
 	document.getElementById("P-regulator-value").value = pid_kp;
 	document.getElementById("I-regulator-value").value = pid_ki;
@@ -78,13 +79,13 @@ connection.onmessage = function (response) {
 		document.getElementById("connection-status-text").innerHTML = "Connected to " + json["info"]["robot_name"];
 		if(settingUp){
 			modes = json["info"]["available_modes"];
-			makeStrategyButtons(modes, 'mode');
+			makeConfigButtons(modes, 'mode');
 			initial_strategys = json["info"]["available_initial_strategies"];
-			makeStrategyButtons(initial_strategys, 'initial');
+			makeConfigButtons(initial_strategys, 'initial');
 			search_strategys = json["info"]["available_search_strategies"];
-			makeStrategyButtons(search_strategys, 'search');
+			makeConfigButtons(search_strategys, 'search');
 			chase_strategys = json["info"]["available_chase_strategies"];
-			makeStrategyButtons(chase_strategys, 'chase');
+			makeConfigButtons(chase_strategys, 'chase');
 			settingUp = false;
 		}
 	}
@@ -96,13 +97,13 @@ connection.onmessage = function (response) {
 		pid_kp = json["configurations"]["pid"]["kp"];
 		pid_ki = json["configurations"]["pid"]["ki"];
 		pid_kd = json["configurations"]["pid"]["kd"];
-		updateVariableSettings(start_time, pid_kp, pid_ki, pid_kd);
+		updateParameters(start_time, pid_kp, pid_ki, pid_kd);
 
 		let mode = json["configurations"]["mode"];
 		let initial = json["configurations"]["initial_move"];
 		let search = json["configurations"]["search"];
 		let chase = json["configurations"]["chase"];
-		updateStrategyButtons(mode, initial, search, chase);
+		updateConfigButtons(mode, initial, search, chase);
 
 		if(mode == "auto"){
 			document.getElementById("auto-settings").style.display = "block";
@@ -148,31 +149,31 @@ connection.onmessage = function (response) {
 	}
 };
 
-function makeStrategyButtons(strategyList, strategyType){
-	strategyList.forEach(element => {
+function makeConfigButtons(availableConfigs, configType){
+	availableConfigs.forEach(element => {
 		let widget = document.createElement("button");
-		widget.addEventListener("click", _ => sendRequest(strategyType, element));
-		widget.id = strategyType+'_'+element;
+		widget.addEventListener("click", _ => sendRequest(configType, element));
+		widget.id = configType+'_'+element;
 		let elementName = element.replace('_', ' ');
-		if (elementName == 'rc'){
-			elementName = "RC";
+		if (buttonNameExceptions.includes(elementName)){
+			elementName = elementName.toUpperCase();
 		} else {
 			elementName = elementName.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
 		}
 		widget.innerHTML = elementName;
-		document.getElementById(strategyType+"-container").appendChild(widget);
+		document.getElementById(configType+"-container").appendChild(widget);
 	});
 }
 
-function updateStrategyButtons(mode, initial, search, chase){
-	clearStrategyButtons();
+function updateConfigButtons(mode, initial, search, chase){
+	clearConfigButtons();
 	document.getElementById('mode_'+mode).style.background = Colors.highlight_color;
 	document.getElementById('initial_'+initial).style.background = Colors.highlight_color;
 	document.getElementById('search_'+search).style.background = Colors.highlight_color;
 	document.getElementById('chase_'+chase).style.background = Colors.highlight_color;
 }
 
-function clearStrategyButtons(){
+function clearConfigButtons(){
 	document.getElementById('mode_auto').style.background = Colors.std_color;
 	document.getElementById('mode_rc').style.background = Colors.std_color;
 	initial_strategys.forEach(element => {

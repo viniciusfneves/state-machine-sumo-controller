@@ -26,7 +26,7 @@ h1 {
 button {
 	border: none;
 	width: 120px;
-    height: 50px;
+	height: 50px;
 	padding: 12px;
 	margin: 8px;
 	cursor: pointer;
@@ -42,8 +42,8 @@ button {
 }
 
 .button-red {
-	background-color: #bd0101;
-    width: 156px;
+	background-color: #a80000;
+	width: 156px;
 }
 
 .button-orange {
@@ -51,9 +51,9 @@ button {
 }
 
 #telemetry-button {
-    background-color: rgb(8, 69, 182);
-    display: block;
-    margin: 13px auto
+	background-color: rgb(8, 69, 182);
+	display: block;
+	margin: 13px auto;
 }
 
 #connection-info {
