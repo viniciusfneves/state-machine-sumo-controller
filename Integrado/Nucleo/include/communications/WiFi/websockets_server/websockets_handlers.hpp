@@ -67,6 +67,48 @@ void processJsonMessage(String message) {
         }
     }
 
+    // Processa as requisições de alteração do comando do robô no modo RC
+    if (jsonMessage.containsKey("ctrl_type")) {
+        const char *config = jsonMessage["ctrl_type"];
+
+        if (strcmp(config, "bt_ps4") == 0) {
+            setCtrlType(Commander::bt_ps4);
+        }
+        if (strcmp(config, "radio") == 0) {
+            setCtrlType(Commander::radio);
+        }
+    }
+
+    // Processa as requisições de alteração do map de comandos do controle RC
+    if (jsonMessage.containsKey("ctrl_map")) {
+        const char *config = jsonMessage["ctrl_map"];
+
+        if (strcmp(config, "game_standard") == 0) {
+            setCtrlMapping(CommandMap::game_standard);
+        }
+        if (strcmp(config, "rc_standard") == 0) {
+            setCtrlMapping(CommandMap::rc_standard);
+        }
+        if (strcmp(config, "rc_inverted") == 0) {
+            setCtrlMapping(CommandMap::rc_inverted);
+        }
+    }
+
+    // Processa as requisições de alteração dos filtros nos comandos do controle
+    if (jsonMessage.containsKey("ctrl_filter")) {
+        const char *config = jsonMessage["ctrl_filter"];
+
+        if (strcmp(config, "linear") == 0) {
+            setCtrlFilter(CommandFilter::linear);
+        }
+        if (strcmp(config, "quadratic") == 0) {
+            setCtrlFilter(CommandFilter::quadratic);
+        }
+        if (strcmp(config, "cubic") == 0) {
+            setCtrlFilter(CommandFilter::cubic);
+        }
+    }
+
     // Processa as requisições de alteração da estratégia inicial
     if (jsonMessage.containsKey("initial")) {
         const char *strategy = jsonMessage["initial"];

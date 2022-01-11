@@ -3,6 +3,7 @@
 
 #include <communications/data/robot_data_json_encoder.hpp>
 #include <configuration/configurations.hpp>
+#include <dynamic_data/controller_data.hpp>
 
 // strategy -> (enum) InitialMove
 // Muda a configuração de estratégia de movimento inicial
@@ -49,6 +50,21 @@ void changePIDSettings(double set_kp, double set_ki, double set_kd) {
     robotConfiguration.Kp = set_kp;
     robotConfiguration.Ki = set_ki;
     robotConfiguration.Kd = set_kd;
+    broadcastRobotConfiguration();
+}
+
+void setCtrlType(Commander comm) {
+    controllerData.commander = comm;
+    broadcastRobotConfiguration();
+}
+
+void setCtrlFilter(CommandFilter filter) {
+    controllerData.filterSettings = filter;
+    broadcastRobotConfiguration();
+}
+
+void setCtrlMapping(CommandMap map) {
+    controllerData.mapSettings = map;
     broadcastRobotConfiguration();
 }
 

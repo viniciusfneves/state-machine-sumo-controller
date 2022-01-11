@@ -15,16 +15,29 @@ enum Input {
     length
 };
 
-enum class CommandMapping {
+enum class Commander {
+    bt_ps4,
+    radio
+};
+
+enum class CommandMap {
+    rc_standard,
+    rc_inverted,
+    game_standard
+};
+
+enum class CommandFilter {
     linear,
-    cubic,
-    rc_controller_standard
+    quadratic,
+    cubic
 };
 
 // Informações e leituras do Controle de PS4
 struct ControllerData {
     ControllerStatus controllerStatus = ControllerStatus::disconnected;
-    CommandMapping mapSettings = CommandMapping::cubic;
+    Commander commander = Commander::bt_ps4;
+    CommandMap mapSettings = CommandMap::game_standard;
+    CommandFilter filterSettings = CommandFilter::quadratic;
     double controllerInputs[Input::length];  // Segue a ordem do enum Input
     unsigned short battery = 0;
     bool isCharging = false;
