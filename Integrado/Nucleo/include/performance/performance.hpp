@@ -1,13 +1,13 @@
 #pragma once
 
 struct PerformanceGauges {
-    unsigned long startTimestamp;
-    int timeToExecute;
+    int64_t startTimestamp;
+    int64_t timeToExecute;
     int numberOfTaks;
-    long freeMemory;
-    long stackWaterMark;
+    uint32_t freeMemory;
+    uint16_t stackWaterMark;
 
-    void measure(unsigned long actualTimestamp, int tasks, long heap, long stackWM) {
+    void measure(int64_t actualTimestamp, uint8_t tasks, uint32_t heap, uint16_t stackWM) {
         timeToExecute = actualTimestamp - startTimestamp;
         numberOfTaks = tasks;
         freeMemory = heap;

@@ -152,6 +152,16 @@ connection.onmessage = function (response) {
 		if (status == "exec_controller") {
 			document.getElementById("fight-status-circle").style.background = Colors.std_green;		
 		}
+
+		
+	}
+	if("controller" in json){
+		let controller_status = json["controller"]["connection_status"];
+		if(controller_status == "connected"){
+			document.getElementById("ctrl-status-img").src = "../../assets/ps4_full.png";
+		}else{
+			document.getElementById("ctrl-status-img").src = "../../assets/ps4_all_bk.png";
+		}
 	}
 };
 

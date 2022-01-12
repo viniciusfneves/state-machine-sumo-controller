@@ -38,7 +38,7 @@ struct ControllerData {
     CommandMap mapSettings = CommandMap::game_standard;
     CommandFilter filterSettings = CommandFilter::quadratic;
     double controllerInputs[Input::length];  // Segue a ordem do enum Input
-    unsigned short battery = 0;
+    uint8_t battery = 0;
     bool isCharging = false;
 
     bool isControllerConnected() { return controllerStatus == ControllerStatus::connected ? true : false; }
