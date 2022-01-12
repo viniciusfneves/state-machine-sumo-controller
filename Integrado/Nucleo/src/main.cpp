@@ -3,6 +3,7 @@
 
 #include <event_handler/event_handler.hpp>
 #include <motors/drive_motors.hpp>
+#include <performance/performance.hpp>
 #include <sensors/sensors.hpp>
 #include <sml.hpp>
 
@@ -23,7 +24,6 @@ void setup() {
 
 // Configurações do ambiente para ESP32
 #ifdef ESP32_ENV
-    // Serial.begin(115200);
     SPIFFS.begin();  // Inicia o File System do ESP32
 
     // ---- AVISO PARA USO DO CONTROLE DE PS4 ---- //
@@ -55,7 +55,7 @@ void setup() {
 // O espaço alocado em STACK para o loop -> "loopTask" pode ser reduzido para 3072 bytes, liberando mais HEAP
 // Para consumo pelos webServers e pela biblioteca do controle de PS4
 void loop() {
-    // int time_1 = micros();
+    performance.startTimestamp = micros();
 #ifdef ESP32_ENV
     processControllerEvents();
     processWebSocketEvents();
@@ -63,11 +63,6 @@ void loop() {
 #endif
     readSensors();
     processMachineEvents();
-    // Serial.printf("%04lu", micros() - time_1);
-    // Serial.print(" | ");
-    // Serial.print(uxTaskGetNumberOfTasks());
-    // Serial.print(" | ");
-    // Serial.printf("%06d", ESP.getFreeHeap());
-    // Serial.print(" | ");
-    // Serial.println(uxTaskGetStackHighWaterMark(NULL));
+
+    performance.measure(micros(), uxTaskGetNumberOfTasks(), ESP.getFreeHeap(), uxTaskGetStackHighWaterMark(NULL));
 }
