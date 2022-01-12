@@ -1,5 +1,4 @@
-#ifndef EDGE_SENSOR_HPP
-#define EDGE_SENSOR_HPP
+#pragma once
 
 #include "../../configuration/specifications.hpp"
 #include "../../dynamic_data/robot_data.hpp"
@@ -28,5 +27,3 @@ void initEdgeSensors() {
 #ifdef WEBOTS
 #include "../../webots/sensors.hpp"
 #endif
-
-#endif  // EDGE_SENSOR_HPP

@@ -1,5 +1,4 @@
-#ifndef CHASE_SELECTOR_HPP
-#define CHASE_SELECTOR_HPP
+#pragma once
 
 #include "../../../lib/boost/sml.hpp"
 #include "../../configuration/configurations.hpp"
@@ -21,5 +20,3 @@ struct ChaseSelector {
             "selector"_s [standard] = state<StandardChase>);
     }
 };
-
-#endif

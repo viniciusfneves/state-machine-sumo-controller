@@ -1,5 +1,4 @@
-#if !defined(ROBOT_DATA_HPP)
-#define ROBOT_DATA_HPP
+#pragma once
 
 #include "../configuration/specifications.hpp"
 
@@ -56,5 +55,3 @@ bool isEdgeDetected() { return robotData.edgeDetected; }
 
 // Muda na memória do robô o seu estado de execução atual
 void changeRobotState(RobotState state) { robotData.robotState = state; }
-
-#endif  // ROBOT_DATA_HPP

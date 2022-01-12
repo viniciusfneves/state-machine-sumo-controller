@@ -1,5 +1,4 @@
-#if !defined(PID_CONTROLLER_HPP)
-#define PID_CONTROLLER_HPP
+#pragma once
 
 #include "../configuration/configurations.hpp"
 
@@ -26,5 +25,3 @@ double pid(double error) {
 void resetPID() {
     integral = 0;
 }
-
-#endif  // PID_CONTROLLER_HPP

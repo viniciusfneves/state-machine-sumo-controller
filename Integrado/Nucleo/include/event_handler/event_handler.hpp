@@ -1,5 +1,4 @@
-#ifndef EVENT_HANDLER_HPP
-#define EVENT_HANDLER_HPP
+#pragma once
 
 #include "../event_handler/circular_buffer.hpp"
 #include "../machine/main_machine.hpp"
@@ -58,4 +57,3 @@ void processMachineEvents() {
         return;
     }
 }
-#endif

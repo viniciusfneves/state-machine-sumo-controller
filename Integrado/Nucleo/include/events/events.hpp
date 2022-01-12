@@ -1,5 +1,4 @@
-#ifndef EVENTS_HPP
-#define EVENTS_HPP
+#pragma once
 
 // Aqui são definidos todos os possíveis eventos que podem ser emitidos para a máquina
 enum class Event {
@@ -28,5 +27,3 @@ struct OpponentDetected {};
 struct Controller {};
 
 struct None {};
-
-#endif

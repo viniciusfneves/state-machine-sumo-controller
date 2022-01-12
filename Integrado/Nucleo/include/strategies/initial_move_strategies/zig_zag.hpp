@@ -1,5 +1,4 @@
-#ifndef ZIG_ZAG_HPP
-#define ZIG_ZAG_HPP
+#pragma once
 
 #include "../../../lib/boost/sml.hpp"
 #include "../../utilities/timeout_implementation/timeout.hpp"
@@ -25,5 +24,3 @@ struct ZigZag {
             "final_state"_s  + event<Timeout>      / exitState        = "exit_state"_s);
     }
 };
-
-#endif

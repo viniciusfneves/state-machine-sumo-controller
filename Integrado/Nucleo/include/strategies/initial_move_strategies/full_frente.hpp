@@ -1,5 +1,4 @@
-#ifndef FULL_FRENTE_HPP
-#define FULL_FRENTE_HPP
+#pragma once
 
 #include "../../../lib/boost/sml.hpp"
 #include "../../utilities/timeout_implementation/timeout.hpp"
@@ -19,5 +18,3 @@ struct FullFrente {
             "moving"_s  + on_entry<_>  / (configExit, runForwards));
     }
 };
-
-#endif

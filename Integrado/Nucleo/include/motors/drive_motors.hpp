@@ -1,5 +1,4 @@
-#ifndef DRIVE_MOTORS_HPP
-#define DRIVE_MOTORS_HPP
+#pragma once
 
 // Dependências gerais
 #include <configuration/configurations.hpp>
@@ -152,5 +151,3 @@ void rotateRobot(int degrees, Direction direction) {
     delay(static_cast<int>(degrees * 25 / robotConfiguration.maxSpeed));  // O tempo até completar a rotação ainda precisa ser verificado com testes e modelado para uma função
     stopMotors();
 };
-
-#endif  //DRIVE_MOTORS_HPP

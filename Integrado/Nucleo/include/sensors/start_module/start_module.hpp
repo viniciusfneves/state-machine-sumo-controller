@@ -1,5 +1,4 @@
-#ifndef START_MODULE_HPP
-#define START_MODULE_HPP
+#pragma once
 
 #include <event_handler/circular_buffer.hpp>
 #include <pins/pins.hpp>
@@ -23,5 +22,3 @@ void readStartModule() {
     }
     startModule::lastState = startModule::currentState;
 }
-
-#endif  // START_MODULE_HPP

@@ -1,5 +1,4 @@
-#if !defined(CIRCULAR_BUFFER_HPP)
-#define CIRCULAR_BUFFER_HPP
+#pragma once
 
 #include "../../lib/CircularBuffer/CircularBuffer.h"
 #include "../events/events.hpp"
@@ -26,5 +25,3 @@ void addEventToQueue(Event event) {
 bool eventQueueIsFull() {
     return eventQueue.isFull();
 }
-
-#endif  // CIRCULAR_BUFFER_HPP

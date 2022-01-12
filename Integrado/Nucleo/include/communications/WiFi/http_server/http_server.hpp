@@ -1,5 +1,4 @@
-#ifndef HTTP_SERVER_HPP
-#define HTTP_SERVER_HPP
+#pragma once
 
 #include <ArduinoJson.h>
 #include <ESPAsyncWebServer.h>
@@ -38,5 +37,3 @@ void initHTTPServer() {
     setRequestsResponse();
     server.begin();
 }
-
-#endif

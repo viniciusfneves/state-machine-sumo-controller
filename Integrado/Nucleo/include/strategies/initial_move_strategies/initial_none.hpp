@@ -1,5 +1,4 @@
-#ifndef INITIAL_NONE_HPP
-#define INITIAL_NONE_HPP
+#pragma once
 
 #include "../../../lib/boost/sml.hpp"
 #include "../../motors/drive_motors.hpp"
@@ -19,5 +18,3 @@ struct InitialNone {
             "switch_state"_s  + on_entry<_>  / (stop_motors, exit_state));
     }
 };
-
-#endif

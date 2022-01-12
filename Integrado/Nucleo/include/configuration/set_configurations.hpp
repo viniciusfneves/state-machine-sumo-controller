@@ -1,5 +1,4 @@
-#ifndef SET_CONFIGURATION_HPP
-#define SET_CONFIGURATION_HPP
+#pragma once
 
 #include <communications/data/robot_data_json_encoder.hpp>
 #include <configuration/configurations.hpp>
@@ -67,5 +66,3 @@ void setCtrlMapping(CommandMap map) {
     controllerData.mapSettings = map;
     broadcastRobotConfiguration();
 }
-
-#endif  // SET_CONFIGURATION_HPP

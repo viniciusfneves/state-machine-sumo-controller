@@ -1,5 +1,4 @@
-#if !defined(CONFIGURATIONS_HPP)
-#define CONFIGURATIONS_HPP
+#pragma once
 
 #include "../strategies/strategies.hpp"
 
@@ -32,5 +31,3 @@ struct Configurations {
 
 // Objeto global de configurações do robô
 Configurations robotConfiguration;
-
-#endif  // CONFIGURATIONS_HPP

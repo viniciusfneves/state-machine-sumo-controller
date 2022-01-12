@@ -1,5 +1,4 @@
-#if !defined(STRATEGIES_HPP)
-#define STRATEGIES_HPP
+#pragma once
 
 #ifndef WEBOTS
 using std::vector;
@@ -35,5 +34,3 @@ enum class Search {
 enum class Chase {
     standard
 };
-
-#endif  // STRATEGIES_HPP

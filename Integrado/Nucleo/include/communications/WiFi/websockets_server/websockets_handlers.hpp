@@ -1,5 +1,4 @@
-#ifndef WEBSOCKET_HANDLERS_HPP
-#define WEBSOCKET_HANDLERS_HPP
+#pragma once
 
 #include <communications/WiFi/websockets_server/websockets_server.hpp>
 #include <communications/data/robot_data_json_encoder.hpp>
@@ -181,5 +180,3 @@ void initWebSocketsServer() {
     // Configura qual função é executada a cada evento recebido pelo WebSocket
     webSocket.onEvent(handleWSIncomingData);
 }
-
-#endif  // WEBSOCKET_HANDLERS_HPP

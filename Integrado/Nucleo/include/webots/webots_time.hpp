@@ -1,5 +1,5 @@
-#ifndef WEBOTS_TIME_HPP
-#define WEBOTS_TIME_HPP
+#pragma once
+
 #include <webots/Robot.hpp>
 
 using namespace webots;
@@ -20,5 +20,3 @@ void delay(unsigned long time) {
         ;
     }
 }
-
-#endif

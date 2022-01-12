@@ -1,5 +1,4 @@
-#ifndef MAIN_MACHINE_HPP
-#define MAIN_MACHINE_HPP
+#pragma once
 
 #include "../../lib/boost/sml.hpp"
 #include "../events/events.hpp"
@@ -54,5 +53,3 @@ struct Machine
 
 // Definição global da máquina de estados
 sml::sm<Machine> Core;
-
-#endif

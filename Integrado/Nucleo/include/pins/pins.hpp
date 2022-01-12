@@ -1,5 +1,5 @@
-#ifndef PINS_HPP
-#define PINS_HPP
+#pragma once
+
 #include <Arduino.h> //Todo arquivo que importar pins, terá Arduino.h como dependencia automaticamente
 
 namespace pins
@@ -198,4 +198,3 @@ namespace pins
     }
 #endif
 }
-#endif

@@ -1,5 +1,5 @@
-#ifndef WEBOTS_SENSORS_HPP
-#define WEBOTS_SENSORS_HPP
+#pragma once
+
 #include "../dynamic_data/robot_data.hpp"
 #include "../utilities/calculus/calculus.hpp"
 #include "C:/Program Files/Webots/include/controller/cpp/webots/DistanceSensor.hpp"
@@ -65,4 +65,3 @@ void readOpponentSensors() {
         robotData.opError = calculateError(robotData.opponentSensorsDetectionArray, opponentSensorWeight, NUMBER_OF_OPPONENT_SENSORS);
     }
 }
-#endif

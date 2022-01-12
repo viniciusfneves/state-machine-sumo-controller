@@ -1,5 +1,4 @@
-#ifndef WIFI_POINT_HPP
-#define WIFI_POINT_HPP
+#pragma once
 
 #include <WiFi.h>
 
@@ -22,4 +21,3 @@ void connectToWiFi(const char *ssid, const char *passphrase) {
     Serial.print("Connected to adress: ");
     Serial.println(WiFi.localIP());
 }
-#endif

@@ -1,5 +1,4 @@
-#ifndef RADAR_HPP
-#define RADAR_HPP
+#pragma once
 
 #include "../../../lib/boost/sml.hpp"
 #include "../../motors/drive_motors.hpp"
@@ -26,4 +25,3 @@ struct SearchRadar {
             "switch"_s  [right]  / rotateRight  = "rotate_right"_s);
     }
 };
-#endif

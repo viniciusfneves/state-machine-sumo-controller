@@ -1,5 +1,4 @@
-#ifndef TIMEOUT_HPP
-#define TIMEOUT_HPP
+#pragma once
 
 #ifdef REAL_ROBOT
 #include <Arduino.h>
@@ -35,5 +34,3 @@ void setTimeout(unsigned long time) {
 void cancelTimeout() {
     _timeoutActive = false;
 }
-
-#endif

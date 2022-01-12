@@ -1,5 +1,4 @@
-#ifndef CHASE_CONTROLLER_HPP
-#define CHASE_CONTROLLER_HPP
+#pragma once
 
 #include "../../../lib/boost/sml.hpp"
 #include "../../dynamic_data/robot_data.hpp"
@@ -18,5 +17,3 @@ struct StandardChase {
             "chase"_s  +  event<OpponentDetected>  /  chaseAction);
     }
 };
-
-#endif

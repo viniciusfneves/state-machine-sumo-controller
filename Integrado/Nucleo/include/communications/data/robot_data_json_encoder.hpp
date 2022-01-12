@@ -1,5 +1,4 @@
-#if !defined(SEND_DATA_HPP)
-#define SEND_DATA_HPP
+#pragma once
 
 #include <ArduinoJson.h>
 
@@ -192,4 +191,3 @@ void broadcastTelemetryData() {
     DynamicJsonDocument readings = encodeTelemetryData();
     serializeAndBroadcast(readings);
 };
-#endif  // SEND_DATA_HPP

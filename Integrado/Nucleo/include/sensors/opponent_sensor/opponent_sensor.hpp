@@ -1,5 +1,4 @@
-#ifndef OPPONENT_SENSOR_HPP
-#define OPPONENT_SENSOR_HPP
+#pragma once
 
 #include "../../configuration/specifications.hpp"
 #include "../../dynamic_data/robot_data.hpp"
@@ -53,5 +52,3 @@ void initOpponentSensors() {
     }
 }
 #endif
-
-#endif  // OPPONENT_SENSOR_HPP

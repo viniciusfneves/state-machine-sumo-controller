@@ -1,5 +1,4 @@
-#ifndef FIGHT_MACHINE_HPP
-#define FIGHT_MACHINE_HPP
+#pragma once
 
 #include "../../lib/boost/sml.hpp"
 #include "../configuration/configurations.hpp"
@@ -72,4 +71,3 @@ public:
             "selector"_s [rc_mode]      =  state<RC>);
     }
 };
-#endif

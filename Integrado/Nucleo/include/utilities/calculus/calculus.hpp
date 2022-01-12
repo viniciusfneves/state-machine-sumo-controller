@@ -1,5 +1,4 @@
-#if !defined(CALCULUS_HPP)
-#define CALCULUS_HPP
+#pragma once
 
 // Cópia da função map(), porém com suporte à valores do tipo double
 double map_double(double x, double in_min, double in_max, double out_min, double out_max) {
@@ -36,4 +35,3 @@ double calculateError(bool readingVector[], int weightVector[], int length) {
     }
     return sum / readings;
 }
-#endif  // CALCULUS_HPP

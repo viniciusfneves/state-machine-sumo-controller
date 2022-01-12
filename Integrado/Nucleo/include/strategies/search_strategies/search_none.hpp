@@ -1,5 +1,4 @@
-#ifndef SEARCH_NONE_HPP
-#define SEARCH_NONE_HPP
+#pragma once
 
 #include "../../../lib/boost/sml.hpp"
 #include "../../utilities/timeout_implementation/timeout.hpp"
@@ -19,5 +18,3 @@ struct SearchNone {
             "exit"_s + on_entry<_> / (stop_motors, exit_state));
     }
 };
-
-#endif

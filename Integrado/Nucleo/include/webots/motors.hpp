@@ -1,5 +1,4 @@
-#ifndef MOTORS_HPP
-#define MOTORS_HPP
+#pragma once
 
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Motor.hpp"
 #include "C:/Program Files/Webots/include/controller/cpp/webots/Robot.hpp"
@@ -52,5 +51,3 @@ void initMotors(Robot *robot) {
     leftMotor = initMotor(robot, (char *)"left wheel motor");
     rightMotor = initMotor(robot, (char *)"right wheel motor");
 }
-
-#endif

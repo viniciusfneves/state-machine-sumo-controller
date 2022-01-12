@@ -1,5 +1,4 @@
-#if !defined(SENSORS_HPP)
-#define SENSORS_HPP
+#pragma once
 
 #include "configuration/configurations.hpp"
 #include "edge_sensor/edge_sensor.hpp"
@@ -12,5 +11,3 @@ void readSensors() {
     readOpponentSensors();
     readEdgeSensors();
 };
-
-#endif  // SENSORS_HPP

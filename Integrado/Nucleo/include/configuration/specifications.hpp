@@ -1,5 +1,4 @@
-#if !defined(SPECIFICATIONS_HPP)
-#define SPECIFICATIONS_HPP
+#pragma once
 
 #include <string.h>
 
@@ -92,5 +91,3 @@ struct Specifications {
 
 // Objeto de especificações do robô
 Specifications robotSpecifications;
-
-#endif  // SPECIFICATIONS_HPP

@@ -1,5 +1,4 @@
-#ifndef CONTROLLER_DATA_HPP
-#define CONTROLLER_DATA_HPP
+#pragma once
 
 // Status de conexão do controle de PS4
 enum class ControllerStatus {
@@ -46,5 +45,3 @@ struct ControllerData {
 };
 
 ControllerData controllerData;
-
-#endif  // CONTROLLER_DATA_HPP
