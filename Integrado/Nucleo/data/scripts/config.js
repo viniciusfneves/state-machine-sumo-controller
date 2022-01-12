@@ -78,7 +78,11 @@ connection.onmessage = function (response) {
 
 	// Processa o nome do robô recebido
 	if ("info" in json) {
-		document.getElementById("connection-status-text").innerHTML = "Connected to " + json["info"]["robot_name"];
+		document.getElementById("connection-status-text").innerHTML = "Conectado à " + json["info"]["robot_name"];
+		let titulo = document.getElementsByTagName("title");
+		if(titulo.length > 0){
+			titulo.item(0).innerHTML = json["info"]["robot_name"] + " Controller";
+		}
 		if(settingUp){
 			modes = json["info"]["available_modes"];
 			makeConfigButtons(modes, 'mode');
@@ -204,5 +208,6 @@ function toggleDebbugingOptions() {
 
 function sendCustomMessage(){
 	let message = document.getElementById("debug-message-text-field").value;
+	document.getElementById("debug-message-text-field").value = "";
 	connection.send(message);
 }

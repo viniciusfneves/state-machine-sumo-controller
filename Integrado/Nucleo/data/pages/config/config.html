@@ -16,11 +16,11 @@
 	<body>
 		<h1 id="config-title">Configurações do Robô</h1>
 
-		<h4 id="connection-info">Connection Status:</h4>
+		<h4 id="connection-info">Conexão:</h4>
 		<div id="connection-status-circle"></div>
-		<h4 id="connection-status-text">Trying upgrade to WebSocket</h4>
+		<h4 id="connection-status-text">Tentando conexão WebSocket</h4>
 
-		<h3 id="h3-status">Status da State Machine</h3>
+		<h3 id="h3-status">Estado do Robô</h3>
 
 		<div id="status-container">
 			<div class="status-indicator">
@@ -41,34 +41,34 @@
 			</div>
 		</div>
 
-		<h3>Emita eventos para a State Machine</h3>
-
 		<button class="button-green" id="event_start">Start</button>
 		<button class="button-red" id="event_disengage">Disengage</button>
 		<button class="button-orange" id="event_arm">Arm</button>
 		<button id="telemetry-button" onclick="window.location.href='/telemetry'">Telemetria</button>
 
-		<h3>Seleção do Modo de Operação</h3>
+		<h3>Modo de Operação</h3>
 
 		<div id="mode-container"></div>
 
 		<div id="auto-settings">
-			<h3>Configure a estratégia de movimento inicial</h3>
+			<h3>Primeiro Movimento</h3>
 			<div id="initial-container"></div>
 
-			<h3>Configure a estratégia de busca</h3>
+			<h3>Busca</h3>
 			<div id="search-container"></div>
 
-			<h3>Configure a estratégia de perseguição</h3>
+			<h3>Perseguição</h3>
 			<div id="chase-container"></div>
 
 			<h3>Configurações gerais</h3>
+			<div class="pid-container">
+				<div class="PID-regulator-text">
+					<h4 class="pid-text">P</h4>
+					<h4 class="pid-text">I</h4>
+					<h4 class="pid-text">D</h4>
+				</div>
 
-			<h4>Regulador</h4>
-
-			<div id="PID-reg-container">
 				<div class="PID-regulator-setter">
-					<h4 class="inline-text">P:</h4>
 					<input
 						type="number"
 						class="setter-value-field"
@@ -76,9 +76,6 @@
 						step="0.1"
 						value=""
 					/>
-				</div>
-				<div class="PID-regulator-setter">
-					<h4 class="inline-text">I:</h4>
 					<input
 						type="number"
 						class="setter-value-field"
@@ -86,9 +83,6 @@
 						step="0.1"
 						value=""
 					/>
-				</div>
-				<div class="PID-regulator-setter">
-					<h4 class="inline-text">D:</h4>
 					<input
 						type="number"
 						class="setter-value-field"
@@ -99,7 +93,7 @@
 				</div>
 			</div>
 
-			<h4>Start Time (milissegundos)</h4>
+			<h4>Start clock (ms)</h4>
 			<input
 				type="number"
 				class="setter-value-field"
@@ -111,14 +105,18 @@
 			<button id="set-button">Set</button>
 		</div>
 		<div id="rc-settings">
-			<h3>Tipo de controle</h3>
+			<h3>Tipo de Controle</h3>
 			<div id="rc-type-container"></div>
-			<h3>Operação do controle</h3>
+			<h3>Mapa de Comandos</h3>
 			<div id="rc-operation-container"></div>
-			<h3>Filtros do controle</h3>
+			<h3>Filtro dos Comandos</h3>
 			<div id="rc-filter-container"></div>
 		</div>
-		<img id="debug-icon" src="../../assets/debug_icon_bw.png" alt="debug-icon">
+		<img
+			id="debug-icon"
+			src="../../assets/debug_icon_bw.png"
+			alt="debug-icon"
+		/>
 		<div id="debugging-container">
 			<input
 				type="text"
