@@ -37,6 +37,7 @@ void setup() {
     // initAccessPoint();
     // initHTTPServer();
     initWebSocketsServer();
+    performance.setStackSize(CONFIG_ARDUINO_LOOP_STACK_SIZE);
 #endif
 
     // Configuração de Sensores e módulos do robô

@@ -171,29 +171,31 @@ DynamicJsonDocument encodeTelemetryData() {
     readings["readings"]["motor"][0] = robotData.motorsPower[0];
     readings["readings"]["motor"][1] = robotData.motorsPower[1];
 
-    readings["controller"]["connection_status"] = controllerData.isControllerConnected() ? "connected" : "disconnected";
-    readings["controller"]["battery"] = controllerData.battery;
-    readings["controller"]["charging_status"] = controllerData.isCharging ? "true" : "false";
+    if (controllerData.isControllerConnected()) {
+        readings["controller"]["connection_status"] = "connected";
+        readings["controller"]["charging_status"] = controllerData.isCharging ? "true" : "false";
+        readings["controller"]["battery"] = controllerData.battery;
+        readings["controller"]["raw_linear"] = controllerData.controllerInputs[Input::linearSpeed];
+        readings["controller"]["raw_angular"] = controllerData.controllerInputs[Input::angularSpeed];
+    } else
+        readings["controller"]["connection_status"] = "disconnected";
 
     readings["performance"]["loop_task"] = performance.timeToExecute;
     readings["performance"]["n_tasks"] = performance.numberOfTaks;
-    readings["performance"]["memory"] = performance.freeMemory;
-    readings["performance"]["stack_WM"] = performance.stackWaterMark;
+    readings["performance"]["memory_usage"] = performance.freeMemory;
+    readings["performance"]["stack_max_usage"] = performance.BstackMaxUsage;
 
     return readings;
 }
 
 void broadcastRobotInfos() {
-    DynamicJsonDocument infos = encodeRobotInfos();
-    serializeAndBroadcast(infos);
-};
+    serializeAndBroadcast(encodeRobotInfos());
+}
 
 void broadcastRobotConfiguration() {
-    DynamicJsonDocument configs = EncodeRobotConfiguration();
-    serializeAndBroadcast(configs);
+    serializeAndBroadcast(EncodeRobotConfiguration());
 };
 
 void broadcastTelemetryData() {
-    DynamicJsonDocument readings = encodeTelemetryData();
-    serializeAndBroadcast(readings);
+    serializeAndBroadcast(encodeTelemetryData());
 };

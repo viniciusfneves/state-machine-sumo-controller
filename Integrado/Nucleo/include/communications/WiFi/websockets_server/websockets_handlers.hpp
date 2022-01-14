@@ -4,6 +4,8 @@
 #include <communications/data/robot_data_json_encoder.hpp>
 #include <configuration/set_configurations.hpp>
 
+#define TELEMETRY_INTERVAL 32
+
 namespace commDataValues {
 unsigned long lastTelemetryTimestamp = 0UL;
 };
@@ -146,7 +148,7 @@ void processJsonMessage(String message) {
 };
 
 void pushTelemetry(unsigned long timestamp) {
-    if (timestamp - commDataValues::lastTelemetryTimestamp < 32)
+    if (timestamp - commDataValues::lastTelemetryTimestamp < TELEMETRY_INTERVAL)
         return;
     broadcastTelemetryData();
     commDataValues::lastTelemetryTimestamp = timestamp;
