@@ -8,8 +8,6 @@
 #include <sml.hpp>
 
 #ifdef ESP32_ENV
-#include <SPIFFS.h>
-
 #include <communications/PS4_controller/ps4_controller.hpp>
 #include <communications/WiFi/WiFi.hpp>
 #include <communications/WiFi/http_server/http_server.hpp>
@@ -24,8 +22,6 @@ void setup() {
 
 // Configurações do ambiente para ESP32
 #ifdef ESP32_ENV
-    SPIFFS.begin();  // Inicia o File System do ESP32
-
     // ---- AVISO PARA USO DO CONTROLE DE PS4 ---- //
     // O uso do controle juntamente com os WebServers só pode ser feito utilizando uma rede WiFi externa
     // Ao tentar utilizar o ESP32 como AcessPoint e conectar e ler o controle, o AcessPoint é terminado e portanto não será
@@ -38,8 +34,8 @@ void setup() {
     // initController();
     // connectToWiFi("SSID", "PASSWORD");
 
-    initAccessPoint();
-    initHTTPServer();
+    // initAccessPoint();
+    // initHTTPServer();
     initWebSocketsServer();
 #endif
 

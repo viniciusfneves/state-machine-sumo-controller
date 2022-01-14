@@ -51,6 +51,7 @@ var initial_strategys;
 var search_strategys;
 var chase_strategys;
 var settingUp = true;
+var lastCtrlstatus = "disconnected";
 var start_time;
 var pid_kp;
 var pid_ki;
@@ -156,11 +157,14 @@ connection.onmessage = function (response) {
 		
 	}
 	if("controller" in json){
-		let controller_status = json["controller"]["connection_status"];
-		if(controller_status == "connected"){
-			document.getElementById("ctrl-status-img").src = "../../assets/ps4_full.png";
-		}else{
-			document.getElementById("ctrl-status-img").src = "../../assets/ps4_all_bk.png";
+		let actualCtrlStatus = json["controller"]["connection_status"]
+		if(actualCtrlStatus != lastCtrlstatus){
+			lastCtrlstatus = actualCtrlStatus;
+			if(actualCtrlStatus == "connected"){
+				document.getElementById("ctrl-status-img").src = "../../assets/ps4_full.png";
+			}else{
+				document.getElementById("ctrl-status-img").src = "../../assets/ps4_all_bk.png";
+			}
 		}
 	}
 };
