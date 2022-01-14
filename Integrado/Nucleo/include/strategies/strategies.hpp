@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef WEBOTS
+#ifdef ESP32_ENV
 using std::vector;
 
 vector<String> modesAvailable       = {"auto", "rc"};

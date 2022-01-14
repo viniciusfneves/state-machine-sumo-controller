@@ -1,11 +1,11 @@
 // A biblioteca SML precisa ser a primeira incluída no programa
+#include <sml.hpp>
 #include <Arduino.h>
 
 #include <event_handler/event_handler.hpp>
 #include <motors/drive_motors.hpp>
 #include <performance/performance.hpp>
 #include <sensors/sensors.hpp>
-#include <sml.hpp>
 
 #ifdef ESP32_ENV
 #include <communications/PS4_controller/ps4_controller.hpp>
@@ -17,7 +17,7 @@
 void setup() {
 // Configurações do ambiente para Arduino
 #ifdef ARDUINO_ENV
-    Serial.begin(9600);
+    // Serial.begin(9600);
 #endif
 
 // Configurações do ambiente para ESP32
@@ -60,5 +60,9 @@ void loop() {
     readSensors();
     processMachineEvents();
 
+#ifdef ESP32_ENV
     performance.measure(micros(), uxTaskGetNumberOfTasks(), ESP.getFreeHeap(), uxTaskGetStackHighWaterMark(NULL));
+#else
+    performance.measure(micros());
+#endif
 }

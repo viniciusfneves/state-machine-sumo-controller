@@ -13,6 +13,10 @@ struct PerformanceGauges {
         freeMemory = heap;
         stackWaterMark = stackWM;
     }
+
+    void measure(int64_t actualTimestamp) {
+        timeToExecute = actualTimestamp - startTimestamp;
+    }
 };
 
 PerformanceGauges performance;

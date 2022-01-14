@@ -65,6 +65,7 @@ namespace pins
 
         const int sensors[] = {farLeft, left, center, right, farRight};
     }
+    const int startModule = 23;
 #endif // ATENA
 
 #ifdef APOLO
@@ -97,7 +98,6 @@ namespace pins
         const int sensors[] = {leftSide, farLeft, left, center, right, farRight, rightSide};
     }
     const int startModule = 23;
-    }
 #endif // APOLO
 
 // Definição de pinos para os robôs sumo mini
@@ -132,6 +132,7 @@ namespace pins
         const int start = 4;
         const int XHUT = 8;
     }
+    const int startModule = 23;
 #endif
 
 #ifdef ET_MINI
@@ -163,6 +164,7 @@ namespace pins
         const int start = 16;
         const int XHUT = 17;
     }
+    const int startModule = 23;
 #endif
 
 #ifdef MERI
@@ -196,5 +198,6 @@ namespace pins
         const int ledCMD = 13;
         const int batRead = 33;
     }
+    const int startModule = 23;
 #endif
 }
