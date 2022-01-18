@@ -9,7 +9,7 @@ struct PerformanceGauges {
     uint16_t stackWaterMark;  // bytes
     uint16_t BstackMaxUsage;  // bytes
 
-    void setStackSize(uint8_t size) {
+    void setStackSize(uint16_t size) {
         stackSize = size;
     }
 

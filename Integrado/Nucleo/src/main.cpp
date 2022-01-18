@@ -31,7 +31,7 @@ void setup() {
     // junto com "connectToWiFi()"fornecendo à função o SSID e a senha da rede que deseja se conectar
     // Futuramente: Será implementado um serviço mDNS para facilitar a conexão via redes externas onde o IP é dinâmico
     // ------------------------------------------ // ------------------------------------------ //
-    // initController();
+    initController();
     // connectToWiFi("SSID", "PASSWORD");
 
     // initAccessPoint();
