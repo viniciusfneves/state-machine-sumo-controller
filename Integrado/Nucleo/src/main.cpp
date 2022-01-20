@@ -47,16 +47,12 @@ void setup() {
     initEdgeSensors();
 }
 
-// ------- IMPLEMENTAÇÃO MAIS COMPLEXA E OPCIONAL ------- //
-// Para aumentar ainda mais a performance dos servidores e GARANTIR que não haverão crashes na aplicação,
-// O espaço alocado em STACK para o loop -> "loopTask" pode ser reduzido para 3072 bytes, liberando mais HEAP
-// Para consumo pelos webServers e pela biblioteca do controle de PS4
 void loop() {
     performance.startTimestamp = micros();
 #ifdef ESP32_ENV
     processControllerEvents();
     processWebSocketEvents();
-    pushTelemetry(millis());
+    pushTelemetry(micros());
 #endif
     readSensors();
     processMachineEvents();

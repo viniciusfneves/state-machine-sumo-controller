@@ -3,7 +3,7 @@
 #define CONTROLLER_MAC_ADDRESS "00:1a:7d:da:71:03"
 #define MAX_BREATH_BRIGHTNESS 200
 #define BREATH_COLOR_DECAY 20
-#define CTRL_UPDATE_INTERVAL 32  //ms
+#define CTRL_UPDATE_INTERVAL 32000  //us
 
 #define SET_UNIQUE_COLOR(_r, _g, _b)          \
     ps4LightCtrl::r = _r;                     \
@@ -29,9 +29,9 @@
     ps4LightCtrl::g_buf = _g;           \
     ps4LightCtrl::b_buf = _b
 
-// time define o tempo(ms) no qual as luzes devem alternar
+// time define o tempo(us) no qual as luzes devem alternar
 #define DUAL_COLOR_FLASHING_LIGHT_HANDLER(time)                                               \
-    ps4LightCtrl::timeToChange = (millis() - ps4Timestamps::lastlightUpdateTimestamp) > time; \
+    ps4LightCtrl::timeToChange = (micros() - ps4Timestamps::lastlightUpdateTimestamp) > time; \
     if (!ps4LightCtrl::timeToChange)                                                          \
         return;                                                                               \
     if (ps4LightCtrl::switchController)                                                       \
@@ -39,7 +39,7 @@
     else                                                                                      \
         PS4.setLed(ps4LightCtrl::r_buf, ps4LightCtrl::g_buf, ps4LightCtrl::b_buf);            \
     ps4LightCtrl::switchController ^= 1;                                                      \
-    ps4Timestamps::lastlightUpdateTimestamp = millis();                                       \
+    ps4Timestamps::lastlightUpdateTimestamp = micros();                                       \
     PS4.setFlashRate(255, 0);                                                                 \
     PS4.sendToController();                                                                   \
     return
@@ -286,10 +286,9 @@ void processControllerEvents() {
 
     //-- Configura as luzes do controle conforme a situação do robô - State Machine --//
 
-    // Só envia os comandos para alteração das luzes no intervalo de tempo(ms) determinado abaixo
-    if (millis() - ps4Timestamps::lastControllerUpdateTimestamp < CTRL_UPDATE_INTERVAL)
+    if (micros() - ps4Timestamps::lastControllerUpdateTimestamp < CTRL_UPDATE_INTERVAL)
         return;
-    ps4Timestamps::lastControllerUpdateTimestamp = millis();
+    ps4Timestamps::lastControllerUpdateTimestamp = micros();
 
     if (controllerData.isCharging && robotData.robotState == RobotState::stopped) {
         SET_BREATHING_COLOR(255, 0, 0);

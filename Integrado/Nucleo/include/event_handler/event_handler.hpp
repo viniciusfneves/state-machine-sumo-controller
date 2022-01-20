@@ -31,7 +31,7 @@ void processMachineEvents() {
     }
     if (isTimeoutActive()) {
         // NÃO RETORNAR AQUI
-        if (timeoutAllowed(millis())) {
+        if (timeoutAllowed(micros())) {
             cancelTimeout();
             Core.process_event(Timeout{});
         }

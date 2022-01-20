@@ -4,7 +4,7 @@
 #include <communications/data/robot_data_json_encoder.hpp>
 #include <configuration/set_configurations.hpp>
 
-#define TELEMETRY_INTERVAL 32
+#define TELEMETRY_INTERVAL 32000
 
 namespace commDataValues {
 unsigned long lastTelemetryTimestamp = 0UL;
