@@ -66,8 +66,8 @@ void initMotors() {
 #ifdef ESP32_ENV
 #ifdef BRUSHLESS
     // Define a resolução de saída dos pinos de PWM do ESP32
-    analogWriteResolution(pins::motors::leftMotor, 12);
-    analogWriteResolution(pins::motors::rightMotor, 12);
+    analogWriteResolution(pins::motors::left, 12);
+    analogWriteResolution(pins::motors::right, 12);
 #endif
 #ifdef BRUSHED
     // Define a resolução de saída dos pinos de PWM do ESP32
@@ -78,10 +78,10 @@ void initMotors() {
 #endif
 #endif
 #ifdef BRUSHLESS
-    pinMode(pins::motors::leftMotor, OUTPUT);
-    pinMode(pins::motors::rightMotor, OUTPUT);
-    analogWrite(pins::motors::leftMotor, 0);
-    analogWrite(pins::motors::rightMotor, 0);
+    pinMode(pins::motors::left, OUTPUT);
+    pinMode(pins::motors::right, OUTPUT);
+    analogWrite(pins::motors::left, 0);
+    analogWrite(pins::motors::right, 0);
 #endif
 #ifdef BRUSHED
     pinMode(pins::motors::leftIN1, OUTPUT);

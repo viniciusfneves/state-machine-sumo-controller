@@ -71,10 +71,8 @@ namespace pins
 #ifdef APOLO
     namespace motors
     {
-        const int leftIN1 = 25;
-        const int leftIN2 = 27;
-        const int rightIN1 = 26;
-        const int rightIN2 = 32;
+        const int left = 25;
+        const int right = 26;
     }
     namespace edgeSensors
     {
