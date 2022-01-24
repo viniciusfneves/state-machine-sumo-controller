@@ -1,10 +1,9 @@
 #pragma once
 
-#ifdef REAL_ROBOT
-#include <Arduino.h>
-#endif
 #ifdef WEBOTS
 #include "../../webots/webots_time.hpp"
+#else
+#include <Arduino.h>
 #endif
 
 bool _timeoutActive = false;  //Indica se Timeout está ativo

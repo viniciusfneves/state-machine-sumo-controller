@@ -8,10 +8,9 @@
 #ifdef WEBOTS
 #include "../webots/motors.hpp"
 #include "../webots/webots_time.hpp"
-#endif
-
-#ifdef REAL_ROBOT
+#else
 #include <pins/pins.hpp>
+#endif
 
 #ifdef ESP32_ENV
 #include <analogWrite.h>  // Adiciona a função analogWrite para compilação com ESP32
@@ -95,8 +94,6 @@ void initMotors() {
     digitalWrite(pins::motors::rightIN2, HIGH);
 #endif
 }
-
-#endif  // REAL_ROBOT
 
 // Usado para dizer em qual direção o robô deve se mover
 enum class Direction {

@@ -3,8 +3,12 @@
 #include "../../configuration/specifications.hpp"
 #include "../../dynamic_data/robot_data.hpp"
 #include "../../utilities/calculus/calculus.hpp"
-#ifdef REAL_ROBOT
+
+#ifdef WEBOTS
+#include "../../webots/sensors.hpp"
+#else
 #include <pins/pins.hpp>
+#endif
 
 // Lê e atualiza as informações sobre as leituras dos sensores de borda do robô
 // Atualiza o array de leitura e se a borda foi detectado ou não
@@ -22,8 +26,3 @@ void initEdgeSensors() {
         pinMode(edgePin, INPUT);
     }
 };
-#endif
-
-#ifdef WEBOTS
-#include "../../webots/sensors.hpp"
-#endif

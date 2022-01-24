@@ -4,9 +4,10 @@
 #include "../../dynamic_data/robot_data.hpp"
 #include "../../utilities/calculus/calculus.hpp"
 
-// SIMULAÇÃO
 #ifdef WEBOTS
 #include "../../webots/sensors.hpp"
+#else
+#include <pins/pins.hpp>
 #endif
 
 // SUMO 3KG
@@ -26,10 +27,6 @@ int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-1, 1};
 #ifdef MERI
 int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-3, -1, 0, 1, 3};
 #endif
-
-// FUNÇÕES GLOBAIS - ARDUINO & ESP
-#ifdef REAL_ROBOT
-#include <pins/pins.hpp>
 
 // Lê e atualiza as informações sobre as leituras dos sensores de oponente do robô
 // Atualiza o array de leitura, se o oponente foi detectado ou não e o erro relacionado à detecção
@@ -51,4 +48,3 @@ void initOpponentSensors() {
         pinMode(opPin, INPUT);
     }
 }
-#endif
