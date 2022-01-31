@@ -109,61 +109,62 @@ namespace pins
 #ifdef ZE_PEQUENO
     namespace motors
     {
-        int leftMotorIN1 = 10;
-        int leftMotorIN2 = 9;
-        int rightMotorIN1 = 6;
-        int rightMotorIN2 = 5;
+        int leftMotorIN1 = 18;
+        int leftMotorIN2 = 19;
+        int rightMotorIN1 = 14;
+        int rightMotorIN2 = 15;
     }
     namespace edgeSensors
     {
-        int leftFrontEdge = 15;
-        int rightFrontEdge = 16;
+        int leftFrontEdge = 27;
+        int rightFrontEdge = 32;
 
         int sensors[] = {leftFrontEdge, rightFrontEdge};
     }
     namespace opponentsSensors
     {
-        int rightFrontOpponent = 3;
-        int leftFrontOpponent = 2;
+        int leftFrontOpponent = 23;
+        int centralFrontOpponent = 25;
+        int rightFrontOpponent = 26;
 
-        int sensors[] = {leftFrontOpponent, rightFrontOpponent};
+        int sensors[] = {leftFrontOpponent, rightFrontOpponent, centralFrontOpponent};
     }
     namespace configuration
     {
-        int led = 7;
-        int start = 4;
-        int XHUT = 8;
+        int led = 4;
+        int start = 5;
+        int XHUT = 33;
     }
 #endif
 
 #ifdef ET_MINI
     namespace motors
     {
-        int leftMotorIN1 = 10;
-        int leftMotorIN2 = 9;
-        int rightMotorIN1 = 6;
-        int rightMotorIN2 = 5;
+        int leftMotorIN1 = 18;
+        int leftMotorIN2 = 19;
+        int rightMotorIN1 = 14;
+        int rightMotorIN2 = 15;
     }
     namespace edgeSensors
     {
-        int leftFrontEdge = 3;
-        int rightFrontEdge = 2;
+        int leftFrontEdge = 27;
+        int rightFrontEdge = 32;
 
         int sensors[] = {leftFrontEdge, rightFrontEdge};
     }
     namespace opponentsSensors
     {
-        int leftFrontOpponent = 7;
-        int centralFrontOpponent = 8;
-        int rightFrontOpponent = 4;
+        int leftFrontOpponent = 23;
+        int centralFrontOpponent = 25;
+        int rightFrontOpponent = 26;
 
-        int sensors[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent};
+        int sensors[] = {leftFrontOpponent, rightFrontOpponent, centralFrontOpponent};
     }
     namespace configuration
     {
-        int led = 13;
-        int start = 16;
-        int XHUT = 17;
+        int led = 4;
+        int start = 5;
+        int XHUT = 33;
     }
 #endif
 
