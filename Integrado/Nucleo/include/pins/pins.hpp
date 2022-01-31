@@ -127,7 +127,7 @@ namespace pins
         int centralFrontOpponent = 25;
         int rightFrontOpponent = 26;
 
-        int sensors[] = {leftFrontOpponent, rightFrontOpponent, centralFrontOpponent};
+        int sensors[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent};
     }
     namespace configuration
     {
@@ -158,7 +158,7 @@ namespace pins
         int centralFrontOpponent = 25;
         int rightFrontOpponent = 26;
 
-        int sensors[] = {leftFrontOpponent, rightFrontOpponent, centralFrontOpponent};
+        int sensors[] = {leftFrontOpponent, centralFrontOpponent, rightFrontOpponent};
     }
     namespace configuration
     {
