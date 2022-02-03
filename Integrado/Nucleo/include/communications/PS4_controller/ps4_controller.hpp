@@ -261,13 +261,13 @@ void configController(const LightMode& mode, const Vibration vibro = Vibration::
             break;
 
         case LightMode::flashing_dual_colors:
-            DUAL_COLOR_FLASHING_LIGHT_HANDLER(190);
+            DUAL_COLOR_FLASHING_LIGHT_HANDLER(190000);
 
         case LightMode::slow_flashing_dual_colors:
-            DUAL_COLOR_FLASHING_LIGHT_HANDLER(450);
+            DUAL_COLOR_FLASHING_LIGHT_HANDLER(450000);
 
         case LightMode::breathing:
-            BREATHING_LIGHT_HANDLER(70);
+            BREATHING_LIGHT_HANDLER(80);
 
         default:
             PS4.setFlashRate(255, 0);
