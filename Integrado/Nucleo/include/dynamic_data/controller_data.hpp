@@ -1,5 +1,7 @@
 #pragma once
 
+using std::vector;
+
 // Status de conexão do controle de PS4
 enum class ControllerStatus {
     connected,
@@ -30,6 +32,10 @@ enum class CommandFilter {
     quadratic,
     cubic
 };
+
+vector<String> ctrl_types     = {"bt_ps4", "radio"};
+vector<String> ctrl_maps      = {"game_standard", "rc_standard", "rc_inverted"};
+vector<String> ctrl_filters   = {"linear", "quadratic", "cubic"};
 
 // Informações e leituras do Controle de PS4
 struct ControllerData {

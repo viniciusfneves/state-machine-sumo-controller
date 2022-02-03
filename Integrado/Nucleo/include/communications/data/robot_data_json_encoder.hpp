@@ -20,7 +20,7 @@ void serializeAndBroadcast(DynamicJsonDocument readings) {
 // Envia as informações estáticas do robô
 // Essas informações são em sua maioria usadas para construir a interface do usuário e possibilitar uma interface de comunicação com o usuário
 DynamicJsonDocument encodeRobotInfos() {
-    StaticJsonDocument<512> infos;
+    StaticJsonDocument<2048> infos;
 
     // Nome do robô
     infos["info"]["robot_name"] = robotSpecifications.robotName;
@@ -41,6 +41,15 @@ DynamicJsonDocument encodeRobotInfos() {
     }
     for (int index = 0; index < chaseStrategies.size(); index++) {
         infos["info"]["available_chase_strategies"][index] = chaseStrategies[index];
+    }
+    for (int index = 0; index < ctrl_types.size(); index++) {
+        infos["info"]["available_ctrl_types"][index] = ctrl_types[index];
+    }
+    for (int index = 0; index < ctrl_maps.size(); index++) {
+        infos["info"]["available_ctrl_maps"][index] = ctrl_maps[index];
+    }
+    for (int index = 0; index < ctrl_filters.size(); index++) {
+        infos["info"]["available_ctrl_filters"][index] = ctrl_filters[index];
     }
 
     return infos;

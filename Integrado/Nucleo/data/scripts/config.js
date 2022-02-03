@@ -50,13 +50,22 @@ var modes;
 var initial_strategys;
 var search_strategys;
 var chase_strategys;
+var ctrl_types;
+var ctrl_maps;
+var ctrl_filters;
 var settingUp = true;
 var lastCtrlstatus = "disconnected";
 var start_time;
 var pid_kp;
 var pid_ki;
 var pid_kd;
-var buttonNameExceptions = ["rc","bt ps4"];
+var buttonNameExceptions = {
+							"rc": "RC",
+							"bt ps4":"PS4",
+							"game standard": "Game STD",
+							"rc standard": "RC STD",
+							"rc inverted": "RC INV"
+						};
 
 // Atualiza as informações na tela sobre as configurações do robô de start_time e constantes do PID
 function updateParameters(start_time, pid_kp, pid_ki, pid_kd) {
@@ -93,6 +102,12 @@ connection.onmessage = function (response) {
 			makeConfigButtons(search_strategys, 'search');
 			chase_strategys = json["info"]["available_chase_strategies"];
 			makeConfigButtons(chase_strategys, 'chase');
+			ctrl_types = json["info"]["available_ctrl_types"];
+			makeConfigButtons(ctrl_types, 'ctrl_type');
+			ctrl_maps = json["info"]["available_ctrl_maps"];
+			makeConfigButtons(ctrl_maps, 'ctrl_map');
+			ctrl_filters = json["info"]["available_ctrl_filters"];
+			makeConfigButtons(ctrl_filters, 'ctrl_filter');
 			settingUp = false;
 		}
 	}
@@ -110,7 +125,10 @@ connection.onmessage = function (response) {
 		let initial = json["configurations"]["initial_move"];
 		let search = json["configurations"]["search"];
 		let chase = json["configurations"]["chase"];
-		updateConfigButtons(mode, initial, search, chase);
+		let type = json["configurations"]["controller"]["commander"];
+		let map = json["configurations"]["controller"]["mapping"];
+		let filter = json["configurations"]["controller"]["filter"];
+		updateConfigButtons(mode, initial, search, chase, type, map, filter);
 
 		if(mode == "auto"){
 			document.getElementById("auto-settings").style.display = "block";
@@ -175,8 +193,8 @@ function makeConfigButtons(availableConfigs, configType){
 		widget.addEventListener("click", _ => sendRequest(configType, element));
 		widget.id = configType+'_'+element;
 		let elementName = element.replace('_', ' ');
-		if (buttonNameExceptions.includes(elementName)){
-			elementName = elementName.toUpperCase();
+		if (Object.keys(buttonNameExceptions).includes(elementName)){
+			elementName = buttonNameExceptions[elementName];
 		} else {
 			elementName = elementName.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
 		}
@@ -185,12 +203,15 @@ function makeConfigButtons(availableConfigs, configType){
 	});
 }
 
-function updateConfigButtons(mode, initial, search, chase){
+function updateConfigButtons(mode, initial, search, chase, type, map, filter){
 	clearConfigButtons();
 	document.getElementById('mode_'+mode).style.background = Colors.highlight_color;
 	document.getElementById('initial_'+initial).style.background = Colors.highlight_color;
 	document.getElementById('search_'+search).style.background = Colors.highlight_color;
 	document.getElementById('chase_'+chase).style.background = Colors.highlight_color;
+	document.getElementById('ctrl_type_'+type).style.background = Colors.highlight_color;
+	document.getElementById('ctrl_map_'+map).style.background = Colors.highlight_color;
+	document.getElementById('ctrl_filter_'+filter).style.background = Colors.highlight_color;
 }
 
 function clearConfigButtons(){
@@ -204,6 +225,15 @@ function clearConfigButtons(){
 	});
 	chase_strategys.forEach(element => {
 		document.getElementById('chase_'+element).style.background = Colors.std_color;
+	});
+	ctrl_types.forEach(element => {
+		document.getElementById('ctrl_type_'+element).style.background = Colors.std_color;
+	});
+	ctrl_maps.forEach(element => {
+		document.getElementById('ctrl_map_'+element).style.background = Colors.std_color;
+	});
+	ctrl_filters.forEach(element => {
+		document.getElementById('ctrl_filter_'+element).style.background = Colors.std_color;
 	});
 }
 
