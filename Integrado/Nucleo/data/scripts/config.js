@@ -171,9 +171,8 @@ connection.onmessage = function (response) {
 		if (status == "exec_controller") {
 			document.getElementById("fight-status-circle").style.background = Colors.std_green;		
 		}
-
-		
 	}
+
 	if("controller" in json){
 		let actualCtrlStatus = json["controller"]["connection_status"]
 		if(actualCtrlStatus != lastCtrlstatus){
@@ -182,6 +181,15 @@ connection.onmessage = function (response) {
 				document.getElementById("ctrl-status-img").src = "../../assets/ps4_full.png";
 			}else{
 				document.getElementById("ctrl-status-img").src = "../../assets/ps4_all_bk.png";
+			}
+		}
+		if("charging_status" in json["controller"]){
+			let ctrl_charging = json["controller"]["charging_status"];
+			if(ctrl_charging == "true"){
+				document.getElementById("ctrl-battery").innerHTML = "Charging...";
+			} else {
+				let battery = json["controller"]["battery"];
+				document.getElementById("ctrl-battery").innerHTML = battery + "0%";
 			}
 		}
 	}
