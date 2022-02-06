@@ -6,10 +6,6 @@ struct Configurations {
     // Define a velocidade máxima global do robô -> (int)[0, 255]
     int maxSpeed = 255;
     double radarSpeed = 1;
-    // Define as velocidades lineares e angulares das estratégias iniciais de arco (0 a 1)
-    double archLinearVelocity = 1;
-    double longArchAngularVelocity = 0.5;
-    double shortArchAngularVelocity = 0.7;
 
     // Define o tempo de acionamento do robô para a luta
     int startTime = 25;

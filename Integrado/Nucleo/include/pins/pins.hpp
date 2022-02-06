@@ -127,7 +127,6 @@ namespace pins
     namespace configuration
     {
         const int led = 7;
-        const int start = 4;
         const int XHUT = 8;
     }
     const int startModule = 23;
@@ -159,7 +158,6 @@ namespace pins
     namespace configuration
     {
         const int led = 13;
-        const int start = 16;
         const int XHUT = 17;
     }
     const int startModule = 23;

@@ -39,15 +39,6 @@ void processMachineEvents() {
     if (isOpponentDetected()) {
         Core.process_event(OpponentDetected{});
         return;
-    } else {
-        if (getErrorFromOPSensors() < 0) {
-            Core.process_event(LostOpponentAtLeft{});
-        } else if (getErrorFromOPSensors() > 0) {
-            Core.process_event(LostOpponentAtRight{});
-        }
-        
-        Core.process_event(NotOpponentDetected{});
-        return;
     }
     if (isEdgeDetected()) {
         Core.process_event(EdgeDetected{});

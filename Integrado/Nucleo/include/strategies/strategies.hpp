@@ -19,9 +19,7 @@ enum class Mode {
 enum class InitialMove {
     none,
     full_frente,
-    zig_zag,
-    delayed_radar,
-    short_right_arch
+    zig_zag
 };
 
 // Estratégias de busca

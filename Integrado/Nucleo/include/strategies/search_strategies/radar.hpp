@@ -15,7 +15,7 @@ struct SearchRadar {
         auto right = [] { return getErrorFromOPSensors() > 0; };
 
         // Funções
-        auto rotateLeft  = [] { driveRobot(0, -1 * robotConfiguration.radarSpeed); };
+        auto rotateLeft  = [] { driveRobot(0, -robotConfiguration.radarSpeed); };
         auto rotateRight = [] { driveRobot(0, robotConfiguration.radarSpeed); };
 
         return make_transition_table(
