@@ -2,4 +2,4 @@
 
 #include <WebSocketsServer.h>
 
-WebSocketsServer webSocket(81);  // Configura o serviço do WebSockets para a porta 81
+WebSocketsServer wss(81);  // Configura o serviço do WebSockets para a porta 81

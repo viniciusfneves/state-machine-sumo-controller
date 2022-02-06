@@ -14,7 +14,7 @@ void serializeAndBroadcast(DynamicJsonDocument readings) {
     String JSONBuffer;
 
     serializeJson(readings, JSONBuffer);
-    webSocket.broadcastTXT(JSONBuffer);
+    wss.broadcastTXT(JSONBuffer);
 }
 
 // Envia as informações estáticas do robô

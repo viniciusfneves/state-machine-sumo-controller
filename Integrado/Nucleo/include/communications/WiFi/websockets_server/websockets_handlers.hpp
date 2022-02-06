@@ -13,7 +13,7 @@ unsigned long lastTelemetryTimestamp = 0UL;
 /* --> Colocar no loop <-- */
 // Lida com as requisições feitas ao server websocket
 void processWebSocketEvents() {
-    webSocket.loop();
+    wss.loop();
 }
 
 /* --> ENVIAR SOMENTE JSON PARA ESSA FUNÇÃO <-- */
@@ -156,7 +156,7 @@ void pushTelemetry(unsigned long timestamp) {
 
 /* --> Enviar somente JSON <-- */
 // Lida com os dados recebidos pelo protocolo WebSocket
-void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *payload, size_t length) {
+void handleWSEvent(uint8_t client_id, WStype_t type, uint8_t *payload, size_t length) {
     switch (type) {
         // Caso haja um erro no recebimento de uma mensagem do cliente
         case WStype_ERROR:
@@ -177,8 +177,8 @@ void handleWSIncomingData(uint8_t client_id, WStype_t type, uint8_t *payload, si
 
 // Inicia o serviço websocket
 void initWebSocketsServer() {
-    webSocket.begin();
+    wss.begin();
 
     // Configura qual função é executada a cada evento recebido pelo WebSocket
-    webSocket.onEvent(handleWSIncomingData);
+    wss.onEvent(handleWSEvent);
 }

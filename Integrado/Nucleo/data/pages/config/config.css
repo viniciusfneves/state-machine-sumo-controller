@@ -10,10 +10,6 @@ html {
 	background-color: rgb(245, 245, 245);
 }
 
-#config-title {
-	margin: 20px auto;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
@@ -66,8 +62,7 @@ body {
 }
 
 h1 {
-	color: #444444;
-	margin: 50px auto 30px;
+	margin: 0 auto 15px;
 }
 
 h3 {
@@ -125,21 +120,14 @@ button {
 	margin: 12px auto;
 }
 
-#connection-info {
-	display: inline-block;
-	margin: 0px;
-}
-
 #connection-status-text {
 	display: inline-block;
-	margin: 0px;
 	color: #cc8b00;
 }
 
 #connection-status-circle {
 	display: inline-block;
 	background: #cc8b00;
-	vertical-align: baseline;
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;

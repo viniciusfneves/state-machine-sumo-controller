@@ -14,11 +14,11 @@
 	</head>
 
 	<body>
-		<h1 id="config-title">Configurações do Robô</h1>
-
-		<h4 id="connection-info">Conexão:</h4>
-		<div id="connection-status-circle"></div>
-		<h4 id="connection-status-text">Tentando conexão WebSocket</h4>
+		<h1>Configurações do Robô</h1>
+		<div>
+			<div id="connection-status-circle"></div>
+			<h4 id="connection-status-text">Tentando conexão WebSocket</h4>
+		</div>
 		<div id="controller-info">
 			<img src="../../assets/ps4_all_bk.png" id="ctrl-status-img" />
 			<h3 id="ctrl-battery">-</h3>
@@ -48,7 +48,12 @@
 		<button class="button-green" id="event_start">Start</button>
 		<button class="button-red" id="event_disengage">Disengage</button>
 		<button class="button-orange" id="event_arm">Arm</button>
-		<button id="telemetry-button" onclick="window.location.href='../telemetry/telemetry.html'">Telemetria</button>
+		<button
+			id="telemetry-button"
+			onclick="window.location.href='../telemetry/telemetry.html'"
+		>
+			Telemetria
+		</button>
 
 		<h3>Modo de Operação</h3>
 
@@ -66,7 +71,7 @@
 
 			<h3>Configurações gerais</h3>
 			<div class="pid-container">
-				<h4 class="pid-text">P</h4>
+				<h4 class="pid-text">Kp</h4>
 				<input
 					type="number"
 					class="setter-value-field"
@@ -76,7 +81,7 @@
 				/>
 			</div>
 			<div class="pid-container">
-				<h4 class="pid-text">I</h4>
+				<h4 class="pid-text">Ki</h4>
 				<input
 					type="number"
 					class="setter-value-field"
@@ -86,7 +91,7 @@
 				/>
 			</div>
 			<div class="pid-container">
-				<h4 class="pid-text">D</h4>
+				<h4 class="pid-text">Kd</h4>
 				<input
 					type="number"
 					class="setter-value-field"
