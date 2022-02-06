@@ -19,8 +19,10 @@
 		<h4 id="connection-info">Conexão:</h4>
 		<div id="connection-status-circle"></div>
 		<h4 id="connection-status-text">Tentando conexão WebSocket</h4>
-
-		<img src="../../assets/ps4_all_bk.png" id="ctrl-status-img" />
+		<div id="controller-info">
+			<img src="../../assets/ps4_all_bk.png" id="ctrl-status-img" />
+			<h3 id="ctrl-battery">-</h3>
+		</div>
 
 		<h3 id="h3-status">Estado do Robô</h3>
 
@@ -64,35 +66,34 @@
 
 			<h3>Configurações gerais</h3>
 			<div class="pid-container">
-				<div class="PID-regulator-text">
-					<h4 class="pid-text">P</h4>
-					<h4 class="pid-text">I</h4>
-					<h4 class="pid-text">D</h4>
-				</div>
-
-				<div class="PID-regulator-setter">
-					<input
-						type="number"
-						class="setter-value-field"
-						id="P-regulator-value"
-						step="0.1"
-						value=""
-					/>
-					<input
-						type="number"
-						class="setter-value-field"
-						id="I-regulator-value"
-						step="0.1"
-						value=""
-					/>
-					<input
-						type="number"
-						class="setter-value-field"
-						id="D-regulator-value"
-						step="0.1"
-						value=""
-					/>
-				</div>
+				<h4 class="pid-text">P</h4>
+				<input
+					type="number"
+					class="setter-value-field"
+					id="P-regulator-value"
+					step="0.1"
+					value=""
+				/>
+			</div>
+			<div class="pid-container">
+				<h4 class="pid-text">I</h4>
+				<input
+					type="number"
+					class="setter-value-field"
+					id="I-regulator-value"
+					step="0.1"
+					value=""
+				/>
+			</div>
+			<div class="pid-container">
+				<h4 class="pid-text">D</h4>
+				<input
+					type="number"
+					class="setter-value-field"
+					id="D-regulator-value"
+					step="0.1"
+					value=""
+				/>
 			</div>
 
 			<h4>Start clock (ms)</h4>

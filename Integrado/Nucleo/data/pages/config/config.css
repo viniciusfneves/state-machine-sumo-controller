@@ -20,18 +20,14 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
-.pid-container {
-	width: 60%;
+.pid-text {
+	height: auto;
+	width: 14.5%;
 	margin: 12px auto;
 }
 
-.pid-text {
+.pid-container {
 	display: inline-block;
-	height: auto;
-	width: 14.5%;
-	margin: 0 0 10px 0;
-	min-width: 95px;
-	max-width: 135px;
 }
 
 body {
@@ -87,9 +83,13 @@ h4 {
 }
 
 #ctrl-status-img {
-	display: block;
-	margin: auto;
+	display: inline-block;
+	margin: 12px auto 0 auto;
 	height: 100px;
+}
+
+#ctrl-battery {
+	margin: auto;
 }
 
 button {
@@ -151,10 +151,6 @@ button {
 
 #rc-settings {
 	display: none;
-}
-
-.PID-regulator-setter {
-	display: inline;
 }
 
 .setter-value-field {
