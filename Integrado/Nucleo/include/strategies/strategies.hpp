@@ -5,8 +5,9 @@ using std::vector;
 
 vector<String> modesAvailable       = {"auto", "rc"};
 vector<String> initialStrategies    = {"none", "full_frente", "zig_zag"};
-vector<String> searchStrategies     = {"none", "radar"};
+vector<String> searchStrategies     = {"none", "radar", "full_teste"};
 vector<String> chaseStrategies      = {"standard"};
+
 #endif
 
 // Modos de operação
@@ -25,7 +26,8 @@ enum class InitialMove {
 // Estratégias de busca
 enum class Search {
     none,
-    radar
+    radar, 
+    full_teste
 };
 
 // Estratégias de perseguição
