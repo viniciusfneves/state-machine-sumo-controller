@@ -7,7 +7,7 @@
 #define TELEMETRY_INTERVAL 32000
 
 namespace commDataValues {
-unsigned long lastTelemetryTimestamp = 0UL;
+    unsigned long lastTelemetryTimestamp = 0UL;
 };
 
 /* --> Colocar no loop <-- */
@@ -20,7 +20,7 @@ void processWebSocketEvents() {
 // Responsável por pegar as mensagens do tipo JSON, decodificá-las e atuar corretamente no robô conforme as instruções
 void processJsonMessage(String message) {
     StaticJsonDocument<128> jsonMessage;
-    DeserializationError JSONerror = deserializeJson(jsonMessage, message);
+    DeserializationError    JSONerror = deserializeJson(jsonMessage, message);
     if (JSONerror) {
         Serial.println("(Função processJsonMessage) -> JSON-> Ocorreu um erro ao deserializar a mensagem!");
         return;

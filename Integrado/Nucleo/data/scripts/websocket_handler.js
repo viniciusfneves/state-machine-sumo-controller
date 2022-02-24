@@ -18,7 +18,7 @@ connection.onerror = function () {
 };
 
 // Conexão encerrada
-connection.onclose = function (event) {
+connection.onclose = function (_) {
 	document.getElementById("connection-status-circle").style.background = Colors.std_red;
 	document.getElementById("connection-status-text").style.color = Colors.std_red;
 	document.getElementById("connection-status-text").innerHTML = "Conexão encerrada";

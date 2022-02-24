@@ -12,7 +12,7 @@ struct Specifications {
 #define NUMBER_OF_EDGE_SENSORS 2
 #define NUMBER_OF_OPPONENT_SENSORS 5
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
-    const int wheelBase = 132;            // Distância entre as rodas em milímetros
+    const int    wheelBase   = 132;       // Distância entre as rodas em milímetros
     const double wheelRadius = 72.5 / 2;  // Raio das rodas em milímetros
 #endif
 
@@ -23,7 +23,7 @@ struct Specifications {
 #define NUMBER_OF_EDGE_SENSORS 2
 #define NUMBER_OF_OPPONENT_SENSORS 5
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
-    const int wheelBase = 132;            // Distância entre as rodas em milímetros
+    const int    wheelBase   = 132;       // Distância entre as rodas em milímetros
     const double wheelRadius = 72.5 / 2;  // Raio das rodas em milímetros
 #endif
 
@@ -34,7 +34,7 @@ struct Specifications {
 #define NUMBER_OF_EDGE_SENSORS 4
 #define NUMBER_OF_OPPONENT_SENSORS 7
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
-    const int wheelBase = 132;            // Distância entre as rodas em milímetros
+    const int    wheelBase   = 132;       // Distância entre as rodas em milímetros
     const double wheelRadius = 72.5 / 2;  // Raio das rodas em milímetros
 #endif
 
@@ -47,7 +47,7 @@ struct Specifications {
 #define NUMBER_OF_EDGE_SENSORS 2
 #define NUMBER_OF_OPPONENT_SENSORS 5
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
-    const int wheelBase = 75.2;         // Distância entre as rodas em milímetros. Considerando o centro da roda
+    const int    wheelBase   = 75.2;    // Distância entre as rodas em milímetros. Considerando o centro da roda
     const double wheelRadius = 34 / 2;  // Raio das rodas em milímetros
 #endif
 
@@ -58,7 +58,7 @@ struct Specifications {
 #define NUMBER_OF_EDGE_SENSORS 2
 #define NUMBER_OF_OPPONENT_SENSORS 2
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
-    const int wheelBase = 75;           // Distância entre as rodas em milímetros. Considerando o centro da roda
+    const int    wheelBase   = 75;      // Distância entre as rodas em milímetros. Considerando o centro da roda
     const double wheelRadius = 34 / 2;  // Raio das rodas em milímetros
 #endif
 
@@ -69,7 +69,7 @@ struct Specifications {
 #define NUMBER_OF_EDGE_SENSORS 2
 #define NUMBER_OF_OPPONENT_SENSORS 5
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
-    const int wheelBase = 75;           // Distância entre as rodas em milímetros. Considerando o centro da roda
+    const int    wheelBase   = 75;      // Distância entre as rodas em milímetros. Considerando o centro da roda
     const double wheelRadius = 34 / 2;  // Raio das rodas em milímetros
 #endif
 
@@ -79,13 +79,13 @@ struct Specifications {
 #define NUMBER_OF_EDGE_SENSORS 2
 #define NUMBER_OF_OPPONENT_SENSORS 2
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
-    const int wheelBase = 132;            // Distância entre as rodas em milímetros
+    const int    wheelBase   = 132;       // Distância entre as rodas em milímetros
     const double wheelRadius = 72.5 / 2;  // Raio das rodas em milímetros
 #endif
 
     // GERAL //
 
-    const double maxLinearSpeed = wheelRadius;
+    const double maxLinearSpeed  = wheelRadius;
     const double maxAngularSpeed = 2 * wheelRadius / wheelBase;
 };
 

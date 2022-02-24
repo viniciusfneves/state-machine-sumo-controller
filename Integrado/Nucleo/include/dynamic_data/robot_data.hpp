@@ -27,8 +27,8 @@ struct RobotData {
     RobotState robotState = RobotState::stopped;
 
     // SENSOR DE OPONENTES
-    bool opponentSensorsDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
-    bool opDetected;
+    bool   opponentSensorsDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
+    bool   opDetected;
     double opError;
 
     // SENSOR DE BORDA

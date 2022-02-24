@@ -4,7 +4,7 @@
 
 struct Configurations {
     // Define a velocidade máxima global do robô -> (int)[0, 255]
-    int maxSpeed = 255;
+    int    maxSpeed   = 255;
     double radarSpeed = 1;
 
     // Define o tempo de acionamento do robô para a luta
@@ -20,9 +20,9 @@ struct Configurations {
 
     // Define a inicialização padrão das estratégias
     InitialMove initialMove = InitialMove::full_frente;
-    Search search = Search::radar;
-    Chase chase = Chase::standard;
-    Mode mode = Mode::Auto;
+    Search      search      = Search::radar;
+    Chase       chase       = Chase::standard;
+    Mode        mode        = Mode::Auto;
 };
 
 // Objeto global de configurações do robô

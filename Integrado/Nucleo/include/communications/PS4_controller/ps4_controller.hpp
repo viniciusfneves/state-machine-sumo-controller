@@ -3,20 +3,20 @@
 #define CONTROLLER_MAC_ADDRESS "00:1a:7d:da:71:03"
 #define MAX_BREATH_BRIGHTNESS 200
 #define BREATH_COLOR_DECAY 20
-#define CTRL_UPDATE_INTERVAL 32000  //us
+#define CTRL_UPDATE_INTERVAL 32000  // us
 
 #define SET_UNIQUE_COLOR(_r, _g, _b)          \
-    ps4LightCtrl::r = _r;                     \
-    ps4LightCtrl::g = _g;                     \
-    ps4LightCtrl::b = _b;                     \
+    ps4LightCtrl::r     = _r;                 \
+    ps4LightCtrl::g     = _g;                 \
+    ps4LightCtrl::b     = _b;                 \
     ps4LightCtrl::r_var = BREATH_COLOR_DECAY; \
     ps4LightCtrl::g_var = BREATH_COLOR_DECAY; \
     ps4LightCtrl::b_var = BREATH_COLOR_DECAY
 
 #define SET_DUAL_COLORS(r1, g1, b1, r2, g2, b2) \
-    ps4LightCtrl::r = r1;                       \
-    ps4LightCtrl::g = g1;                       \
-    ps4LightCtrl::b = b1;                       \
+    ps4LightCtrl::r     = r1;                   \
+    ps4LightCtrl::g     = g1;                   \
+    ps4LightCtrl::b     = b1;                   \
     ps4LightCtrl::r_buf = r2;                   \
     ps4LightCtrl::g_buf = g2;                   \
     ps4LightCtrl::b_buf = b2;                   \
@@ -84,16 +84,16 @@
 #include <utilities/calculus/calculus.hpp>
 
 namespace ps4Timestamps {
-unsigned long lastControllerUpdateTimestamp = 0UL;
-unsigned long lastlightUpdateTimestamp = 0UL;
+    unsigned long lastControllerUpdateTimestamp = 0UL;
+    unsigned long lastlightUpdateTimestamp      = 0UL;
 }  // namespace ps4Timestamps
 
 namespace ps4LightCtrl {
-int16_t r_buf, g_buf, b_buf;
-int16_t r_var, g_var, b_var;
-int16_t r, g, b;
-bool timeToChange = false;
-bool switchController = true;
+    int16_t r_buf, g_buf, b_buf;
+    int16_t r_var, g_var, b_var;
+    int16_t r, g, b;
+    bool    timeToChange     = false;
+    bool    switchController = true;
 }  // namespace ps4LightCtrl
 
 enum class LightMode {
@@ -125,7 +125,7 @@ void initController() {
 // Lê os comandos do controle e atua na máquina(robô) conforme necessário
 void readControllerInputs() {
     controllerData.isCharging = PS4.Charging();
-    controllerData.battery = PS4.Battery();
+    controllerData.battery    = PS4.Battery();
     if (PS4.Options()) {
         if (robotData.robotState == RobotState::stopped)
             addEventToQueue(Event::Arm);
@@ -154,13 +154,13 @@ void readControllerInputs() {
     if (controllerData.commander != Commander::bt_ps4)
         return;
 
-    int _trigger, _stick, _pedal, _wheel;
+    int    _trigger, _stick, _pedal, _wheel;
     double _linear, _angular;
     switch (controllerData.mapSettings) {
         case CommandMap::game_standard:
             _trigger = PS4.R2Value() - PS4.L2Value();
-            _stick = PS4.LStickX();
-            _linear = map_double(_trigger, -255, 255, -1, 1);
+            _stick   = PS4.LStickX();
+            _linear  = map_double(_trigger, -255, 255, -1, 1);
             _angular = map_double(_stick, -128, 127, -1, 1);
 
             if (abs(_angular) < 0.07)
@@ -168,9 +168,9 @@ void readControllerInputs() {
             break;
 
         case CommandMap::rc_standard:
-            _pedal = PS4.LStickY();
-            _wheel = PS4.RStickX();
-            _linear = map_double(_pedal, -128, 127, -1, 1);
+            _pedal   = PS4.LStickY();
+            _wheel   = PS4.RStickX();
+            _linear  = map_double(_pedal, -128, 127, -1, 1);
             _angular = map_double(_wheel, -128, 127, -1, 1);
 
             if (abs(_angular) < 0.07)
@@ -180,9 +180,9 @@ void readControllerInputs() {
             break;
 
         case CommandMap::rc_inverted:
-            _pedal = PS4.RStickY();
-            _wheel = PS4.LStickX();
-            _linear = map_double(_pedal, -128, 127, -1, 1);
+            _pedal   = PS4.RStickY();
+            _wheel   = PS4.LStickX();
+            _linear  = map_double(_pedal, -128, 127, -1, 1);
             _angular = map_double(_wheel, -128, 127, -1, 1);
 
             if (abs(_angular) < 0.07)
@@ -193,12 +193,12 @@ void readControllerInputs() {
 
         default:
             _angular = 0;
-            _linear = 0;
+            _linear  = 0;
     }
 
     switch (controllerData.filterSettings) {
         case CommandFilter::linear:
-            controllerData.controllerInputs[Input::linearSpeed] = _linear;
+            controllerData.controllerInputs[Input::linearSpeed]  = _linear;
             controllerData.controllerInputs[Input::angularSpeed] = _angular;
             break;
 
@@ -214,12 +214,12 @@ void readControllerInputs() {
             break;
 
         case CommandFilter::cubic:
-            controllerData.controllerInputs[Input::linearSpeed] = pow(_linear, 3);
+            controllerData.controllerInputs[Input::linearSpeed]  = pow(_linear, 3);
             controllerData.controllerInputs[Input::angularSpeed] = pow(_angular, 3);
             break;
 
         default:
-            controllerData.controllerInputs[Input::linearSpeed] = _linear;
+            controllerData.controllerInputs[Input::linearSpeed]  = _linear;
             controllerData.controllerInputs[Input::angularSpeed] = _angular;
             break;
     }

@@ -3,10 +3,10 @@
 #ifdef ESP32_ENV
 using std::vector;
 
-vector<String> modesAvailable       = {"auto", "rc"};
-vector<String> initialStrategies    = {"none", "full_frente", "zig_zag"};
-vector<String> searchStrategies     = {"none", "radar", "full_teste"};
-vector<String> chaseStrategies      = {"standard"};
+vector<String> modesAvailable    = {"auto", "rc"};
+vector<String> initialStrategies = {"none", "full_frente", "zig_zag"};
+vector<String> searchStrategies  = {"none", "radar", "full_teste"};
+vector<String> chaseStrategies   = {"standard"};
 
 #endif
 
@@ -26,7 +26,7 @@ enum class InitialMove {
 // Estratégias de busca
 enum class Search {
     none,
-    radar, 
+    radar,
     full_teste
 };
 
