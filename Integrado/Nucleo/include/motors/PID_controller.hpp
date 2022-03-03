@@ -2,9 +2,9 @@
 
 #include "../configuration/configurations.hpp"
 
-double &Kp = robotConfiguration.Kp;
-double &Ki = robotConfiguration.Ki;
-double &Kd = robotConfiguration.Kd;
+double &Kp               = robotConfiguration.Kp;
+double &Ki               = robotConfiguration.Ki;
+double &Kd               = robotConfiguration.Kd;
 double &maxAngularOutput = robotConfiguration.maxAngularSpeedInChase;
 
 double proportional = 0, integral = 0, derivative = 0;

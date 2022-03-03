@@ -37,7 +37,7 @@ void drvDrive(int pwm, int drvIn1, int drvIn2) {
 // int PWM_left -> PWM que será enviado ao motor esquerdo
 // int PWM_right -> PWM que será enviado ao motor direito
 void driveMotors(int PWM_left, int PWM_right) {
-    PWM_left = constrain(PWM_left, -255, 255);
+    PWM_left  = constrain(PWM_left, -255, 255);
     PWM_right = constrain(PWM_right, -255, 255);
 
 #ifdef BRUSHLESS
@@ -107,14 +107,14 @@ enum class Direction {
 void driveRobot(double linearSpeed, double angularSpeed) {
     // Limita os parâmetros de entrada aos permitidos pela função
     // Só funciona se os parametros forem de -1 à 1, caso contrário utilize um MAP para definir as velocidas linear e angular
-    linearSpeed = constrain(linearSpeed, -1, 1) * robotSpecifications.maxLinearSpeed;
+    linearSpeed  = constrain(linearSpeed, -1, 1) * robotSpecifications.maxLinearSpeed;
     angularSpeed = constrain(angularSpeed, -1, 1) * robotSpecifications.maxAngularSpeed;
 
     // Transforma os parâmetros de velocidade linear e angular em sinal PWM para os motores
-    int PWM_left = ((2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
+    int PWM_left  = ((2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
     int PWM_right = ((2 * linearSpeed - angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
 
-    //Assegura que a velocidade angular vai ser exercida como pedido, podendo alterar a velocidade linear para isso
+    // Assegura que a velocidade angular vai ser exercida como pedido, podendo alterar a velocidade linear para isso
     double maxSpeed = (PWM_left > PWM_right) ? PWM_left : PWM_right;
     double minSpeed = (PWM_left < PWM_right) ? PWM_left : PWM_right;
 
@@ -135,8 +135,8 @@ void driveRobot(double linearSpeed, double angularSpeed) {
 // (enum) Direction  -> Define para qual lado o robô irá virar
 void rotateRobot(int degrees, Direction direction) {
     // Limita os parâmetros de entrada aos permitidos pela função
-    degrees = constrain(degrees, 1, 359);
-    int PWM_left = robotConfiguration.maxSpeed;
+    degrees       = constrain(degrees, 1, 359);
+    int PWM_left  = robotConfiguration.maxSpeed;
     int PWM_right = robotConfiguration.maxSpeed;
 
     if (direction == Direction::right) {

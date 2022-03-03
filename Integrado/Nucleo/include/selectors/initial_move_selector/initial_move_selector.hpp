@@ -12,19 +12,19 @@ namespace sml = boost::sml;
 struct InitialMoveSelector {
     auto operator()() const {
         using namespace sml;
-        //Funções
-        auto entry        = [] { changeRobotState(RobotState::exec_initial); };
+        // Funções
+        auto entry = [] { changeRobotState(RobotState::exec_initial); };
 
         // Guards
-        auto none             = [] { return robotConfiguration.initialMove == InitialMove::none; };
-        auto full_frente      = [] { return robotConfiguration.initialMove == InitialMove::full_frente; };
-        auto zig_zag          = [] { return robotConfiguration.initialMove == InitialMove::zig_zag; };
+        auto none        = [] { return robotConfiguration.initialMove == InitialMove::none; };
+        auto full_frente = [] { return robotConfiguration.initialMove == InitialMove::full_frente; };
+        auto zig_zag     = [] { return robotConfiguration.initialMove == InitialMove::zig_zag; };
 
         return make_transition_table(
-            *"entry"_s  /  entry             = "selector"_s,
-            "selector"_s  [none]             = state<InitialNone>,
-            "selector"_s  [full_frente]      = state<FullFrente>,
-            "selector"_s  [zig_zag]          = state<ZigZag>);
+            *"entry"_s / entry        = "selector"_s,
+            "selector"_s[none]        = state<InitialNone>,
+            "selector"_s[full_frente] = state<FullFrente>,
+            "selector"_s[zig_zag]     = state<ZigZag>);
     }
 };
 
