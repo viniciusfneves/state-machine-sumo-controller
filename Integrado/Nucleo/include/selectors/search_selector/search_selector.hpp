@@ -4,25 +4,28 @@
 #include "../../../lib/boost/sml.hpp"
 #include "../../configuration/configurations.hpp"
 #include "../../motors/PID_controller.hpp"
-#include "../../strategies/search_strategies/search_none.hpp"
 #include "../../strategies/search_strategies/radar.hpp"
+#include "../../strategies/search_strategies/search_none.hpp"
+#include "../../strategies/search_strategies/teco.hpp"
 
 namespace sml = boost::sml;
 
 struct SearchSelector {
     auto operator()() const {
         using namespace sml;
-        //Funções
-        auto entry  = [] { resetPID(); changeRobotState(RobotState::exec_search); };
+        // Funções
+        auto entry = [] { resetPID(); changeRobotState(RobotState::exec_search); };
 
         // Guards
-        auto none   = [] { return robotConfiguration.search == Search::none; };
-        auto radar  = [] { return robotConfiguration.search == Search::radar; };
+        auto none  = [] { return robotConfiguration.search == Search::none; };
+        auto radar = [] { return robotConfiguration.search == Search::radar; };
+        auto teco  = [] { return robotConfiguration.search == Search::teco; };
 
         return make_transition_table(
-            *"entry"_s  / entry  = "selector"_s,
-            "selector"_s [none]  = state<SearchNone>,
-            "selector"_s [radar] = state<SearchRadar>);
+            *"entry"_s / entry  = "selector"_s,
+            "selector"_s[none]  = state<SearchNone>,
+            "selector"_s[radar] = state<SearchRadar>,
+            "selector"_s[teco]  = state<Teco>);
     }
 };
 

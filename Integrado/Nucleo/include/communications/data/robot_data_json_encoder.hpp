@@ -27,7 +27,7 @@ DynamicJsonDocument encodeRobotInfos() {
 
     // Quantidade de sensores
     infos["info"]["available_opponent_sensors"] = NUMBER_OF_OPPONENT_SENSORS;
-    infos["info"]["available_edge_sensors"] = NUMBER_OF_EDGE_SENSORS;
+    infos["info"]["available_edge_sensors"]     = NUMBER_OF_EDGE_SENSORS;
 
     // Estratégias disponíveis no robô
     for (int index = 0; index < modesAvailable.size(); index++) {
@@ -61,10 +61,10 @@ DynamicJsonDocument EncodeRobotConfiguration() {
 
     // Parâmetros configuráveis para o modo Auto
     configs["configurations"]["start_time"] = robotConfiguration.startTime;
-    configs["configurations"]["max_speed"] = robotConfiguration.maxSpeed;
-    configs["configurations"]["pid"]["kp"] = robotConfiguration.Kp;
-    configs["configurations"]["pid"]["ki"] = robotConfiguration.Ki;
-    configs["configurations"]["pid"]["kd"] = robotConfiguration.Kd;
+    configs["configurations"]["max_speed"]  = robotConfiguration.maxSpeed;
+    configs["configurations"]["pid"]["kp"]  = robotConfiguration.Kp;
+    configs["configurations"]["pid"]["ki"]  = robotConfiguration.Ki;
+    configs["configurations"]["pid"]["kd"]  = robotConfiguration.Kd;
 
     // Parâmetros configuráveis para o modo RC
     configs["configurations"]["controller"]["commander"] = controllerData.commander == Commander::bt_ps4 ? "bt_ps4" : "radio";
@@ -126,6 +126,9 @@ DynamicJsonDocument EncodeRobotConfiguration() {
         case Search::radar:
             configs["configurations"]["search"] = "radar";
             break;
+        case Search::teco:
+            configs["configurations"]["search"] = "teco";
+            break;
     }
 
     // Estratégia de perseguição
@@ -172,7 +175,7 @@ DynamicJsonDocument encodeTelemetryData() {
         readings["readings"]["opponent"][i] = robotData.opponentSensorsDetectionArray[i];
     }
 
-    //Sensores de borda
+    // Sensores de borda
     for (int i = 0; i < NUMBER_OF_EDGE_SENSORS; i++) {
         readings["readings"]["edge"][i] = robotData.edgeSensorsDetectionArray[i];
     }
@@ -182,16 +185,16 @@ DynamicJsonDocument encodeTelemetryData() {
 
     if (controllerData.isControllerConnected()) {
         readings["controller"]["connection_status"] = "connected";
-        readings["controller"]["charging_status"] = controllerData.isCharging ? "true" : "false";
-        readings["controller"]["battery"] = controllerData.battery;
-        readings["controller"]["raw_linear"] = controllerData.controllerInputs[Input::linearSpeed];
-        readings["controller"]["raw_angular"] = controllerData.controllerInputs[Input::angularSpeed];
+        readings["controller"]["charging_status"]   = controllerData.isCharging ? "true" : "false";
+        readings["controller"]["battery"]           = controllerData.battery;
+        readings["controller"]["raw_linear"]        = controllerData.controllerInputs[Input::linearSpeed];
+        readings["controller"]["raw_angular"]       = controllerData.controllerInputs[Input::angularSpeed];
     } else
         readings["controller"]["connection_status"] = "disconnected";
 
-    readings["performance"]["loop_task"] = performance.timeToExecute;
-    readings["performance"]["n_tasks"] = performance.numberOfTaks;
-    readings["performance"]["memory_usage"] = performance.freeMemory;
+    readings["performance"]["loop_task"]       = performance.timeToExecute;
+    readings["performance"]["n_tasks"]         = performance.numberOfTaks;
+    readings["performance"]["memory_usage"]    = performance.freeMemory;
     readings["performance"]["stack_max_usage"] = performance.BstackMaxUsage;
 
     return readings;
