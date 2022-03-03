@@ -39,6 +39,10 @@ void processJsonMessage(String message) {
         if (strcmp(request, "arm") == 0) {
             addEventToQueue(Event::Arm);
         }
+        if (strcmp(request, "dump") == 0) {
+            broadcastRobotInfos();
+            broadcastRobotConfiguration();
+        }
     }
 
     // Processa pedido de alteração do tempo para início do luta
@@ -134,6 +138,9 @@ void processJsonMessage(String message) {
         }
         if (strcmp(strategy, "radar") == 0) {
             setSearchStrategy(Search::radar);
+        }
+        if (strcmp(strategy, "teco") == 0) {
+            setSearchStrategy(Search::teco);
         }
     }
 
