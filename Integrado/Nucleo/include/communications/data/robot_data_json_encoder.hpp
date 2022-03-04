@@ -60,11 +60,14 @@ DynamicJsonDocument EncodeRobotConfiguration() {
     StaticJsonDocument<512> configs;
 
     // Parâmetros configuráveis para o modo Auto
-    configs["configurations"]["start_time"] = robotConfiguration.startTime;
-    configs["configurations"]["max_speed"]  = robotConfiguration.maxSpeed;
-    configs["configurations"]["pid"]["kp"]  = robotConfiguration.Kp;
-    configs["configurations"]["pid"]["ki"]  = robotConfiguration.Ki;
-    configs["configurations"]["pid"]["kd"]  = robotConfiguration.Kd;
+    configs["configurations"]["start_time"]         = robotConfiguration.startTime;
+    configs["configurations"]["max_speed"]          = robotConfiguration.maxSpeed;
+    configs["configurations"]["max_speed_in_chase"] = robotConfiguration.maxAngularSpeedInChase;
+    configs["configurations"]["arc_angular_speed"]  = robotConfiguration.arcAgularSpeed;
+    configs["configurations"]["radar_speed"]        = robotConfiguration.radarSpeed;
+    configs["configurations"]["pid"]["kp"]          = robotConfiguration.Kp;
+    configs["configurations"]["pid"]["ki"]          = robotConfiguration.Ki;
+    configs["configurations"]["pid"]["kd"]          = robotConfiguration.Kd;
 
     // Parâmetros configuráveis para o modo RC
     configs["configurations"]["controller"]["commander"] = controllerData.commander == Commander::bt_ps4 ? "bt_ps4" : "radio";
@@ -122,7 +125,7 @@ DynamicJsonDocument EncodeRobotConfiguration() {
         case InitialMove::arco_rot:
             configs["configurations"]["initial_move"] = "arco_rot";
             break;
-        }
+    }
 
     // Estratégia de busca
     switch (robotConfiguration.search) {

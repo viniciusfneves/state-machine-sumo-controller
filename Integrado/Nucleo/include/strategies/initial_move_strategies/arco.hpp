@@ -13,7 +13,7 @@ struct Arco {
 
         // Funções
         auto configExit = [] { setTimeout(1000); };
-        auto runArc     = [] { driveRobot(1, robotConfiguration.velAngularArco); };
+        auto runArc     = [] { driveRobot(1, robotConfiguration.arcAgularSpeed); };
 
         return make_transition_table(
             *"entry"_s = "moving"_s,

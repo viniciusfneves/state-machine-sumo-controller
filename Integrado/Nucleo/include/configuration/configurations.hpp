@@ -13,7 +13,7 @@ struct Configurations {
     int    maxSpeed   = 255;
     double radarSpeed = 1;
 
-    double    velAngularArco = 0.25;
+    double    arcAgularSpeed = 0.25;
     int       angle          = 30;
     Direction direction      = Direction::left;
 

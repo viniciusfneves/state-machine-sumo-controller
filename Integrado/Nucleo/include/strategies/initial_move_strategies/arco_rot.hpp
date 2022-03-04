@@ -15,7 +15,7 @@ struct ArcoRot {
 
         // Funções
         auto configExit = [] { setTimeout(1000); };
-        auto runArc     = [] { driveRobot(1, robotConfiguration.velAngularArco); };
+        auto runArc     = [] { driveRobot(1, robotConfiguration.arcAgularSpeed); };
         auto rotaciona  = [] { rotateRobot(robotConfiguration.angle, robotConfiguration.direction); };
 
         return make_transition_table(
