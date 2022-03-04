@@ -116,7 +116,13 @@ DynamicJsonDocument EncodeRobotConfiguration() {
         case InitialMove::zig_zag:
             configs["configurations"]["initial_move"] = "zig_zag";
             break;
-    }
+        case InitialMove::arco:
+            configs["configurations"]["initial_move"] = "arco";
+            break;
+        case InitialMove::arco_rot:
+            configs["configurations"]["initial_move"] = "arco_rot";
+            break;
+        }
 
     // Estratégia de busca
     switch (robotConfiguration.search) {

@@ -127,6 +127,12 @@ void processJsonMessage(String message) {
         if (strcmp(strategy, "zig_zag") == 0) {
             setInitialStrategy(InitialMove::zig_zag);
         }
+        if (strcmp(strategy, "arco") == 0) {
+            setInitialStrategy(InitialMove::arco);
+        }
+        if (strcmp(strategy, "arco_rot") == 0) {
+            setInitialStrategy(InitialMove::arco_rot);
+        }
     }
 
     // Processa as requisições de alteração da estratégia de busca

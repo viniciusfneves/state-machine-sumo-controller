@@ -2,10 +2,20 @@
 
 #include "../strategies/strategies.hpp"
 
+// Usado para dizer em qual direção o robô deve se mover
+enum class Direction {
+    left,
+    right
+};
+
 struct Configurations {
     // Define a velocidade máxima global do robô -> (int)[0, 255]
     int    maxSpeed   = 255;
     double radarSpeed = 1;
+
+    double    velAngularArco = 0.25;
+    int       angle          = 30;
+    Direction direction      = Direction::left;
 
     // Define o tempo de acionamento do robô para a luta
     int startTime = 25;

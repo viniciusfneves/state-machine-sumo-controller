@@ -95,12 +95,6 @@ void initMotors() {
 #endif
 }
 
-// Usado para dizer em qual direção o robô deve se mover
-enum class Direction {
-    left,
-    right
-};
-
 // Movimenta o robô baseado nos parâmetros de entrada de velocidade linear e velocidade angular desejada
 // double linearSpeed -> Velocidade linear do robô -> Range [-1,1]
 // double angularSpeed -> Velocidade angular do robô -> Range [-1,1]
