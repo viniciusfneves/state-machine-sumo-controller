@@ -10,12 +10,12 @@ struct Configurations {
     double radarSpeed = 1;
 
     // Parâmetros para as estratégias de Arco
-    double    arcAgularSpeed = 0.25;
-    int       angle          = -35;
+    double arcAgularSpeed = 0.25;
+    int    angle          = -35;
 
     // Parâmetros de ajuste para a função rotateRobot
     double angleBias = 550;
-    double speedBias = 0.2;
+    double speedBias = 0.25;
 
     // Define o tempo de acionamento do robô para a luta
     int startTime = 0;

@@ -34,13 +34,27 @@ void setChaseStrategy(Chase strategy) {
 
 // Muda o tempo de acionamento do robô para começar a luta
 void setStartTime(int time) {
-    robotConfiguration.startTime = time;
+    robotConfiguration.startTime = abs(time);
     broadcastRobotConfiguration();
 }
 
 // Altera a velocidade linear máxima global permitida para o robô
 void setMaxSpeed(int newSpeed) {
-    robotConfiguration.maxSpeed = newSpeed;
+    robotConfiguration.maxSpeed = abs(newSpeed);
+    broadcastRobotConfiguration();
+}
+// Altera a velocidade linear máxima global permitida para o robô
+void setRadarSpeed(double newSpeed) {
+    robotConfiguration.radarSpeed = abs(newSpeed);
+    broadcastRobotConfiguration();
+}
+
+void setMaxAngularSpeedInChase(double newSpeed) {
+    robotConfiguration.maxAngularSpeedInChase = newSpeed;
+    broadcastRobotConfiguration();
+}
+void setArcAngularSpeed(double newSpeed) {
+    robotConfiguration.arcAgularSpeed = newSpeed;
     broadcastRobotConfiguration();
 }
 
@@ -50,7 +64,7 @@ void setRotateRobotAngleBias(double bias) {
 }
 
 void setRotateRobotSpeedBias(double bias) {
-    robotConfiguration.speedBias = bias;
+    robotConfiguration.speedBias = abs(bias);
     broadcastRobotConfiguration();
 }
 

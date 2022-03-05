@@ -60,6 +60,21 @@ void processJsonMessage(String message) {
         setRotateRobotSpeedBias(jsonMessage["rotate_speed_bias"]);
     }
 
+    // Processa pedido de alteração da velocidade de rotação do radar
+    if (jsonMessage.containsKey("radar_speed")) {
+        setRadarSpeed(jsonMessage["radar_speed"]);
+    }
+
+    // Processa pedido de alteração da velocidade angular do arco
+    if (jsonMessage.containsKey("arc_angular_speed")) {
+        setArcAngularSpeed(jsonMessage["arc_angular_speed"]);
+    }
+
+    // Processa pedido de alteração da velocidade máx em perseguição
+    if (jsonMessage.containsKey("max_angular_speed_in_chase")) {
+        setMaxAngularSpeedInChase(jsonMessage["max_angular_speed_in_chase"]);
+    }
+
     // Processa pedido de alteração da velocidade máxima permitida para o robô
     if (jsonMessage.containsKey("max_speed")) {
         setMaxSpeed(jsonMessage["max_speed"]);
