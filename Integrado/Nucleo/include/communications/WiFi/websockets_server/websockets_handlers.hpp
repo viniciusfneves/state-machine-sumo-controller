@@ -50,6 +50,16 @@ void processJsonMessage(String message) {
         setStartTime(jsonMessage["start_time"]);
     }
 
+    // Processa pedido de alteração do bias de controle de tempo de rotateRobot
+    if (jsonMessage.containsKey("rotate_angle_bias")) {
+        setRotateRobotAngleBias(jsonMessage["rotate_angle_bias"]);
+    }
+
+    // Processa pedido de alteração do bias de controle de tempo de rotateRobot
+    if (jsonMessage.containsKey("rotate_speed_bias")) {
+        setRotateRobotSpeedBias(jsonMessage["rotate_speed_bias"]);
+    }
+
     // Processa pedido de alteração da velocidade máxima permitida para o robô
     if (jsonMessage.containsKey("max_speed")) {
         setMaxSpeed(jsonMessage["max_speed"]);
