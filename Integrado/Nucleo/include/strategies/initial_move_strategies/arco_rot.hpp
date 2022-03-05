@@ -16,11 +16,15 @@ struct ArcoRot {
         // Funções
         auto configExit = [] { setTimeout(1000); };
         auto runArc     = [] { driveRobot(1, robotConfiguration.arcAgularSpeed); };
-        auto rotaciona  = [] { rotateRobot(robotConfiguration.angle, robotConfiguration.direction); };
+        auto rotaciona  = [] { rotateRobot(robotConfiguration.angle); };
 
         return make_transition_table(
-            *"entry"_s                                                =  "rotating"_s,
-            "rotating"_s                  /  (configExit, rotaciona)  =  "moving"_s,
-            "moving"_s  + event<Timeout>  /  (configExit, runArc)     =  "exit"_s);
+            *"entry"_s = "rotating"_s,
+
+            // Não é necessário chamar setTimeout em "rotating"_s pois a função
+            // rotateRobot emite um evento de Timeout quando o movimento de rotação for concluído
+            "rotating"_s                / rotaciona            = "moving"_s,
+
+            "moving"_s + event<Timeout> / (configExit, runArc) = "exit"_s);
     }
 };

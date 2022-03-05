@@ -4,6 +4,13 @@
 #include <configuration/configurations.hpp>
 #include <dynamic_data/controller_data.hpp>
 
+// mode -> (enum) Mode
+// Muda a configuração de modo de operação
+void setMode(Mode mode) {
+    robotConfiguration.mode = mode;
+    broadcastRobotConfiguration();
+}
+
 // strategy -> (enum) InitialMove
 // Muda a configuração de estratégia de movimento inicial
 void setInitialStrategy(InitialMove strategy) {
@@ -25,13 +32,6 @@ void setChaseStrategy(Chase strategy) {
     broadcastRobotConfiguration();
 }
 
-// mode -> (enum) Mode
-// Muda a configuração de modo de operação
-void setMode(Mode mode) {
-    robotConfiguration.mode = mode;
-    broadcastRobotConfiguration();
-}
-
 // Muda o tempo de acionamento do robô para começar a luta
 void setStartTime(int time) {
     robotConfiguration.startTime = time;
@@ -44,6 +44,16 @@ void setMaxSpeed(int newSpeed) {
     broadcastRobotConfiguration();
 }
 
+void setRotateRobotAngleBias(double bias) {
+    robotConfiguration.angleBias = bias;
+    broadcastRobotConfiguration();
+}
+
+void setRotateRobotSpeedBias(double bias) {
+    robotConfiguration.speedBias = bias;
+    broadcastRobotConfiguration();
+}
+
 // Altera os parâmetros para cálculo do controle PID
 void changePIDSettings(double set_kp, double set_ki, double set_kd) {
     robotConfiguration.Kp = set_kp;
@@ -52,8 +62,8 @@ void changePIDSettings(double set_kp, double set_ki, double set_kd) {
     broadcastRobotConfiguration();
 }
 
-void setCtrlType(Commander comm) {
-    controllerData.commander = comm;
+void setCtrlType(Commander commander) {
+    controllerData.commander = commander;
     broadcastRobotConfiguration();
 }
 

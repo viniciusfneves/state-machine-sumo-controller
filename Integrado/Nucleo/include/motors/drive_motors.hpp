@@ -4,6 +4,7 @@
 #include <configuration/configurations.hpp>
 #include <configuration/specifications.hpp>
 #include <dynamic_data/robot_data.hpp>
+#include <utilities/timeout_implementation/timeout.hpp>
 
 #ifdef WEBOTS
 #include "../webots/motors.hpp"
@@ -125,20 +126,23 @@ void driveRobot(double linearSpeed, double angularSpeed) {
 };
 
 // Movimenta o robô em torno do próprio eixo rotacionando-o em 'degrees' graus, recebidos como parâmetro
+// Essa função dispara um evento de Timeout após o movimento de rotação ter sido concluído, portanto
+// para usa-lá programe a máquina de estados com esse comportamento em mente
 // int degrees -> Graus de rotação
 // (enum) Direction  -> Define para qual lado o robô irá virar
-void rotateRobot(int degrees, Direction direction) {
+void rotateRobot(int degrees) {
     // Limita os parâmetros de entrada aos permitidos pela função
-    degrees       = constrain(degrees, 1, 359);
+    degrees = constrain(degrees, -359, 359);
+
     int PWM_left  = robotConfiguration.maxSpeed;
     int PWM_right = robotConfiguration.maxSpeed;
 
-    if (direction == Direction::right) {
+    if (degrees > 0) {
         PWM_right *= -1;
     } else {
         PWM_left *= -1;
     }
+    // O tempo até completar a rotação ainda precisa ser verificado com testes e modelado para uma função
+    setTimeout(abs(degrees * robotConfiguration.angleBias) / (robotConfiguration.maxSpeed * robotConfiguration.speedBias));
     driveMotors(PWM_left, PWM_right);
-    delay(static_cast<int>(degrees * 25 / robotConfiguration.maxSpeed));  // O tempo até completar a rotação ainda precisa ser verificado com testes e modelado para uma função
-    stopMotors();
 };
