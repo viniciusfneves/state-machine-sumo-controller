@@ -75,6 +75,11 @@ void processJsonMessage(String message) {
         setMaxAngularSpeedInChase(jsonMessage["max_angular_speed_in_chase"]);
     }
 
+    // Processa pedido de alteração da angulação do arcoRot
+    if (jsonMessage.containsKey("arc_rot_initial_angle")) {
+        setAngle(jsonMessage["arc_rot_initial_angle"]);
+    }
+
     // Processa pedido de alteração da velocidade máxima permitida para o robô
     if (jsonMessage.containsKey("max_speed")) {
         setMaxSpeed(jsonMessage["max_speed"]);

@@ -70,6 +70,7 @@ DynamicJsonDocument EncodeRobotConfiguration() {
     configs["configurations"]["pid"]["kp"]          = robotConfiguration.Kp;
     configs["configurations"]["pid"]["ki"]          = robotConfiguration.Ki;
     configs["configurations"]["pid"]["kd"]          = robotConfiguration.Kd;
+    configs["configurations"]["arc_rot_initial_angle"]  = robotConfiguration.angle;
 
     // Parâmetros configuráveis para o modo RC
     configs["configurations"]["controller"]["commander"] = controllerData.commander == Commander::bt_ps4 ? "bt_ps4" : "radio";

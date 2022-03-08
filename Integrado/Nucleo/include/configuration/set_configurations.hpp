@@ -58,6 +58,11 @@ void setArcAngularSpeed(double newSpeed) {
     broadcastRobotConfiguration();
 }
 
+void setAngle(int newAngle) {
+    robotConfiguration.angle = newAngle;
+    broadcastRobotConfiguration();
+}
+
 void setRotateRobotAngleBias(double bias) {
     robotConfiguration.angleBias = bias;
     broadcastRobotConfiguration();
