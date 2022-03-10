@@ -9,7 +9,7 @@ namespace sml = boost::sml;
 
 struct StandardChase {
     auto operator()() const {
-        auto chaseAction = [] { driveRobot(1, pid(getErrorFromOPSensors())); };
+        auto chaseAction = [] { driveRobot(1, pid.calculateOutput(getErrorFromOPSensors())); };
 
         using namespace sml;
         return make_transition_table(

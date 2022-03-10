@@ -2,26 +2,44 @@
 
 #include "../configuration/configurations.hpp"
 
-double &Kp               = robotConfiguration.Kp;
-double &Ki               = robotConfiguration.Ki;
-double &Kd               = robotConfiguration.Kd;
-double &maxAngularOutput = robotConfiguration.maxAngularSpeedInChase;
+class PIDController {
+   private:
+    double &_kp               = robotConfiguration.Kp;
+    double &_ki               = robotConfiguration.Ki;
+    double &_kd               = robotConfiguration.Kd;
+    double &_maxAngularOutput = robotConfiguration.maxAngularSpeedInChase;
+    double  _maxIntegrative   = _maxAngularOutput * 0.5;
 
-double proportional = 0, integral = 0, derivative = 0;
-double last_error = 0, output = 0;
+    double _proportional = 0, _integral = 0, _derivative = 0;
+    double _dt = 0, _last_error = 0, _last_timestamp = 0, _output = 0;
 
-double pid(double error) {
-    proportional = Kp / 10 * error;
-    integral += Ki * error / 1000;
-    derivative = Kd * (error - last_error);
+   public:
+    double calculateOutput(double error) {
+        _dt = micros() - _last_timestamp;
 
-    output = proportional + integral + derivative;
+        if (_dt >= 1000 || _dt <= 0) {
+            _dt = 1;
+        }
 
-    last_error = error;
+        _proportional = _kp * error;
+        _integral     = _integral + (_ki * error * _dt / 1000000.);
+        _integral     = constrain(_integral, -_maxIntegrative, _maxIntegrative);
 
-    return constrain(output, -maxAngularOutput, maxAngularOutput);
-}
+        _derivative = _kd * (error - _last_error) / (_dt / 1000000.);
 
-void resetPID() {
-    integral = 0;
-}
+        _output = _proportional + _integral + _derivative;
+
+        _last_error     = error;
+        _last_timestamp = micros();
+
+        _output = constrain(_output, -_maxAngularOutput, _maxAngularOutput);
+
+        return _output;
+    }
+
+    void resetPID() {
+        _integral = 0;
+    }
+};
+
+PIDController pid;

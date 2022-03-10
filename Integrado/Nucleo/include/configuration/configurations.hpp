@@ -25,12 +25,9 @@ struct Configurations {
     int startTime = 0;
 
     // Parâmetros do PID
-    double Kp = 1.7;
-    double Ki = 0;
-    double Kd = 0.6;
-
-    // Define uma velocidade angular máxima para o modo de perseguição -> (double)[0,1]
-    double maxAngularSpeedInChase = 0.55;
+    double Kp = 0.195;
+    double Ki = 0.023;
+    double Kd = 0.081;
 
     // Define a inicialização padrão das estratégias
     InitialMove initialMove = InitialMove::full_frente;
