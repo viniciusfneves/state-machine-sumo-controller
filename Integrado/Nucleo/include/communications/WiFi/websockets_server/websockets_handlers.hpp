@@ -70,12 +70,17 @@ void processJsonMessage(String message) {
         setArcAngularSpeed(jsonMessage["arc_angular_speed"]);
     }
 
+    // Processa pedido de alteração do tempo de execução do arco
+    if (jsonMessage.containsKey("arc_timeout")) {
+        setArcTimeout(jsonMessage["arc_timeout"]);
+    }
+
     // Processa pedido de alteração da velocidade máx em perseguição
     if (jsonMessage.containsKey("max_angular_speed_in_chase")) {
         setMaxAngularSpeedInChase(jsonMessage["max_angular_speed_in_chase"]);
     }
 
-    // Processa pedido de alteração da angulação do arcoRot
+    // Processa pedido de alteração da angulação do arco
     if (jsonMessage.containsKey("arc_rot_initial_angle")) {
         setAngle(jsonMessage["arc_rot_initial_angle"]);
     }
@@ -159,9 +164,6 @@ void processJsonMessage(String message) {
         }
         if (strcmp(strategy, "arco") == 0) {
             setInitialStrategy(InitialMove::arco);
-        }
-        if (strcmp(strategy, "arco_rot") == 0) {
-            setInitialStrategy(InitialMove::arco_rot);
         }
     }
 

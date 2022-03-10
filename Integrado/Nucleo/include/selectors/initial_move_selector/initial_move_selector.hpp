@@ -4,7 +4,6 @@
 #include "../../../lib/boost/sml.hpp"
 #include "../../configuration/configurations.hpp"
 #include "../../strategies/initial_move_strategies/arco.hpp"
-#include "../../strategies/initial_move_strategies/arco_rot.hpp"
 #include "../../strategies/initial_move_strategies/full_frente.hpp"
 #include "../../strategies/initial_move_strategies/initial_none.hpp"
 #include "../../strategies/initial_move_strategies/zig_zag.hpp"
@@ -22,15 +21,13 @@ struct InitialMoveSelector {
         auto full_frente = [] { return robotConfiguration.initialMove == InitialMove::full_frente; };
         auto zig_zag     = [] { return robotConfiguration.initialMove == InitialMove::zig_zag; };
         auto arco        = [] { return robotConfiguration.initialMove == InitialMove::arco; };
-        auto arco_rot    = [] { return robotConfiguration.initialMove == InitialMove::arco_rot; };
 
         return make_transition_table(
             *"entry"_s / entry        = "selector"_s,
             "selector"_s[none]        = state<InitialNone>,
             "selector"_s[full_frente] = state<FullFrente>,
             "selector"_s[zig_zag]     = state<ZigZag>,
-            "selector"_s[arco]        = state<Arco>,
-            "selector"_s[arco_rot]    = state<ArcoRot>);
+            "selector"_s[arco]        = state<Arco>);
     }
 };
 

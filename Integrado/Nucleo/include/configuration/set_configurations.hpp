@@ -53,8 +53,14 @@ void setMaxAngularSpeedInChase(double newSpeed) {
     robotConfiguration.maxAngularSpeedInChase = newSpeed;
     broadcastRobotConfiguration();
 }
+
 void setArcAngularSpeed(double newSpeed) {
     robotConfiguration.arcAgularSpeed = newSpeed;
+    broadcastRobotConfiguration();
+}
+
+void setArcTimeout(int time) {
+    robotConfiguration.arcTimeout = time;
     broadcastRobotConfiguration();
 }
 

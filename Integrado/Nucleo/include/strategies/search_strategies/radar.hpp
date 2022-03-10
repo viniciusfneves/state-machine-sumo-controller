@@ -7,7 +7,7 @@
 
 namespace sml = boost::sml;
 
-struct SearchRadar {
+struct Radar {
     auto operator()() const {
         using namespace sml;
         // Guards

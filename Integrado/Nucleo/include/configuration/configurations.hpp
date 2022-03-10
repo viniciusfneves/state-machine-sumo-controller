@@ -6,12 +6,16 @@ struct Configurations {
     // Define a velocidade máxima global do robô -> (int)[0, 255]
     int maxSpeed = 255;
 
-    // Parâmetros para a estratégia de radar
+    // Parâmetros para a estratégia de radar -> (double)[-1, 1]
     double radarSpeed = 1;
 
     // Parâmetros para as estratégias de Arco
     double arcAgularSpeed = 0.25;
-    int    angle          = -35;
+    int    angle          = 0;
+    int    arcTimeout     = 750;
+
+    // Define uma velocidade angular máxima para o modo de perseguição -> (double)[0,1]
+    double maxAngularSpeedInChase = 0.595;
 
     // Parâmetros de ajuste para a função rotateRobot
     double angleBias = 550;
