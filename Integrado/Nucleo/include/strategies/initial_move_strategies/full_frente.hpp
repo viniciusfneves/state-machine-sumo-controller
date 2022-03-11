@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../../lib/boost/sml.hpp"
-#include "../../utilities/timeout_implementation/timeout.hpp"
+#include <utilities/timeout_implementation/timeout.hpp>
 #include "../../motors/drive_motors.hpp"
 
 namespace sml = boost::sml;

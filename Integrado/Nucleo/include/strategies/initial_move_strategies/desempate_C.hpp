@@ -4,7 +4,7 @@
 #include "../../configuration/configurations.hpp"
 #include "../../events/events.hpp"
 #include "../../motors/drive_motors.hpp"
-#include "../../utilities/timeout_implementation/timeout.hpp"
+#include <utilities/timeout_implementation/timeout.hpp>
 
 namespace sml = boost::sml;
 
@@ -20,7 +20,7 @@ struct DesempateC {
         return make_transition_table(
             *"entry"_s                                              = "first_arc"_s,
             "first_arc"_s                    / (configExit, runArc) = "runForwards"_s,
-            "runForwards"_s + event<Timeout> / runForwards          = "second_arc"_s
+            "runForwards"_s + event<Timeout> / runForwards          = "second_arc"_s,
             "second_arc"_s  + event<Timeout> / (configExit, runArc) = "exit"_s);
     }
 };

@@ -4,7 +4,7 @@
 #include "../../configuration/configurations.hpp"
 #include "../../events/events.hpp"
 #include "../../motors/drive_motors.hpp"
-#include "../../utilities/timeout_implementation/timeout.hpp"
+#include <utilities/timeout_implementation/timeout.hpp>
 
 namespace sml = boost::sml;
 
