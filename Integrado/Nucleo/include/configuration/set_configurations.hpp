@@ -59,8 +59,18 @@ void setArcAngularSpeed(double newSpeed) {
     broadcastRobotConfiguration();
 }
 
+void setShortArcAngularSpeed(double newSpeed) {
+    robotConfiguration.shortArcAgularSpeed = newSpeed;
+    broadcastRobotConfiguration();
+}
+
 void setArcTimeout(int time) {
     robotConfiguration.arcTimeout = time;
+    broadcastRobotConfiguration();
+}
+
+void setShortArcTimeout(int time) {
+    robotConfiguration.shortArcTimeout = time;
     broadcastRobotConfiguration();
 }
 

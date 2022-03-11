@@ -60,18 +60,20 @@ DynamicJsonDocument EncodeRobotConfiguration() {
     StaticJsonDocument<512> configs;
 
     // Parâmetros configuráveis para o modo Auto
-    configs["configurations"]["start_time"]            = robotConfiguration.startTime;
-    configs["configurations"]["max_speed"]             = robotConfiguration.maxSpeed;
-    configs["configurations"]["rotate_angle_bias"]     = robotConfiguration.angleBias;
-    configs["configurations"]["rotate_speed_bias"]     = robotConfiguration.speedBias;
-    configs["configurations"]["max_speed_in_chase"]    = robotConfiguration.maxAngularSpeedInChase;
-    configs["configurations"]["arc_angular_speed"]     = robotConfiguration.arcAgularSpeed;
-    configs["configurations"]["arc_rot_initial_angle"] = robotConfiguration.angle;
-    configs["configurations"]["arc_timeout"]           = robotConfiguration.arcTimeout;
-    configs["configurations"]["radar_speed"]           = robotConfiguration.radarSpeed;
-    configs["configurations"]["pid"]["kp"]             = robotConfiguration.Kp;
-    configs["configurations"]["pid"]["ki"]             = robotConfiguration.Ki;
-    configs["configurations"]["pid"]["kd"]             = robotConfiguration.Kd;
+    configs["configurations"]["start_time"]              = robotConfiguration.startTime;
+    configs["configurations"]["max_speed"]               = robotConfiguration.maxSpeed;
+    configs["configurations"]["rotate_angle_bias"]       = robotConfiguration.angleBias;
+    configs["configurations"]["rotate_speed_bias"]       = robotConfiguration.speedBias;
+    configs["configurations"]["max_speed_in_chase"]      = robotConfiguration.maxAngularSpeedInChase;
+    configs["configurations"]["arc_angular_speed"]       = robotConfiguration.arcAgularSpeed;
+    configs["configurations"]["short_arc_angular_speed"] = robotConfiguration.shortArcAgularSpeed;
+    configs["configurations"]["arc_rot_initial_angle"]   = robotConfiguration.angle;
+    configs["configurations"]["arc_timeout"]             = robotConfiguration.arcTimeout;
+    configs["configurations"]["short_arc_timeout"]       = robotConfiguration.shortArcTimeout;
+    configs["configurations"]["radar_speed"]             = robotConfiguration.radarSpeed;
+    configs["configurations"]["pid"]["kp"]               = robotConfiguration.Kp;
+    configs["configurations"]["pid"]["ki"]               = robotConfiguration.Ki;
+    configs["configurations"]["pid"]["kd"]               = robotConfiguration.Kd;
 
     // Parâmetros configuráveis para o modo RC
     configs["configurations"]["controller"]["commander"] = controllerData.commander == Commander::bt_ps4 ? "bt_ps4" : "radio";
@@ -126,6 +128,12 @@ DynamicJsonDocument EncodeRobotConfiguration() {
         case InitialMove::arco:
             configs["configurations"]["initial_move"] = "arco";
             break;
+        case InitialMove::oleh:
+            configs["configurations"]["initial_move"] = "oleh";
+            break;    
+        case InitialMove::desempate_C:
+            configs["configurations"]["initial_move"] = "desempate_C";
+            break;    
     }
 
     // Estratégia de busca
