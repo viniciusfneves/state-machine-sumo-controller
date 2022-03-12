@@ -10,11 +10,9 @@ struct Configurations {
     double radarSpeed = 1;
 
     // Parâmetros para as estratégias de Arco
-    int    angle               = 0;
-    double arcAgularSpeed      = 0.25;
-    int    arcTimeout          = 750;
-    double shortArcAgularSpeed = 0.5;
-    int    shortArcTimeout     = 300;
+    double arcAgularSpeed = 0.25;
+    int    angle          = 0;
+    int    arcTimeout     = 750;
 
     // Define uma velocidade angular máxima para o modo de perseguição -> (double)[0,1]
     double maxAngularSpeedInChase = 0.595;

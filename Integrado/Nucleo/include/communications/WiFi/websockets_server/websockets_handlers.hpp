@@ -70,19 +70,9 @@ void processJsonMessage(String message) {
         setArcAngularSpeed(jsonMessage["arc_angular_speed"]);
     }
 
-    // Processa pedido de alteração da velocidade angular do arco curto
-    if (jsonMessage.containsKey("short_arc_angular_speed")) {
-        setShortArcAngularSpeed(jsonMessage["short_arc_angular_speed"]);
-    }
-
     // Processa pedido de alteração do tempo de execução do arco
     if (jsonMessage.containsKey("arc_timeout")) {
         setArcTimeout(jsonMessage["arc_timeout"]);
-    }
-
-    // Processa pedido de alteração do tempo de execução do arco curto
-    if (jsonMessage.containsKey("short_arc_timeout")) {
-        setShortArcTimeout(jsonMessage["short_arc_timeout"]);
     }
 
     // Processa pedido de alteração da velocidade máx em perseguição

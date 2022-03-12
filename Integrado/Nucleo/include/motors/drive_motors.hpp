@@ -14,23 +14,26 @@
 #endif
 
 #ifdef ESP32_ENV
-#include <analogWrite.h>  // Adiciona a função analogWrite para compilação com ESP32
+#include <ESP32Servo.h>
+
+Servo leftMotor;
+Servo rightMotor;
 #endif
 
 // Função de controles dos pinos de ativação dos drivers para motores brushed
-void drvDrive(int pwm, int drvIn1, int drvIn2) {
+void brushedDrive(int pwm, int in1, int in2) {
     if (pwm == 0) {
         // Caso for parada
-        digitalWrite(drvIn1, true);
-        digitalWrite(drvIn2, true);
+        digitalWrite(in1, true);
+        digitalWrite(in2, true);
     } else if (pwm > 0) {
         // Caso for sentido horário
-        analogWrite(drvIn1, pwm);
-        digitalWrite(drvIn2, false);
+        analogWrite(in1, pwm);
+        digitalWrite(in2, false);
     } else {
         // Caso for sentido anti-horario
-        analogWrite(drvIn2, -1 * pwm);
-        digitalWrite(drvIn1, false);
+        analogWrite(in2, -pwm);
+        digitalWrite(in1, false);
     }
 }
 
@@ -42,13 +45,15 @@ void driveMotors(int PWM_left, int PWM_right) {
     PWM_right = constrain(PWM_right, -255, 255);
 
 #ifdef BRUSHLESS
-    analogWrite(pins::motors::left, PWM_left);
-    analogWrite(pins::motors::right, PWM_right);
+    PWM_left  = map(PWM_left, -255, 255, 0, 180);
+    PWM_right = map(PWM_right, -255, 255, 0, 180);
+    leftMotor.write(PWM_left);
+    rightMotor.write(PWM_right);
 #endif
 
 #ifdef BRUSHED
-    drvDrive(PWM_left, pins::motors::leftIN1, pins::motors::leftIN2);
-    drvDrive(PWM_right, pins::motors::rightIN1, pins::motors::rightIN2);
+    brushedDrive(PWM_left, pins::motors::leftIN1, pins::motors::leftIN2);
+    brushedDrive(PWM_right, pins::motors::rightIN1, pins::motors::rightIN2);
 #endif
 
 #ifdef ESP32_ENV
@@ -64,35 +69,19 @@ void stopMotors() {
 
 // Realiza as configurações necessárias para a parte de locomoção do robô
 void initMotors() {
-#ifdef ESP32_ENV
 #ifdef BRUSHLESS
     // Define a resolução de saída dos pinos de PWM do ESP32
-    analogWriteResolution(pins::motors::left, 12);
-    analogWriteResolution(pins::motors::right, 12);
-#endif
-#ifdef BRUSHED
-    // Define a resolução de saída dos pinos de PWM do ESP32
-    analogWriteResolution(pins::motors::leftIN1, 12);
-    analogWriteResolution(pins::motors::leftIN2, 12);
-    analogWriteResolution(pins::motors::rightIN1, 12);
-    analogWriteResolution(pins::motors::rightIN2, 12);
-#endif
-#endif
-#ifdef BRUSHLESS
-    pinMode(pins::motors::left, OUTPUT);
-    pinMode(pins::motors::right, OUTPUT);
-    analogWrite(pins::motors::left, 0);
-    analogWrite(pins::motors::right, 0);
+    leftMotor.attach(pins::motors::left);
+    rightMotor.attach(pins::motors::right);
+    leftMotor.write(0);
+    rightMotor.write(0);
 #endif
 #ifdef BRUSHED
     pinMode(pins::motors::leftIN1, OUTPUT);
     pinMode(pins::motors::leftIN2, OUTPUT);
     pinMode(pins::motors::rightIN1, OUTPUT);
     pinMode(pins::motors::rightIN2, OUTPUT);
-    digitalWrite(pins::motors::leftIN1, HIGH);
-    digitalWrite(pins::motors::leftIN2, HIGH);
-    digitalWrite(pins::motors::rightIN1, HIGH);
-    digitalWrite(pins::motors::rightIN2, HIGH);
+    stopMotors();
 #endif
 }
 
