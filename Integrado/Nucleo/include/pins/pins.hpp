@@ -94,55 +94,56 @@ namespace pins {
 
 #ifdef ZE_PEQUENO
     namespace motors {
-        const int leftIN1  = 10;
-        const int leftIN2  = 9;
-        const int rightIN1 = 6;
-        const int rightIN2 = 5;
+        const int leftIN1  = 18;
+        const int leftIN2  = 19;
+        const int rightIN1 = 14;
+        const int rightIN2 = 15;
     }  // namespace motors
     namespace edgeSensors {
-        const int left  = 15;
-        const int right = 16;
+        const int left  = 27;
+        const int right = 32;
 
         const int sensors[] = {left, right};
     }  // namespace edgeSensors
     namespace opponentsSensors {
-        const int right = 3;
-        const int left  = 2;
-
-        const int sensors[] = {left, right};
-    }  // namespace opponentsSensors
-    namespace configuration {
-        const int led  = 7;
-        const int XHUT = 8;
-    }  // namespace configuration
-    const int startModule = 23;
-#endif
-
-#ifdef ET_MINI
-    namespace motors {
-        const int leftIN1  = 10;
-        const int leftIN2  = 9;
-        const int rightIN1 = 6;
-        const int rightIN2 = 5;
-    }  // namespace motors
-    namespace edgeSensors {
-        const int left  = 3;
-        const int right = 2;
-
-        const int sensors[] = {left, right};
-    }  // namespace edgeSensors
-    namespace opponentsSensors {
-        const int left   = 7;
-        const int center = 8;
-        const int right  = 4;
+        const int left   = 23;
+        const int center = 25;
+        const int right  = 26;
 
         const int sensors[] = {left, center, right};
     }  // namespace opponentsSensors
     namespace configuration {
-        const int led  = 13;
-        const int XHUT = 17;
+        const int led  = 4;
+        const int XHUT = 33;
     }  // namespace configuration
-    const int startModule = 23;
+    const int startModule = 5;
+#endif
+
+#ifdef ET_MINI
+    namespace motors {
+        const int leftIN1  = 18;
+        const int leftIN2  = 19;
+        const int rightIN1 = 14;
+        const int rightIN2 = 15;
+    }  // namespace motors
+    namespace edgeSensors {
+        const int left  = 27;
+        const int right = 32;
+
+        const int sensors[] = {left, right};
+    }  // namespace edgeSensors
+    namespace opponentsSensors {
+        const int left   = 23;
+        const int center = 25;
+        const int right  = 26;
+
+        const int sensors[] = {left, center, right};
+    }  // namespace opponentsSensors
+    namespace configuration {
+        const int led  = 4;
+        const int XHUT = 33;
+    }  // namespace configuration
+    const int startModule = 5;
 #endif
 
 #ifdef MERI
