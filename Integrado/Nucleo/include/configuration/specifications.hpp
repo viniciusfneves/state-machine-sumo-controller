@@ -44,7 +44,7 @@ struct Specifications {
     // Define o nome do robo
     const char *robotName = "Meri";
     // Quantidade de sensores de cada categoria (Borda e Oponente)
-#define NUMBER_OF_EDGE_SENSORS 2
+#define NUMBER_OF_EDGE_SENSORS 0
 #define NUMBER_OF_OPPONENT_SENSORS 5
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
     const int    wheelBase   = 75.2;    // Distância entre as rodas em milímetros. Considerando o centro da roda
@@ -55,8 +55,8 @@ struct Specifications {
     // Define o nome do robô
     const char *robotName = "ET";
     // Quantidade de sensores de cada categoria (Borda e Oponente)
-#define NUMBER_OF_EDGE_SENSORS 2
-#define NUMBER_OF_OPPONENT_SENSORS 2
+#define NUMBER_OF_EDGE_SENSORS 0
+#define NUMBER_OF_OPPONENT_SENSORS 3
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
     const int    wheelBase   = 75;      // Distância entre as rodas em milímetros. Considerando o centro da roda
     const double wheelRadius = 34 / 2;  // Raio das rodas em milímetros
@@ -66,8 +66,8 @@ struct Specifications {
     // Define o nome do robo
     const char *robotName = "Ze";
     // Quantidade de sensores de cada categoria (Borda e Oponente)
-#define NUMBER_OF_EDGE_SENSORS 2
-#define NUMBER_OF_OPPONENT_SENSORS 5
+#define NUMBER_OF_EDGE_SENSORS 0
+#define NUMBER_OF_OPPONENT_SENSORS 3
     // Especificações mecânicas do robô necessárias para alguns algoritmos do código
     const int    wheelBase   = 75;      // Distância entre as rodas em milímetros. Considerando o centro da roda
     const double wheelRadius = 34 / 2;  // Raio das rodas em milímetros
