@@ -110,7 +110,7 @@ namespace pins {
         const int center = 25;
         const int right  = 26;
 
-        const int sensors[] = {left, center, right};
+        const int sensors[] = {left, right};
     }  // namespace opponentsSensors
     namespace configuration {
         const int led  = 4;
@@ -137,7 +137,7 @@ namespace pins {
         const int center = 25;
         const int right  = 26;
 
-        const int sensors[] = {left, center, right};
+        const int sensors[] = {left, right};
     }  // namespace opponentsSensors
     namespace configuration {
         const int led  = 4;
