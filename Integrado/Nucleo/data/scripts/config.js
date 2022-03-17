@@ -147,8 +147,8 @@ connection.onmessage = function (response) {
 		pid_ki = json["configurations"]["pid"]["ki"];
 		pid_kd = json["configurations"]["pid"]["kd"];
 		arco_arcAgularSpeed = json["configurations"]["arc_angular_speed"];
-		arco_angle["configurations"]["arc_rot_initial_angle"];
-		arco_arcTimeout["configurations"]["arc_timeout"];
+		arco_angle = json["configurations"]["arc_rot_initial_angle"];
+		arco_arcTimeout = json["configurations"]["arc_timeout"];
 		updateParameters(start_time, pid_kp, pid_ki, pid_kd, arco_arcAgularSpeed, arco_angle, arco_arcTimeout);
 
 		let mode = json["configurations"]["mode"];
