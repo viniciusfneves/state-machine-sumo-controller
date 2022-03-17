@@ -42,6 +42,27 @@ window.onload = function () {
         } else {
             document.getElementById("D-regulator-value").style.background = Colors.std_ambar;
         }
+
+		// Verifica se há alterações não salvas no campo arcAgularSpeed do arco
+		if (document.getElementById("arcAgularSpeed-regulator-value").value == arco_arcAgularSpeed) {
+            document.getElementById("arcAgularSpeed-regulator-value").style.background = Colors.std_green;
+        } else {
+            document.getElementById("arcAgularSpeed-regulator-value").style.background = Colors.std_ambar;
+        }
+
+		// Verifica se há alterações não salvas no campo angle do arco
+		if (document.getElementById("angle-regulator-value").value == arco_angle) {
+            document.getElementById("angle-regulator-value").style.background = Colors.std_green;
+        } else {
+            document.getElementById("angle-regulator-value").style.background = Colors.std_ambar;
+        }
+
+		// Verifica se há alterações não salvas no campo arcTimeout do arco
+		if (document.getElementById("arcTimeout-regulator-value").value == arco_arcTimeout) {
+            document.getElementById("arcTimeout-regulator-value").style.background = Colors.std_green;
+        } else {
+            document.getElementById("arcTimeout-regulator-value").style.background = Colors.std_ambar;
+        }
 	}, 200);
 };
 
@@ -59,6 +80,9 @@ var start_time;
 var pid_kp;
 var pid_ki;
 var pid_kd;
+var arco_arcAgularSpeed;
+var arco_angle;
+var arco_arcTimeout;
 var buttonNameExceptions = {
 							"rc": "RC",
 							"bt ps4":"PS4",
@@ -68,11 +92,14 @@ var buttonNameExceptions = {
 						};
 
 // Atualiza as informações na tela sobre as configurações do robô de start_time e constantes do PID
-function updateParameters(start_time, pid_kp, pid_ki, pid_kd) {
+function updateParameters(start_time, pid_kp, pid_ki, pid_kd, arco_arcAgularSpeed, arco_angle, arco_arcTimeout) {
 	document.getElementById("start-time-value").value = start_time;
 	document.getElementById("P-regulator-value").value = pid_kp;
 	document.getElementById("I-regulator-value").value = pid_ki;
 	document.getElementById("D-regulator-value").value = pid_kd;
+	document.getElementById("arcAgularSpeed-regulator-value").value = arco_arcAgularSpeed;
+	document.getElementById("angle-regulator-value").value = arco_angle;
+	document.getElementById("arcTimeout-regulator-value").value = arco_arcTimeout;
 }
 
 function clearRobotState(){
@@ -119,7 +146,10 @@ connection.onmessage = function (response) {
 		pid_kp = json["configurations"]["pid"]["kp"];
 		pid_ki = json["configurations"]["pid"]["ki"];
 		pid_kd = json["configurations"]["pid"]["kd"];
-		updateParameters(start_time, pid_kp, pid_ki, pid_kd);
+		arco_arcAgularSpeed = json["configurations"]["arc_angular_speed"];
+		arco_angle["configurations"]["arc_rot_initial_angle"];
+		arco_arcTimeout["configurations"]["arc_timeout"];
+		updateParameters(start_time, pid_kp, pid_ki, pid_kd, arco_arcAgularSpeed, arco_angle, arco_arcTimeout);
 
 		let mode = json["configurations"]["mode"];
 		let initial = json["configurations"]["initial_move"];

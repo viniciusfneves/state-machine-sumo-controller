@@ -16,6 +16,10 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
+.arc-container {
+	display: inline-block;
+}
+
 .pid-text {
 	height: auto;
 	width: 14.5%;

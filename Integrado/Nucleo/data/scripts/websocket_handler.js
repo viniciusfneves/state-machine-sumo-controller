@@ -41,5 +41,8 @@ export function setParameters() {
     let parameter_pid_kp = document.getElementById("P-regulator-value").value;
     let parameter_pid_ki = document.getElementById("I-regulator-value").value;
     let parameter_pid_kd = document.getElementById("D-regulator-value").value;
-    connection.send('{"start_time":' + parameter_start_time + ',"pid":{"kp":' + parameter_pid_kp + ',"ki":' + parameter_pid_ki + ',"kd":' + parameter_pid_kd + '}}');
+    let parameter_arco_arcAgularSpeed = document.getElementById("arcAgularSpeed-regulator-value").value;
+    let parameter_arco_angle = document.getElementById("angle-regulator-value").value;
+    let parameter_arco_arcTimeout = document.getElementById("arcTimeout-regulator-value").value;
+    connection.send('{"start_time":' + parameter_start_time + ',"pid":{"kp":' + parameter_pid_kp + ',"ki":' + parameter_pid_ki + ',"kd":' + parameter_pid_kd + '},"arc_angular_speed":' + parameter_arco_arcAgularSpeed + ',"arc_rot_initial_angle":' + parameter_arco_angle + ',"arc_timeout":' + parameter_arco_arcTimeout + '}');
 }
