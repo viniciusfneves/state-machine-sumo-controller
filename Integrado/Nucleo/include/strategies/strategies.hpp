@@ -21,7 +21,9 @@ enum class InitialMove {
     none,
     full_frente,
     zig_zag,
-    arco
+    arco,
+    oleh,
+    desempate_C
 };
 
 // Estratégias de busca

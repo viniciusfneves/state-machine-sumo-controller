@@ -126,6 +126,12 @@ DynamicJsonDocument EncodeRobotConfiguration() {
         case InitialMove::arco:
             configs["configurations"]["initial_move"] = "arco";
             break;
+        case InitialMove::oleh:
+            configs["configurations"]["initial_move"] = "oleh";
+            break;
+        case InitialMove::desempate_C:
+            configs["configurations"]["initial_move"] = "desempate_C";
+            break;
     }
 
     // Estratégia de busca
