@@ -1,7 +1,7 @@
 import * as Colors from './colors.js'
 
 /*Abre a conexão com serviço WebSocket do ESP*/
-export var connection = new WebSocket("ws://" + location.hostname + ":81");
+export var connection = new WebSocket("ws://192.168.4.1:81");
 
 // Conexão estabelecida
 connection.onopen = function () {
