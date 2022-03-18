@@ -69,6 +69,11 @@ void stopMotors() {
         digitalWrite(pins::motors::leftIN2, LOW);
         digitalWrite(pins::motors::rightIN1, LOW);
         digitalWrite(pins::motors::rightIN2, LOW);
+
+        #ifdef ESP32_ENV
+            robotData.motorsPower[0] = 0;
+            robotData.motorsPower[1] = 0;
+        #endif
     #endif
 
     #ifdef BRUSHLESS
