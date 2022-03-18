@@ -19,7 +19,7 @@ void processWebSocketEvents() {
 /* --> ENVIAR SOMENTE JSON PARA ESSA FUNÇÃO <-- */
 // Responsável por pegar as mensagens do tipo JSON, decodificá-las e atuar corretamente no robô conforme as instruções
 void processJsonMessage(String message) {
-    StaticJsonDocument<128> jsonMessage;
+    StaticJsonDocument<256> jsonMessage;
     DeserializationError    JSONerror = deserializeJson(jsonMessage, message);
     if (JSONerror) {
         Serial.println("(Função processJsonMessage) -> JSON-> Ocorreu um erro ao deserializar a mensagem!");
