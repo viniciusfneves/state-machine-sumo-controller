@@ -3,8 +3,9 @@
 #include <communications/WiFi/websockets_server/websockets_server.hpp>
 #include <communications/data/robot_data_json_encoder.hpp>
 #include <configuration/set_configurations.hpp>
+#include <utilities/calculus/calculus.hpp>
 
-#define TELEMETRY_INTERVAL 32000
+#define TELEMETRY_INTERVAL 32000  // uS
 
 namespace commDataValues {
     unsigned long lastTelemetryTimestamp = 0UL;
