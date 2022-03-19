@@ -2,13 +2,13 @@
 #include <sml.hpp>
 #include <Arduino.h>
 
-#include <communications/PS4_controller/ps4_controller.hpp>
-#include <communications/WiFi/WiFi.hpp>
-#include <communications/WiFi/websockets_server/websockets_handlers.hpp>
 #include <event_handler/event_handler.hpp>
 #include <motors/drive_motors.hpp>
 #include <performance/performance.hpp>
 #include <sensors/sensors.hpp>
+#include <communications/PS4_controller/ps4_controller.hpp>
+#include <communications/WiFi/WiFi.hpp>
+#include <communications/WiFi/websockets_server/websockets_handlers.hpp>
 
 void setup() {
     // ---- AVISO PARA USO DO CONTROLE DE PS4 ---- //
