@@ -1,6 +1,8 @@
 #pragma once
 
 // Dependências gerais
+#include <ESP32Servo.h>
+
 #include <configuration/configurations.hpp>
 #include <configuration/specifications.hpp>
 #include <dynamic_data/robot_data.hpp>
@@ -13,12 +15,8 @@
 #include <pins/pins.hpp>
 #endif
 
-#ifdef ESP32_ENV
-#include <ESP32Servo.h>
-
 Servo leftMotor;
 Servo rightMotor;
-#endif
 
 // Função de controles dos pinos de ativação dos drivers para motores brushed
 void brushedDrive(int pwm, int in1, int in2) {
@@ -56,10 +54,8 @@ void driveMotors(int PWM_left, int PWM_right) {
     brushedDrive(PWM_right, pins::motors::rightIN1, pins::motors::rightIN2);
 #endif
 
-#ifdef ESP32_ENV
     robotData.motorsPower[0] = PWM_left;
     robotData.motorsPower[1] = PWM_right;
-#endif
 };
 
 // Para toda a locomoção do robô

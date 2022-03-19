@@ -2,25 +2,15 @@
 #include <sml.hpp>
 #include <Arduino.h>
 
+#include <communications/PS4_controller/ps4_controller.hpp>
+#include <communications/WiFi/WiFi.hpp>
+#include <communications/WiFi/websockets_server/websockets_handlers.hpp>
 #include <event_handler/event_handler.hpp>
 #include <motors/drive_motors.hpp>
 #include <performance/performance.hpp>
 #include <sensors/sensors.hpp>
 
-#ifdef ESP32_ENV
-#include <communications/PS4_controller/ps4_controller.hpp>
-#include <communications/WiFi/WiFi.hpp>
-#include <communications/WiFi/websockets_server/websockets_handlers.hpp>
-#endif
-
 void setup() {
-// Configurações do ambiente para Arduino
-#ifdef ARDUINO_ENV
-    Serial.begin(9600);
-#endif
-
-// Configurações do ambiente para ESP32
-#ifdef ESP32_ENV
     // ---- AVISO PARA USO DO CONTROLE DE PS4 ---- //
     // Ao tentar utilizar o ESP32 como AcessPoint Wi-Fi e BLE para se comunicar com o controle,
     // o AcessPoint é terminado e o robô para de responder
@@ -30,13 +20,12 @@ void setup() {
     // ------------------------------------------ // ------------------------------------------ //
     // Se quiser utilizar o ESP como AcessPoint, comente "initController()" e tudo funcionará, exceto o controle de PS4
 
-    // initAccessPoint();
+    initAccessPoint();
     // connectToWiFi("SSID", "PASSWORD");
 
-    initController();
+    // initController();
     initWebSocketsServer();
     performance.setStackSize(CONFIG_ARDUINO_LOOP_STACK_SIZE);
-#endif
 
     // Configuração de Sensores e módulos do robô
     initStartModule();
@@ -47,17 +36,13 @@ void setup() {
 
 void loop() {
     performance.startTimestamp = micros();
-#ifdef ESP32_ENV
-    processControllerEvents();
+
+    // processControllerEvents();
     processWebSocketEvents();
     pushTelemetry(micros());
-#endif
+
     readSensors();
     processMachineEvents();
 
-#ifdef ESP32_ENV
     performance.measure(micros(), uxTaskGetNumberOfTasks(), ESP.getFreeHeap(), uxTaskGetStackHighWaterMark(NULL));
-#else
-    performance.measure(micros());
-#endif
 }
