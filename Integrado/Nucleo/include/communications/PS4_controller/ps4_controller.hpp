@@ -81,6 +81,7 @@
 
 #include <configuration/set_configurations.hpp>
 #include <dynamic_data/controller_data.hpp>
+#include <event_handler/circular_buffer.hpp>
 #include <utilities/calculus/calculus.hpp>
 
 namespace ps4Timestamps {
