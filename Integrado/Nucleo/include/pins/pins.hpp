@@ -13,6 +13,8 @@ namespace pins {
         const int leftIN2  = 27;
         const int rightIN1 = 26;
         const int rightIN2 = 32;
+        const int left  = 25;
+        const int right = 26;
     }  // namespace motors
     namespace edgeSensors {
         const int left  = 35;

@@ -32,7 +32,7 @@ int opponentSensorWeight[NUMBER_OF_OPPONENT_SENSORS] = {-3, -1, 0, 1, 3};
 // Atualiza o array de leitura, se o oponente foi detectado ou não e o erro relacionado à detecção
 void readOpponentSensors() {
     for (int index = 0; index < NUMBER_OF_OPPONENT_SENSORS; index++) {
-        robotData.opponentSensorsDetectionArray[index] = digitalRead(pins::opponentsSensors::sensors[index]);
+        robotData.opponentSensorsDetectionArray[index] = !digitalRead(pins::opponentsSensors::sensors[index]);
     }
 
     robotData.opDetected = checkTrueOnArray(robotData.opponentSensorsDetectionArray, NUMBER_OF_OPPONENT_SENSORS);
