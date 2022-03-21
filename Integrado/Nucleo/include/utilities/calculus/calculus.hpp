@@ -1,18 +1,16 @@
 #pragma once
 
 // Cópia da função map(), porém com suporte à valores do tipo double
-double map_double(double x, double in_min, double in_max, double out_min, double out_max) {
+double map_double(double x, double in_min, double in_max, double out_min, double out_max) noexcept {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-// Verifica se um ou mais valores de um vetor é true ou 1
+// Verifica se um ou mais valores de um Map é true
 // (vetor de booleanos) vector -> Vetor à ser analisado
 // (int) length -> Tamanho dos vetores
-bool checkTrueOnArray(bool vector[], int length) {
-    for (int index = 0; index < length; index++) {
-        if (vector[index] == 0) {
-            ;
-        } else {
+bool checkDetection(const std::map<String, bool>& readings) {
+    for (auto element = readings.begin(); element != readings.end(); element++) {
+        if (element->second == true) {
             return true;
         }
     }
@@ -20,18 +18,16 @@ bool checkTrueOnArray(bool vector[], int length) {
 }
 
 // Calcula o erro atralado à leitura dos sensores de acordo com os pesos de cada sensor
-// OS VETORES DE LEITURA E DE PESO PRECISAM TER A MESMA DIMENSÃO
-// (vetor de booleanos) readingVector -> Vetor das leituras
-// (vetor de inteiros) weightVector -> Vetor dos pesos
-// (int) length -> Tamanho dos vetores
-double calculateError(bool readingVector[], int weightVector[], int length) {
-    double sum = 0.;
-    double readings = 0.;
-    for (int index = 0; index < length; index++) {
-        if (readingVector[index] == 1) {
-            sum += weightVector[index];
-            readings += 1;
+// map<String, bool> readings -> Map das leituras dos sensores
+// map<String, bool> weights -> Peso dado à leitura de cada sensor
+double calculateError(const std::map<String, bool>& readings, std::map<String, double>& weights) {
+    double sum              = 0.;
+    int    numberOfReadings = 0;
+    for (auto value = readings.begin(); value != readings.end(); value++) {
+        if (value->second == true) {
+            numberOfReadings++;
+            sum += weights[value->first];
         }
     }
-    return sum / readings;
+    return sum / (double)numberOfReadings;
 }

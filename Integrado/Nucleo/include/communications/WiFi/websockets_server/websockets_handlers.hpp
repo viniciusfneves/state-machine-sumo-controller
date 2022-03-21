@@ -91,6 +91,10 @@ void processJsonMessage(String message) {
         setMaxSpeed(jsonMessage["max_speed"]);
     }
 
+    if (jsonMessage.containsKey("invert_op_sensors")) {
+        setInvertOpSensorReading(jsonMessage["invert_op_sensors"]);
+    }
+
     // Processa pedido de alteração das constantes do pid
     if (jsonMessage.containsKey("pid")) {
         changePIDSettings(jsonMessage["pid"]["kp"], jsonMessage["pid"]["ki"], jsonMessage["pid"]["kd"]);

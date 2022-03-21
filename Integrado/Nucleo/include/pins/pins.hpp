@@ -2,99 +2,78 @@
 
 #include <Arduino.h>  //-Todo arquivo que importar pins, terá Arduino.h como dependencia automaticamente
 
+#include <map>
+
 namespace pins {
-    // Definição de pinos para os robôs sumo 3Kg
+    // ! 3KG //
 
-    // 3KG //
-
-#ifdef VAL
+#if defined(VAL) || (ATENA)
     namespace motors {
         const int leftIN1  = 25;
         const int leftIN2  = 27;
         const int rightIN1 = 26;
         const int rightIN2 = 32;
-        const int left  = 25;
-        const int right = 26;
+        const int left     = 25;
+        const int right    = 26;
     }  // namespace motors
     namespace edgeSensors {
-        const int left  = 35;
-        const int right = 34;
-
-        const int sensors[] = {left, right};
+        const std::map<String, int> sensors = {
+            {"frontLeft", 35},
+            {"frontRight", 34},
+            //{"rearLeft", 39},
+            //{"rearRight", 36},
+        };
     }  // namespace edgeSensors
     namespace opponentsSensors {
-        const int leftSide  = 5;
-        const int farLeft   = 12;
-        const int left      = 33;
-        const int center    = 14;
-        const int right     = 15;
-        const int farRight  = 18;
-        const int rightSide = 19;
-
-        const int sensors[] = {farLeft, left, center, right, farRight};
+        const std::map<String, int> sensors = {
+            //{"leftSide", 5},
+            {"farLeft", 12},
+            {"left", 33},
+            {"center", 14},
+            {"right", 15},
+            {"farRight", 18},
+            //{"rightSide", 19},
+        };
     }  // namespace opponentsSensors
     const int startModule = 23;
-#endif  // VAL
-
-#ifdef ATENA
-    namespace motors {
-        const int leftIN1  = 25;
-        const int leftIN2  = 25;
-        const int rightIN1 = 26;
-        const int rightIN2 = 26;
-    }  // namespace motors
-    namespace edgeSensors {
-        const int left  = 35;
-        const int right = 34;
-
-        const int sensors[] = {left, right};
-    }  // namespace edgeSensors
-    namespace opponentsSensors {
-        const int leftSide  = 5;
-        const int farLeft   = 12;
-        const int left      = 33;
-        const int center    = 14;
-        const int right     = 15;
-        const int farRight  = 18;
-        const int rightSide = 19;
-
-        const int sensors[] = {farLeft, left, center, right, farRight};
-    }  // namespace opponentsSensors
-    const int startModule = 23;
-#endif  // ATENA
+#endif  // VAL & ATENA
 
 #ifdef APOLO
     namespace motors {
-        const int left  = 25;
-        const int right = 26;
+        const int leftIN1  = 25;
+        const int leftIN2  = 27;
+        const int rightIN1 = 26;
+        const int rightIN2 = 32;
+        const int left     = 25;
+        const int right    = 26;
     }  // namespace motors
     namespace edgeSensors {
-        const int frontLeft  = 35;
-        const int rearLeft   = 39;
-        const int frontRight = 34;
-        const int rearRight  = 36;
-
-        const int sensors[] = {frontLeft, frontRight};
+        const std::map<String, int> sensors = {
+            {"frontLeft", 35},
+            {"frontRight", 34},
+            {"rearLeft", 39},
+            {"rearRight", 36},
+        };
     }  // namespace edgeSensors
     namespace opponentsSensors {
-        const int leftSide  = 5;
-        const int farLeft   = 12;
-        const int left      = 33;
-        const int center    = 14;
-        const int right     = 15;
-        const int farRight  = 18;
-        const int rightSide = 19;
-
-        const int sensors[] = {leftSide, farLeft, left, center, right, farRight, rightSide};
+        const std::map<String, int> sensors = {
+            {"leftSide", 5},
+            {"farLeft", 12},
+            {"left", 33},
+            {"center", 14},
+            {"right", 15},
+            {"farRight", 18},
+            {"rightSide", 19},
+        };
     }  // namespace opponentsSensors
     const int startModule = 23;
 #endif  // APOLO
 
     // Definição de pinos para os robôs sumo mini
 
-    // MINIS //
+    // ! MINIS //
 
-#ifdef ZE_PEQUENO
+#if defined(ZE_PEQUENO) || (ET_MINI)
     namespace motors {
         const int leftIN1  = 18;
         const int leftIN2  = 19;
@@ -102,44 +81,19 @@ namespace pins {
         const int rightIN2 = 15;
     }  // namespace motors
     namespace edgeSensors {
-        const int left  = 27;
-        const int right = 32;
+        const std::map<String, int> sensors = {
+            //{"frontLeft", 27},
+            //{"frontRight", 32},
+        };
 
-        const int sensors[] = {left, right};
     }  // namespace edgeSensors
     namespace opponentsSensors {
-        const int left   = 23;
-        const int center = 25;
-        const int right  = 26;
+        const std::map<String, int> sensors = {
+            {"left", 23},
+            {"center", 25},
+            {"right", 26},
+        };
 
-        const int sensors[] = {left, right};
-    }  // namespace opponentsSensors
-    namespace configuration {
-        const int led  = 4;
-        const int XHUT = 33;
-    }  // namespace configuration
-    const int startModule = 5;
-#endif
-
-#ifdef ET_MINI
-    namespace motors {
-        const int leftIN1  = 18;
-        const int leftIN2  = 19;
-        const int rightIN1 = 14;
-        const int rightIN2 = 15;
-    }  // namespace motors
-    namespace edgeSensors {
-        const int left  = 27;
-        const int right = 32;
-
-        const int sensors[] = {left, right};
-    }  // namespace edgeSensors
-    namespace opponentsSensors {
-        const int left   = 23;
-        const int center = 25;
-        const int right  = 26;
-
-        const int sensors[] = {left, right};
     }  // namespace opponentsSensors
     namespace configuration {
         const int led  = 4;

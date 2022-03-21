@@ -39,7 +39,7 @@ button {
 	font-size: 18px;
 }
 
-#event_start {
+#event-start {
 	display: inline-block;
 	max-width: 250px;
 	padding: 12px;
@@ -48,7 +48,7 @@ button {
 	background-color: #00770c;
 }
 
-#config_button {
+#config-button {
 	display: inline-block;
 	max-width: 250px;
 	padding: 12px;
@@ -57,13 +57,13 @@ button {
 	background-color: rgb(8, 69, 182);
 }
 
-#event_disengage {
+#event-disengage {
 	width: 85%;
 	min-width: 250px;
 	max-width: 1000px;
 	height: 100px;
 	background-color: #a80000;
-    margin-bottom: 42px;
+	margin-bottom: 42px;
 }
 
 #connection-status-text {
@@ -81,12 +81,12 @@ button {
 	border-radius: 50%;
 }
 
-.status-text{
+.status-text {
 	font-size: medium;
 	width: 96px;
 }
 
-#strategys-indicator-container{
+#strategys-indicator-container {
 	display: flex;
 	margin: auto;
 	width: 50%;
@@ -95,7 +95,7 @@ button {
 	justify-content: space-between;
 }
 
-.status-circle{
+.status-circle {
 	background: #868686;
 	margin: auto;
 	width: 3vw;
@@ -118,8 +118,7 @@ button {
 	max-height: 300px;
 	min-width: 200px;
 	min-height: 200px;
-	box-shadow: inset 6px 1px 12px rgb(128, 128, 128),
-		6px 2px 1em rgb(112, 112, 112);
+	box-shadow: inset 6px 1px 12px rgb(128, 128, 128), 6px 2px 1em rgb(112, 112, 112);
 }
 
 .op-sensor {
@@ -132,48 +131,48 @@ button {
 	height: 16px;
 }
 
-#left-side-op {
+#leftSideOp {
 	top: 32%;
 	left: 0;
 	transform: rotate(90deg);
 	background: black;
 }
 
-#far-left-op {
+#farLeftOp {
 	top: 14%;
 	left: 5%;
 	transform: rotate(-25deg);
 	background: black;
 }
 
-#left-op {
+#leftOp {
 	top: 6.8%;
 	left: 23%;
 	transform: rotate(-15deg);
 	background: black;
 }
 
-#center-op {
+#centerOp {
 	top: 4%;
 	left: 43%;
 	background: black;
 }
 
-#right-op {
+#rightOp {
 	top: 6.8%;
 	right: 23%;
 	transform: rotate(15deg);
 	background: black;
 }
 
-#far-right-op {
+#farRightOp {
 	top: 14%;
 	right: 5%;
 	transform: rotate(25deg);
 	background: black;
 }
 
-#right-side-op {
+#rightSideOp {
 	top: 32%;
 	right: 0;
 	transform: rotate(90deg);
@@ -192,25 +191,25 @@ button {
 	min-height: 13px;
 }
 
-#front-left-edge {
+#frontLeftEdge {
 	background: white;
 	top: 5%;
 	left: 5%;
 }
 
-#front-right-edge {
+#frontRightEdge {
 	background: white;
 	top: 5%;
 	right: 5%;
 }
 
-#rear-left-edge {
+#rearLeftEdge {
 	background: white;
 	bottom: 5%;
 	left: 5%;
 }
 
-#rear-right-edge {
+#rearRightEdge {
 	background: white;
 	bottom: 5%;
 	right: 5%;
@@ -229,24 +228,24 @@ button {
 	box-shadow: inset 0 0 4px rgb(27, 27, 27);
 }
 
-#right-motor {
+#rightMotor {
 	top: 55%;
 	right: 4%;
 }
 
-#left-motor {
+#leftMotor {
 	top: 55%;
 	left: 4%;
 }
 
-#right-motor-power {
+#rightMotorPower {
 	position: absolute;
 	font-size: xx-large;
 	top: 47.5%;
 	right: -30%;
 }
 
-#left-motor-power {
+#leftMotorPower {
 	position: absolute;
 	font-size: xx-large;
 	top: 47.5%;

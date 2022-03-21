@@ -79,6 +79,11 @@ void setRotateRobotSpeedBias(double bias) {
     broadcastRobotConfiguration();
 }
 
+void setInvertOpSensorReading(bool value) {
+    robotConfiguration.invertOpReading = value;
+    broadcastRobotConfiguration();
+}
+
 // Altera os parâmetros para cálculo do controle PID
 void changePIDSettings(double set_kp, double set_ki, double set_kd) {
     robotConfiguration.Kp = set_kp;

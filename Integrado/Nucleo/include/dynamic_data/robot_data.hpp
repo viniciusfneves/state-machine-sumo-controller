@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 
 #include "../configuration/specifications.hpp"
 
@@ -14,26 +15,17 @@ enum class RobotState {
 };
 
 struct RobotData {
-    // --------------------------> IMPORTANTE <-------------------------- //
-    // NÃO UTILIZAR ARRAYS DE TAMANHO DINÂMICO!!!
-    // - PROBLEMAS AO COMPILAR PARA O AMBIENTE DO ARDUINO UNO
-    // - PROBLEMAS NA TELEMETRIA NO AMBIENTE DOS 3KG
-    // - PROBLEMAS AO COMPILAR DENTRO DO WEBOTS
-    // RESUMINDO: NÃO FUNCIONA EM 2 DOS 3 AMBIENTES PRINCIPAIS E FUNCIONA CAPEGANDA NO OUTRO
-    // NÃO USE!!!!
-    // Tentar utilizar vetores ao invés disso -> Implementação futura
-
     // Guarda o estado atual do robô -> Inicializado com stopped
     RobotState robotState = RobotState::stopped;
 
     // SENSOR DE OPONENTES
-    bool   opponentSensorsDetectionArray[NUMBER_OF_OPPONENT_SENSORS];
-    bool   opDetected;
-    double opError;
+    std::map<String, bool> opponentSensorsDetectionArray;
+    double                 opError;
+    bool                   opDetected;
 
     // SENSOR DE BORDA
-    bool edgeSensorsDetectionArray[NUMBER_OF_EDGE_SENSORS];
-    bool edgeDetected;
+    std::map<String, bool> edgeSensorsDetectionArray;
+    bool                   edgeDetected;
 
     // POTÊNCIA DOS MOTORES
     int motorsPower[2];

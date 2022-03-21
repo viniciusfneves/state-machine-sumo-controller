@@ -25,10 +25,6 @@ DynamicJsonDocument encodeRobotInfos() {
     // Nome do robô
     infos["info"]["robot_name"] = robotSpecifications.robotName;
 
-    // Quantidade de sensores
-    infos["info"]["available_opponent_sensors"] = NUMBER_OF_OPPONENT_SENSORS;
-    infos["info"]["available_edge_sensors"]     = NUMBER_OF_EDGE_SENSORS;
-
     // Estratégias disponíveis no robô
     for (int index = 0; index < modesAvailable.size(); index++) {
         infos["info"]["available_modes"][index] = modesAvailable[index];
@@ -181,13 +177,13 @@ DynamicJsonDocument encodeTelemetryData() {
     }
 
     // Sensores de oponente
-    for (int i = 0; i < NUMBER_OF_OPPONENT_SENSORS; i++) {
-        readings["readings"]["opponent"][i] = robotData.opponentSensorsDetectionArray[i];
+    for (auto reading = robotData.opponentSensorsDetectionArray.begin(); reading != robotData.opponentSensorsDetectionArray.end(); reading++) {
+        readings["readings"]["opponent"][reading->first] = reading->second;
     }
 
     // Sensores de borda
-    for (int i = 0; i < NUMBER_OF_EDGE_SENSORS; i++) {
-        readings["readings"]["edge"][i] = robotData.edgeSensorsDetectionArray[i];
+    for (auto reading = robotData.edgeSensorsDetectionArray.begin(); reading != robotData.edgeSensorsDetectionArray.end(); reading++) {
+        readings["readings"]["edge"][reading->first] = reading->second;
     }
 
     readings["readings"]["motor"][0] = robotData.motorsPower[0];
