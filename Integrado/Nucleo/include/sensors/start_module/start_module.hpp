@@ -4,14 +4,11 @@
 #include <pins/pins.hpp>
 
 namespace startModule {
-bool lastState = false;
-bool currentState = false;
+    bool lastState    = false;
+    bool currentState = false;
 }  // namespace startModule
 
-void initStartModule() {
-    pinMode(pins::startModule, INPUT);
-}
-
+// Realiza a leitura do módulo start e emissão de eventos relacionados ao sensor
 void readStartModule() {
     startModule::currentState = digitalRead(pins::startModule);
     if (startModule::lastState != startModule::currentState) {
@@ -21,4 +18,9 @@ void readStartModule() {
             addEventToQueue(Event::Disengage);
     }
     startModule::lastState = startModule::currentState;
+}
+
+// Realiza as configurações necessárias para o funcionamento do módulo start
+void initStartModule() {
+    pinMode(pins::startModule, INPUT);
 }

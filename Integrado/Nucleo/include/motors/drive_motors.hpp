@@ -36,26 +36,26 @@ void brushedDrive(int pwm, int in1, int in2) {
 }
 
 // Movimenta os motores com os PWM definidos como parâmetro de entrada
-// int PWM_left -> PWM que será enviado ao motor esquerdo
-// int PWM_right -> PWM que será enviado ao motor direito
-void driveMotors(int PWM_left, int PWM_right) {
-    PWM_left  = constrain(PWM_left, -255, 255);
-    PWM_right = constrain(PWM_right, -255, 255);
+// int leftPWM -> PWM que será enviado ao motor esquerdo
+// int rightPWM -> PWM que será enviado ao motor direito
+void driveMotors(int leftPWM, int rightPWM) {
+    leftPWM  = constrain(leftPWM, -255, 255);
+    rightPWM = constrain(rightPWM, -255, 255);
 
 #ifdef BRUSHLESS
-    PWM_left  = map(PWM_left, -255, 255, 0, 180);
-    PWM_right = map(PWM_right, -255, 255, 0, 180);
-    leftMotor.write(PWM_left);
-    rightMotor.write(PWM_right);
+    int leftESC  = map(leftPWM, -255, 255, 0, 180);
+    int rightESC = map(rightPWM, -255, 255, 0, 180);
+    leftMotor.write(leftESC);
+    rightMotor.write(rightESC);
 #endif
 
 #ifdef BRUSHED
-    brushedDrive(PWM_left, pins::motors::leftIN1, pins::motors::leftIN2);
-    brushedDrive(PWM_right, pins::motors::rightIN1, pins::motors::rightIN2);
+    brushedDrive(leftPWM, pins::motors::leftIN1, pins::motors::leftIN2);
+    brushedDrive(rightPWM, pins::motors::rightIN1, pins::motors::rightIN2);
 #endif
 
-    robotData.motorsPower[0] = PWM_left;
-    robotData.motorsPower[1] = PWM_right;
+    robotData.motorsPower[0] = leftPWM;
+    robotData.motorsPower[1] = rightPWM;
 };
 
 // Para toda a locomoção do robô
@@ -91,23 +91,23 @@ void driveRobot(double linearSpeed, double angularSpeed) {
     angularSpeed = constrain(angularSpeed, -1, 1) * robotSpecifications.maxAngularSpeed;
 
     // Transforma os parâmetros de velocidade linear e angular em sinal PWM para os motores
-    int PWM_left  = ((2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
-    int PWM_right = ((2 * linearSpeed - angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
+    int leftPWM  = ((2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
+    int rightPWM = ((2 * linearSpeed - angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;
 
     // Assegura que a velocidade angular vai ser exercida como pedido, podendo alterar a velocidade linear para isso
-    double maxSpeed = (PWM_left > PWM_right) ? PWM_left : PWM_right;
-    double minSpeed = (PWM_left < PWM_right) ? PWM_left : PWM_right;
+    double maxSpeed = (leftPWM > rightPWM) ? leftPWM : rightPWM;
+    double minSpeed = (leftPWM < rightPWM) ? leftPWM : rightPWM;
 
     if (maxSpeed > robotConfiguration.maxSpeed) {
-        PWM_left -= maxSpeed - robotConfiguration.maxSpeed;
-        PWM_right -= maxSpeed - robotConfiguration.maxSpeed;
+        leftPWM -= maxSpeed - robotConfiguration.maxSpeed;
+        rightPWM -= maxSpeed - robotConfiguration.maxSpeed;
     } else if (minSpeed < -robotConfiguration.maxSpeed) {
-        PWM_left -= minSpeed + robotConfiguration.maxSpeed;
-        PWM_right -= minSpeed + robotConfiguration.maxSpeed;
+        leftPWM -= minSpeed + robotConfiguration.maxSpeed;
+        rightPWM -= minSpeed + robotConfiguration.maxSpeed;
     }
 
     // Comanda os motores à rodar com as potências calculadas
-    driveMotors(PWM_left, PWM_right);
+    driveMotors(leftPWM, rightPWM);
 };
 
 // Movimenta o robô em torno do próprio eixo rotacionando-o em 'degrees' graus, recebidos como parâmetro
@@ -119,15 +119,15 @@ void rotateRobot(int degrees) {
     // Limita os parâmetros de entrada aos permitidos pela função
     degrees = constrain(degrees, -359, 359);
 
-    int PWM_left  = robotConfiguration.maxSpeed;
-    int PWM_right = robotConfiguration.maxSpeed;
+    int leftPWM  = robotConfiguration.maxSpeed;
+    int rightPWM = robotConfiguration.maxSpeed;
 
     if (degrees > 0) {
-        PWM_right *= -1;
+        rightPWM *= -1;
     } else {
-        PWM_left *= -1;
+        leftPWM *= -1;
     }
     // O tempo até completar a rotação ainda precisa ser verificado com testes e modelado para uma função
     setTimeout(abs(degrees * robotConfiguration.angleBias) / (robotConfiguration.maxSpeed * robotConfiguration.speedBias));
-    driveMotors(PWM_left, PWM_right);
+    driveMotors(leftPWM, rightPWM);
 };
