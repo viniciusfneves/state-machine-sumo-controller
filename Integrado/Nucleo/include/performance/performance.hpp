@@ -20,10 +20,6 @@ struct PerformanceGauges {
         stackWaterMark = stackWM;
         BstackMaxUsage = stackSize - stackWaterMark;
     }
-
-    void measure(int64_t actualTimestamp) {
-        timeToExecute = actualTimestamp - startTimestamp;
-    }
 };
 
 PerformanceGauges performance;
