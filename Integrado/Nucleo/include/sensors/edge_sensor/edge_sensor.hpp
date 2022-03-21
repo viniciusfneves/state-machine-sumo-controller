@@ -15,13 +15,13 @@
 void readEdgeSensors() {
     for (auto sensor = pins::edgeSensors::sensors.begin(); sensor != pins::edgeSensors::sensors.end(); sensor++) {
         if (analogRead(sensor->second) < robotConfiguration.edgeDetectionThreshold) {
-            robotData.edgeSensorsDetectionArray[sensor->first] = true;
+            updateEdgeSensors(sensor->first, true);
         } else {
-            robotData.edgeSensorsDetectionArray[sensor->first] = false;
+            updateEdgeSensors(sensor->first, false);
         }
     }
 
-    robotData.edgeDetected = checkDetection(robotData.edgeSensorsDetectionArray);
+    updateEdgeDetection(checkDetection(robotData.edgeSensorsDetectionArray));
 };
 
 // Realiza as configurações necessárias para o sensoriamento de borda do robô

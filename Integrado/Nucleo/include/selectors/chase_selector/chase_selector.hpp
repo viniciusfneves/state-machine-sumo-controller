@@ -10,7 +10,7 @@ struct ChaseSelector {
     auto operator()() const {
         using namespace sml;
         // Funções
-        auto entry = [] { changeRobotState(RobotState::exec_chase); };
+        auto entry = [] { updateRobotState(RobotState::exec_chase); };
 
         // Guards
         auto standard = [] { return robotConfiguration.chase == Chase::standard; };

@@ -24,9 +24,9 @@ struct Machine
         auto mode_rc   = []{ return robotConfiguration.mode == Mode::RC; };
 
         // Funções
-        auto armRobot        = [] { changeRobotState(RobotState::ready); };
-        auto setStartClock   = [] { setTimeout(robotConfiguration.startTime); changeRobotState(RobotState::starting); };
-        auto disengageRobot  = [] { stopMotors(); changeRobotState(RobotState::stopped); };
+        auto armRobot        = [] { updateRobotState(RobotState::ready); };
+        auto setStartClock   = [] { setTimeout(robotConfiguration.startTime); updateRobotState(RobotState::starting); };
+        auto disengageRobot  = [] { stopMotors(); updateRobotState(RobotState::stopped); };
 
         return make_transition_table(
             *"entry"_s                                                        =  "disengaged"_s,

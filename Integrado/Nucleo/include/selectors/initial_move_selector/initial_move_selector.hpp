@@ -14,7 +14,7 @@ struct InitialMoveSelector {
     auto operator()() const {
         using namespace sml;
         // Funções
-        auto entry = [] { changeRobotState(RobotState::exec_initial); };
+        auto entry = [] { updateRobotState(RobotState::exec_initial); };
 
         // Guards
         auto none        = [] { return robotConfiguration.initialMove == InitialMove::none; };

@@ -47,7 +47,7 @@ class FightMachine
             using namespace sml;
 
             // Funções
-            auto entry          = [] { changeRobotState(RobotState::exec_controller); };
+            auto entry          = [] { updateRobotState(RobotState::exec_controller); };
             auto executeCommand = [] { driveRobot(controllerData.controllerInputs[Input::linearSpeed], controllerData.controllerInputs[Input::angularSpeed]); };
 
             return make_transition_table(

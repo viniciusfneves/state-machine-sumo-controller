@@ -55,6 +55,8 @@ DynamicJsonDocument encodeRobotInfos() {
 DynamicJsonDocument EncodeRobotConfiguration() {
     StaticJsonDocument<512> configs;
 
+    xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
+
     // Parâmetros configuráveis para o modo Auto
     configs["configurations"]["start_time"]            = robotConfiguration.startTime;
     configs["configurations"]["max_speed"]             = robotConfiguration.maxSpeed;
@@ -68,35 +70,6 @@ DynamicJsonDocument EncodeRobotConfiguration() {
     configs["configurations"]["pid"]["kp"]             = robotConfiguration.Kp;
     configs["configurations"]["pid"]["ki"]             = robotConfiguration.Ki;
     configs["configurations"]["pid"]["kd"]             = robotConfiguration.Kd;
-
-    // Parâmetros configuráveis para o modo RC
-    configs["configurations"]["controller"]["commander"] = controllerData.commander == Commander::bt_ps4 ? "bt_ps4" : "radio";
-    switch (controllerData.mapSettings) {
-        case CommandMap::rc_standard:
-            configs["configurations"]["controller"]["mapping"] = "rc_standard";
-            break;
-
-        case CommandMap::rc_inverted:
-            configs["configurations"]["controller"]["mapping"] = "rc_inverted";
-            break;
-
-        case CommandMap::game_standard:
-            configs["configurations"]["controller"]["mapping"] = "game_standard";
-            break;
-    }
-    switch (controllerData.filterSettings) {
-        case CommandFilter::linear:
-            configs["configurations"]["controller"]["filter"] = "linear";
-            break;
-
-        case CommandFilter::quadratic:
-            configs["configurations"]["controller"]["filter"] = "quadratic";
-            break;
-
-        case CommandFilter::cubic:
-            configs["configurations"]["controller"]["filter"] = "cubic";
-            break;
-    }
 
     // Modo de operação
     switch (robotConfiguration.mode) {
@@ -144,12 +117,47 @@ DynamicJsonDocument EncodeRobotConfiguration() {
             break;
     }
 
+    xSemaphoreGive(xConfigSemaphore);
+    xSemaphoreTake(xCtrlDataSemaphore, portMAX_DELAY);
+
+    // Parâmetros configuráveis para o modo RC
+    configs["configurations"]["controller"]["commander"] = controllerData.commander == Commander::bt_ps4 ? "bt_ps4" : "radio";
+    switch (controllerData.mapSettings) {
+        case CommandMap::rc_standard:
+            configs["configurations"]["controller"]["mapping"] = "rc_standard";
+            break;
+
+        case CommandMap::rc_inverted:
+            configs["configurations"]["controller"]["mapping"] = "rc_inverted";
+            break;
+
+        case CommandMap::game_standard:
+            configs["configurations"]["controller"]["mapping"] = "game_standard";
+            break;
+    }
+    switch (controllerData.filterSettings) {
+        case CommandFilter::linear:
+            configs["configurations"]["controller"]["filter"] = "linear";
+            break;
+
+        case CommandFilter::quadratic:
+            configs["configurations"]["controller"]["filter"] = "quadratic";
+            break;
+
+        case CommandFilter::cubic:
+            configs["configurations"]["controller"]["filter"] = "cubic";
+            break;
+    }
+    xSemaphoreGive(xCtrlDataSemaphore);
+
     return configs;
 }
 
 // Envia as leituras dos sensores de borda, dos sensores de oponente e da potência dos motores -> TELEMETRIA
 DynamicJsonDocument encodeTelemetryData() {
     StaticJsonDocument<512> readings;
+
+    xSemaphoreTake(xRobotDataSemaphore, portMAX_DELAY);
 
     // Estado de execução
     switch (robotData.robotState) {
@@ -189,6 +197,9 @@ DynamicJsonDocument encodeTelemetryData() {
     readings["readings"]["motor"][0] = robotData.motorsPower[0];
     readings["readings"]["motor"][1] = robotData.motorsPower[1];
 
+    xSemaphoreGive(xRobotDataSemaphore);
+    xSemaphoreTake(xCtrlDataSemaphore, portMAX_DELAY);
+
     if (controllerData.isControllerConnected()) {
         readings["controller"]["connection_status"] = "connected";
         readings["controller"]["charging_status"]   = controllerData.isCharging ? "true" : "false";
@@ -202,6 +213,8 @@ DynamicJsonDocument encodeTelemetryData() {
     readings["performance"]["n_tasks"]         = performance.numberOfTaks;
     readings["performance"]["memory_usage"]    = performance.freeMemory;
     readings["performance"]["stack_max_usage"] = performance.BstackMaxUsage;
+
+    xSemaphoreGive(xCtrlDataSemaphore);
 
     return readings;
 }

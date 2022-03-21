@@ -61,3 +61,5 @@ struct Configurations {
 
 // Objeto global de configurações do robô
 Configurations robotConfiguration;
+
+SemaphoreHandle_t xConfigSemaphore = xSemaphoreCreateMutex();

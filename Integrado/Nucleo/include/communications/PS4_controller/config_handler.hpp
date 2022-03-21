@@ -5,6 +5,10 @@
 #define MAX_BREATH_BRIGHTNESS 200
 #define BREATH_COLOR_DECAY 20
 
+#include <configuration/configurations.hpp>
+#include <dynamic_data/controller_data.hpp>
+#include <dynamic_data/robot_data.hpp>
+
 namespace ps4LightCtrl {
     int16_t r_buf, g_buf, b_buf;
     int16_t r_var, g_var, b_var;
@@ -150,4 +154,72 @@ void configController(const LightMode& mode, const Vibration vibro = Vibration::
     }
     PS4.setLed(ps4LightCtrl::r, ps4LightCtrl::g, ps4LightCtrl::b);
     PS4.sendToController();
+}
+
+void updateLights() {
+    if (controllerData.isCharging && robotData.robotState == RobotState::stopped) {
+        SET_BREATHING_COLOR(255, 0, 0);
+        configController(LightMode::breathing);
+        return;
+    }
+
+    // ! Controla as configurações de luzes do modo autônomo
+    if (robotConfiguration.mode == Mode::Auto) {
+        switch (robotData.robotState) {
+            case RobotState::ready:
+                SET_UNIQUE_COLOR(0, 0, 255);
+                configController(LightMode::slow_flashing);
+                break;
+
+            case RobotState::starting:
+                SET_DUAL_COLORS(0, 255, 0, 255, 0, 0);
+                configController(LightMode::flashing_dual_colors);
+                break;
+
+            case RobotState::stopped:
+                SET_UNIQUE_COLOR(255, 0, 0);
+                configController(LightMode::l_static);
+                break;
+
+            case RobotState::exec_controller:
+                SET_DUAL_COLORS(255, 0, 0, 255, 255, 0);
+                configController(LightMode::flashing_dual_colors, Vibration::weak);
+                break;
+
+            default:
+                SET_UNIQUE_COLOR(0, 255, 0);
+                configController(LightMode::l_static);
+                break;
+        }
+    }
+
+    // ! Controla as configurações de luzes do modo RC
+    if (robotConfiguration.mode == Mode::RC) {
+        switch (robotData.robotState) {
+            case RobotState::ready:
+                SET_UNIQUE_COLOR(200, 200, 0);
+                configController(LightMode::slow_flashing);
+                break;
+
+            case RobotState::starting:
+                SET_DUAL_COLORS(0, 0, 255, 255, 0, 0);
+                configController(LightMode::flashing_dual_colors);
+                break;
+
+            case RobotState::stopped:
+                SET_UNIQUE_COLOR(255, 0, 0);
+                configController(LightMode::l_static);
+                break;
+
+            case RobotState::exec_controller:
+                SET_UNIQUE_COLOR(0, 0, 255);
+                configController(LightMode::l_static);
+                break;
+
+            default:
+                SET_DUAL_COLORS(255, 0, 0, 255, 255, 0);
+                configController(LightMode::flashing_dual_colors, Vibration::weak);
+                break;
+        }
+    }
 }

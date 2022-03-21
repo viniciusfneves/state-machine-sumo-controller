@@ -13,20 +13,8 @@
 #include <event_handler/circular_buffer.hpp>
 #include <utilities/calculus/calculus.hpp>
 
-void initController() {
-    PS4.begin(CONTROLLER_MAC_ADDRESS);
-    PS4.attachOnConnect([] {
-        controllerData.controllerStatus = ControllerStatus::connected;
-    });
-    PS4.attachOnDisconnect([] {
-        controllerData.controllerStatus = ControllerStatus::disconnected;
-    });
-}
-
 // Lê os comandos do controle e atua na máquina(robô) conforme necessário
 void readControllerInputs() {
-    controllerData.isCharging = PS4.Charging();
-    controllerData.battery    = PS4.Battery();
     if (PS4.PSButton()) {
         if (robotData.robotState == RobotState::stopped)
             addEventToQueue(Event::Arm);
@@ -49,6 +37,11 @@ void readControllerInputs() {
         if (robotData.robotState == RobotState::ready)
             addEventToQueue(Event::Start);
     }
+
+    xSemaphoreTake(xCtrlDataSemaphore, portMAX_DELAY);
+    controllerData.isCharging = PS4.Charging();
+    controllerData.battery    = PS4.Battery();
+    xSemaphoreGive(xCtrlDataSemaphore);
 
     // Lê os comandos responsáveis pela movimentação do robô
     // Aqui também deverá ser feita a mixagem dos inputs antes de serem transformados em linear e angular
@@ -97,6 +90,8 @@ void readControllerInputs() {
             _linear  = 0;
     }
 
+    xSemaphoreTake(xCtrlDataSemaphore, portMAX_DELAY);
+
     switch (controllerData.filterSettings) {
         case CommandFilter::linear:
             controllerData.controllerInputs[Input::linearSpeed]  = _linear;
@@ -124,88 +119,35 @@ void readControllerInputs() {
             controllerData.controllerInputs[Input::angularSpeed] = _angular;
             break;
     }
-
+    xSemaphoreGive(xCtrlDataSemaphore);
     if (robotConfiguration.mode == Mode::RC) {
         addEventToQueue(Event::Controller);
     }
 }
 
-void processControllerEvents() {
-    // Verifica se o controle está conectado antes de prosseguir com a função
-    if (!controllerData.isControllerConnected())
-        return;
-
-    readControllerInputs();
-
-    //-- Configura as luzes do controle conforme a situação do robô - State Machine --//
-
-    if (micros() - ps4Timestamps::lastControllerUpdateTimestamp < CTRL_UPDATE_INTERVAL)
-        return;
-    ps4Timestamps::lastControllerUpdateTimestamp = micros();
-
-    if (controllerData.isCharging && robotData.robotState == RobotState::stopped) {
-        SET_BREATHING_COLOR(255, 0, 0);
-        configController(LightMode::breathing);
-        return;
-    }
-
-    // ! Controla as configurações de luzes do modo autônomo
-    if (robotConfiguration.mode == Mode::Auto) {
-        switch (robotData.robotState) {
-            case RobotState::ready:
-                SET_UNIQUE_COLOR(0, 0, 255);
-                configController(LightMode::slow_flashing);
-                break;
-
-            case RobotState::starting:
-                SET_DUAL_COLORS(0, 255, 0, 255, 0, 0);
-                configController(LightMode::flashing_dual_colors);
-                break;
-
-            case RobotState::stopped:
-                SET_UNIQUE_COLOR(255, 0, 0);
-                configController(LightMode::l_static);
-                break;
-
-            case RobotState::exec_controller:
-                SET_DUAL_COLORS(255, 0, 0, 255, 255, 0);
-                configController(LightMode::flashing_dual_colors, Vibration::weak);
-                break;
-
-            default:
-                SET_UNIQUE_COLOR(0, 255, 0);
-                configController(LightMode::l_static);
-                break;
+void processControllerEvents(void* _) {
+    for (;;) {  // Verifica se o controle está conectado antes de prosseguir com a função
+        while (!controllerData.isControllerConnected()) {
+            vTaskDelay(200 / portTICK_PERIOD_MS);
         }
+
+        readControllerInputs();
+
+        //-- Configura as luzes do controle conforme a situação do robô - State Machine --//
+        updateLights();
+
+        vTaskDelay(32 / portTICK_PERIOD_MS);
     }
+}
 
-    // ! Controla as configurações de luzes do modo RC
-    if (robotConfiguration.mode == Mode::RC) {
-        switch (robotData.robotState) {
-            case RobotState::ready:
-                SET_UNIQUE_COLOR(200, 200, 0);
-                configController(LightMode::slow_flashing);
-                break;
+void initController() {
+    PS4.begin(CONTROLLER_MAC_ADDRESS);
+    PS4.attachOnConnect([] {
+        controllerData.controllerStatus = ControllerStatus::connected;
+    });
+    PS4.attachOnDisconnect([] {
+        controllerData.controllerStatus = ControllerStatus::disconnected;
+    });
 
-            case RobotState::starting:
-                SET_DUAL_COLORS(0, 0, 255, 255, 0, 0);
-                configController(LightMode::flashing_dual_colors);
-                break;
-
-            case RobotState::stopped:
-                SET_UNIQUE_COLOR(255, 0, 0);
-                configController(LightMode::l_static);
-                break;
-
-            case RobotState::exec_controller:
-                SET_UNIQUE_COLOR(0, 0, 255);
-                configController(LightMode::l_static);
-                break;
-
-            default:
-                SET_DUAL_COLORS(255, 0, 0, 255, 255, 0);
-                configController(LightMode::flashing_dual_colors, Vibration::weak);
-                break;
-        }
-    }
+    xTaskCreate(processControllerEvents, "PS4CTRL", 1024 * 3, NULL, 1, NULL);
 }

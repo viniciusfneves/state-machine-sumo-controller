@@ -16,16 +16,16 @@ void readOpponentSensors() {
     for (auto sensor = pins::opponentsSensors::sensors.begin(); sensor != pins::opponentsSensors::sensors.end(); sensor++) {
         int reading = digitalRead(sensor->second);
         if (robotConfiguration.invertOpReading) {
-            robotData.opponentSensorsDetectionArray[sensor->first] = !reading;
+            updateOpSensors(sensor->first, !reading);
         } else {
-            robotData.opponentSensorsDetectionArray[sensor->first] = reading;
+            updateOpSensors(sensor->first, reading);
         }
     }
 
-    robotData.opDetected = checkDetection(robotData.opponentSensorsDetectionArray);
+    updateOpDetection(checkDetection(robotData.opponentSensorsDetectionArray));
 
     if (isOpponentDetected()) {
-        robotData.opError = calculateError(robotData.opponentSensorsDetectionArray, robotConfiguration.opponentSensorWeight);
+        updateOpError(calculateError(robotData.opponentSensorsDetectionArray, robotConfiguration.opponentSensorWeight));
     }
 }
 

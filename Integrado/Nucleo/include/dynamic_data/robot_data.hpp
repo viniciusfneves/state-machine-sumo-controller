@@ -34,6 +34,8 @@ struct RobotData {
 // Objeto dos dados dinâmicas do robô
 RobotData robotData;
 
+SemaphoreHandle_t xRobotDataSemaphore = xSemaphoreCreateMutex();
+
 /*   ##-----> Funções de retorno dos dados <-----##   */
 
 // Retorna true se um oponente foi ou não detectado por um dos sensores
@@ -46,4 +48,38 @@ double getErrorFromOPSensors() { return robotData.opError; }
 bool isEdgeDetected() { return robotData.edgeDetected; }
 
 // Muda na memória do robô o seu estado de execução atual
-void changeRobotState(RobotState state) { robotData.robotState = state; }
+void updateRobotState(RobotState state) {
+    xSemaphoreTake(xRobotDataSemaphore, portMAX_DELAY);
+    robotData.robotState = state;
+    xSemaphoreGive(xRobotDataSemaphore);
+}
+
+void updateEdgeSensors(String sensor, bool value) {
+    xSemaphoreTake(xRobotDataSemaphore, portMAX_DELAY);
+    robotData.edgeSensorsDetectionArray[sensor] = value;
+    xSemaphoreGive(xRobotDataSemaphore);
+}
+
+void updateEdgeDetection(bool value) {
+    xSemaphoreTake(xRobotDataSemaphore, portMAX_DELAY);
+    robotData.edgeDetected = value;
+    xSemaphoreGive(xRobotDataSemaphore);
+}
+
+void updateOpSensors(String sensor, bool value) {
+    xSemaphoreTake(xRobotDataSemaphore, portMAX_DELAY);
+    robotData.opponentSensorsDetectionArray[sensor] = value;
+    xSemaphoreGive(xRobotDataSemaphore);
+}
+
+void updateOpDetection(bool value) {
+    xSemaphoreTake(xRobotDataSemaphore, portMAX_DELAY);
+    robotData.opDetected = value;
+    xSemaphoreGive(xRobotDataSemaphore);
+}
+
+void updateOpError(double value) {
+    xSemaphoreTake(xRobotDataSemaphore, portMAX_DELAY);
+    robotData.opError = value;
+    xSemaphoreGive(xRobotDataSemaphore);
+}

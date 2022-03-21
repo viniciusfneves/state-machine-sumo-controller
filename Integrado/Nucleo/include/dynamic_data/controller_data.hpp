@@ -51,3 +51,5 @@ struct ControllerData {
 };
 
 ControllerData controllerData;
+
+SemaphoreHandle_t xCtrlDataSemaphore = xSemaphoreCreateMutex();

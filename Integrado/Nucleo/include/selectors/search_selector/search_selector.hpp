@@ -14,7 +14,7 @@ struct SearchSelector {
     auto operator()() const {
         using namespace sml;
         // Funções
-        auto entry = [] { pid.resetPID(); changeRobotState(RobotState::exec_search); };
+        auto entry = [] { pid.resetPID(); updateRobotState(RobotState::exec_search); };
 
         // Guards
         auto none  = [] { return robotConfiguration.search == Search::none; };

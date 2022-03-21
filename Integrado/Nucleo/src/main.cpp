@@ -23,7 +23,6 @@ void setup() {
     initAccessPoint();
     // connectToWiFi("SSID", "PASSWORD");
 
-    // initController();
     initWebSocketsServer();
     performance.setStackSize(CONFIG_ARDUINO_LOOP_STACK_SIZE);
 
@@ -32,12 +31,13 @@ void setup() {
     initMotors();
     initOpponentSensors();
     initEdgeSensors();
+
+    // initController();
 }
 
 void loop() {
     performance.startTimestamp = micros();
 
-    // processControllerEvents();
     processWebSocketEvents();
     pushTelemetry(micros());
 
