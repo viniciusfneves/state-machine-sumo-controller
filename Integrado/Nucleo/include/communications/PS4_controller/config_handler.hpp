@@ -158,9 +158,23 @@ void configController(const LightMode& mode, const Vibration vibro = Vibration::
 
 void updateLights() {
     if (controllerData.isCharging && robotData.robotState == RobotState::stopped) {
-        SET_BREATHING_COLOR(255, 0, 0);
-        configController(LightMode::breathing);
-        return;
+        if (controllerData.battery < 3) {
+            SET_BREATHING_COLOR(255, 0, 0);
+            configController(LightMode::breathing);
+            return;
+        } else if (controllerData.battery < 8) {
+            SET_BREATHING_COLOR(200, 140, 0);
+            configController(LightMode::breathing);
+            return;
+        } else if (controllerData.battery < 10) {
+            SET_BREATHING_COLOR(0, 200, 90);
+            configController(LightMode::breathing);
+            return;
+        } else {
+            SET_DUAL_COLORS(0, 255, 0, 0, 0, 255);
+            configController(LightMode::slow_flashing_dual_colors);
+            return;
+        }
     }
 
     // ! Controla as configurações de luzes do modo autônomo

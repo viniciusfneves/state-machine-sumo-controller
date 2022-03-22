@@ -127,16 +127,13 @@ void readControllerInputs() {
 
 void processControllerEvents(void* _) {
     for (;;) {  // Verifica se o controle está conectado antes de prosseguir com a função
-        while (!controllerData.isControllerConnected()) {
-            vTaskDelay(200 / portTICK_PERIOD_MS);
+        if (controllerData.isControllerConnected()) {
+            readControllerInputs();
+
+            //-- Configura as luzes do controle conforme a situação do robô - State Machine --//
+            updateLights();
         }
-
-        readControllerInputs();
-
-        //-- Configura as luzes do controle conforme a situação do robô - State Machine --//
-        updateLights();
-
-        vTaskDelay(32 / portTICK_PERIOD_MS);
+        vTaskDelay(25 / portTICK_PERIOD_MS);
     }
 }
 
@@ -149,5 +146,6 @@ void initController() {
         controllerData.controllerStatus = ControllerStatus::disconnected;
     });
 
+    // ! Processamento da Thread do controle de PS4
     xTaskCreate(processControllerEvents, "PS4CTRL", 1024 * 3, NULL, 1, NULL);
 }

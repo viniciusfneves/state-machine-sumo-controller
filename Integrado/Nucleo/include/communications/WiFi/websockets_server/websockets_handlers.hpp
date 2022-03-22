@@ -5,16 +5,22 @@
 #include <configuration/set_configurations.hpp>
 #include <utilities/calculus/calculus.hpp>
 
-#define TELEMETRY_INTERVAL 32000  // uS
+#define TELEMETRY_INTERVAL 32000  // us
 
-namespace commDataValues {
+namespace telemetry {
     unsigned long lastTelemetryTimestamp = 0UL;
 };
 
-/* --> Colocar no loop <-- */
 // Lida com as requisições feitas ao server websocket
-void processWebSocketEvents() {
-    wss.loop();
+void processWebSocketEvents(void *_) {
+    for (;;) {
+        wss.loop();
+        if (micros() - telemetry::lastTelemetryTimestamp >= TELEMETRY_INTERVAL) {
+            broadcastTelemetryData();
+            telemetry::lastTelemetryTimestamp = micros();
+        }
+        vTaskDelay(1 / portTICK_PERIOD_MS);
+    }
 }
 
 /* --> ENVIAR SOMENTE JSON PARA ESSA FUNÇÃO <-- */
@@ -195,13 +201,6 @@ void processJsonMessage(String message) {
             setChaseStrategy(Chase::standard);
         }
     }
-};
-
-void pushTelemetry(unsigned long timestamp) {
-    if (timestamp - commDataValues::lastTelemetryTimestamp < TELEMETRY_INTERVAL)
-        return;
-    broadcastTelemetryData();
-    commDataValues::lastTelemetryTimestamp = timestamp;
 }
 
 /* --> Enviar somente JSON <-- */
@@ -231,4 +230,5 @@ void initWebSocketsServer() {
 
     // Configura qual função é executada a cada evento recebido pelo WebSocket
     wss.onEvent(handleWSEvent);
+    xTaskCreate(processWebSocketEvents, "WSServer", 1024 * 4, NULL, 1, NULL);
 }

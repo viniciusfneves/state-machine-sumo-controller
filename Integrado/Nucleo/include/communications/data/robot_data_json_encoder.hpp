@@ -7,7 +7,6 @@
 #include <configuration/specifications.hpp>
 #include <dynamic_data/controller_data.hpp>
 #include <dynamic_data/robot_data.hpp>
-#include <performance/performance.hpp>
 
 // Serializa objetos JSON e os envia para todos os clientes conectados no WebSocket
 void serializeAndBroadcast(DynamicJsonDocument readings) {
@@ -208,11 +207,6 @@ DynamicJsonDocument encodeTelemetryData() {
         readings["controller"]["raw_angular"]       = controllerData.controllerInputs[Input::angularSpeed];
     } else
         readings["controller"]["connection_status"] = "disconnected";
-
-    readings["performance"]["loop_task"]       = performance.timeToExecute;
-    readings["performance"]["n_tasks"]         = performance.numberOfTaks;
-    readings["performance"]["memory_usage"]    = performance.freeMemory;
-    readings["performance"]["stack_max_usage"] = performance.BstackMaxUsage;
 
     xSemaphoreGive(xCtrlDataSemaphore);
 
