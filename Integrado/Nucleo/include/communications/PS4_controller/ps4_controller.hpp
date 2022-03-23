@@ -15,7 +15,7 @@
 
 // Lê os comandos do controle e atua na máquina(robô) conforme necessário
 void readControllerInputs() {
-    if (PS4.PSButton()) {
+    if (PS4.PSButton() && PS4.Share()) {
         if (robotData.robotState == RobotState::stopped)
             addEventToQueue(Event::Arm);
     }
