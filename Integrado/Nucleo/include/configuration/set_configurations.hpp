@@ -112,8 +112,15 @@ void setInvertOpSensorReading(bool value) {
     broadcastRobotConfiguration();
 }
 
+void setOpSensorWeight(String sensor, double value) {
+    xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
+    robotConfiguration.opponentSensorWeight[sensor] = value;
+    xSemaphoreGive(xConfigSemaphore);
+    broadcastRobotConfiguration();
+}
+
 // Altera os parâmetros para cálculo do controle PID
-void changePIDSettings(double set_kp, double set_ki, double set_kd) {
+void setPIDConstants(double set_kp, double set_ki, double set_kd) {
     xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
     robotConfiguration.Kp = set_kp;
     robotConfiguration.Ki = set_ki;

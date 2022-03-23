@@ -54,21 +54,26 @@ DynamicJsonDocument encodeRobotInfos() {
 DynamicJsonDocument EncodeRobotConfiguration() {
     StaticJsonDocument<512> configs;
 
-    xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
-
     // Parâmetros configuráveis para o modo Auto
-    configs["configurations"]["start_time"]            = robotConfiguration.startTime;
-    configs["configurations"]["max_speed"]             = robotConfiguration.maxSpeed;
-    configs["configurations"]["rotate_angle_bias"]     = robotConfiguration.angleBias;
-    configs["configurations"]["rotate_speed_bias"]     = robotConfiguration.speedBias;
-    configs["configurations"]["max_speed_in_chase"]    = robotConfiguration.maxAngularSpeedInChase;
-    configs["configurations"]["arc_angular_speed"]     = robotConfiguration.arcAgularSpeed;
-    configs["configurations"]["arc_rot_initial_angle"] = robotConfiguration.angle;
-    configs["configurations"]["arc_timeout"]           = robotConfiguration.arcTimeout;
-    configs["configurations"]["radar_speed"]           = robotConfiguration.radarSpeed;
-    configs["configurations"]["pid"]["kp"]             = robotConfiguration.Kp;
-    configs["configurations"]["pid"]["ki"]             = robotConfiguration.Ki;
-    configs["configurations"]["pid"]["kd"]             = robotConfiguration.Kd;
+    configs["configurations"]["start_time"]               = robotConfiguration.startTime;
+    configs["configurations"]["max_speed"]                = robotConfiguration.maxSpeed;
+    configs["configurations"]["rotate_angle_bias"]        = robotConfiguration.angleBias;
+    configs["configurations"]["rotate_speed_bias"]        = robotConfiguration.speedBias;
+    configs["configurations"]["edge_detection_threshold"] = robotConfiguration.edgeDetectionThreshold;
+    configs["configurations"]["op_reading_inverted"]      = robotConfiguration.invertOpReading;
+    configs["configurations"]["max_speed_in_chase"]       = robotConfiguration.maxAngularSpeedInChase;
+    configs["configurations"]["arc_angular_speed"]        = robotConfiguration.arcAgularSpeed;
+    configs["configurations"]["arc_rot_angle"]            = robotConfiguration.angle;
+    configs["configurations"]["arc_timeout"]              = robotConfiguration.arcTimeout;
+    configs["configurations"]["radar_speed"]              = robotConfiguration.radarSpeed;
+    configs["configurations"]["pid"]["kp"]                = robotConfiguration.Kp;
+    configs["configurations"]["pid"]["ki"]                = robotConfiguration.Ki;
+    configs["configurations"]["pid"]["kd"]                = robotConfiguration.Kd;
+
+    //  Peso dos sensores de oponente no cálculo do erro
+    for (auto weight = robotConfiguration.opponentSensorWeight.begin(); weight != robotConfiguration.opponentSensorWeight.end(); weight++) {
+        configs["configurations"]["opponent_weight"][weight->first.c_str()] = weight->second;
+    }
 
     // Modo de operação
     switch (robotConfiguration.mode) {
@@ -116,9 +121,6 @@ DynamicJsonDocument EncodeRobotConfiguration() {
             break;
     }
 
-    xSemaphoreGive(xConfigSemaphore);
-    xSemaphoreTake(xCtrlDataSemaphore, portMAX_DELAY);
-
     // Parâmetros configuráveis para o modo RC
     configs["configurations"]["controller"]["commander"] = controllerData.commander == Commander::bt_ps4 ? "bt_ps4" : "radio";
     switch (controllerData.mapSettings) {
@@ -147,7 +149,6 @@ DynamicJsonDocument EncodeRobotConfiguration() {
             configs["configurations"]["controller"]["filter"] = "cubic";
             break;
     }
-    xSemaphoreGive(xCtrlDataSemaphore);
 
     return configs;
 }
@@ -155,8 +156,6 @@ DynamicJsonDocument EncodeRobotConfiguration() {
 // Envia as leituras dos sensores de borda, dos sensores de oponente e da potência dos motores -> TELEMETRIA
 DynamicJsonDocument encodeTelemetryData() {
     StaticJsonDocument<512> readings;
-
-    xSemaphoreTake(xRobotDataSemaphore, portMAX_DELAY);
 
     // Estado de execução
     switch (robotData.robotState) {
@@ -196,9 +195,6 @@ DynamicJsonDocument encodeTelemetryData() {
     readings["readings"]["motor"][0] = robotData.motorsPower[0];
     readings["readings"]["motor"][1] = robotData.motorsPower[1];
 
-    xSemaphoreGive(xRobotDataSemaphore);
-    xSemaphoreTake(xCtrlDataSemaphore, portMAX_DELAY);
-
     if (controllerData.isControllerConnected()) {
         readings["controller"]["connection_status"] = "connected";
         readings["controller"]["charging_status"]   = controllerData.isCharging ? "true" : "false";
@@ -207,8 +203,6 @@ DynamicJsonDocument encodeTelemetryData() {
         readings["controller"]["raw_angular"]       = controllerData.controllerInputs[Input::angularSpeed];
     } else
         readings["controller"]["connection_status"] = "disconnected";
-
-    xSemaphoreGive(xCtrlDataSemaphore);
 
     return readings;
 }
