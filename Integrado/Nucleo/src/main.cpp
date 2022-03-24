@@ -34,14 +34,16 @@ void setup() {
     initOpponentSensors();
     initEdgeSensors();
 
+    // ! Processamento da Máquina de Estados
+    xTaskCreate(execMachine, "ROBOTMACHINE", MACHINE_STACK_SIZE, NULL, 5, NULL);
+
     // ! Serviços de comunicação e controle
+    // initController();
     initAccessPoint();
     // connectToWiFi("SSID", "PASSWORD");
     initWebSocketsServer();
-    // initController();
 
-    // ! Processamento da Máquina de Estados
-    xTaskCreate(execMachine, "ROBOTMACHINE", MACHINE_STACK_SIZE, NULL, 3, NULL);
+    // Deleta as tasks do framework Arduino
     vTaskDelete(NULL);
 }
 
@@ -49,6 +51,6 @@ void execMachine(void* _) {
     for (;;) {
         readSensors();
         processMachineEvents();
-        vTaskDelay(1 / portTICK_PERIOD_MS);
+        vTaskDelay(4 / portTICK_PERIOD_MS);
     }
 }

@@ -2,6 +2,7 @@
 
 // Dependências gerais
 #include <ESP32Servo.h>
+#include <analogWrite.h>
 
 #include <configuration/configurations.hpp>
 #include <configuration/specifications.hpp>
@@ -22,16 +23,17 @@ Servo rightMotor;
 void brushedDrive(int pwm, int in1, int in2) {
     if (pwm == 0) {
         // Caso for parada
-        digitalWrite(in1, true);
-        digitalWrite(in2, true);
+        analogWrite(in1, 255);
+        analogWrite(in2, 255);
     } else if (pwm > 0) {
         // Caso for sentido horário
         analogWrite(in1, pwm);
-        digitalWrite(in2, false);
+        analogWrite(in2, 0);
     } else {
         // Caso for sentido anti-horario
-        analogWrite(in2, -pwm);
-        digitalWrite(in1, false);
+        pwm = abs(pwm);
+        analogWrite(in1, 0);
+        analogWrite(in2, pwm);
     }
 }
 
