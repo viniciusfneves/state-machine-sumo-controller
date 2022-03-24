@@ -60,19 +60,7 @@ void driveMotors(int PWM_left, int PWM_right) {
 
 // Para toda a locomoção do robô
 void stopMotors() {
-    #ifdef BRUSHED
-        digitalWrite(pins::motors::leftIN1, LOW);
-        digitalWrite(pins::motors::leftIN2, LOW);
-        digitalWrite(pins::motors::rightIN1, LOW);
-        digitalWrite(pins::motors::rightIN2, LOW);
-
-        robotData.motorsPower[0] = 0;
-        robotData.motorsPower[1] = 0;
-    #endif
-
-    #ifdef BRUSHLESS
-        driveMotors(0, 0);
-    #endif
+    driveMotors(0, 0);
 };
 
 // Realiza as configurações necessárias para a parte de locomoção do robô
