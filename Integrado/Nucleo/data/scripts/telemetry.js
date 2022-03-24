@@ -100,10 +100,15 @@ connection.onmessage = function (response) {
 		document.getElementById("connection-status-text").innerHTML = "Connected to " + json["info"]["robot_name"];
 	}
 	if ("readings" in json) {
-		updateRobotState(json["readings"]["robot_status"]);
-		refreshOpSensorReadings(json["readings"]["opponent"]);
-		refreshEdgeSensorReadings(json["readings"]["edge"]);
-		setMotorPower("left", json["readings"]["motor"][0]);
-		setMotorPower("right", json["readings"]["motor"][1]);
+		var readings = json["readings"];
+
+		updateRobotState(readings["robot_status"]);
+
+		if ("opponent" in readings) refreshOpSensorReadings(readings["opponent"]);
+
+		if ("edge" in readings) refreshEdgeSensorReadings(readings["edge"]);
+
+		setMotorPower("left", readings["motor"][0]);
+		setMotorPower("right", readings["motor"][1]);
 	}
 };
