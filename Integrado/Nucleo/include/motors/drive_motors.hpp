@@ -1,8 +1,13 @@
 #pragma once
 
 // Dependências gerais
+#ifdef BRUSHLESS
 #include <ESP32Servo.h>
-#include <analogWrite.h>
+Servo leftMotor;
+Servo rightMotor;
+#else
+#include "../../lib/ESP32 AnalogWrite/src/analogWrite.h"
+#endif
 
 #include <configuration/configurations.hpp>
 #include <configuration/specifications.hpp>
@@ -15,9 +20,6 @@
 #else
 #include <pins/pins.hpp>
 #endif
-
-Servo leftMotor;
-Servo rightMotor;
 
 // Função de controles dos pinos de ativação dos drivers para motores brushed
 void brushedDrive(int pwm, int in1, int in2) {

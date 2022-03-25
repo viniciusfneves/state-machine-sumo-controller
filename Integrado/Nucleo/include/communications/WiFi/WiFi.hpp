@@ -11,7 +11,6 @@ const char *password = "12345678";                     // Senha da rede
 void initAccessPoint() {
     WiFi.mode(WIFI_MODE_AP);
     WiFi.softAP(ssid, password);
-    delay(100);
 }
 
 void connectToWiFi(const char *ssid, const char *passphrase) {
