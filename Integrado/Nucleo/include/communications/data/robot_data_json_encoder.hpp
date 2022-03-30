@@ -72,7 +72,7 @@ DynamicJsonDocument EncodeRobotConfiguration() {
 
     //  Peso dos sensores de oponente no cálculo do erro
     for (auto weight = robotConfiguration.opponentSensorWeight.begin(); weight != robotConfiguration.opponentSensorWeight.end(); weight++) {
-        configs["configurations"]["opponent_weight"][weight->first.c_str()] = weight->second;
+        configs["configurations"]["op_sensors_weight"][weight->first.c_str()] = weight->second;
     }
 
     // Modo de operação

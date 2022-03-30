@@ -183,7 +183,7 @@ void processJsonMessage(String message) {
         }
     }
 
-    // Processa pedido de alteração das constantes do pid
+    // Processa pedido de alteração das constantes do PID
     if (jsonMessage.containsKey("pid")) {
         setPIDConstants(jsonMessage["pid"]["kp"], jsonMessage["pid"]["ki"], jsonMessage["pid"]["kd"]);
     }
