@@ -61,6 +61,39 @@
 			<div id="chase-container"></div>
 
 			<h3>Configurações gerais</h3>
+			<h4>Arco</h4>
+			<div class="arc-container">
+				<h5 class="arc-text">Agular Speed [-1, 1]</h5>
+				<input
+					type="number"
+					class="setter-value-field"
+					id="arcAgularSpeed-regulator-value"
+					step="0.05"
+					value=""
+				/>
+			</div>
+			<div class="arc-container">
+				<h5 class="arc-text">Angle [-359, 359]</h5>
+				<input
+					type="number"
+					class="setter-value-field"
+					id="angle-regulator-value"
+					step="1"
+					value=""
+				/>
+			</div>
+			<div class="arc-container">
+				<h5 class="arc-text">Timeout (ms)</h5>
+				<input
+					type="number"
+					class="setter-value-field"
+					id="arcTimeout-regulator-value"
+					step="1"
+					value=""
+				/>
+			</div>
+
+			<h4>PID</h4>
 			<div class="pid-container">
 				<h4 class="pid-text">Kp</h4>
 				<input type="number" class="setter-value-field" id="P-regulator-value" step="0.1" value="" />
