@@ -81,6 +81,12 @@ void processJsonMessage(String message) {
         if (strcmp(strategy, "arco") == 0) {
             setInitialStrategy(InitialMove::arco);
         }
+        if (strcmp(strategy, "oleh") == 0) {
+            setInitialStrategy(InitialMove::oleh);
+        }
+        if (strcmp(strategy, "desempate_C") == 0) {
+            setInitialStrategy(InitialMove::desempate_C);
+        }
     }
 
     // Processa as requisições de alteração da estratégia de busca
