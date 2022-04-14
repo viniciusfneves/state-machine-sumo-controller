@@ -97,32 +97,33 @@ namespace pins {
     }  // namespace opponentsSensors
     namespace configuration {
         const int led  = 4;
-        const int XHUT = 33;
     }  // namespace configuration
     const int startModule = 5;
+    const int XHUT = 33;
 #endif
 
 #ifdef MERI
     namespace motors {
         const int leftIN1  = 18;
-        const int leftIN2  = 29;
+        const int leftIN2  = 19;
         const int rightIN1 = 27;
         const int rightIN2 = 26;
     }  // namespace motors
     namespace edgeSensors {
-        const int left  = 3;
-        const int right = 2;
-
-        const int sensors[] = {left, right};
+        const std::map<String, int> sensors = {
+            //{"frontLeft", },
+            //{"frontCenter", 16},
+            //{"frontRight", 17},
+        };
     }  // namespace edgeSensors
     namespace opponentsSensors {
-        const int leftLat  = 36;
-        const int left     = 39;
-        const int center   = 34;
-        const int right    = 35;
-        const int rightLat = 25;
-
-        const int sensors[] = {leftLat, left, center, right, rightLat};
+        const std::map<String, int> sensors = {
+            {"farLeft", 36},
+            {"left", 39},
+            {"center", 34},
+            {"right", 35},
+            {"farRight", 25},
+        };
     }  // namespace opponentsSensors
     namespace configuration {
         const int ledConfig = 4;
