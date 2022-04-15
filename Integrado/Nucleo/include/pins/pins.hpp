@@ -73,7 +73,7 @@ namespace pins {
 
     // ! MINIS //
 
-#if defined(ZE_PEQUENO) || (ET_MINI)
+#if defined (ZE_PEQUENO) || (ET_MINI)
     namespace motors {
         const int leftIN1  = 18;
         const int leftIN2  = 19;
@@ -90,7 +90,7 @@ namespace pins {
     namespace opponentsSensors {
         const std::map<String, int> sensors = {
             {"left", 23},
-            {"center", 25},
+            //{"center", 25},
             {"right", 26},
         };
 
@@ -99,7 +99,7 @@ namespace pins {
         const int led  = 4;
     }  // namespace configuration
     const int startModule = 5;
-    const int XHUT = 33;
+    const int XHUT        = 33;
 #endif
 
 #ifdef MERI
@@ -118,11 +118,11 @@ namespace pins {
     }  // namespace edgeSensors
     namespace opponentsSensors {
         const std::map<String, int> sensors = {
-            {"farLeft", 36},
+            //{"farLeft", 36},
             {"left", 39},
-            {"center", 34},
+            //{"center", 34},
             {"right", 35},
-            {"farRight", 25},
+            //{"farRight", 25},
         };
     }  // namespace opponentsSensors
     namespace configuration {
