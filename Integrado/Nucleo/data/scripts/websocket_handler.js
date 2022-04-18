@@ -55,7 +55,7 @@ export function setParameters() {
 		parameter_pid_kd +
 		'},"arc_angular_speed":' +
 		parameter_arco_arcAgularSpeed +
-		',"arc_rot_angle":' +
+		',"arc_rot_initial_angle":' +
 		parameter_arco_angle +
 		',"arc_timeout":' +
 		parameter_arco_arcTimeout +
