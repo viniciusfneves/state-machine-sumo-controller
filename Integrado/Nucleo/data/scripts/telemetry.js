@@ -3,6 +3,7 @@ import * as Colors from "./colors.js";
 
 window.onload = function () {
 	document.getElementById("event-start").addEventListener("click", (_) => requestEvent("start"));
+	document.getElementById("event-arm").addEventListener("click", (_) => requestEvent("arm"));
 	document.getElementById("event-disengage").addEventListener("click", (_) => requestEvent("disengage"));
 };
 
