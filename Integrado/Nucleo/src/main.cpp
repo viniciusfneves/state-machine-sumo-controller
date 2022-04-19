@@ -1,9 +1,11 @@
 #define MACHINE_STACK_SIZE 1024 * 2
 
 #include <Arduino.h>
+#include <ESPmDNS.h>
 
 #include <communications/PS4_controller/ps4_controller.hpp>
 #include <communications/WiFi/WiFi.hpp>
+#include <communications/WiFi/http/http_server.hpp>
 #include <communications/WiFi/websockets_server/websockets_handlers.hpp>
 #include <event_handler/event_handler.hpp>
 #include <motors/drive_motors.hpp>
@@ -38,10 +40,12 @@ void setup() {
     xTaskCreate(execMachine, "ROBOTMACHINE", MACHINE_STACK_SIZE, NULL, 5, NULL);
 
     // ! Serviços de comunicação e controle
-    // initController();
-    initAccessPoint();
-    // connectToWiFi("SSID", "PASSWORD");
+    // initAccessPoint();
+    connectToWiFi(robotSpecifications.robotName, "SumoBots2012");
+    initHTTPServer();
     initWebSocketsServer();
+    MDNS.begin(robotSpecifications.robotName);
+    initController();
 
     // Deleta as tasks do framework Arduino
     vTaskDelete(NULL);
