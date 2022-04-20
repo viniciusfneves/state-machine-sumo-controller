@@ -84,8 +84,8 @@ void processJsonMessage(String message) {
         if (strcmp(strategy, "oleh") == 0) {
             setInitialStrategy(InitialMove::oleh);
         }
-        if (strcmp(strategy, "desempate_C") == 0) {
-            setInitialStrategy(InitialMove::desempate_C);
+        if (strcmp(strategy, "desempate_c") == 0) {
+            setInitialStrategy(InitialMove::desempate_c);
         }
     }
 

@@ -3,7 +3,7 @@
 using std::vector;
 
 vector<String> modesAvailable    = {"auto", "rc"};
-vector<String> initialStrategies = {"none", "full_frente", "zig_zag", "arco", "oleh", "desempate_C"};
+vector<String> initialStrategies = {"none", "full_frente", "zig_zag", "arco", "oleh", "desempate_c"};
 vector<String> searchStrategies  = {"none", "radar", "teco"};
 vector<String> chaseStrategies   = {"standard"};
 
@@ -20,7 +20,7 @@ enum class InitialMove {
     zig_zag,
     arco,
     oleh,
-    desempate_C
+    desempate_c
 };
 
 // Estratégias de busca

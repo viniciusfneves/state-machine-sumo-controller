@@ -102,8 +102,8 @@ DynamicJsonDocument EncodeRobotConfiguration() {
         case InitialMove::oleh:
             configs["configurations"]["initial_move"] = "oleh";
             break;
-        case InitialMove::desempate_C:
-            configs["configurations"]["initial_move"] = "desempate_C";
+        case InitialMove::desempate_c:
+            configs["configurations"]["initial_move"] = "desempate_c";
             break;
     }
 

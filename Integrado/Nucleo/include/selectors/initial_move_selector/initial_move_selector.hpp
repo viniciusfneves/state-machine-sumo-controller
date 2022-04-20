@@ -24,7 +24,7 @@ struct InitialMoveSelector {
         auto zig_zag     = [] { return robotConfiguration.initialMove == InitialMove::zig_zag; };
         auto arco        = [] { return robotConfiguration.initialMove == InitialMove::arco; };
         auto oleh        = [] { return robotConfiguration.initialMove == InitialMove::oleh; };
-        auto desempate_C = [] { return robotConfiguration.initialMove == InitialMove::desempate_C; };
+        auto desempate_c = [] { return robotConfiguration.initialMove == InitialMove::desempate_c; };
 
         return make_transition_table(
             *"entry"_s / entry        = "selector"_s,
@@ -33,7 +33,7 @@ struct InitialMoveSelector {
             "selector"_s[zig_zag]     = state<ZigZag>,
             "selector"_s[arco]        = state<Arco>,
             "selector"_s[oleh]        = state<Oleh>,
-            "selector"_s[desempate_C] = state<DesempateC>
+            "selector"_s[desempate_c] = state<DesempateC>
         );
     }
 };
