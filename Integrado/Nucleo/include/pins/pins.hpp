@@ -77,8 +77,8 @@ namespace pins {
     namespace motors {
         const int leftIN1  = 18;
         const int leftIN2  = 19;
-        const int rightIN1 = 14;
-        const int rightIN2 = 15;
+        const int rightIN1 = 17;
+        const int rightIN2 = 16;
     }  // namespace motors
     namespace edgeSensors {
         const std::map<String, int> sensors = {
