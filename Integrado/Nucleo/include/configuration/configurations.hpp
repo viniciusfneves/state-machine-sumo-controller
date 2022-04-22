@@ -48,7 +48,7 @@ struct Configurations {
     double radarSpeed = 0.75;
 
     // Parâmetro para as estratégias de Full Frente
-    int fullFrenteTimeout = 150;
+    int fullFrenteTimeout = 120;
 
     // Parâmetros para as estratégias de Arco
     double arcAgularSpeed = 0.125;

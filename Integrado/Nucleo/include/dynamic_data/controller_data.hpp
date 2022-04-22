@@ -42,8 +42,8 @@ vector<String> ctrlFilters = {"linear", "quadratic", "cubic"};
 struct ControllerData {
     ControllerStatus controllerStatus = ControllerStatus::disconnected;
     Commander        commander        = Commander::bt_ps4;
-    CommandMap       mapSettings      = CommandMap::game_standard;
-    CommandFilter    filterSettings   = CommandFilter::quadratic;
+    CommandMap       mapSettings      = CommandMap::nog;
+    CommandFilter    filterSettings   = CommandFilter::cubic;
     uint8_t          battery          = 0;
     bool             isCharging       = false;
     double           controllerInputs[Input::length];  // Segue a ordem do enum Input
