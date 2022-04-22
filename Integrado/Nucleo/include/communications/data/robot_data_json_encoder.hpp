@@ -141,6 +141,10 @@ DynamicJsonDocument EncodeRobotConfiguration() {
         case CommandMap::game_standard:
             configs["configurations"]["controller"]["map"] = "game_standard";
             break;
+
+        case CommandMap::nog:
+            configs["configurations"]["controller"]["map"] = "nog";
+            break;
     }
     switch (controllerData.filterSettings) {
         case CommandFilter::linear:

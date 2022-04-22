@@ -85,6 +85,21 @@ void readControllerInputs() {
                 _linear = 0;
             break;
 
+        case CommandMap::nog:
+            _pedal   = PS4.RStickY();
+            _wheel   = PS4.LStickX();
+            _linear  = map_double(_pedal, -128, 127, -0.7, 0.7);
+            _angular = map_double(_wheel, -128, 127, -0.7, 0.7);
+
+            if (abs(_angular) < 0.07)
+                _angular = 0;
+            if (abs(_linear) < 0.07)
+                _linear = 0;
+            if (PS4.R2Value() > 192) {
+                _linear = 1;
+            }
+            break;
+
         default:
             _angular = 0;
             _linear  = 0;

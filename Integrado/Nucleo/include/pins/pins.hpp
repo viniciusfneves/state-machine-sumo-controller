@@ -130,6 +130,6 @@ namespace pins {
         const int ledCMD    = 13;
         const int batRead   = 33;
     }  // namespace configuration
-    const int startModule = 23;
+    const int startModule = 5;
 #endif
 }  // namespace pins

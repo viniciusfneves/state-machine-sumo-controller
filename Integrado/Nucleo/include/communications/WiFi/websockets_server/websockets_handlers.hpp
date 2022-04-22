@@ -138,6 +138,9 @@ void processJsonMessage(String message) {
         if (strcmp(config, "rc_inverted") == 0) {
             setCtrlMapping(CommandMap::rc_inverted);
         }
+        if (strcmp(config, "nog") == 0) {
+            setCtrlMapping(CommandMap::nog);
+        }
     }
 
     // Processa as requisições de alteração dos filtros nos comandos do controle

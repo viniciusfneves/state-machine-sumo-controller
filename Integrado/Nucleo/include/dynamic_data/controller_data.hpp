@@ -24,7 +24,8 @@ enum class Commander {
 enum class CommandMap {
     rc_standard,
     rc_inverted,
-    game_standard
+    game_standard,
+    nog
 };
 
 enum class CommandFilter {
@@ -34,7 +35,7 @@ enum class CommandFilter {
 };
 
 vector<String> ctrlTypes   = {"bt_ps4", "radio"};
-vector<String> ctrlMaps    = {"game_standard", "rc_standard", "rc_inverted"};
+vector<String> ctrlMaps    = {"game_standard", "rc_standard", "rc_inverted", "nog"};
 vector<String> ctrlFilters = {"linear", "quadratic", "cubic"};
 
 // Informações e leituras do Controle de PS4
