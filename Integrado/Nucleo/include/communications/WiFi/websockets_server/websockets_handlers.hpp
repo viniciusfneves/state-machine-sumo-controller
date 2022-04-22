@@ -204,6 +204,11 @@ void processJsonMessage(String message) {
         setRadarSpeed(jsonMessage["radar_speed"]);
     }
 
+    // Processa pedido de alteração do tempo de execução do Full Frente
+    if (jsonMessage.containsKey("full_frente_timeout")) {
+        setFullFrenteTimeout(jsonMessage["full_frente_timeout"]);
+    }
+
     // Processa pedido de alteração do tempo de execução do arco
     if (jsonMessage.containsKey("arc_timeout")) {
         setArcTimeout(jsonMessage["arc_timeout"]);

@@ -63,6 +63,13 @@ void setRadarSpeed(double newSpeed) {
     broadcastRobotConfiguration();
 }
 
+void setFullFrenteTimeout(int time) {
+    xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
+    robotConfiguration.fullFrenteTimeout = time;
+    xSemaphoreGive(xConfigSemaphore);
+    broadcastRobotConfiguration();
+}
+
 void setMaxAngularSpeedInChase(double newSpeed) {
     xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
     robotConfiguration.maxAngularSpeedInChase = newSpeed;

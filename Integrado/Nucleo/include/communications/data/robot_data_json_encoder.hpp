@@ -65,6 +65,7 @@ DynamicJsonDocument EncodeRobotConfiguration() {
     configs["configurations"]["edge_detection_threshold"] = robotConfiguration.edgeDetectionThreshold;
     configs["configurations"]["op_reading_inverted"]      = robotConfiguration.invertOpReading;
     configs["configurations"]["max_speed_in_chase"]       = robotConfiguration.maxAngularSpeedInChase;
+    // configs["configurations"]["full_frente_timeout"]      = robotConfiguration.fullFrenteTimeout;
     configs["configurations"]["arc_angular_speed"]        = robotConfiguration.arcAgularSpeed;
     configs["configurations"]["arc_rot_angle"]            = robotConfiguration.angle;
     configs["configurations"]["arc_timeout"]              = robotConfiguration.arcTimeout;
