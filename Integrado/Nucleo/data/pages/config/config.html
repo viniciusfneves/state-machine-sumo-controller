@@ -14,6 +14,7 @@
 		<div>
 			<div id="connection-status-circle"></div>
 			<h4 id="connection-status-text">Tentando conexão WebSocket</h4>
+			<h5 id="connection-adress"></h5>
 		</div>
 		<div id="controller-info">
 			<img src="../../assets/ps4_all_bk.png" id="ctrl-status-img" />
@@ -64,33 +65,15 @@
 			<h4>Arco</h4>
 			<div class="arc-container">
 				<h5 class="arc-text">Agular Speed [-1, 1]</h5>
-				<input
-					type="number"
-					class="setter-value-field"
-					id="arcAgularSpeed-regulator-value"
-					step="0.05"
-					value=""
-				/>
+				<input type="number" class="setter-value-field" id="arcAgularSpeed-regulator-value" step="0.05" value="" />
 			</div>
 			<div class="arc-container">
 				<h5 class="arc-text">Angle [-359, 359]</h5>
-				<input
-					type="number"
-					class="setter-value-field"
-					id="angle-regulator-value"
-					step="1"
-					value=""
-				/>
+				<input type="number" class="setter-value-field" id="angle-regulator-value" step="1" value="" />
 			</div>
 			<div class="arc-container">
 				<h5 class="arc-text">Timeout (ms)</h5>
-				<input
-					type="number"
-					class="setter-value-field"
-					id="arcTimeout-regulator-value"
-					step="1"
-					value=""
-				/>
+				<input type="number" class="setter-value-field" id="arcTimeout-regulator-value" step="1" value="" />
 			</div>
 
 			<h4>PID</h4>

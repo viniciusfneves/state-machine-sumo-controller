@@ -24,6 +24,9 @@ DynamicJsonDocument encodeRobotInfos() {
     // Nome do robô
     infos["info"]["robot_name"] = robotSpecifications.robotName;
 
+    // Endereço IP do robô
+    infos["info"]["ip_adress"] = WiFi.localIP();
+
     // Estratégias disponíveis no robô
     for (int index = 0; index < modesAvailable.size(); index++) {
         infos["info"]["available_modes"][index] = modesAvailable[index];

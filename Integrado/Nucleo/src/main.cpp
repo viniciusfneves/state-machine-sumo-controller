@@ -41,7 +41,7 @@ void setup() {
 
     // ! Serviços de comunicação e controle
     // initAccessPoint();
-    connectToWiFi(robotSpecifications.robotName, "SumoBots2012");
+    connectToWiFi("BotsSumo", "SumoBots2012");
     initHTTPServer();
     initWebSocketsServer();
     MDNS.begin(robotSpecifications.robotName);

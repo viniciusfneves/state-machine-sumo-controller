@@ -116,6 +116,7 @@ connection.onmessage = function (response) {
 	// Processa o nome do robô recebido
 	if ("info" in json) {
 		document.getElementById("connection-status-text").innerHTML = "Conectado à " + json["info"]["robot_name"];
+		document.getElementById("connection-adress").innerHTML = json["info"]["ip_adress"];
 		let titulo = document.getElementsByTagName("title");
 		if (titulo.length > 0) {
 			titulo.item(0).innerHTML = json["info"]["robot_name"] + " Controller";
