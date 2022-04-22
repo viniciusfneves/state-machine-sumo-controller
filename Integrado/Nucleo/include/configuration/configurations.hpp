@@ -25,8 +25,8 @@ struct Configurations {
 
     // * CALIBRAÇÃO DE FUNÇÕES
     // Parâmetros de ajuste da função rotateRobot
-    double angleBias = 550;
-    double speedBias = 0.25;
+    double angleBias = 200;
+    double speedBias = 1;
 
     // Parâmetros do PID
     double Kp = 0.195;
@@ -45,12 +45,15 @@ struct Configurations {
     // ! :::--- PARÂMETROS DE ESTRATÉGIAS ---:::
 
     // Parâmetro para velocidade de rotação do radar -> (double)[-1, 1]
-    double radarSpeed = 1;
+    double radarSpeed = 0.75;
+
+    // Parâmetro para as estratégias de Full Frente
+    int fullFrenteTimeout = 150;
 
     // Parâmetros para as estratégias de Arco
-    double arcAgularSpeed = 0.25;
+    double arcAgularSpeed = 0.125;
     int    angle          = 0;
-    int    arcTimeout     = 750;
+    int    arcTimeout     = 240;
 
     // Define a inicialização padrão das estratégias
     InitialMove initialMove = InitialMove::full_frente;
