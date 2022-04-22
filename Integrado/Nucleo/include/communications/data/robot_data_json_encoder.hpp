@@ -37,14 +37,14 @@ DynamicJsonDocument encodeRobotInfos() {
     for (int index = 0; index < chaseStrategies.size(); index++) {
         infos["info"]["available_chase_strategies"][index] = chaseStrategies[index];
     }
-    for (int index = 0; index < ctrl_types.size(); index++) {
-        infos["info"]["available_ctrl_types"][index] = ctrl_types[index];
+    for (int index = 0; index < ctrlTypes.size(); index++) {
+        infos["info"]["available_ctrl_types"][index] = ctrlTypes[index];
     }
-    for (int index = 0; index < ctrl_maps.size(); index++) {
-        infos["info"]["available_ctrl_maps"][index] = ctrl_maps[index];
+    for (int index = 0; index < ctrlMaps.size(); index++) {
+        infos["info"]["available_ctrl_maps"][index] = ctrlMaps[index];
     }
-    for (int index = 0; index < ctrl_filters.size(); index++) {
-        infos["info"]["available_ctrl_filters"][index] = ctrl_filters[index];
+    for (int index = 0; index < ctrlFilters.size(); index++) {
+        infos["info"]["available_ctrl_filters"][index] = ctrlFilters[index];
     }
 
     return infos;
@@ -131,15 +131,15 @@ DynamicJsonDocument EncodeRobotConfiguration() {
     configs["configurations"]["controller"]["commander"] = controllerData.commander == Commander::bt_ps4 ? "bt_ps4" : "radio";
     switch (controllerData.mapSettings) {
         case CommandMap::rc_standard:
-            configs["configurations"]["controller"]["mapping"] = "rc_standard";
+            configs["configurations"]["controller"]["map"] = "rc_standard";
             break;
 
         case CommandMap::rc_inverted:
-            configs["configurations"]["controller"]["mapping"] = "rc_inverted";
+            configs["configurations"]["controller"]["map"] = "rc_inverted";
             break;
 
         case CommandMap::game_standard:
-            configs["configurations"]["controller"]["mapping"] = "game_standard";
+            configs["configurations"]["controller"]["map"] = "game_standard";
             break;
     }
     switch (controllerData.filterSettings) {

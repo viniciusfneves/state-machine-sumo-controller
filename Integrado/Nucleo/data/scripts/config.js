@@ -156,7 +156,7 @@ connection.onmessage = function (response) {
 		let search = json["configurations"]["search"];
 		let chase = json["configurations"]["chase"];
 		let type = json["configurations"]["controller"]["commander"];
-		let map = json["configurations"]["controller"]["mapping"];
+		let map = json["configurations"]["controller"]["map"];
 		let filter = json["configurations"]["controller"]["filter"];
 		updateConfigButtons(mode, initial, search, chase, type, map, filter);
 
