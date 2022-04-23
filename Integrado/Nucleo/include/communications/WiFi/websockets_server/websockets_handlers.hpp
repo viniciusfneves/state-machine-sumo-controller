@@ -184,6 +184,25 @@ void processJsonMessage(String message) {
         setInvertOpSensorReading(jsonMessage["invert_op_sensors"]);
     }
 
+    if (jsonMessage.containsKey("invert_left_wheel")) {
+        setInvertLeftWheel(jsonMessage["invert_left_wheel"]);
+    }
+
+    if (jsonMessage.containsKey("invert_right_wheel")) {
+        setInvertRightWheel(jsonMessage["invert_right_wheel"]);
+    }
+
+    if (jsonMessage.containsKey("invert_angular_axis")) {
+        setInvertAngularAxis(jsonMessage["invert_angular_axis"]);
+    }
+
+    if (jsonMessage.containsKey("rc_ctrl_linear")) {
+        setCtrlLinear(jsonMessage["rc_ctrl_linear"]);
+    }
+    if (jsonMessage.containsKey("rc_ctrl_angular")) {
+        setCtrlAngular(jsonMessage["rc_ctrl_angular"]);
+    }
+
     if (jsonMessage.containsKey("op_sensors_weight")) {
         for (auto sensor = pins::opponentsSensors::sensors.begin(); sensor != pins::opponentsSensors::sensors.end(); sensor++) {
             if (jsonMessage["op_sensors_weight"].containsKey(sensor->first)) {

@@ -45,6 +45,10 @@ void brushedDrive(int pwm, int in1, int in2) {
 void driveMotors(int leftPWM, int rightPWM) {
     leftPWM  = constrain(leftPWM, -255, 255);
     rightPWM = constrain(rightPWM, -255, 255);
+    if (robotConfiguration.invertLeftWheel)
+        leftPWM *= -1;
+    if (robotConfiguration.invertRightWheel)
+        rightPWM *= -1;
 
 #ifdef BRUSHLESS
     int leftESC  = map(leftPWM, -255, 255, 0, 180);
@@ -93,6 +97,9 @@ void driveRobot(double linearSpeed, double angularSpeed) {
     // Só funciona se os parametros forem de -1 à 1, caso contrário utilize um MAP para definir as velocidas linear e angular
     linearSpeed  = constrain(linearSpeed, -1, 1) * robotSpecifications.maxLinearSpeed;
     angularSpeed = constrain(angularSpeed, -1, 1) * robotSpecifications.maxAngularSpeed;
+
+    if (robotConfiguration.invertAngularAxis)
+        angularSpeed *= -1;
 
     // Transforma os parâmetros de velocidade linear e angular em sinal PWM para os motores
     int leftPWM  = ((2 * linearSpeed + angularSpeed * (robotSpecifications.wheelBase)) / (2 * (robotSpecifications.wheelRadius))) * robotConfiguration.maxSpeed;

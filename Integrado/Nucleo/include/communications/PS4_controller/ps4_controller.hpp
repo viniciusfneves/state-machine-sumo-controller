@@ -88,15 +88,23 @@ void readControllerInputs() {
         case CommandMap::nog:
             _pedal   = PS4.RStickY();
             _wheel   = PS4.LStickX();
-            _linear  = map_double(_pedal, -128, 127, -0.7, 0.7);
-            _angular = map_double(_wheel, -128, 127, -0.7, 0.7);
+            _linear  = map_double(_pedal, -128, 127, -robotConfiguration.rcCtrlLinearSpeed, robotConfiguration.rcCtrlLinearSpeed);
+            _angular = map_double(_wheel, -128, 127, -robotConfiguration.rcCtrlAngularSpeed, robotConfiguration.rcCtrlAngularSpeed);
 
             if (abs(_angular) < 0.07)
                 _angular = 0;
             if (abs(_linear) < 0.07)
                 _linear = 0;
-            if (PS4.R2Value() > 192) {
+            if (PS4.R2Value() > 192)
                 _linear = 1;
+
+            if (PS4.R1()) {
+                _linear  = -0.7;
+                _angular = 0.9;
+            }
+            if (PS4.L1()) {
+                _linear  = -0.7;
+                _angular = -0.9;
             }
             break;
 

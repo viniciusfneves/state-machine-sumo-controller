@@ -16,7 +16,10 @@ struct Configurations {
         {"farRight", 2},
         {"rightSide", 4},
     };
-    bool invertOpReading = false;
+    bool invertOpReading   = false;
+    bool invertAngularAxis = false;
+    bool invertLeftWheel   = false;
+    bool invertRightWheel  = false;
 
     // * SENSORES DE BORDA
     // Define qual o valor a partir da leitura de sinais analógicos
@@ -37,7 +40,9 @@ struct Configurations {
     int startTime = 0;
 
     // Define a velocidade máxima global do robô -> (int)[0, 255]
-    int maxSpeed = 255;
+    int    maxSpeed           = 255;
+    double rcCtrlLinearSpeed  = 0.85;
+    double rcCtrlAngularSpeed = 0.85;
 
     // Define uma velocidade angular máxima para o modo de perseguição -> (double)[0,1]
     double maxAngularSpeedInChase = 0.595;

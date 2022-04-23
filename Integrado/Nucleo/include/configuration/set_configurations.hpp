@@ -119,6 +119,41 @@ void setInvertOpSensorReading(bool value) {
     broadcastRobotConfiguration();
 }
 
+void setInvertLeftWheel(bool value) {
+    xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
+    robotConfiguration.invertLeftWheel = value;
+    xSemaphoreGive(xConfigSemaphore);
+    broadcastRobotConfiguration();
+}
+
+void setInvertRightWheel(bool value) {
+    xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
+    robotConfiguration.invertRightWheel = value;
+    xSemaphoreGive(xConfigSemaphore);
+    broadcastRobotConfiguration();
+}
+
+void setInvertAngularAxis(bool value) {
+    xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
+    robotConfiguration.invertAngularAxis = value;
+    xSemaphoreGive(xConfigSemaphore);
+    broadcastRobotConfiguration();
+}
+
+void setCtrlLinear(double value) {
+    xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
+    robotConfiguration.rcCtrlLinearSpeed = value;
+    xSemaphoreGive(xConfigSemaphore);
+    broadcastRobotConfiguration();
+}
+
+void setCtrlAngular(double value) {
+    xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
+    robotConfiguration.rcCtrlAngularSpeed = value;
+    xSemaphoreGive(xConfigSemaphore);
+    broadcastRobotConfiguration();
+}
+
 void setOpSensorWeight(String sensor, double value) {
     xSemaphoreTake(xConfigSemaphore, portMAX_DELAY);
     robotConfiguration.opponentSensorWeight[sensor] = value;

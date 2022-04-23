@@ -55,7 +55,7 @@ DynamicJsonDocument encodeRobotInfos() {
 
 // Envia as configurações atuais do robô
 DynamicJsonDocument EncodeRobotConfiguration() {
-    StaticJsonDocument<512> configs;
+    StaticJsonDocument<1024> configs;
 
     // Parâmetros configuráveis para o modo Auto
     configs["configurations"]["start_time"]               = robotConfiguration.startTime;
@@ -64,8 +64,11 @@ DynamicJsonDocument EncodeRobotConfiguration() {
     configs["configurations"]["rotate_speed_bias"]        = robotConfiguration.speedBias;
     configs["configurations"]["edge_detection_threshold"] = robotConfiguration.edgeDetectionThreshold;
     configs["configurations"]["op_reading_inverted"]      = robotConfiguration.invertOpReading;
-    configs["configurations"]["max_speed_in_chase"]       = robotConfiguration.maxAngularSpeedInChase;
+    configs["configurations"]["left_wheel_inverted"]      = robotConfiguration.invertLeftWheel;
+    configs["configurations"]["right_wheel_inverted"]     = robotConfiguration.invertRightWheel;
+    configs["configurations"]["angular_axis_inverted"]    = robotConfiguration.invertAngularAxis;
     // configs["configurations"]["full_frente_timeout"]      = robotConfiguration.fullFrenteTimeout;
+    configs["configurations"]["max_speed_in_chase"]       = robotConfiguration.maxAngularSpeedInChase;
     configs["configurations"]["arc_angular_speed"]        = robotConfiguration.arcAgularSpeed;
     configs["configurations"]["arc_rot_angle"]            = robotConfiguration.angle;
     configs["configurations"]["arc_timeout"]              = robotConfiguration.arcTimeout;

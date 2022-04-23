@@ -289,6 +289,5 @@ function toggleDebbugingOptions() {
 
 function sendCustomMessage() {
 	let message = document.getElementById("debug-message-text-field").value;
-	document.getElementById("debug-message-text-field").value = "";
 	connection.send(message);
 }
