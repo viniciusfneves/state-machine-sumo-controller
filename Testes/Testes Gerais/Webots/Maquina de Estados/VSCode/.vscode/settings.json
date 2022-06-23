@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "iomanip": "cpp",
-        "iostream": "cpp",
-        "ostream": "cpp"
-    },
-    "extensions.ignoreRecommendations": true
- /   "extensions.ignoreRecommendations": true
-}
